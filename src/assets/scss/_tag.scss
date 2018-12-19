@@ -1,0 +1,10 @@
+@import "variables";
+
+.tag {
+  display: inline-block;
+  padding: 0 10rpx;
+  font-size: 20rpx;
+  line-height: 33rpx;
+  color: white;
+  background-color: $theme-color;
+}

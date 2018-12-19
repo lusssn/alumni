@@ -1,0 +1,21 @@
+$blue-base: #2180E8;
+$red-base: #F76260;
+
+$gray-deepest: #333333;
+$gray-deeper: #666666;
+$gray-deep: #999999;
+$gray-base: #CACACA; // tabbar icon
+$gray-light: #E5E5E5;
+$gray-lighter: #EDEDED;
+$gray-lightest: #F5F5F5;
+
+$theme-color: $blue-base;
+$error-color: $red-base;
+
+$border-color: $gray-light; // 边
+$bg-color: $gray-lighter; // 背景
+$ground-color: $gray-lightest; // 大背景
+
+$strong-color: $gray-deepest; // 标题文字
+$main-color: $gray-deeper; // 主要文字
+$muted-color: $gray-deep; // 次级文字

@@ -1,0 +1,38 @@
+{
+  "pages":[
+    "pages/index/index",
+    "pages/friend/friend",
+    "pages/mine/mine"
+  ],
+  "window":{
+    "backgroundTextStyle":"dark",
+    "navigationBarBackgroundColor": "#FFFFFF",
+    "navigationBarTitleText": "校友圈",
+    "navigationBarTextStyle":"black"
+  },
+  "tabBar": {
+    "color": "#CACACA",
+    "selectedColor": "#2180E8",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "iconPath": "images/home-normal.png",
+        "selectedIconPath": "images/home-selected.png",
+        "text": "首 页"
+      },
+      {
+        "pagePath": "pages/friend/friend",
+        "iconPath": "images/friend-normal.png",
+        "selectedIconPath": "images/friend-selected.png",
+        "text": "朋 友"
+      },
+      {
+        "pagePath": "pages/mine/mine",
+        "iconPath": "images/mine-normal.png",
+        "selectedIconPath": "images/mine-selected.png",
+        "text": "我 的"
+      }
+    ]
+  }
+}

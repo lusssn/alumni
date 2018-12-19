@@ -1,0 +1,33 @@
+<view class="container">
+  <view class="card">
+    <view class="card-block padding-t-lg padding-b-lg">
+      <view class='search'>
+        <icon type="search" size="16" color="#999999" />
+        <input class="search-input h2" placeholder="搜索" />
+      </view>
+    </view>
+  </view>
+  <view class="card">
+    <view class="card-block">
+      <view class="flex-align-center padding-t-lg padding-b-lg border-b">
+        <view class="avatar" />
+        <view class="flex-item padding-l-lg">
+          <view class="padding-b-sm">
+            <text class="h1 text-strong">杨峒陵</text>
+            <text class="tag margin-l-md">在读</text>
+          </view>
+          <view class="padding-b-sm">学校名称：东南大学（2013届）</view>
+          <view>公司：Microsoft－实习生</view>
+        </view>
+        <view class="self-top">
+          <icon class="icon-location" />
+          <text class="text-muted">南京</text>
+        </view>
+      </view>
+      <view class="padding-t-md padding-b-md">
+        <icon class="icon-plane margin-r-sm" />
+        <text class="text-muted">定位南京，实习做产品，时间充裕。</text>
+      </view>
+    </view>
+  </view>
+</view>

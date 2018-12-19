@@ -1,0 +1,36 @@
+@import "variables";
+
+// align
+.text-center {
+  text-align: center;
+}
+// color
+.text-primary {
+  color: $theme-color;
+}
+.text-strong {
+  color: $strong-color;
+}
+.text-muted {
+  color: $muted-color;
+}
+// size
+.h1 {
+  font-size: 32rpx;
+}
+.h2 {
+  font-size: 30rpx;
+}
+.h3 {
+  font-size: 28rpx;
+}
+.h4 {
+  font-size: 26rpx;
+}
+// default font size
+.h5 {
+  font-size: 24rpx;
+}
+.h6 {
+  font-size: 22rpx;
+}

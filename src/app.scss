@@ -1,0 +1,47 @@
+@import "./assets/scss/reset";
+
+@import "./assets/scss/layout";
+@import "./assets/scss/border";
+@import "./assets/scss/font";
+
+@import "./assets/scss/card";
+@import "./assets/scss/field";
+@import "./assets/scss/tag";
+
+@import "./assets/scss/svg";
+.icon-location {
+  @include svg("location");
+}
+.icon-arrow-up {
+  @include svg("arrow-up");
+}
+.icon-arrow-right {
+  @include svg("arrow-up");
+
+  transform: rotate(-90deg);
+}
+.icon-ercode {
+  @include svg("plane", 42rpx);
+
+  background-color: $bg-color;
+}
+.icon-plane {
+  @include svg("plane");
+}
+.icon-plus {
+  @include svg("plus", $theme-color);
+}
+.icon-error {
+  @include svg("error", $red-base);
+}
+.icon-camera {
+  @include svg("camera", white);
+
+  background-color: $bg-color;
+}
+.icon-edit {
+  @include svg("edit", $theme-color);
+}
+.icon-unlock {
+  @include svg("unlock", $strong-color);
+}

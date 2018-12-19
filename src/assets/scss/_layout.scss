@@ -1,0 +1,39 @@
+.flex-align-center {
+  display: flex;
+  align-items: center;
+}
+.flex-item {
+  flex: 1;
+}
+.self-top {
+  align-self: flex-start;
+}
+
+// 生成内边距、外边距工具类
+$directionList: (
+    "": "",
+    -top: "-t",
+    -right: "-r",
+    -bottom: "-b",
+    -left: "-l",
+);
+$sizeMap: (
+    no: 0,
+    sm: 10rpx,
+    md: 20rpx,
+    lg: 32rpx
+);
+@each $direction, $prefix in $directionList {
+  @each $header, $size in $sizeMap {
+    .padding#{$prefix}-#{$header} {
+      padding#{$direction}: $size !important;
+    }
+  }
+}
+@each $direction, $prefix in $directionList {
+  @each $header, $size in $sizeMap {
+    .margin#{$prefix}-#{$header} {
+      margin#{$direction}: $size !important;
+    }
+  }
+}
