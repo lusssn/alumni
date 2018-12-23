@@ -1,0 +1,35 @@
+@import "../../assets/scss/variables";
+
+// 搜索结果
+.search-result {
+  position: absolute;
+  top: 134rpx;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin-bottom: 0;
+}
+.search-item {
+  padding: 26rpx 0;
+  &:active {
+    opacity: .7;
+  }
+}
+// 准备搜索
+.ready-text {
+  padding-top: 50rpx;
+  & > text {
+    position: relative;
+    padding: 0 50rpx;
+    &:not(:last-child)::before {
+      position: absolute;
+      top: 6rpx;
+      right: 0;
+      bottom: 6rpx;
+      width: 2rpx;
+      content: "";
+      transform: scaleX(.5);
+      background-color: $gray-deep;
+    }
+  }
+}

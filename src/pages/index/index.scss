@@ -1,19 +1,5 @@
 @import "../../assets/scss/variables";
-@import "../../assets/scss/svg";
 
-.search {
-  position: relative;
-  & > icon {
-    position: absolute;
-    top: 20rpx;
-    left: 20rpx;
-  }
-  &-input {
-    padding: 10rpx 15rpx 9rpx 70rpx;
-    border-radius: 4rpx;
-    background-color: $bg-color;
-  }
-}
 .avatar {
   width: 132rpx;
   height: 132rpx;

@@ -2,7 +2,8 @@
   "pages":[
     "pages/index/index",
     "pages/friend/friend",
-    "pages/mine/mine"
+    "pages/mine/mine",
+    "pages/search/search"
   ],
   "window":{
     "backgroundTextStyle":"dark",

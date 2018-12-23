@@ -8,6 +8,30 @@
 @import "./assets/scss/field";
 @import "./assets/scss/tag";
 
+.search {
+  position: relative;
+  display: flex;
+  align-items: center;
+  & > icon {
+    position: absolute;
+    top: 20rpx;
+    left: 20rpx;
+  }
+  &-input {
+    padding: 10rpx 15rpx 9rpx 70rpx;
+    flex: 1;
+    border-radius: 4rpx;
+    background-color: $bg-color;
+  }
+}
+
+.link {
+  color: $theme-color;
+  &:active {
+    opacity: .7;
+  }
+}
+
 @import "./assets/scss/svg";
 .icon-location {
   @include svg("location");

@@ -6,7 +6,8 @@
   "license": "MIT",
   "private": false,
   "scripts": {
-    "start": "gulp start"
+    "start": "gulp start",
+    "build": "gulp build"
   },
   "devDependencies": {
     "fs-extra": "^7.0.1",

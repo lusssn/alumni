@@ -21,7 +21,8 @@ $sizeMap: (
     no: 0,
     sm: 10rpx,
     md: 20rpx,
-    lg: 32rpx
+    lg: 32rpx,
+    xl: 36rpx
 );
 @each $direction, $prefix in $directionList {
   @each $header, $size in $sizeMap {

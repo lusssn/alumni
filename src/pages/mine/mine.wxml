@@ -92,4 +92,18 @@
       </view>
     </view>
   </view>
+  <view class="card">
+    <view class='card-header'>
+      <view class='card-title'>工作经历</view>
+      <icon class="icon-plus margin-r-sm" />
+      <text class='h3 text-primary'>添加</text>
+    </view>
+    <view class="card-block padding-b-xl text-center">
+      <image
+        class="experience-empty margin-t-xl margin-b-xl"
+        src="../../images/experience-empty.png"
+      />
+      <view class='h4 text-primary'>暂无工作经历，快去添加吧</view>
+    </view>
+  </view>
 </view>

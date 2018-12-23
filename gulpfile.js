@@ -42,7 +42,7 @@ const images = () => {
     .pipe(gulp.dest(`${DEST_DIR}/images`))
 }
 
-const build = gulp.parallel(styles, scripts, images)
+const compile = gulp.parallel(styles, scripts, images)
 
 const watch = () => {
   gulp.watch(SRC.styles, styles)
@@ -50,8 +50,10 @@ const watch = () => {
   gulp.watch(SRC.images, images)
 }
 
-const start = gulp.series(clean, build, watch)
+const start = gulp.series(clean, compile, watch)
+const build = gulp.series(clean, compile)
 
 module.exports = {
   start,
+  build,
 }
