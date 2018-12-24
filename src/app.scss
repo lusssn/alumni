@@ -59,7 +59,7 @@
   @include svg("error", $red-base);
 }
 .icon-camera {
-  @include svg("camera", white);
+  @include svg("camera", 48rpx, white);
 
   background-color: $bg-color;
 }

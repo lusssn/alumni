@@ -9,8 +9,8 @@
     </view>
   </view>
   <!-- 搜索结果 -->
-  <view class='card search-result'>
-    <view hidden="{{list.length}}" class='card-block'>
+  <view class="card search-result">
+    <view hidden="{{list.length}}" class="card-block">
       <view class="search-item flex-align-center border-b">
         <text class="h1 text-strong flex-item">姓名</text>
         <text class="h2 text-muted">6个结果</text>

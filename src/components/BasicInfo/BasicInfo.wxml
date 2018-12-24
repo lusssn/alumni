@@ -1,0 +1,24 @@
+<view class="card">
+  <view class="card-header">
+    <view class="card-title">基本信息</view>
+    <icon class="icon-edit margin-r-sm" />
+    <text class="h3 text-primary">编辑</text>
+  </view>
+  <view class="card-block padding-t-sm padding-b-sm">
+    <view class="field">
+      <label class="field-label">出生年月：</label>
+      <view class="field-content">
+        <text>1995-12-23</text>
+        <icon class="icon-unlock self-top" />
+      </view>
+    </view>
+    <view class="field">
+      <label class="field-label">手机号码：</label>
+      <view class="field-content">18843608082</view>
+    </view>
+    <view class="field">
+      <label class="field-label">微信号：</label>
+      <view class="field-content">vt5677ghj</view>
+    </view>
+  </view>
+</view>

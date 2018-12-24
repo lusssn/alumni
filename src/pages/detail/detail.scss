@@ -1,0 +1,15 @@
+@import "../../assets/scss/variables";
+
+.container {
+  padding-bottom: 92rpx;
+}
+.avatar {
+  width: 132rpx;
+  height: 132rpx;
+  border-radius: 50%;
+  background-color: $bg-color;
+}
+.experience-empty {
+  width: 189rpx;
+  height: 203rpx;
+}

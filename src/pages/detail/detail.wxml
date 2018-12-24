@@ -5,26 +5,16 @@
         <view class="avatar" />
         <view class="flex-item padding-l-lg">
           <view class="h1 text-strong padding-b-md">
-            <text>杨峒陵</text>
+            <text class="margin-r-sm">杨峒陵</text>
+            <text class="text-primary">♂</text>
+            <text class="text-error">♀</text>
           </view>
-          <view>ID: 346982</view>
+          <view class="padding-b-sm">ID: 346982</view>
+          <view>定位南京，实习做产品，时间充裕。</view>
         </view>
-        <icon class="icon-ercode" />
-        <icon class="icon-arrow-right margin-l-sm" />
-      </view>
-    </view>
-  </view>
-  <view class="card">
-    <view class="card-block padding-t-sm padding-b-sm border-b">
-      <view class="field">
-        <label class="field-label">自我描述：</label>
-        <view class="field-content">定位南京，实习做产品，时间充裕。定位南京，实习做产品。</view>
-      </view>
-      <view class="field">
-        <label class="field-label">定位：</label>
-        <view class="field-content">
-          <text>南京</text>
-          <view class="h3 text-primary">获取定位</view>
+        <view class="self-top">
+          <icon class="icon-location" />
+          <text class="text-muted">南京</text>
         </view>
       </view>
     </view>
@@ -44,5 +34,10 @@
       />
       <view class="h4 text-primary">暂无工作经历，快去添加吧</view>
     </view>
+  </view>
+  <view class="fix-bottom flex">
+    <button class="flex-item">拒绝</button>
+    <button class="flex-item" type="primary">同意</button>
+    <!--<button class="flex-item" type="primary">交换名片</button>-->
   </view>
 </view>

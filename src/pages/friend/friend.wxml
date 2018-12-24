@@ -1,6 +1,6 @@
 <view class="container padding-t-md">
   <view class="card">
-    <view class='card-header'>消息通知</view>
+    <view class="card-header">消息通知</view>
     <view class="card-block">
       <view class="flex-align-center padding-t-lg padding-b-lg border-b">
         <view class="avatar" />
@@ -21,7 +21,7 @@
     </view>
   </view>
   <view class="card">
-    <view class='card-header'>我的朋友</view>
+    <view class="card-header">我的朋友</view>
     <view class="card-block">
       <view class="flex-align-center padding-t-lg padding-b-lg border-b">
         <view class="avatar" />

@@ -9,3 +9,19 @@ page {
 text {
   vertical-align: middle;
 }
+
+button {
+  border-radius: 0;
+  background-color: white;
+  color: $muted-color;
+  &::after {
+    border-color: rgba(black, .08);
+    border-radius: 0;
+  }
+  &[type=primary] {
+    background-color: $theme-color;
+  }
+  &.button-hover[type=primary] {
+    background-color: darken($theme-color, 10%);
+  }
+}

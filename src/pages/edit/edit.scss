@@ -1,0 +1,34 @@
+@import "../../assets/scss/variables";
+
+.container {
+  padding-bottom: 132rpx;
+}
+// reset
+.field {
+  padding: 32rpx 0;
+  align-items: center;
+  &-label {
+    color: $main-color;
+  }
+  &:not(:last-child) {
+    position: relative;
+    &::before {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      height: 2rpx;
+      content: "";
+      transform: scaleY(.5);
+      background-color: $border-color;
+    }
+  }
+}
+// 头像
+.avatar {
+  width: 150rpx;
+  height: 150rpx;
+  border-radius: 50%;
+  background-color: $bg-color;
+  margin: 0 auto;
+}

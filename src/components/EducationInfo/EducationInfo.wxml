@@ -1,0 +1,39 @@
+<view class="card">
+  <view class="card-header">
+    <view class="card-title">教育经历</view>
+    <icon class="icon-plus margin-r-sm" />
+    <text class="h3 text-primary">添加</text>
+  </view>
+  <view class="card-block padding-t-sm padding-b-sm border-b">
+    <view class="field">
+      <label class="field-label">学历：</label>
+      <view class="field-content">研究生</view>
+    </view>
+    <view class="field">
+      <label class="field-label">院系专业：</label>
+      <view class="field-content">
+        <text>东南大学－机械学院\n工业设计</text>
+      </view>
+    </view>
+    <view class="field">
+      <label class="field-label">入学／毕业：</label>
+      <view class="field-content">2017年／2019年</view>
+    </view>
+  </view>
+  <view class="card-block padding-t-sm padding-b-sm">
+    <view class="field">
+      <label class="field-label">学历：</label>
+      <view class="field-content">本科</view>
+    </view>
+    <view class="field">
+      <label class="field-label">院系专业：</label>
+      <view class="field-content">
+        <text>东南大学－机械学院\n工业设计</text>
+      </view>
+    </view>
+    <view class="field">
+      <label class="field-label">入学／毕业：</label>
+      <view class="field-content">2013年／2017年</view>
+    </view>
+  </view>
+</view>

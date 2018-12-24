@@ -3,7 +3,9 @@
     "pages/index/index",
     "pages/friend/friend",
     "pages/mine/mine",
-    "pages/search/search"
+    "pages/search/search",
+    "pages/edit/edit",
+    "pages/detail/detail"
   ],
   "window":{
     "backgroundTextStyle":"dark",
