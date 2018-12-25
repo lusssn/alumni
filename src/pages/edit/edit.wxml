@@ -1,194 +1,66 @@
-<view class="container">
-  <view class="card padding-t-xl padding-b-xl">
-    <view class="avatar flex-center">
-      <icon class="icon-camera" />
-    </view>
-  </view>
-  <view class="card">
-    <view class="card-header">
-      <view class="card-title">基本信息</view>
-    </view>
-    <view class="card-block">
-      <view class="field">
-        <label class="field-label">真实姓名：</label>
-        <view class="field-content">
-          <input placeholder="请输入真实姓名" />
-        </view>
-      </view>
-      <view class="field">
-        <label class="field-label">性别：</label>
-        <view class="field-content">
-          <input placeholder="请选择性别" />
-        </view>
-      </view>
-      <view class="field">
-        <label class="field-label">自我描述：</label>
-        <view class="field-content">
-          <input placeholder="请输入自我描述" />
-        </view>
-      </view>
-      <view class="field">
-        <label class="field-label">定位：</label>
-        <view class="field-content">
-          <input placeholder="请输入定位" />
-          <view class="h3 text-primary">获取定位</view>
-        </view>
+<import src="templates/educationEdit.wxml" />
+<import src="templates/jobEdit.wxml" />
+<view class="container{{type !== 'basic' ? ' padding-t-md' : ''}}">
+  <block wx:if="{{type === 'basic'}}">
+    <view class="card padding-t-xl padding-b-xl">
+      <view class="avatar flex-center">
+        <icon class="icon-camera" />
       </view>
     </view>
-  </view>
-  <view class="card">
-    <view class="card-header">
-      <view class="card-title">联系方式</view>
-    </view>
-    <view class="card-block">
-      <view class="field">
-        <label class="field-label">手机号码：</label>
-        <view class="field-content">
-          <input placeholder="请输入手机号码" />
-        </view>
+    <view class="card">
+      <view class="card-header">
+        <view class="card-title">基本信息</view>
       </view>
-      <view class="field">
-        <label class="field-label">微信号：</label>
-        <view class="field-content">
-          <input placeholder="请输入微信号" />
+      <view class="card-block">
+        <view class="field">
+          <label class="field-label">真实姓名：</label>
+          <view class="field-content">
+            <input placeholder="请输入真实姓名" />
+          </view>
         </view>
-      </view>
-    </view>
-  </view>
-  <view class="card">
-    <view class="card-header">
-      <view class="card-title">最高学历</view>
-    </view>
-    <view class="card-block">
-      <view class="field">
-        <label class="field-label">学校名称：</label>
-        <view class="field-content">
-          <input placeholder="请输入学校名称" />
-          <view class="h3 text-error">
-            <icon class="icon-error margin-r-sm" />
-            <text>信息未填写</text>
+        <view class="field">
+          <label class="field-label">性别：</label>
+          <view class="field-content">
+            <input placeholder="请选择性别" />
+          </view>
+        </view>
+        <view class="field">
+          <label class="field-label">自我描述：</label>
+          <view class="field-content">
+            <input placeholder="请输入自我描述" />
+          </view>
+        </view>
+        <view class="field">
+          <label class="field-label">定位：</label>
+          <view class="field-content">
+            <input placeholder="请输入定位" />
+            <view class="h3 text-primary">获取定位</view>
           </view>
         </view>
       </view>
-      <view class="field">
-        <label class="field-label">学历：</label>
-        <view class="field-content">
-          <input placeholder="请选择学历" />
-        </view>
+    </view>
+    <view class="card">
+      <view class="card-header">
+        <view class="card-title">联系方式</view>
       </view>
-      <view class="field">
-        <label class="field-label">院系：</label>
-        <view class="field-content">
-          <input placeholder="请输入院系" />
+      <view class="card-block">
+        <view class="field">
+          <label class="field-label">手机号码：</label>
+          <view class="field-content">
+            <input placeholder="请输入手机号码" />
+          </view>
         </view>
-      </view>
-      <view class="field">
-        <label class="field-label">专业：</label>
-        <view class="field-content">
-          <input placeholder="请输入专业" />
-        </view>
-      </view>
-      <view class="field">
-        <label class="field-label">入学年份：</label>
-        <view class="field-content">
-          <picker
-              class="flex-item"
-              mode="date"
-              fields="year"
-              value="{{date}}"
-              start="2015-09-01"
-              end="2017-09-01"
-          >
-            <input
-                placeholder="请选择入学年份"
-                value="{{date}}"
-                disabled
-            />
-          </picker>
-          <icon class="icon-arrow-up" />
-        </view>
-      </view>
-      <view class="field">
-        <label class="field-label">毕业时间：</label>
-        <view class="field-content">
-          <picker
-              class="flex-item"
-              mode="date"
-              fields="year"
-              value="{{date}}"
-              start="2015-09-01"
-              end="2017-09-01"
-          >
-            <input
-                placeholder="请选择毕业时间"
-                value="{{date}}"
-                disabled
-            />
-          </picker>
-          <icon class="icon-arrow-up" />
+        <view class="field">
+          <label class="field-label">微信号：</label>
+          <view class="field-content">
+            <input placeholder="请输入微信号" />
+          </view>
         </view>
       </view>
     </view>
-  </view>
-  <view class="card">
-    <view class="card-header">
-      <view class="card-title">最近工作</view>
-    </view>
-    <view class="card-block">
-      <view class="field">
-        <label class="field-label">公司名称：</label>
-        <view class="field-content">
-          <input placeholder="请输入公司名称" />
-        </view>
-      </view>
-      <view class="field">
-        <label class="field-label">职位名称：</label>
-        <view class="field-content">
-          <input placeholder="请输入职位名称" />
-        </view>
-      </view>
-      <view class="field">
-        <label class="field-label">入职时间：</label>
-        <view class="field-content">
-          <picker
-              class="flex-item"
-              mode="date"
-              fields="year"
-              value="{{date}}"
-              start="2015-09-01"
-              end="2017-09-01"
-          >
-            <input
-                placeholder="请选择入职时间"
-                value="{{date}}"
-                disabled
-            />
-          </picker>
-          <icon class="icon-arrow-up" />
-        </view>
-      </view>
-      <view class="field">
-        <label class="field-label">离职时间：</label>
-        <view class="field-content">
-          <picker
-              class="flex-item"
-              mode="date"
-              fields="year"
-              value="{{date}}"
-              start="2015-09-01"
-              end="2017-09-01"
-          >
-            <input
-                placeholder="请选择离职时间"
-                value="{{date}}"
-                disabled
-            />
-          </picker>
-          <icon class="icon-arrow-up" />
-        </view>
-      </view>
-    </view>
-  </view>
+  </block>
+  <template wx:if="{{type === 'education'}}" is="educationEdit" />
+  <template wx:if="{{type === 'job'}}" is="jobEdit" />
   <view class="fix-bottom padding-md border-t">
     <button type="primary">保存</button>
   </view>

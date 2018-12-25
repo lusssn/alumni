@@ -1,0 +1,77 @@
+<template name="educationEdit">
+  <view class="card">
+    <view class="card-header">
+      <view class="card-title">教育经历</view>
+    </view>
+    <view class="card-block">
+      <view class="field">
+        <label class="field-label">学校名称：</label>
+        <view class="field-content">
+          <input placeholder="请输入学校名称" />
+          <view class="h3 text-error">
+            <icon class="icon-error margin-r-sm" />
+            <text>信息未填写</text>
+          </view>
+        </view>
+      </view>
+      <view class="field">
+        <label class="field-label">学历：</label>
+        <view class="field-content">
+          <input placeholder="请选择学历" />
+        </view>
+      </view>
+      <view class="field">
+        <label class="field-label">院系：</label>
+        <view class="field-content">
+          <input placeholder="请输入院系" />
+        </view>
+      </view>
+      <view class="field">
+        <label class="field-label">专业：</label>
+        <view class="field-content">
+          <input placeholder="请输入专业" />
+        </view>
+      </view>
+      <view class="field">
+        <label class="field-label">入学年份：</label>
+        <view class="field-content">
+          <picker
+            class="flex-item"
+            mode="date"
+            fields="year"
+            value="{{date}}"
+            start="2015-09-01"
+            end="2017-09-01"
+          >
+            <input
+              placeholder="请选择入学年份"
+              value="{{date}}"
+              disabled
+            />
+          </picker>
+          <icon class="icon-arrow-up" />
+        </view>
+      </view>
+      <view class="field">
+        <label class="field-label">毕业时间：</label>
+        <view class="field-content">
+          <picker
+            class="flex-item"
+            mode="date"
+            fields="year"
+            value="{{date}}"
+            start="2015-09-01"
+            end="2017-09-01"
+          >
+            <input
+              placeholder="请选择毕业时间"
+              value="{{date}}"
+              disabled
+            />
+          </picker>
+          <icon class="icon-arrow-up" />
+        </view>
+      </view>
+    </view>
+  </view>
+</template>

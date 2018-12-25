@@ -1,0 +1,7 @@
+export { default as assoc } from './assoc'
+export { default as assocPath } from './assocPath'
+export { default as clone } from './clone'
+export { default as empty } from './empty'
+export { default as find } from './find'
+export { default as findIndex } from './findIndex'
+export { default as propEq } from './propEq'

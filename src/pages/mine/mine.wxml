@@ -29,13 +29,34 @@
       </view>
     </view>
   </view>
-  <BasicInfo />
-  <EducationInfo />
+  <view class="card">
+    <view class="card-header">
+      <view class="card-title">基本信息</view>
+      <view class="link" bindtap="handleBasicEdit">
+        <icon class="icon-edit margin-r-sm" />
+        <text class="h3">编辑</text>
+      </view>
+    </view>
+    <BasicInfo />
+  </view>
+  <view class="card">
+    <view class="card-header">
+      <view class="card-title">教育经历</view>
+      <view class="link" bindtap="handleEducationAdd">
+        <icon class="icon-plus margin-r-sm" />
+        <text class="h3">添加</text>
+      </view>
+    </view>
+    <EducationInfo border />
+    <EducationInfo />
+  </view>
   <view class="card">
     <view class="card-header">
       <view class="card-title">工作经历</view>
-      <icon class="icon-plus margin-r-sm" />
-      <text class="h3 text-primary">添加</text>
+      <view class="link" bindtap="handleJobAdd">
+        <icon class="icon-plus margin-r-sm" />
+        <text class="h3">添加</text>
+      </view>
     </view>
     <view class="card-block padding-b-xl text-center">
       <image

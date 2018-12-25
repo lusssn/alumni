@@ -6,5 +6,8 @@ Component({
     basicInfo: {
       type: Object, value: {},
     },
+    border: {
+      type: Boolean,
+    },
   },
 })

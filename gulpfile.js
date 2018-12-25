@@ -7,8 +7,8 @@ const rename = require('gulp-rename')
 const clean = () => fs.emptyDir('dist')
 
 const SRC = {
-  styles: './src/**/*.scss',
-  scripts: './src/**/*.{js,json,wxml}',
+  styles: 'src/**/*.scss',
+  scripts: 'src/**/*.{js,json,wxml}',
   images: 'src/assets/images/**/*.{png,jpg,jpeg,svg}',
 }
 const DEST_DIR = './dist'
