@@ -60,8 +60,6 @@
 }
 .icon-camera {
   @include svg("camera", 48rpx, white);
-
-  background-color: $bg-color;
 }
 .icon-edit {
   @include svg("edit", $theme-color);

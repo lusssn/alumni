@@ -8,7 +8,7 @@
         <label class="field-label">学校名称：</label>
         <view class="field-content">
           <input placeholder="请输入学校名称" />
-          <view class="h3 text-error">
+          <view hidden class="h3 text-error">
             <icon class="icon-error margin-r-sm" />
             <text>信息未填写</text>
           </view>
@@ -17,7 +17,18 @@
       <view class="field">
         <label class="field-label">学历：</label>
         <view class="field-content">
-          <input placeholder="请选择学历" />
+          <picker
+            value="{{education.degree}}"
+            range="{{degreeSelect}}"
+            range-key="name"
+            bindchange="handleDegreeChange"
+          >
+            <input
+              placeholder="请选择学历"
+              value="{{isNaN(education.degree) ? '' : degreeSelect[education.degree].name}}"
+              disabled
+            />
+          </picker>
         </view>
       </view>
       <view class="field">
@@ -39,13 +50,15 @@
             class="flex-item"
             mode="date"
             fields="year"
-            value="{{date}}"
-            start="2015-09-01"
-            end="2017-09-01"
+            start="1960"
+            end="2020"
+            value="{{education.enrolDate}}"
+            data-name="enrolDate"
+            bindchange="handleInputChange"
           >
             <input
               placeholder="请选择入学年份"
-              value="{{date}}"
+              value="{{education.enrolDate}}"
               disabled
             />
           </picker>
@@ -59,13 +72,15 @@
             class="flex-item"
             mode="date"
             fields="year"
-            value="{{date}}"
-            start="2015-09-01"
-            end="2017-09-01"
+            start="1960"
+            end="2020"
+            value="{{education.graduatedDate}}"
+            data-name="graduatedDate"
+            bindchange="handleInputChange"
           >
             <input
               placeholder="请选择毕业时间"
-              value="{{date}}"
+              value="{{education.graduatedDate}}"
               disabled
             />
           </picker>

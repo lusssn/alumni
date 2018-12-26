@@ -3,7 +3,8 @@
 <view class="container{{type !== 'basic' ? ' padding-t-md' : ''}}">
   <block wx:if="{{type === 'basic'}}">
     <view class="card padding-t-xl padding-b-xl">
-      <view class="avatar flex-center">
+      <view class="avatar flex-center" bindtap="handleClickAvatar">
+        <image src="{{basic.avatar}}" mode="aspectFill" />
         <icon class="icon-camera" />
       </view>
     </view>
@@ -15,7 +16,12 @@
         <view class="field">
           <label class="field-label">真实姓名：</label>
           <view class="field-content">
-            <input placeholder="请输入真实姓名" />
+            <input
+              placeholder="请输入真实姓名"
+              value="{{basic.realName}}"
+              data-name="realName"
+              bindinput="handleInputChange"
+            />
           </view>
         </view>
         <view class="field">
@@ -59,9 +65,13 @@
       </view>
     </view>
   </block>
-  <template wx:if="{{type === 'education'}}" is="educationEdit" />
+  <template
+    wx:if="{{type === 'education'}}"
+    is="educationEdit"
+    data="{{ degreeSelect, education }}"
+  />
   <template wx:if="{{type === 'job'}}" is="jobEdit" />
   <view class="fix-bottom padding-md border-t">
-    <button type="primary">保存</button>
+    <button type="primary" bindtap="handleClickSave">保存</button>
   </view>
 </view>

@@ -26,9 +26,21 @@
 }
 // 头像
 .avatar {
+  position: relative;
   width: 150rpx;
   height: 150rpx;
+  margin: 0 auto;
+  overflow: hidden;
   border-radius: 50%;
   background-color: $bg-color;
-  margin: 0 auto;
+  &:active {
+    opacity: .7;
+  }
+  & > .icon-camera {
+    position: absolute;
+  }
+  & > image {
+    width: 100%;
+    height: 100%;
+  }
 }

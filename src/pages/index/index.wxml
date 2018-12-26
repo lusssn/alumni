@@ -12,7 +12,7 @@
       </view>
     </view>
   </view>
-  <view class="card">
+  <view class="card" bindtap="handleClickCard">
     <view class="card-block">
       <view class="flex-align-center padding-t-lg padding-b-lg border-b">
         <view class="avatar" />
