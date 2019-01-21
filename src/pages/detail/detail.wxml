@@ -5,32 +5,35 @@
         <view class="avatar" />
         <view class="flex-item padding-l-lg">
           <view class="h1 text-strong padding-b-md">
-            <text class="margin-r-sm">杨峒陵</text>
-            <text class="text-primary">♂</text>
-            <text class="text-error">♀</text>
+            <text class="margin-r-sm">{{base.real_name}}</text>
+            <text wx:if="{{base.gender}}" class="text-primary">♂</text>
+            <text wx:else class="text-error">♀</text>
           </view>
-          <view class="padding-b-sm">ID: 346982</view>
-          <view>定位南京，实习做产品，时间充裕。</view>
+          <view class="padding-b-sm">ID: {{base.ID}}</view>
+          <view>{{base.descr}}</view>
         </view>
         <view class="self-top">
           <icon class="icon-location" />
-          <text class="text-muted">南京</text>
+          <text class="text-muted">{{base.city}}</text>
         </view>
       </view>
     </view>
   </view>
+
   <view class="card">
     <view class="card-header">
       <view class="card-title">基本信息</view>
     </view>
-    <BasicInfo />
+    <BasicInfo data="{{privacy}}" />
   </view>
+
   <view class="card">
     <view class="card-header">
       <view class="card-title">教育经历</view>
     </view>
-    <EducationInfo />
+    <EducationInfo wx:for="{{educations}}" data="{{item}}" />
   </view>
+
   <view class="card">
     <view class="card-header">
       <view class="card-title">工作经历</view>

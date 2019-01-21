@@ -23,17 +23,20 @@
   <view class="card">
     <view class="card-header">我的朋友</view>
     <view class="card-block">
-      <view class="flex-align-center padding-t-lg padding-b-lg border-b">
-        <view class="avatar" />
+      <view
+        wx:for="{{friendList}}"
+        class="flex-align-center padding-t-lg padding-b-lg border-b"
+      >
+        <image class="avatar" src="{{item.head_url}}" />
         <view class="flex-item padding-l-lg">
           <view class="h1 text-strong padding-b-sm">
-            <text>杨峒陵</text>
+            <text>{{item.real_name}}</text>
           </view>
-          <view>上海聚泛信息科技有限公司－前端工程师</view>
+          <view>{{item.company}}－{{item.job}}</view>
         </view>
         <view class="self-top">
           <icon class="icon-location" />
-          <text class="text-muted">南京</text>
+          <text class="text-muted">{{item.location}}</text>
         </view>
       </view>
     </view>

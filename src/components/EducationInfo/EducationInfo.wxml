@@ -1,16 +1,18 @@
 <view class="card-block padding-t-sm padding-b-sm{{border ? ' border-b' : ''}}">
   <view class="field">
     <label class="field-label">学历：</label>
-    <view class="field-content">研究生</view>
+    <view class="field-content">{{data.profession}}</view>
   </view>
   <view class="field">
     <label class="field-label">院系专业：</label>
     <view class="field-content">
-      <text>东南大学－机械学院\n工业设计</text>
+      <text>{{data.school}}－{{data.department}}\{{data.background}}</text>
     </view>
   </view>
   <view class="field">
     <label class="field-label">入学／毕业：</label>
-    <view class="field-content">2017年／2019年</view>
+    <view class="field-content">
+      {{data.start_year}}年／{{data.graduate_year}}年
+    </view>
   </view>
 </view>

@@ -2,13 +2,13 @@
   <view class="field">
     <label class="field-label">出生年月：</label>
     <view class="field-content">
-      <text>1995-12-23</text>
+      <text>{{data.birth}}</text>
       <icon class="icon-unlock self-top" />
     </view>
   </view>
   <view class="field">
     <label class="field-label">手机号码：</label>
-    <view class="field-content">18843608082</view>
+    <view class="field-content">{{data.phone}}</view>
   </view>
   <view class="field">
     <label class="field-label">微信号：</label>

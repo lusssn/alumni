@@ -3,7 +3,7 @@ Component({
     addGlobalClass: true,
   },
   properties: {
-    basicInfo: {
+    data: {
       type: Object, value: {},
     },
     border: {
