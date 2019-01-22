@@ -3,7 +3,7 @@
     <label class="field-label">出生年月：</label>
     <view class="field-content">
       <text>{{data.birth}}</text>
-      <icon class="icon-unlock self-top" />
+      <icon class="icon-lock self-top" />
     </view>
   </view>
   <view class="field">

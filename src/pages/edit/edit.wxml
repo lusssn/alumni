@@ -3,7 +3,7 @@
 <view class="container{{type !== 'basic' ? ' padding-t-md' : ''}}">
   <block wx:if="{{type === 'basic'}}">
     <view class="card padding-t-xl padding-b-xl">
-      <view class="avatar flex-center" bindtap="handleClickAvatar">
+      <view class="avatar flex-center tap" bindtap="handleClickAvatar">
         <image src="{{basic.avatar}}" mode="aspectFill" />
         <icon class="icon-camera" />
       </view>

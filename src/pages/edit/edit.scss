@@ -33,9 +33,6 @@
   overflow: hidden;
   border-radius: 50%;
   background-color: $bg-color;
-  &:active {
-    opacity: .7;
-  }
   & > .icon-camera {
     position: absolute;
   }

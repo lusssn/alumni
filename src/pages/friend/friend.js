@@ -1,3 +1,5 @@
+import wxUtil from '../../utils/wxUtil'
+
 Page({
   data: {
     friendList: [
@@ -18,5 +20,11 @@ Page({
         job: 'string',
       },
     ],
+  },
+  handleClickCard() {
+    wxUtil.navigateTo('detail')
+  },
+  handleToNotice() {
+    wxUtil.navigateTo('notice')
   },
 })

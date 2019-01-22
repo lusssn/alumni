@@ -1,0 +1,13 @@
+<view class="flex-align-center padding-t-lg padding-b-lg border-b tap">
+  <view class="avatar" />
+  <view class="flex-item padding-l-lg">
+    <view class="h1 text-strong padding-b-sm">
+      <text>杨峒陵</text>
+    </view>
+    <view>请求交往名片</view>
+  </view>
+  <view class="self-top">
+    <text class="h6 text-muted">2018-09-23</text>
+  </view>
+  <icon class="icon-arrow-right margin-l-lg" />
+</view>

@@ -32,6 +32,10 @@
   }
 }
 
+.tap:active {
+  opacity: .7;
+}
+
 @import "./assets/scss/svg";
 .icon-location {
   @include svg("location");
@@ -45,9 +49,7 @@
   transform: rotate(-90deg);
 }
 .icon-ercode {
-  @include svg("plane", 42rpx);
-
-  background-color: $bg-color;
+  @include svg("ercode", 42rpx, $gray-base);
 }
 .icon-plane {
   @include svg("plane");
@@ -64,6 +66,6 @@
 .icon-edit {
   @include svg("edit", $theme-color);
 }
-.icon-unlock {
-  @include svg("unlock", $strong-color);
+.icon-lock {
+  @include svg("lock", $strong-color);
 }

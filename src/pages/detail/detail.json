@@ -1,5 +1,5 @@
 {
-  "navigationBarTitleText": "我的",
+  "navigationBarTitleText": "名片",
   "usingComponents": {
     "BasicInfo": "../../components/BasicInfo/BasicInfo",
     "EducationInfo": "../../components/EducationInfo/EducationInfo"

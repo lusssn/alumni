@@ -16,9 +16,7 @@ const DEST_DIR = './dist'
 const styles = () => {
   return gulp
     .src(SRC.styles)
-    .pipe(replace(/(@import.+\.wxss;)/g, match => {
-      return `/** ${match} **/`
-    }))
+    .pipe(replace(/(@import.+\.wxss(\'|\");)/g, match => `/** ${match} **/`))
     .pipe(sass({ outputStyle: 'compressed' }).on('error', sass.logError))
     .pipe(replace(
       /(\/\*\*\s{0,})(@.+)(\s{0,}\*\*\/)/g,

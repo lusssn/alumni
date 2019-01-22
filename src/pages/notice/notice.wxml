@@ -1,0 +1,6 @@
+<view class="card">
+  <view class="card-block">
+    <NoticeItem bindtap="handleClickCard" />
+    <NoticeItem bindtap="handleClickCard" />
+  </view>
+</view>

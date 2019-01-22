@@ -5,7 +5,8 @@
     "pages/mine/mine",
     "pages/search/search",
     "pages/edit/edit",
-    "pages/detail/detail"
+    "pages/detail/detail",
+    "pages/notice/notice"
   ],
   "window":{
     "backgroundTextStyle":"dark",
