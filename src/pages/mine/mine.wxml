@@ -47,8 +47,20 @@
         <text class="h3">添加</text>
       </view>
     </view>
-    <EducationInfo border />
-    <EducationInfo />
+    <block wx:if="{{educations.length}}">
+      <EducationInfo
+        wx:for="{{educations}}"
+        data="{{item}}"
+        border="{{index < educations.length - 1 }}"
+      />
+    </block>
+    <view wx:else class="card-block padding-b-xl text-center">
+      <image
+        class="experience-empty margin-t-xl margin-b-xl"
+        src="../../images/experience-empty.png"
+      />
+      <view class="h4 text-primary">暂无教育经历，快去添加吧</view>
+    </view>
   </view>
   <view class="card">
     <view class="card-header">

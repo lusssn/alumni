@@ -13,7 +13,7 @@
   </view>
   <view class="card">
     <view class="card-header">我的朋友</view>
-    <view class="card-block">
+    <view wx:if="{{friendList.length}}" class="card-block">
       <view
         wx:for="{{friendList}}"
         class="flex-align-center padding-t-lg padding-b-lg border-b tap"
@@ -31,6 +31,13 @@
           <text class="text-muted">{{item.location}}</text>
         </view>
       </view>
+    </view>
+    <view wx:else class="card-block padding-b-xl text-center">
+      <image
+        class="friend-empty margin-t-xl margin-b-xl"
+        src="../../images/friend-empty.png"
+      />
+      <view class="h4 text-primary">暂无朋友，快去交换名片吧</view>
     </view>
   </view>
 </view>

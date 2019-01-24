@@ -4,6 +4,7 @@
     "pages/friend/friend",
     "pages/mine/mine",
     "pages/search/search",
+    "pages/searchList/searchList",
     "pages/edit/edit",
     "pages/detail/detail",
     "pages/notice/notice"

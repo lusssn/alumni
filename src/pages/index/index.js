@@ -25,6 +25,8 @@ Page({
       },
     ],
   },
+  onPullDownRefresh() {},
+  onReachBottom() {},
   handleClickSearch() {
     wxUtil.navigateTo('search')
   },

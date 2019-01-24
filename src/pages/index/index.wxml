@@ -13,31 +13,9 @@
     </view>
   </view>
 
-  <view
+  <BusinessCard
     wx:for="{{friendList}}"
-    class="card"
     bindtap="handleClickCard"
-  >
-    <view class="card-block">
-      <view class="flex-align-center padding-t-lg padding-b-lg border-b">
-        <!--<image class="avatar" src="{{item.head_url}}" />-->
-        <view class="flex-item padding-l-lg">
-          <view class="padding-b-sm">
-            <text class="h1 text-strong">{{item.real_name}}</text>
-            <text class="tag margin-l-md">在读</text>
-          </view>
-          <view class="padding-b-sm">学校名称：{{item.school}}（2013届）</view>
-          <view>公司：{{item.company}}－{{item.job}}</view>
-        </view>
-        <view class="self-top">
-          <icon class="icon-location" />
-          <text class="text-muted">{{item.location}}</text>
-        </view>
-      </view>
-      <view class="padding-t-md padding-b-md">
-        <icon class="icon-plane margin-r-sm" />
-        <text class="text-muted">定位南京，实习做产品，时间充裕。</text>
-      </view>
-    </view>
-  </view>
+    data="{{item}}"
+  />
 </view>

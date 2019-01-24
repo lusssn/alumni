@@ -11,7 +11,10 @@
   <!-- 搜索结果 -->
   <view class="card search-result">
     <view hidden="{{list.length}}" class="card-block">
-      <view class="search-item flex-align-center border-b">
+      <view
+        class="search-item flex-align-center border-b"
+        bindtap="handleSearchDetail"
+      >
         <text class="h1 text-strong flex-item">姓名</text>
         <text class="h2 text-muted">6个结果</text>
         <icon class="icon-arrow-right margin-l-sm" />
