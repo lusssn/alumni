@@ -66,6 +66,3 @@
 .icon-edit {
   @include svg("edit", $theme-color);
 }
-.icon-lock {
-  @include svg("lock", $strong-color);
-}

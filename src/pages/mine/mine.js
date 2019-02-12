@@ -2,7 +2,7 @@ import wxUtil from '../../utils/wxUtil'
 
 Page({
   data: {
-    educations: [],
+    educations: [{}, {}],
   },
   handleBasicEdit() {
     wxUtil.navigateTo('edit', { type: 'basic' })
