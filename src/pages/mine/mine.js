@@ -1,8 +1,16 @@
 import wxUtil from '../../utils/wxUtil'
+import request from '../../utils/request'
 
 Page({
   data: {
-    educations: [{}, {}],
+    education: [],
+  },
+  onLoad() {
+    request.getUserInfo().then(({ openId }) => {
+      request.get(`/query/getall/${openId}`).then(({ data }) => {
+        this.setData( data )
+      }, () => {})
+    })
   },
   handleBasicEdit() {
     wxUtil.navigateTo('edit', { type: 'basic' })

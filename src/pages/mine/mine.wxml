@@ -32,11 +32,11 @@
         <text class="h3">添加</text>
       </view>
     </view>
-    <block wx:if="{{educations.length}}">
+    <block wx:if="{{education.length}}">
       <EducationInfo
-        wx:for="{{educations}}"
+        wx:for="{{education}}"
         data="{{item}}"
-        border="{{index < educations.length - 1 }}"
+        border="{{index < education.length - 1 }}"
         bindtap="handleEducationAdd"
       />
     </block>

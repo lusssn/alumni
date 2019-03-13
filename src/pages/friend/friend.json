@@ -1,6 +1,7 @@
 {
   "navigationBarTitleText": "朋友",
   "usingComponents": {
+    "Loading": "../../components/Loading/Loading",
     "NoticeItem": "../../components/NoticeItem/NoticeItem"
   }
 }

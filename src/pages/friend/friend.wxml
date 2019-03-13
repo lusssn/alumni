@@ -13,22 +13,24 @@
   </view>
   <view class="card">
     <view class="card-header">我的朋友</view>
-    <view wx:if="{{friendList.length}}" class="card-block">
+    <Loading wx:if="{{!isLoaded}}" />
+    <view wx:elif="{{friendList.length}}" class="card-block">
       <view
         wx:for="{{friendList}}"
+        wx:key="ID"
         class="flex-align-center padding-t-lg padding-b-lg border-b tap"
         bindtap="handleClickCard"
       >
-        <!--<image class="avatar" src="{{item.head_url}}" />-->
+        <image class="avatar" mode="aspectFill" src="{{item.head_url}}" />
         <view class="flex-item padding-l-lg">
           <view class="h1 text-strong padding-b-sm">
             <text>{{item.real_name}}</text>
           </view>
-          <view>{{item.company}}－{{item.job}}</view>
+          <view>{{item.company}}－{{item.vocation}}</view>
         </view>
         <view class="self-top">
           <icon class="icon-location" />
-          <text class="text-muted">{{item.location}}</text>
+          <text class="text-muted">{{item.city}}</text>
         </view>
       </view>
     </view>
