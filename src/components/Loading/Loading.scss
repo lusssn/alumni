@@ -1,0 +1,59 @@
+@import "../../assets/scss/variables";
+
+$rect-width: 12rpx;
+$rect-height: 58rpx;
+
+.loading {
+  padding: 50rpx 0;
+  text-align: center;
+  &-title {
+    margin-top: 10rpx;
+    color: rgba($theme-color, .8);
+  }
+}
+.sk-wave {
+  display: flex;
+  justify-content: center;
+  & > .sk-rect {
+    width: $rect-width;
+    height: $rect-height;
+    animation: sk-wave-stretch-delay 1.1s infinite ease-in-out;
+    background-color: rgba($theme-color, .9);
+    &:not(:last-child) {
+      margin-right: $rect-width;
+    }
+  }
+  .sk-rect-1 {
+    animation-delay: -1.1s;
+  }
+  .sk-rect-2 {
+    animation-delay: -1.0s;
+  }
+  .sk-rect-3 {
+    animation-delay: -.9s;
+  }
+  .sk-rect-4 {
+    animation-delay: -.8s;
+  }
+  .sk-rect-5 {
+    animation-delay: -.7s;
+  }
+}
+
+@-webkit-keyframes sk-wave-stretch-delay {
+  0%, 40%, 100% {
+    transform: scaleY(.5);
+  }
+  20% {
+    transform: scaleY(1);
+  }
+}
+
+@keyframes sk-wave-stretch-delay {
+  0%, 40%, 100% {
+    transform: scaleY(.5);
+  }
+  20% {
+    transform: scaleY(1);
+  }
+}

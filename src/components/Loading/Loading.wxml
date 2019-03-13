@@ -1,0 +1,10 @@
+<view class="loading">
+  <view class="sk-wave">
+    <view class="sk-rect sk-rect-1" />
+    <view class="sk-rect sk-rect-2" />
+    <view class="sk-rect sk-rect-3" />
+    <view class="sk-rect sk-rect-4" />
+    <view class="sk-rect sk-rect-5" />
+  </view>
+  <view class="loading-title">{{title}}</view>
+</view>
