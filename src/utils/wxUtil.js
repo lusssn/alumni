@@ -1,7 +1,9 @@
+import { promisifyWxApi } from './util'
+
 // 需要手动配置tabbar页面列表
 const TABBAR_PAGES = ['index', 'friend', 'mine']
 /**
- * Toast提示重载
+ * 页面跳转重载
  * @param pageName String 必填，页面文件名称
  * @param urlParams Json 页面参数
  * @param close Boolean/String 跳转方式，true：关闭当前页再跳转；'all'：关闭所有页面再跳转
@@ -33,6 +35,24 @@ const navigateTo = (pageName, urlParams, close) => {
   }
 }
 
+/**
+ * Toast提示重载
+ * @param title
+ * @param icon
+ * @param others
+ * @returns { Promise }
+ */
+const showToast = (title = '', icon = 'loading', others) => {
+  const params = {
+    title,
+    icon,
+    mask: true,
+    ...others,
+  }
+  return promisifyWxApi(wx.showToast)(params)
+}
+
 export default {
   navigateTo,
+  showToast,
 }
