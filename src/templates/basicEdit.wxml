@@ -1,0 +1,114 @@
+<template name="basicEdit">
+  <view class="card padding-t-xl padding-b-xl">
+    <view class="avatar flex-center tap" bindtap="handleClickAvatar">
+      <image src="{{basic.head_url}}" mode="aspectFill" />
+      <icon class="icon-camera" />
+    </view>
+  </view>
+  <view class="card">
+    <view class="card-header">
+      <view class="card-title">个人信息</view>
+    </view>
+    <view class="card-block">
+      <view class="field">
+        <label class="field-label">真实姓名：</label>
+        <view class="field-content">
+          <input
+            placeholder="请输入真实姓名"
+            value="{{basic.real_name}}"
+            data-name="basic.real_name"
+            bindinput="handleInputChange"
+          />
+        </view>
+      </view>
+      <view class="field">
+        <label class="field-label">性别：</label>
+        <view class="field-content">
+          <picker
+            key="gender"
+            range="{{genderSelect}}"
+            range-key="name"
+            value="{{basic.gender}}"
+            data-name="basic.gender"
+            bindchange="handleInputChange"
+          >
+            <input
+              placeholder="请选择性别"
+              value="{{genderSelect[basic.gender].name}}"
+              disabled
+            />
+          </picker>
+        </view>
+      </view>
+      <view class="field">
+        <label class="field-label">自我描述：</label>
+        <view class="field-content">
+          <input
+            placeholder="请输入自我描述"
+            value="{{basic.descr}}"
+            data-name="basic.descr"
+            bindinput="handleInputChange"
+          />
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="card">
+    <view class="card-header">
+      <view class="card-title">联系方式</view>
+    </view>
+    <view class="card-block">
+      <view class="field">
+        <label class="field-label">定位：</label>
+        <view class="field-content">
+          <input placeholder="请输入定位" />
+          <view class="h3 text-primary">获取定位</view>
+        </view>
+      </view>
+      <view class="field">
+        <label class="field-label">详细地址：</label>
+        <view class="field-content">
+          <input
+            placeholder="选填"
+            value="{{basic.address}}"
+            data-name="basic.address"
+            bindinput="handleInputChange"
+          />
+        </view>
+      </view>
+      <view class="field">
+        <label class="field-label">手机号码：</label>
+        <view class="field-content">
+          <input
+            placeholder="请输入手机号码"
+            value="{{basic.phone}}"
+            data-name="basic.phone"
+            bindinput="handleInputChange"
+          />
+        </view>
+      </view>
+      <view class="field">
+        <label class="field-label">微信号：</label>
+        <view class="field-content">
+          <input
+            placeholder="请输入微信号"
+            value="{{basic.wechat}}"
+            data-name="basic.wechat"
+            bindinput="handleInputChange"
+          />
+        </view>
+      </view>
+      <view class="field">
+        <label class="field-label">邮箱：</label>
+        <view class="field-content">
+          <input
+            placeholder="请输入邮箱"
+            value="{{basic.email}}"
+            data-name="basic.email"
+            bindinput="handleInputChange"
+          />
+        </view>
+      </view>
+    </view>
+  </view>
+</template>

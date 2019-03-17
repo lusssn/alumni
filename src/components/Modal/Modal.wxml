@@ -1,0 +1,49 @@
+<view hidden="{{!isOpen}}" class="modal">
+  <view class="modal-view">
+    <view wx:if="{{title}}" class="modal-title">{{title}}</view>
+    <view wx:if="{{content}}" class="modal-content">
+      <block wx:for="{{content}}" wx:key="*this">
+        <text>{{index % 2 ? '' : item}}</text>
+        <text wx:if="{{index % 2}}" class="modal-sp-content">{{item}}</text>
+      </block>
+    </view>
+    <view class="modal-btns">
+      <!-- 此处不可在open-type中写分支，否则更新modal数据时，open-type不会二次更新 -->
+      <block wx:if="{{cancelText}}">
+        <button
+          wx:if="{{cancelOpenType}}"
+          class="modal-btn cancel"
+          open-type="{{cancelOpenType}}"
+          bindtap="{{cancelOpenType === 'getUserInfo' ? '' : 'handleClose'}}"
+          bindgetuserinfo="handleClose"
+        >
+          {{cancelText}}
+        </button>
+        <button
+          wx:else
+          class="modal-btn cancel"
+          bindtap="handleClose"
+        >
+          {{cancelText}}
+        </button>
+      </block>
+      <!-- 此处不可在open-type中写分支，否则更新modal数据时，open-type不会二次更新 -->
+      <button
+        wx:if="{{okOpenType}}"
+        class="modal-btn ok"
+        open-type="{{okOpenType}}"
+        bindtap="{{okOpenType === 'getUserInfo' ? '' : 'handleOk'}}"
+        bindgetuserinfo="handleOk"
+      >
+        {{okText}}
+      </button>
+      <button
+        wx:else
+        class="modal-btn ok"
+        bindtap="handleOk"
+      >
+        {{okText}}
+      </button>
+    </view>
+  </view>
+</view>

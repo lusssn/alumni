@@ -6,6 +6,7 @@
     "pages/search/search",
     "pages/searchList/searchList",
     "pages/edit/edit",
+    "pages/complete/complete",
     "pages/detail/detail",
     "pages/notice/notice"
   ],

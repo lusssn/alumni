@@ -5,13 +5,23 @@ Page({
   data: {
     isLoaded: false,
     friendList: [],
+    noticeList: [],
   },
   onLoad() {
     request.getUserInfo().then(({ openId }) => {
-      request.get(`/friend/getfriend/${openId}`).then(res => {
+      // 加载消息列表数据
+      request.get(`/friend/getinform/${openId}`).then(({ data }) => {
         this.setData({
           isLoaded: true,
-          friendList: res.friend || [],
+          noticeList: data,
+        })
+      }, () => {})
+      // 加载朋友列表数据
+      request.get(`/friend/getfriend/${openId}`).then(({ data }) => {
+        this.setData({
+          isLoaded: true,
+          // 避免wxml中做friendList.length时抛异常
+          friendList: data || [],
         })
       }, () => {})
     }, () => {})

@@ -26,7 +26,7 @@
           <view class="h1 text-strong padding-b-sm">
             <text>{{item.real_name}}</text>
           </view>
-          <view>{{item.company}}－{{item.vocation}}</view>
+          <view>{{item.company}}－{{item.job}}</view>
         </view>
         <view class="self-top">
           <icon class="icon-location" />

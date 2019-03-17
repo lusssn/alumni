@@ -7,7 +7,12 @@
       <view class="field">
         <label class="field-label">学校名称：</label>
         <view class="field-content">
-          <input placeholder="请输入学校名称" />
+          <input
+            placeholder="请输入学校名称"
+            value="{{education.school}}"
+            data-name="education.school"
+            bindinput="handleInputChange"
+          />
           <view hidden class="h3 text-error">
             <icon class="icon-error margin-r-sm" />
             <text>信息未填写</text>
@@ -18,14 +23,16 @@
         <label class="field-label">学历：</label>
         <view class="field-content">
           <picker
-            value="{{education.degree}}"
+            key="degree"
             range="{{degreeSelect}}"
             range-key="name"
-            bindchange="handleDegreeChange"
+            value="{{education.degree}}"
+            data-name="education.degree"
+            bindchange="handleInputChange"
           >
             <input
               placeholder="请选择学历"
-              value="{{isNaN(education.degree) ? '' : degreeSelect[education.degree].name}}"
+              value="{{degreeSelect[education.degree].name}}"
               disabled
             />
           </picker>
@@ -34,13 +41,23 @@
       <view class="field">
         <label class="field-label">院系：</label>
         <view class="field-content">
-          <input placeholder="请输入院系" />
+          <input
+            placeholder="请输入院系"
+            value="{{education.department}}"
+            data-name="education.department"
+            bindinput="handleInputChange"
+          />
         </view>
       </view>
       <view class="field">
         <label class="field-label">专业：</label>
         <view class="field-content">
-          <input placeholder="请输入专业" />
+          <input
+            placeholder="请输入专业"
+            value="{{education.profession}}"
+            data-name="education.profession"
+            bindinput="handleInputChange"
+          />
         </view>
       </view>
       <view class="field">
@@ -52,13 +69,13 @@
             fields="year"
             start="1960"
             end="2020"
-            value="{{education.enrolDate}}"
-            data-name="enrolDate"
+            value="{{education.start_year}}"
+            data-name="education.start_year"
             bindchange="handleInputChange"
           >
             <input
               placeholder="请选择入学年份"
-              value="{{education.enrolDate}}"
+              value="{{education.start_year}}"
               disabled
             />
           </picker>
@@ -74,13 +91,13 @@
             fields="year"
             start="1960"
             end="2020"
-            value="{{education.graduatedDate}}"
-            data-name="graduatedDate"
+            value="{{education.end_year}}"
+            data-name="education.end_year"
             bindchange="handleInputChange"
           >
             <input
               placeholder="请选择毕业时间"
-              value="{{education.graduatedDate}}"
+              value="{{education.end_year}}"
               disabled
             />
           </picker>

@@ -1,0 +1,66 @@
+@import "../../assets/scss/_variables";
+@import "../../assets/scss/_border";
+
+.modal {
+  position: fixed;
+  z-index: 10;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(black, .5);
+  &-view {
+    width: 560rpx;
+    text-align: center;
+    border-radius: 8rpx;
+    background-color: white;
+  }
+  &-title {
+    padding-top: 40rpx;
+    font-size: 34rpx;
+    color: $strong-color;
+  }
+  &-content {
+    padding: 40rpx 60rpx 50rpx;
+    font-size: 32rpx;
+    line-height: 44rpx;
+    color: $main-color;
+  }
+  &-sp-content {
+    color: $theme-color;
+  }
+  &-btns {
+    @include borderPoint5("t");
+
+    display: flex;
+  }
+  &-btn {
+    height: 100rpx;
+    flex: 1;
+    box-sizing: border-box;
+    font-size: 36rpx;
+    color: $main-color;
+    border-radius: 0;
+    background-color: transparent;
+    &::after {
+      border: none;
+    }
+    &:active {
+      background-color: rgba(black, .1);
+    }
+    &.ok {
+      color: $theme-color;
+    }
+    &.cancel {
+      @include borderPoint5("r");
+
+      color: $muted-color;
+      &:after {
+        left: auto;
+      }
+    }
+  }
+}

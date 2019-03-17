@@ -18,10 +18,15 @@ Page({
       { id: 2, name: '博士' },
       { id: 1, name: '其他' },
     ],
+    genderSelect: [
+      { id: 1, name: '男' },
+      { id: 2, name: '女' },
+    ],
     basic: {
       gender: 1,
     },
     education: {},
+    work: {},
   },
   onLoad({ type, id = null }) {
     const editType = R.find(R.propEq('type', type))(EDIT_TYPE)
@@ -40,15 +45,9 @@ Page({
     })
   },
   handleInputChange(e) {
-    const { type } = this.data
     const { name } = e.currentTarget.dataset
     this.setData({
-      [`${type}.${name}`]: e.detail.value,
-    })
-  },
-  handleDegreeChange(e) {
-    this.setData({
-      'education.degree': e.detail.value,
+      [name]: e.detail.value,
     })
   },
   handleRemove() {

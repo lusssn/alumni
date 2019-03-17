@@ -1,0 +1,21 @@
+<import src="../../templates/basicEdit.wxml" />
+<import src="../../templates/educationEdit.wxml" />
+<import src="../../templates/jobEdit.wxml" />
+<view class="container">
+  <template is="basicEdit" data="{{ genderSelect, basic }}" />
+  <template is="educationEdit" data="{{ degreeSelect, education }}" />
+  <template is="jobEdit" data="{{ work }}" />
+  <view class="fix-bottom padding-md border-t flex">
+    <button class="flex-item" type="primary" bindtap="handleSave">保存</button>
+  </view>
+  <Modal
+    isOpen="{{isShowAuthModal}}"
+    title="提示"
+    cancelText="取消"
+    okText="授权"
+    okOpenType="getUserInfo"
+    content="{{['小程序需要读取您的个人信息']}}"
+    bindcancel="handleCloseAuthModal"
+    bindok="handleAuth"
+  />
+</view>

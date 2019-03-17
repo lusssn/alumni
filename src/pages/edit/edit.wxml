@@ -1,88 +1,21 @@
-<import src="templates/educationEdit.wxml" />
-<import src="templates/jobEdit.wxml" />
+<import src="../../templates/basicEdit.wxml" />
+<import src="../../templates/educationEdit.wxml" />
+<import src="../../templates/jobEdit.wxml" />
 <view class="container{{type !== 'basic' ? ' padding-t-md' : ''}}">
-  <block wx:if="{{type === 'basic'}}">
-    <view class="card padding-t-xl padding-b-xl">
-      <view class="avatar flex-center tap" bindtap="handleClickAvatar">
-        <image src="{{basic.avatar}}" mode="aspectFill" />
-        <icon class="icon-camera" />
-      </view>
-    </view>
-    <view class="card">
-      <view class="card-header">
-        <view class="card-title">个人信息</view>
-      </view>
-      <view class="card-block">
-        <view class="field">
-          <label class="field-label">真实姓名：</label>
-          <view class="field-content">
-            <input
-              placeholder="请输入真实姓名"
-              value="{{basic.realName}}"
-              data-name="realName"
-              bindinput="handleInputChange"
-            />
-          </view>
-        </view>
-        <view class="field">
-          <label class="field-label">性别：</label>
-          <view class="field-content">
-            <input placeholder="请选择性别" />
-          </view>
-        </view>
-        <view class="field">
-          <label class="field-label">自我描述：</label>
-          <view class="field-content">
-            <input placeholder="请输入自我描述" />
-          </view>
-        </view>
-      </view>
-    </view>
-    <view class="card">
-      <view class="card-header">
-        <view class="card-title">联系方式</view>
-      </view>
-      <view class="card-block">
-        <view class="field">
-          <label class="field-label">定位：</label>
-          <view class="field-content">
-            <input placeholder="请输入定位" />
-            <view class="h3 text-primary">获取定位</view>
-          </view>
-        </view>
-        <view class="field">
-          <label class="field-label">详细地址：</label>
-          <view class="field-content">
-            <input placeholder="选填" />
-          </view>
-        </view>
-        <view class="field">
-          <label class="field-label">手机号码：</label>
-          <view class="field-content">
-            <input placeholder="请输入手机号码" />
-          </view>
-        </view>
-        <view class="field">
-          <label class="field-label">微信号：</label>
-          <view class="field-content">
-            <input placeholder="请输入微信号" />
-          </view>
-        </view>
-        <view class="field">
-          <label class="field-label">邮箱：</label>
-          <view class="field-content">
-            <input placeholder="请输入邮箱" />
-          </view>
-        </view>
-      </view>
-    </view>
-  </block>
+  <template
+    wx:if="{{type === 'basic'}}"
+    is="basicEdit"
+    data="{{ basic }}"
+  />
   <template
     wx:if="{{type === 'education'}}"
     is="educationEdit"
     data="{{ degreeSelect, education }}"
   />
-  <template wx:if="{{type === 'job'}}" is="jobEdit" />
+  <template
+    wx:if="{{type === 'job'}}"
+    is="jobEdit"
+  />
   <view class="fix-bottom padding-md border-t flex">
     <button
       wx:if="{{id}}"
