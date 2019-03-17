@@ -2,12 +2,12 @@
   <view class="card">
     <view class="card-block">
       <view class="flex-align-center padding-t-lg padding-b-lg border-b">
-        <view class="avatar" />
+        <image class="avatar" mode="aspectFill" src="{{basic.head_url}}" />
         <view class="flex-item padding-l-lg">
           <view class="h1 text-strong padding-b-md">
-            <text>杨峒陵</text>
+            <text>{{basic.real_name}}</text>
           </view>
-          <view>ID: 346982</view>
+          <view>ID: {{basic.id}}</view>
         </view>
         <icon class="icon-ercode" />
         <icon class="icon-arrow-right margin-l-sm" />
@@ -22,7 +22,7 @@
         <text class="h3">编辑</text>
       </view>
     </view>
-    <BasicInfo />
+    <BasicInfo data="{{basic}}" />
   </view>
   <view class="card">
     <view class="card-header">
@@ -32,11 +32,11 @@
         <text class="h3">添加</text>
       </view>
     </view>
-    <block wx:if="{{education.length}}">
+    <block wx:if="{{educations.length}}">
       <EducationInfo
-        wx:for="{{education}}"
+        wx:for="{{educations}}"
         data="{{item}}"
-        border="{{index < education.length - 1 }}"
+        border="{{index < educations.length - 1 }}"
         bindtap="handleEducationAdd"
       />
     </block>
@@ -51,12 +51,20 @@
   <view class="card">
     <view class="card-header">
       <view class="card-title">工作经历</view>
-      <view class="link" bindtap="handleJobAdd">
+      <view class="link" bindtap="handleWorkAdd">
         <icon class="icon-plus margin-r-sm" />
         <text class="h3">添加</text>
       </view>
     </view>
-    <view class="card-block padding-b-xl text-center">
+    <block wx:if="{{works.length}}">
+      <WorkInfo
+        wx:for="{{works}}"
+        data="{{item}}"
+        border="{{index < works.length - 1 }}"
+        bindtap="handleWorkAdd"
+      />
+    </block>
+    <view wx:else class="card-block padding-b-xl text-center">
       <image
         class="experience-empty margin-t-xl margin-b-xl"
         src="../../images/experience-empty.png"

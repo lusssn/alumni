@@ -76,7 +76,7 @@ const _request = (url, params = {}, others) => {
   })
 }
 
-const get = (url, params = {}, others) => {
+const get = (url, params = {}, others = {}) => {
   const _url = `${config.service.baseUrl}${url}`
   return _request(_url, params, {
     method: 'GET',
@@ -84,10 +84,15 @@ const get = (url, params = {}, others) => {
   })
 }
 
-const post = (url, params = {}, others) => {
+const post = (url, params = {}, { header = {}, ...others } = {}) => {
   const _url = `${config.service.baseUrl}${url}`
+  const _header = {
+    'content-type': 'application/x-www-form-urlencoded',
+    ...header,
+  }
   return _request(_url, params, {
     method: 'POST',
+    header: _header,
     ...others,
   })
 }

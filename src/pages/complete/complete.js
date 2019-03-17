@@ -2,21 +2,13 @@ import * as R from '../../utils/ramda/index'
 import { promisifyWxApi } from '../../utils/util'
 import request from '../../utils/request'
 import wxUtil from '../../utils/wxUtil'
+import { DEGREE_TYPE, GENDER_TYPE } from '../../macro'
 
 Page({
   data: {
     isShowAuthModal: false,
-    degreeSelect: [
-      { id: 5, name: '专科' },
-      { id: 4, name: '本科' },
-      { id: 3, name: '硕士' },
-      { id: 2, name: '博士' },
-      { id: 1, name: '其他' },
-    ],
-    genderSelect: [
-      { id: 1, name: '男' },
-      { id: 2, name: '女' },
-    ],
+    degreeSelect: DEGREE_TYPE,
+    genderSelect: GENDER_TYPE,
     basic: {},
     education: {},
     work: {},
@@ -54,34 +46,35 @@ Page({
   },
   handleSave() {
     console.log(this.data)
-    let { basic, education, work, degreeSelect, genderSelect } = this.data
+    let { basic, education, work } = this.data
     // 处理gender
-    const gender = genderSelect[basic.gender] || {}
+    const gender = GENDER_TYPE[basic.gender] || {}
     basic = R.assoc('gender', gender.id || 0, basic)
 
     // 处理degree
-    const degree = degreeSelect[education.degree] || {}
+    const degree = DEGREE_TYPE[education.degree] || {}
     education = R.assoc('degree', degree.id || 0)
     // TODO 提交数据
-    request.getUserInfo().then(userInfo => {
-      request.post('/edit/editbase', {
-        openid: userInfo.openId,
+    request.getUserInfo().then(({ openId }) => {
+      const saveBasic = request.post('/edit/editbase', {
+        openid: openId,
         ...basic,
-      }).then(() => {
-
-      }, () => {})
-      request.post('/edit/addeducation', {
-        openid: userInfo.openId,
+      })
+      const saveEducation = request.post('/edit/addeducation', {
+        openid: openId,
         ...education,
-      }).then(() => {
-
-      }, () => {})
-      request.post('/edit/addwork', {
-        openid: userInfo.openId,
+      })
+      const saveWork = request.post('/edit/addwork', {
+        openid: openId,
         ...work,
-      }).then(() => {
-
-      }, () => {})
+      })
+      Promise.all([saveBasic, saveEducation, saveWork]).then(() => {
+        wxUtil.showToast('保存成功', 'success').then(() => {
+          wxUtil.navigateTo('mine', {}, 'all')
+        })
+      }, () => {
+        wxUtil.showToast('请重试')
+      })
     })
   },
   handleCloseAuthModal() {
@@ -101,5 +94,5 @@ Page({
       },
       isShowAuthModal: false,
     })
-  }
+  },
 })

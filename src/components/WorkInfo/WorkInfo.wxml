@@ -1,16 +1,16 @@
 <view class="card-block padding-t-sm padding-b-sm{{border ? ' border-b' : ''}}">
   <view class="field">
-    <label class="field-label">学历：</label>
-    <view class="field-content">{{data.profession}}</view>
+    <label class="field-label">公司名称：</label>
+    <view class="field-content">{{data.company}}</view>
   </view>
   <view class="field">
-    <label class="field-label">院系专业：</label>
+    <label class="field-label">职业名称：</label>
     <view class="field-content">
-      <text>{{data.school}}－{{data.department}}\{{data.background}}</text>
+      <text>{{data.job}}</text>
     </view>
   </view>
   <view class="field">
-    <label class="field-label">入学／毕业：</label>
+    <label class="field-label">入职／离职：</label>
     <view class="field-content">
       {{data.start_year}}／{{data.end_year}}
     </view>

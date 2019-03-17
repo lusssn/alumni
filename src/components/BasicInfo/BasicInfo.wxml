@@ -1,19 +1,19 @@
 <view class="card-block padding-t-sm padding-b-sm">
   <view class="field">
     <label class="field-label">自我描述：</label>
-    <view class="field-content">定位南京，实习做产品，时间充裕。定位南京，实习做产品。</view>
+    <view class="field-content">{{data.descr}}</view>
   </view>
   <view class="field">
     <label class="field-label">定位：</label>
     <view class="field-content">
-      <text>南京</text>
+      <text>{{data.city || ''}}</text>
       <view class="h3 text-primary">获取定位</view>
     </view>
   </view>
   <view class="field">
     <label class="field-label">出生年月：</label>
     <view class="field-content">
-      <text>{{data.birth}}</text>
+      <text>{{data.birth || ''}}</text>
     </view>
   </view>
   <view class="field">
@@ -22,6 +22,6 @@
   </view>
   <view class="field">
     <label class="field-label">微信号：</label>
-    <view class="field-content">vt5677ghj</view>
+    <view class="field-content">{{data.wechat}}</view>
   </view>
 </view>
