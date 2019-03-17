@@ -2,6 +2,7 @@
   "navigationBarTitleText": "名片",
   "usingComponents": {
     "BasicInfo": "../../components/BasicInfo/BasicInfo",
-    "EducationInfo": "../../components/EducationInfo/EducationInfo"
+    "EducationInfo": "../../components/EducationInfo/EducationInfo",
+    "WorkInfo": "../../components/WorkInfo/WorkInfo"
   }
 }

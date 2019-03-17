@@ -2,19 +2,19 @@
   <view class="card">
     <view class="card-block">
       <view class="flex-align-center padding-t-lg padding-b-lg border-b">
-        <view class="avatar" />
+        <image class="avatar" mode="aspectFill" src="{{basic.head_url}}" />
         <view class="flex-item padding-l-lg">
           <view class="h1 text-strong padding-b-md">
-            <text class="margin-r-sm">{{base.real_name}}</text>
-            <text wx:if="{{base.gender}}" class="text-primary">♂</text>
+            <text class="margin-r-sm">{{basic.real_name}}</text>
+            <text wx:if="{{basic.gender}}" class="text-primary">♂</text>
             <text wx:else class="text-error">♀</text>
           </view>
-          <view class="padding-b-sm">ID: {{base.ID}}</view>
-          <view>{{base.descr}}</view>
+          <view class="padding-b-sm">ID: {{basic.id}}</view>
+          <view>{{basic.descr}}</view>
         </view>
         <view class="self-top">
           <icon class="icon-location" />
-          <text class="text-muted">{{base.city}}</text>
+          <text class="text-muted">{{basic.city}}</text>
         </view>
       </view>
     </view>
@@ -24,7 +24,7 @@
     <view class="card-header">
       <view class="card-title">基本信息</view>
     </view>
-    <BasicInfo data="{{privacy}}" />
+    <BasicInfo data="{{basic}}" />
   </view>
 
   <view class="card">
@@ -32,7 +32,12 @@
       <view class="card-title">教育经历</view>
     </view>
     <block wx:if="{{educations.length}}">
-      <EducationInfo wx:for="{{educations}}" data="{{item}}" />
+      <EducationInfo
+        wx:for="{{educations}}"
+        wx:key="num"
+        data="{{item}}"
+        border="{{index < educations.length - 1 }}"
+      />
     </block>
     <view wx:else class="card-block padding-b-xl text-center">
       <image
@@ -47,7 +52,15 @@
     <view class="card-header">
       <view class="card-title">工作经历</view>
     </view>
-    <view class="card-block padding-b-xl text-center">
+    <block wx:if="{{works.length}}">
+      <WorkInfo
+        wx:for="{{works}}"
+        wx:key="num"
+        data="{{item}}"
+        border="{{index < works.length - 1 }}"
+      />
+    </block>
+    <view wx:else class="card-block padding-b-xl text-center">
       <image
         class="experience-empty margin-t-xl margin-b-xl"
         src="../../images/experience-empty.png"

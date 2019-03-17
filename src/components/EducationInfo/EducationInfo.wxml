@@ -6,7 +6,7 @@
   <view class="field">
     <label class="field-label">院系专业：</label>
     <view class="field-content">
-      <text>{{data.school}}－{{data.department}}\{{data.background}}</text>
+      <text>{{data.school}}－{{data.department}}/{{data.background}}</text>
     </view>
   </view>
   <view class="field">

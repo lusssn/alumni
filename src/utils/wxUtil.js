@@ -42,12 +42,15 @@ const navigateTo = (pageName, urlParams, close) => {
  * @param others
  * @returns { Promise }
  */
-const showToast = (title = '', icon = 'loading', others) => {
+const showToast = (title = '', icon = 'warning', others) => {
   const params = {
     title,
     icon,
     mask: true,
     ...others,
+  }
+  if (icon === 'warning') {
+    params.image = '../../images/warning-o.png'
   }
   return promisifyWxApi(wx.showToast)(params)
 }

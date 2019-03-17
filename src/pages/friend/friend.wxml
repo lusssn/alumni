@@ -13,12 +13,13 @@
   </view>
   <view class="card">
     <view class="card-header">我的朋友</view>
-    <Loading wx:if="{{!isLoaded}}" />
+    <Loading wx:if="{{!friendList}}" />
     <view wx:elif="{{friendList.length}}" class="card-block">
       <view
         wx:for="{{friendList}}"
-        wx:key="ID"
+        wx:key="friendid"
         class="flex-align-center padding-t-lg padding-b-lg border-b tap"
+        data-id="{{item.friendid}}"
         bindtap="handleClickCard"
       >
         <image class="avatar" mode="aspectFill" src="{{item.head_url}}" />

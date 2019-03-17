@@ -10,11 +10,11 @@ Page({
   onLoad() {
     request.getUserInfo().then(({ openId }) => {
       request.get(`/query/getall/${openId}`).then(({ data }) => {
-        const { base, personal } = data
+        const { base, personal, education, work } = data
         this.setData({
           basic: { ...base[0], ...personal[0] },
-          educations: data.education,
-          works: data.work,
+          educations: education,
+          works: work,
         })
       }, () => {})
     })

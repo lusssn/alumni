@@ -1,39 +1,27 @@
+import wxUtil from '../../utils/wxUtil'
+import request from '../../utils/request'
+
 Page({
   data: {
-    open_id: 'string',
-    base: {
-      head_url: 'string',
-      gender: 0,
-      descr: 'string',
-      city: 'string',
-      ID: 'string',
-      nick_name: 'string',
-      real_name: 'string',
-    },
-    privacy: {
-      birth: '2019-01-19T13:41:39.801Z',
-      phone: 0,
-      birth_lock: true,
-      phone_lock: true,
-      wechat_lock: true,
-    },
-    educations: [
-      {
-        school: 'string',
-        background: 'string',
-        department: 'string',
-        profession: 'string',
-        start_year: 0,
-        graduate_year: 0,
-      },
-    ],
-    works: [
-      {
-        company: 'string',
-        job: 'string',
-        start_year: 0,
-        end_year: 0,
-      },
-    ],
+    basic: {},
+    educations: [],
+    works: [],
   },
+  onLoad({ id }) {
+    if (!id) {
+      wxUtil.showToast('不存在此人')
+      return
+    }
+    // 加载详情数据
+    request.get(`/query/getall/${id}`).then(({ data }) => {
+      const { base, personal, education, work } = data
+      this.setData({
+        basic: { ...base[0], ...personal[0] },
+        educations: education,
+        works: work,
+      })
+    }, () => {
+      wxUtil.showToast('获取详情失败')
+    })
+  }
 })

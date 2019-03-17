@@ -12,7 +12,7 @@
   <view class="field">
     <label class="field-label">入职／离职：</label>
     <view class="field-content">
-      {{data.start_year}}／{{data.end_year}}
+      {{data.start_year || '无'}}／{{data.end_year || '无'}}
     </view>
   </view>
 </view>
