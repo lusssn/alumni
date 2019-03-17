@@ -1,11 +1,11 @@
 <import src="../../templates/basicEdit.wxml" />
 <import src="../../templates/educationEdit.wxml" />
-<import src="../../templates/jobEdit.wxml" />
+<import src="../../templates/workEdit.wxml" />
 <view class="container{{type !== 'basic' ? ' padding-t-md' : ''}}">
   <template
     wx:if="{{type === 'basic'}}"
     is="basicEdit"
-    data="{{ basic }}"
+    data="{{ genderSelect, basic }}"
   />
   <template
     wx:if="{{type === 'education'}}"
@@ -13,8 +13,9 @@
     data="{{ degreeSelect, education }}"
   />
   <template
-    wx:if="{{type === 'job'}}"
-    is="jobEdit"
+    wx:if="{{type === 'work'}}"
+    is="workEdit"
+    data="{{work}}"
   />
   <view class="fix-bottom padding-md border-t flex">
     <button

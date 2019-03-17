@@ -38,6 +38,7 @@
         wx:key="num"
         data="{{item}}"
         border="{{index < educations.length - 1 }}"
+        data-num="{{item.num}}"
         bindtap="handleEducationAdd"
       />
     </block>
@@ -63,6 +64,7 @@
         wx:key="num"
         data="{{item}}"
         border="{{index < works.length - 1 }}"
+        data-num="{{item.num}}"
         bindtap="handleWorkAdd"
       />
     </block>

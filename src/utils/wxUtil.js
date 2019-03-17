@@ -47,6 +47,7 @@ const showToast = (title = '', icon = 'warning', others) => {
     title,
     icon,
     mask: true,
+    duration: 3000,
     ...others,
   }
   if (icon === 'warning') {

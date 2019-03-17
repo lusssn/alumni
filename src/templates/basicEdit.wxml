@@ -66,17 +66,6 @@
         </view>
       </view>
       <view class="field">
-        <label class="field-label">详细地址：</label>
-        <view class="field-content">
-          <input
-            placeholder="选填"
-            value="{{basic.address}}"
-            data-name="basic.address"
-            bindinput="handleInputChange"
-          />
-        </view>
-      </view>
-      <view class="field">
         <label class="field-label">手机号码：</label>
         <view class="field-content">
           <input

@@ -1,10 +1,10 @@
 <import src="../../templates/basicEdit.wxml" />
 <import src="../../templates/educationEdit.wxml" />
-<import src="../../templates/jobEdit.wxml" />
+<import src="../../templates/workEdit.wxml" />
 <view class="container">
   <template is="basicEdit" data="{{ genderSelect, basic }}" />
   <template is="educationEdit" data="{{ degreeSelect, education }}" />
-  <template is="jobEdit" data="{{ work }}" />
+  <template is="workEdit" data="{{ work }}" />
   <view class="fix-bottom padding-md border-t flex">
     <button class="flex-item" type="primary" bindtap="handleSave">保存</button>
   </view>

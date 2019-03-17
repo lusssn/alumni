@@ -1,4 +1,4 @@
-<template name="jobEdit">
+<template name="workEdit">
   <view class="card">
     <view class="card-header">
       <view class="card-title">工作经历</view>

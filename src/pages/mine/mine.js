@@ -22,10 +22,18 @@ Page({
   handleBasicEdit() {
     wxUtil.navigateTo('edit', { type: 'basic' })
   },
-  handleEducationAdd() {
-    wxUtil.navigateTo('edit', { type: 'education' })
+  handleEducationAdd(e) {
+    const { num } = e.currentTarget.dataset
+    wxUtil.navigateTo('edit', {
+      type: 'education',
+      id: num,
+    })
   },
-  handleWorkAdd() {
-    wxUtil.navigateTo('edit', { type: 'job' })
+  handleWorkAdd(e) {
+    const { num } = e.currentTarget.dataset
+    wxUtil.navigateTo('edit', {
+      type: 'work',
+      id: num,
+    })
   }
 })

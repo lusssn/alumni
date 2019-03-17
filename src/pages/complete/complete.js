@@ -15,11 +15,10 @@ Page({
   },
   onLoad() {
     request.getUserInfo().then(userInfo => {
-      const { genderSelect } = this.data
       this.setData({
         basic: {
           head_url: userInfo.avatarUrl,
-          gender: R.findIndex(R.propEq('id', userInfo.gender))(genderSelect),
+          gender: R.findIndex(R.propEq('id', userInfo.gender))(GENDER_TYPE),
         },
       })
     }, () => {
@@ -45,7 +44,6 @@ Page({
     })
   },
   handleSave() {
-    console.log(this.data)
     let { basic, education, work } = this.data
     // 处理gender
     const gender = GENDER_TYPE[basic.gender] || {}
@@ -53,8 +51,8 @@ Page({
 
     // 处理degree
     const degree = DEGREE_TYPE[education.degree] || {}
-    education = R.assoc('degree', degree.id || 0)
-    // TODO 提交数据
+    education = R.assoc('degree', degree.id || 0, education)
+    // 提交数据
     request.getUserInfo().then(({ openId }) => {
       const saveBasic = request.post('/edit/editbase', {
         openid: openId,
@@ -75,7 +73,7 @@ Page({
       }, () => {
         wxUtil.showToast('请重试')
       })
-    })
+    }, () => {})
   },
   handleCloseAuthModal() {
     // 关闭弹窗
@@ -86,11 +84,10 @@ Page({
   handleAuth(e) {
     const { event } = e.detail
     const { userInfo } = event.detail
-    const { genderSelect } = this.data
     this.setData({
       basic: {
         head_url: userInfo.avatarUrl,
-        gender: R.findIndex(R.propEq('id', userInfo.gender))(genderSelect),
+        gender: R.findIndex(R.propEq('id', userInfo.gender))(GENDER_TYPE),
       },
       isShowAuthModal: false,
     })
