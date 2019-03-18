@@ -23,16 +23,15 @@
         <label class="field-label">学历：</label>
         <view class="field-content">
           <picker
-            key="degree"
             range="{{degreeSelect}}"
             range-key="name"
-            value="{{education.degree}}"
-            data-name="education.degree"
+            value="{{education.background}}"
+            data-name="education.background"
             bindchange="handleInputChange"
           >
             <input
               placeholder="请选择学历"
-              value="{{degreeSelect[education.degree].name}}"
+              value="{{degreeSelect[education.background].name}}"
               disabled
             />
           </picker>

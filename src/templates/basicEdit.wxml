@@ -25,7 +25,6 @@
         <label class="field-label">性别：</label>
         <view class="field-content">
           <picker
-            key="gender"
             range="{{genderSelect}}"
             range-key="name"
             value="{{basic.gender}}"
@@ -38,6 +37,25 @@
               disabled
             />
           </picker>
+        </view>
+      </view>
+      <view class="field">
+        <label class="field-label">出生年月：</label>
+        <view class="field-content">
+          <picker
+            class="flex-item"
+            mode="date"
+            value="{{basic.birth}}"
+            data-name="basic.birth"
+            bindchange="handleInputChange"
+          >
+            <input
+              placeholder="请选择出生年月"
+              value="{{basic.birth}}"
+              disabled
+            />
+          </picker>
+          <icon class="icon-arrow-up" />
         </view>
       </view>
       <view class="field">
@@ -61,8 +79,13 @@
       <view class="field">
         <label class="field-label">定位：</label>
         <view class="field-content">
-          <input placeholder="请输入定位" />
-          <view class="h3 text-primary">获取定位</view>
+          <input
+            placeholder="请输入定位"
+            value="{{basic.city}}"
+            data-name="basic.city"
+            bindinput="handleInputChange"
+          />
+          <view class="h3 text-primary" bindtap="handleLocation">获取定位</view>
         </view>
       </view>
       <view class="field">

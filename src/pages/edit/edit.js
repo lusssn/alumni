@@ -58,7 +58,7 @@ Page({
           // 找到id对应项
           const education = R.find(R.propEq('num', id))(data) || {}
           // 处理学历
-          education.degree = R.findIndex(
+          education.background = R.findIndex(
             R.propEq('name', education.background),
           )(DEGREE_TYPE)
           this.setData({ education })
@@ -80,6 +80,12 @@ Page({
       this.setData({
         'basic.head_url': res.tempFilePaths.pop(),
       })
+    })
+  },
+  // 定位
+  handleLocation() {
+    request.getLocation().then(res => {
+      this.setData({ 'basic.city': res })
     })
   },
   handleInputChange(e) {
@@ -127,8 +133,8 @@ Page({
         params.gender = gender.id
       } else if (type === 'education') {
         // 处理degree
-        const degree = DEGREE_TYPE[params.degree] || {}
-        params.degree = degree.id
+        const degree = DEGREE_TYPE[params.background] || {}
+        params.background = degree.id
       }
       // 发起请求
       request.post(editType.saveUrl, params).then(() => {

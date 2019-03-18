@@ -37,6 +37,12 @@ Page({
       })
     })
   },
+  // 定位
+  handleLocation() {
+    request.getLocation().then(res => {
+      this.setData({ 'basic.city': res })
+    })
+  },
   handleInputChange(e) {
     const { name } = e.currentTarget.dataset
     this.setData({
@@ -50,8 +56,8 @@ Page({
     basic = R.assoc('gender', gender.id || 0, basic)
 
     // 处理degree
-    const degree = DEGREE_TYPE[education.degree] || {}
-    education = R.assoc('degree', degree.id || 0, education)
+    const degree = DEGREE_TYPE[education.background] || {}
+    education = R.assoc('background', degree.id || 0, education)
     // 提交数据
     request.getUserInfo().then(({ openId }) => {
       const saveBasic = request.post('/edit/editbase', {

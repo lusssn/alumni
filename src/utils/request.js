@@ -4,6 +4,7 @@ import { promisifyWxApi } from './util'
 import wxUtil from './wxUtil'
 
 const app = getApp()
+const regHttp = /^(http[s]{0,1}:\/\/)/
 
 const getUserInfo = () => {
   // 优先从global中读取数据
@@ -50,8 +51,9 @@ const getUserInfo = () => {
 }
 
 const _request = (url, params = {}, others) => {
+  const _url = `${regHttp.test(url) ? '' : config.service.baseUrl}${url}`
   return promisifyWxApi(qcloud.request)({
-    url,
+    url: _url,
     data: params,
     ...others,
   }).then(res => {
@@ -63,7 +65,8 @@ const _request = (url, params = {}, others) => {
       code: -1,
     })
   }).then(data => {
-    if (+data.status === 200) {
+    // 特殊说明：qqMap接口返回的status为0时为成功
+    if (+data.status === 200 || !data.status) {
       return data
     }
     return Promise.reject({
@@ -77,27 +80,46 @@ const _request = (url, params = {}, others) => {
 }
 
 const get = (url, params = {}, others = {}) => {
-  const _url = `${config.service.baseUrl}${url}`
-  return _request(_url, params, {
+  return _request(url, params, {
     method: 'GET',
     ...others,
   })
 }
 
 const post = (url, params = {}, { header = {}, ...others } = {}) => {
-  const _url = `${config.service.baseUrl}${url}`
   const _header = {
     'content-type': 'application/x-www-form-urlencoded',
     ...header,
   }
-  return _request(_url, params, {
+  return _request(url, params, {
     method: 'POST',
     header: _header,
     ...others,
   })
 }
 
+const getLocation = () => {
+  return promisifyWxApi(wx.getLocation)({
+    type: 'wgs84',
+  }).then(({ latitude, longitude }) => {
+    const _url = `${config.service.qqMapHost}/ws/geocoder/v1/`
+    return get(_url, {
+      location: `${latitude},${longitude}`,
+      key: config.qqMapKey,
+    }).then((res) => {
+      const { address_component: address } = res.result
+      return address.city || address.province || address.nation
+    })
+  }, () => {
+    return Promise.reject({
+      title: '获取位置失败',
+      code: -1,
+    })
+  })
+}
+
 export default {
+  getLocation,
   getUserInfo,
   get,
   post,

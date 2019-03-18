@@ -1,6 +1,7 @@
 {
   "navigationBarTitleText": "我的",
   "usingComponents": {
+    "Loading": "../../components/Loading/Loading",
     "BasicInfo": "../../components/BasicInfo/BasicInfo",
     "EducationInfo": "../../components/EducationInfo/EducationInfo",
     "WorkInfo": "../../components/WorkInfo/WorkInfo"

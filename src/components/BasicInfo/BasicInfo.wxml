@@ -5,10 +5,7 @@
   </view>
   <view class="field">
     <label class="field-label">定位：</label>
-    <view class="field-content">
-      <text>{{data.city || ''}}</text>
-      <view wx:if="{{isSelf}}" class="h3 text-primary">获取定位</view>
-    </view>
+    <view class="field-content">{{data.city || ''}}</view>
   </view>
   <view class="field">
     <label class="field-label">出生年月：</label>

@@ -1,4 +1,4 @@
-<view class="container padding-t-md">
+<view wx:if="{{isLoaded}}" class="container padding-t-md">
   <view class="card">
     <view class="card-block">
       <view class="flex-align-center padding-t-lg padding-b-lg border-b">
@@ -22,7 +22,7 @@
         <text class="h3">编辑</text>
       </view>
     </view>
-    <BasicInfo data="{{basic}}" isSelf />
+    <BasicInfo data="{{basic}}" />
   </view>
   <view class="card">
     <view class="card-header">
@@ -77,3 +77,4 @@
     </view>
   </view>
 </view>
+<Loading wx:else isFixed />

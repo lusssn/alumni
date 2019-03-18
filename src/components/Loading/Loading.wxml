@@ -1,4 +1,4 @@
-<view class="loading">
+<view class="loading{{isFixed ? ' loading-fixed' : ''}}">
   <view class="sk-wave">
     <view class="sk-rect sk-rect-1" />
     <view class="sk-rect sk-rect-2" />

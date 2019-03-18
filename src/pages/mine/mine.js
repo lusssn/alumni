@@ -3,6 +3,7 @@ import request from '../../utils/request'
 
 Page({
   data: {
+    isLoaded: false,
     basic: {},
     educations: [],
     works: [],
@@ -12,6 +13,7 @@ Page({
       request.get(`/query/getall/${openId}`).then(({ data }) => {
         const { base, personal, education, work } = data
         this.setData({
+          isLoaded: true,
           basic: { ...base[0], ...personal[0] },
           educations: education,
           works: work,
