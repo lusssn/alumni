@@ -32,6 +32,7 @@
           <picker
             class="flex-item"
             mode="date"
+            fields="year"
             value="{{work.start_year}}"
             data-name="work.start_year"
             bindchange="handleInputChange"
@@ -51,6 +52,7 @@
           <picker
             class="flex-item"
             mode="date"
+            fields="year"
             value="{{work.end_year}}"
             data-name="work.end_year"
             bindchange="handleInputChange"

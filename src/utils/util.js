@@ -11,7 +11,7 @@ export const promisifyWxApi = fn => {
       fn({
         ...args,
         success: res => resolve(res),
-        fail: res => reject(res)
+        fail: res => reject(res),
       })
     })
   }

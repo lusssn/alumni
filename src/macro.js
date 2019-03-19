@@ -1,3 +1,9 @@
+export const NOTICE = {
+  editedBasic: Symbol('editedBasic'),
+  editedEducation: Symbol('hasEditEducation'),
+  editedWork: Symbol('editedWork')
+}
+
 export const GENDER_TYPE = [
   { id: 1, name: '男' },
   { id: 2, name: '女' },

@@ -9,13 +9,13 @@ const EDIT_TYPE = [
   {
     type: 'education',
     title: '添加教育经历',
-    saveUrl: '/edit/addeducation',
+    saveUrl: '/edit/editeducation',
     removeUrl: '/edit/deleteeducation',
   },
   {
     type: 'work',
     title: '添加工作经历',
-    saveUrl: '/edit/addwork',
+    saveUrl: '/edit/editwork',
     removeUrl: '/edit/deletework',
   },
 ]
@@ -36,41 +36,15 @@ Page({
     wx.setNavigationBarTitle({
       title: editType.title,
     })
-    this.initPageData(type, id)
+    // 判断修改类型，加载对应数据
+    if (type === 'basic') {
+      this.loadBasic()
+    } else if (type === 'education' && id) {
+      this.loadEducation(id)
+    } else if (type === 'work' && id) {
+      this.loadWork(id)
+    }
     this.setData({ type, id })
-  },
-  // 页面数据初始化
-  initPageData(type, id) {
-    request.getUserInfo().then(({ openId }) => {
-      // 判断修改类型，加载对应数据
-      if (type === 'basic') {
-        request.get(`/query/getbase/${openId}`).then(({ data }) => {
-          const { base, personal } = data
-          const basic = { ...base[0], ...personal[0] }
-          // 处理性别
-          basic.gender = R.findIndex(
-            R.propEq('id', Number(basic.gender)),
-          )(GENDER_TYPE)
-          this.setData({ basic })
-        }, () => {})
-      } else if (type === 'education' && id) {
-        request.get(`/query/geteducation/${openId}`).then(({ data }) => {
-          // 找到id对应项
-          const education = R.find(R.propEq('num', id))(data) || {}
-          // 处理学历
-          education.background = R.findIndex(
-            R.propEq('name', education.background),
-          )(DEGREE_TYPE)
-          this.setData({ education })
-        }, () => {})
-      } else if (type === 'work' && id) {
-        request.get(`/query/getwork/${openId}`).then(({ data }) => {
-          // 找到id对应项
-          const work = R.find(R.propEq('num', id))(data) || {}
-          this.setData({ work })
-        }, () => {})
-      }
-    }, () => {})
   },
   // 点击头像
   handleClickAvatar() {
@@ -109,6 +83,9 @@ Page({
             openid: openId,
             num: id,
           }).then(() => {
+            const app = getApp()
+            type === 'education' && app.setNotice(NOTICE.editedEducation, true)
+            type === 'work' && app.setNotice(NOTICE.editedWork, true)
             wxUtil.showToast('删除成功', 'success').then(() => {
               wx.navigateBack()
             })
@@ -134,14 +111,55 @@ Page({
       } else if (type === 'education') {
         // 处理degree
         const degree = DEGREE_TYPE[params.background] || {}
-        params.background = degree.id
+        params.background = degree.name
       }
       // 发起请求
       request.post(editType.saveUrl, params).then(() => {
-        wxUtil.showToast('保存成功', 'success')
+        const app = getApp()
+        type === 'basic' && app.setNotice('editedBasic', true)
+        type === 'education' && app.setNotice('editedEducation', true)
+        type === 'work' && app.setNotice('editedWork', true)
+        wxUtil.showToast('保存成功', 'success').then(() => {
+          wx.navigateBack()
+        })
       }, () => {
         wxUtil.showToast('保存失败')
       })
+    }, () => {})
+  },
+  loadBasic() {
+    request.getUserInfo().then(({ openId }) => {
+      request.get(`/query/getbase/${openId}`).then(({ data }) => {
+        const { base, personal } = data
+        const basic = { ...base[0], ...personal[0] }
+        // 处理性别
+        basic.gender = R.findIndex(
+          R.propEq('id', Number(basic.gender)),
+        )(GENDER_TYPE)
+        this.setData({ basic })
+      }, () => {})
+    }, () => {})
+  },
+  loadEducation(id) {
+    request.getUserInfo().then(({ openId }) => {
+      request.get(`/query/geteducation/${openId}`).then(({ data }) => {
+        // 找到id对应项
+        const education = R.find(R.propEq('num', id))(data) || {}
+        // 处理学历
+        education.background = R.findIndex(
+          R.propEq('name', education.background),
+        )(DEGREE_TYPE)
+        this.setData({ education })
+      }, () => {})
+    }, () => {})
+  },
+  loadWork(id) {
+    request.getUserInfo().then(({ openId }) => {
+      request.get(`/query/getwork/${openId}`).then(({ data }) => {
+        // 找到id对应项
+        const work = R.find(R.propEq('num', id))(data) || {}
+        this.setData({ work })
+      }, () => {})
     }, () => {})
   },
 })

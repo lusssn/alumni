@@ -3,7 +3,11 @@
     <view class="card-block padding-t-lg padding-b-lg">
       <view class="search">
         <icon type="search" size="16" color="#999999" />
-        <input class="search-input h2" placeholder="搜索" />
+        <input
+          class="search-input h2"
+          placeholder="搜索"
+          bindconfirm="handleSearch"
+        />
         <text class="link h2 padding-l-lg">取消</text>
       </view>
     </view>

@@ -57,7 +57,8 @@ Page({
 
     // 处理degree
     const degree = DEGREE_TYPE[education.background] || {}
-    education = R.assoc('background', degree.id || 0, education)
+    education = R.assoc('background', degree.name || 0, education)
+
     // 提交数据
     request.getUserInfo().then(({ openId }) => {
       const saveBasic = request.post('/edit/editbase', {
