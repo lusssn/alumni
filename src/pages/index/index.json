@@ -2,6 +2,7 @@
   "navigationBarTitleText": "名片",
   "enablePullDownRefresh": true,
   "usingComponents": {
+    "Loading": "../../components/Loading/Loading",
     "BusinessCard": "../../components/BusinessCard/BusinessCard"
   }
 }

@@ -1,4 +1,4 @@
-<view class="container">
+<view wx:if="{{isLoaded}}" class="container">
   <view class="card">
     <view class="card-block padding-t-lg padding-b-lg">
       <view class="search">
@@ -19,3 +19,4 @@
     data="{{item}}"
   />
 </view>
+<Loading wx:else isFixed />

@@ -1,5 +1,5 @@
 import * as R from '../../utils/ramda/index'
-import { promisifyWxApi } from '../../utils/util'
+import { promisify } from '../../utils/util'
 import request from '../../utils/request'
 import wxUtil from '../../utils/wxUtil'
 import { DEGREE_TYPE, GENDER_TYPE } from '../../macro'
@@ -29,7 +29,7 @@ Page({
     })
   },
   handleClickAvatar() {
-    promisifyWxApi(wx.chooseImage)({
+    promisify(wx.chooseImage)({
       count: 1,
     }).then(res => {
       this.setData({

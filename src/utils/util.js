@@ -5,7 +5,7 @@
  * @param fn
  * @returns {Function}
  */
-export const promisifyWxApi = fn => {
+export const promisify = fn => {
   return args => {
     return new Promise((resolve, reject) => {
       fn({

@@ -1,5 +1,5 @@
 import * as R from '../../utils/ramda/index'
-import { promisifyWxApi } from '../../utils/util'
+import { promisify } from '../../utils/util'
 import request from '../../utils/request'
 import wxUtil from '../../utils/wxUtil'
 import { GENDER_TYPE, DEGREE_TYPE } from '../../macro'
@@ -48,7 +48,7 @@ Page({
   },
   // 点击头像
   handleClickAvatar() {
-    promisifyWxApi(wx.chooseImage)({
+    promisify(wx.chooseImage)({
       count: 1,
     }).then(res => {
       this.setData({
@@ -69,7 +69,7 @@ Page({
     })
   },
   handleRemove() {
-    promisifyWxApi(wx.showModal)({
+    promisify(wx.showModal)({
       title: '提示',
       content: '你确认要删除该条信息吗？',
       confirmColor: '#2180E8',

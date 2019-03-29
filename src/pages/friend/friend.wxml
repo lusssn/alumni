@@ -1,13 +1,20 @@
 <view class="container padding-t-md">
-  <view class="card">
+  <view wx:if="{{noticeList.length}}" class="card">
     <view class="card-header">消息通知</view>
     <view class="card-block">
-      <NoticeItem bindtap="handleClickCard" />
+      <NoticeItem
+        wx:for="{{noticeList}}"
+        wx:key="*this"
+        data="{{item}}"
+        data-id="{{item.friendid}}"
+        data-status="{{item.state}}"
+        bindtap="handleClickCard"
+      />
       <view
         class="padding-t-md padding-b-md text-center"
         bindtap="handleToNotice"
       >
-        <text class="h3 link">查看更多消息 (6)</text>
+        <text class="h3 link">查看更多消息 ({{noticeTotal}})</text>
       </view>
     </view>
   </view>

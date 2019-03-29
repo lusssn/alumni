@@ -1,4 +1,4 @@
-import { promisifyWxApi } from './util'
+import { promisify } from './util'
 
 // 需要手动配置tabbar页面列表
 const TABBAR_PAGES = ['index', 'friend', 'mine']
@@ -53,7 +53,7 @@ const showToast = (title = '', icon = 'warning', others) => {
   if (icon === 'warning') {
     params.image = '../../images/warning-o.png'
   }
-  return promisifyWxApi(wx.showToast)(params)
+  return promisify(wx.showToast)(params)
 }
 
 export default {

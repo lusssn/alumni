@@ -6,7 +6,7 @@
 const host = 'https://www.zimotiontec.cn'
 const qqMapHost = 'https://apis.map.qq.com'
 
-const config = {
+const server = {
   qqMapKey: 'AWIBZ-EZJ34-AULUQ-DO546-YFS5T-6ZFNX',
   // 下面的地址配合云端 Demo 工作
   service: {
@@ -29,4 +29,4 @@ const config = {
   },
 }
 
-export default config
+export default server

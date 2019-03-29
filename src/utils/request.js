@@ -1,6 +1,6 @@
 const qcloud = require('../vendor/wafer2-client-sdk/index')
-import config from '../config'
-import { promisifyWxApi } from './util'
+import server from '../server'
+import { promisify } from './util'
 import wxUtil from './wxUtil'
 
 const app = getApp()
@@ -13,9 +13,10 @@ const getUserInfo = () => {
     return Promise.resolve(userInfo)
   }
   const session = qcloud.Session.get()
+  console.log('session: ', session)
   if (session) {
     // 如果有session，则使用code登录
-    return promisifyWxApi(qcloud.loginWithCode)()
+    return promisify(qcloud.loginWithCode)()
       .then(res => {
         // 将个人信息存储到global
         app.setConfig({ userInfo: res })
@@ -24,12 +25,12 @@ const getUserInfo = () => {
   } else {
     // 无session情况下的登录
     // 需要先判断是否授权
-    return promisifyWxApi(wx.getSetting)()
+    return promisify(wx.getSetting)()
       .then(
         ({ authSetting }) => {
           if (authSetting['scope.userInfo']) {
             // 进行登录
-            return promisifyWxApi(qcloud.login)()
+            return promisify(qcloud.login)()
               .then(res => {
                 // 将个人信息存储到global
                 app.setConfig({ userInfo: res })
@@ -51,8 +52,8 @@ const getUserInfo = () => {
 }
 
 const _request = (url, params = {}, others) => {
-  const _url = `${regHttp.test(url) ? '' : config.service.baseUrl}${url}`
-  return promisifyWxApi(qcloud.request)({
+  const _url = `${regHttp.test(url) ? '' : server.service.baseUrl}${url}`
+  return promisify(qcloud.request)({
     url: _url,
     data: params,
     ...others,
@@ -99,13 +100,13 @@ const post = (url, params = {}, { header = {}, ...others } = {}) => {
 }
 
 const getLocation = () => {
-  return promisifyWxApi(wx.getLocation)({
+  return promisify(wx.getLocation)({
     type: 'wgs84',
   }).then(({ latitude, longitude }) => {
-    const _url = `${config.service.qqMapHost}/ws/geocoder/v1/`
+    const _url = `${server.service.qqMapHost}/ws/geocoder/v1/`
     return get(_url, {
       location: `${latitude},${longitude}`,
-      key: config.qqMapKey,
+      key: server.qqMapKey,
     }).then((res) => {
       const { address_component: address } = res.result
       return address.city || address.province || address.nation

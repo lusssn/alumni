@@ -1,8 +1,12 @@
 <view class="container padding-t-md">
   <view class="card">
     <view class="card-block">
-      <NoticeItem bindtap="handleClickCard" />
-      <NoticeItem bindtap="handleClickCard" />
+      <NoticeItem
+        wx:for="{{noticeList}}"
+        wx:key="*this"
+        data="{{item}}"
+        bindtap="handleClickCard"
+      />
     </view>
   </view>
 </view>

@@ -3,6 +3,7 @@
   "usingComponents": {
     "BasicInfo": "../../components/BasicInfo/BasicInfo",
     "EducationInfo": "../../components/EducationInfo/EducationInfo",
-    "WorkInfo": "../../components/WorkInfo/WorkInfo"
+    "WorkInfo": "../../components/WorkInfo/WorkInfo",
+    "Loading": "../../components/Loading/Loading"
   }
 }

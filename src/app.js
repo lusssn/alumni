@@ -1,10 +1,10 @@
 const qcloud = require('./vendor/wafer2-client-sdk/index')
-import config from './config'
+import server from './server'
 import { NOTICE } from './macro'
 
 App({
   onLaunch() {
-    qcloud.setLoginUrl(config.service.loginUrl)
+    qcloud.setLoginUrl(server.service.loginUrl)
   },
   global: {},
   setConfig(conf) {
