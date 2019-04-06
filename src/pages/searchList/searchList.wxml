@@ -1,6 +1,8 @@
 <view class="container padding-t-md">
   <BusinessCard
-    wx:for="{{friendList}}"
+    wx:for="{{list}}"
+    wx:key="*this"
+    data-id="{{item.openid}}"
     bindtap="handleClickCard"
     data="{{item}}"
   />

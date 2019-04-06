@@ -7,7 +7,6 @@
         wx:key="*this"
         data="{{item}}"
         data-id="{{item.friendid}}"
-        data-status="{{item.state}}"
         bindtap="handleClickCard"
       />
       <view

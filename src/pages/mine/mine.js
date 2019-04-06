@@ -1,5 +1,5 @@
 import wxUtil from '../../utils/wxUtil'
-import request from '../../utils/request'
+import * as Api from '../api'
 
 Page({
   data: {
@@ -9,17 +9,15 @@ Page({
     works: [],
   },
   onLoad() {
-    request.getUserInfo().then(({ openId }) => {
-      request.get(`/query/getall/${openId}`).then(({ data }) => {
-        const { base, personal, education, work } = data
-        this.setData({
-          isLoaded: true,
-          basic: { ...base[0], ...personal[0] },
-          educations: education,
-          works: work,
-        })
-      }, () => {})
-    })
+    Api.fetchAllInfo().then(data => {
+      const { base, personal, education, work } = data
+      this.setData({
+        isLoaded: true,
+        basic: { ...base[0], ...personal[0] },
+        educations: education,
+        works: work,
+      })
+    }, () => {})
   },
   onShow() {
     const app = getApp()
@@ -45,27 +43,21 @@ Page({
     })
   },
   updateBasic() {
-    request.getUserInfo().then(({ openId }) => {
-      request.get(`/query/getbase/${openId}`).then(({ data }) => {
-        const { base, personal } = data
-        this.setData({
-          basic: { ...base[0], ...personal[0] },
-        })
-      }, () => {})
-    })
+    Api.fetchBasicInfo().then(data => {
+      const { base, personal } = data
+      this.setData({
+        basic: { ...base[0], ...personal[0] },
+      })
+    }, () => {})
   },
   updateEducation() {
-    request.getUserInfo().then(({ openId }) => {
-      request.get(`/query/geteducation/${openId}`).then(({ data }) => {
-        this.setData({ educations: data })
-      }, () => {})
-    })
+    Api.fetchEducationInfo().then(data => {
+      this.setData({ educations: data })
+    }, () => {})
   },
   updateWork() {
-    request.getUserInfo().then(({ openId }) => {
-      request.get(`/query/getwork/${openId}`).then(({ data }) => {
-        this.setData({ works: data })
-      }, () => {})
-    })
+    Api.fetchWorkInfo().then(({ data }) => {
+      this.setData({ works: data })
+    }, () => {})
   },
 })

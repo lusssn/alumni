@@ -1,23 +1,14 @@
 import * as R from '../../utils/ramda/index'
+import * as Api from '../api'
 import { promisify } from '../../utils/util'
 import request from '../../utils/request'
 import wxUtil from '../../utils/wxUtil'
 import { GENDER_TYPE, DEGREE_TYPE } from '../../macro'
 
 const EDIT_TYPE = [
-  { type: 'basic', title: '编辑基本信息', saveUrl: '/edit/editbase' },
-  {
-    type: 'education',
-    title: '添加教育经历',
-    saveUrl: '/edit/editeducation',
-    removeUrl: '/edit/deleteeducation',
-  },
-  {
-    type: 'work',
-    title: '添加工作经历',
-    saveUrl: '/edit/editwork',
-    removeUrl: '/edit/deletework',
-  },
+  { type: 'basic', title: '编辑基本信息' },
+  { type: 'education', title: '添加教育经历' },
+  { type: 'work', title: '添加工作经历' },
 ]
 
 Page({
@@ -74,92 +65,86 @@ Page({
       content: '你确认要删除该条信息吗？',
       confirmColor: '#2180E8',
     }).then(({ confirm }) => {
-      // 删除请求
-      if (confirm) {
-        const { type, id } = this.data
-        const editType = R.find(R.propEq('type', type))(EDIT_TYPE)
-        request.getUserInfo().then(({ openId }) => {
-          request.post(editType.removeUrl, {
-            openid: openId,
-            num: id,
-          }).then(() => {
-            const app = getApp()
-            type === 'education' && app.setNotice(NOTICE.editedEducation, true)
-            type === 'work' && app.setNotice(NOTICE.editedWork, true)
-            wxUtil.showToast('删除成功', 'success').then(() => {
-              wx.navigateBack()
-            })
-          }, () => {
-            wxUtil.showToast('删除失败')
-          })
-        }, () => {})
+      if (!confirm) {
+        return
       }
+      // 删除请求
+      const { type, id } = this.data
+      let next = null
+      if (type === 'education') {
+        next = Api.fetchRemoveEducation({ num: id })
+      } else if (type === 'work') {
+        next = Api.fetchRemoveWork({ num: id })
+      }
+      next.then(() => {
+        const app = getApp()
+        type === 'education' && app.setNotice(NOTICE.editedEducation, true)
+        type === 'work' && app.setNotice(NOTICE.editedWork, true)
+        wxUtil.showToast('删除成功', 'success').then(() => {
+          wx.navigateBack()
+        })
+      }, () => {
+        wxUtil.showToast('删除失败')
+      })
     })
   },
   handleSave() {
     const { type } = this.data
-    const editType = R.find(R.propEq('type', type))(EDIT_TYPE)
-    request.getUserInfo().then(({ openId }) => {
-      const params = {
-        openid: openId,
-        ...this.data[type],
-      }
-      if (type === 'basic') {
-        // 处理gender
-        const gender = GENDER_TYPE[params.gender] || {}
-        params.gender = gender.id
-      } else if (type === 'education') {
-        // 处理degree
-        const degree = DEGREE_TYPE[params.background] || {}
-        params.background = degree.name
-      }
-      // 发起请求
-      request.post(editType.saveUrl, params).then(() => {
-        const app = getApp()
-        type === 'basic' && app.setNotice('editedBasic', true)
-        type === 'education' && app.setNotice('editedEducation', true)
-        type === 'work' && app.setNotice('editedWork', true)
-        wxUtil.showToast('保存成功', 'success').then(() => {
-          wx.navigateBack()
-        })
-      }, () => {
-        wxUtil.showToast('保存失败')
+    const params = this.data[type]
+    let next = null
+    if (type === 'basic') {
+      // 处理gender
+      const gender = GENDER_TYPE[params.gender] || {}
+      params.gender = gender.id
+      next = Api.fetchSaveBasic(params)
+    } else if (type === 'education') {
+      // 处理degree
+      const degree = DEGREE_TYPE[params.background] || {}
+      params.background = degree.name
+      next = Api.fetchSaveEducation(params)
+    } else if (type === 'work') {
+      next = Api.fetchSaveWork(params)
+    }
+    // 发起请求
+    next.then(() => {
+      const app = getApp()
+      type === 'basic' && app.setNotice('editedBasic', true)
+      type === 'education' && app.setNotice('editedEducation', true)
+      type === 'work' && app.setNotice('editedWork', true)
+      wxUtil.showToast('保存成功', 'success').then(() => {
+        wx.navigateBack()
       })
-    }, () => {})
+    }, () => {
+      wxUtil.showToast('保存失败')
+    })
   },
   loadBasic() {
-    request.getUserInfo().then(({ openId }) => {
-      request.get(`/query/getbase/${openId}`).then(({ data }) => {
-        const { base, personal } = data
-        const basic = { ...base[0], ...personal[0] }
-        // 处理性别
-        basic.gender = R.findIndex(
-          R.propEq('id', Number(basic.gender)),
-        )(GENDER_TYPE)
-        this.setData({ basic })
-      }, () => {})
+    Api.fetchBasicInfo().then(data => {
+      const { base, personal } = data
+      const basic = { ...base[0], ...personal[0] }
+      // 处理性别
+      basic.gender = R.findIndex(
+        R.propEq('id', Number(basic.gender)),
+      )(GENDER_TYPE)
+      this.setData({ basic })
     }, () => {})
   },
   loadEducation(id) {
-    request.getUserInfo().then(({ openId }) => {
-      request.get(`/query/geteducation/${openId}`).then(({ data }) => {
-        // 找到id对应项
-        const education = R.find(R.propEq('num', id))(data) || {}
-        // 处理学历
-        education.background = R.findIndex(
-          R.propEq('name', education.background),
-        )(DEGREE_TYPE)
-        this.setData({ education })
-      }, () => {})
+    Api.fetchEducationInfo().then(data => {
+      // 找到id对应项
+      const education = R.find(R.propEq('num', id))(data) || {}
+      // 处理学历
+      education.background = R.findIndex(
+        R.propEq('name', education.background),
+      )(DEGREE_TYPE)
+      this.setData({ education })
     }, () => {})
   },
   loadWork(id) {
-    request.getUserInfo().then(({ openId }) => {
-      request.get(`/query/getwork/${openId}`).then(({ data }) => {
-        // 找到id对应项
-        const work = R.find(R.propEq('num', id))(data) || {}
-        this.setData({ work })
-      }, () => {})
+    Api.fetchWorkInfo().then(data => {
+      // 找到id对应项
+      const work = R.find(R.propEq('num', id))(data) || {}
+      this.setData({ work })
     }, () => {})
   },
 })

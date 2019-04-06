@@ -1,4 +1,5 @@
 import * as R from '../../utils/ramda/index'
+import * as Api from '../api'
 import { promisify } from '../../utils/util'
 import request from '../../utils/request'
 import wxUtil from '../../utils/wxUtil'
@@ -60,27 +61,17 @@ Page({
     education = R.assoc('background', degree.name || 0, education)
 
     // 提交数据
-    request.getUserInfo().then(({ openId }) => {
-      const saveBasic = request.post('/edit/editbase', {
-        openid: openId,
-        ...basic,
+    Promise.all([
+      Api.fetchSaveBasic(basic),
+      Api.fetchSaveEducation(education),
+      Api.fetchSaveWork(work),
+    ]).then(() => {
+      wxUtil.showToast('保存成功', 'success').then(() => {
+        wxUtil.navigateTo('mine', {}, 'all')
       })
-      const saveEducation = request.post('/edit/addeducation', {
-        openid: openId,
-        ...education,
-      })
-      const saveWork = request.post('/edit/addwork', {
-        openid: openId,
-        ...work,
-      })
-      Promise.all([saveBasic, saveEducation, saveWork]).then(() => {
-        wxUtil.showToast('保存成功', 'success').then(() => {
-          wxUtil.navigateTo('mine', {}, 'all')
-        })
-      }, () => {
-        wxUtil.showToast('请重试')
-      })
-    }, () => {})
+    }, () => {
+      wxUtil.showToast('请重试')
+    })
   },
   handleCloseAuthModal() {
     // 关闭弹窗

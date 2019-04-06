@@ -13,7 +13,6 @@ const getUserInfo = () => {
     return Promise.resolve(userInfo)
   }
   const session = qcloud.Session.get()
-  console.log('session: ', session)
   if (session) {
     // 如果有session，则使用code登录
     return promisify(qcloud.loginWithCode)()
@@ -51,7 +50,7 @@ const getUserInfo = () => {
   }
 }
 
-const _request = (url, params = {}, others) => {
+const _request = (url, params = {}, others = {}) => {
   const _url = `${regHttp.test(url) ? '' : server.service.baseUrl}${url}`
   return promisify(qcloud.request)({
     url: _url,
@@ -80,23 +79,37 @@ const _request = (url, params = {}, others) => {
   })
 }
 
-const get = (url, params = {}, others = {}) => {
-  return _request(url, params, {
-    method: 'GET',
-    ...others,
+const _authRequest = (url, params = {}, others = {}) => {
+  return getUserInfo().then(({ openId }) => {
+    return _request(url, { openid: openId, ...params }, others)
+  }).catch(err => {
+    wxUtil.showToast(err.title)
+    return Promise.reject(err)
   })
 }
 
-const post = (url, params = {}, { header = {}, ...others } = {}) => {
-  const _header = {
-    'content-type': 'application/x-www-form-urlencoded',
-    ...header,
+const get = (url, params = {}, custom = {}) => {
+  const { noAuth, ..._others } = custom
+  if (noAuth) {
+    return _request(url, params, _others)
   }
-  return _request(url, params, {
+  return _authRequest(url, params, _others)
+}
+
+const post = (url, params = {}, custom = {}) => {
+  const { header = {}, noAuth, ...others } = custom
+  const _others = {
     method: 'POST',
-    header: _header,
+    header: {
+      'content-type': 'application/x-www-form-urlencoded',
+      ...header,
+    },
     ...others,
-  })
+  }
+  if (noAuth) {
+    return _request(url, params, _others)
+  }
+  return _authRequest(url, params, _others)
 }
 
 const getLocation = () => {
@@ -107,7 +120,7 @@ const getLocation = () => {
     return get(_url, {
       location: `${latitude},${longitude}`,
       key: server.qqMapKey,
-    }).then((res) => {
+    }, { noAuth: true }).then((res) => {
       const { address_component: address } = res.result
       return address.city || address.province || address.nation
     })

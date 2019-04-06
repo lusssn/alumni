@@ -1,7 +1,7 @@
 import wxUtil from '../../utils/wxUtil'
-import request from '../../utils/request'
-import { CONTACT_TYPE } from '../../macro'
 import * as R from '../../utils/ramda/index'
+import * as Api from '../api'
+import { CONTACT_TYPE } from '../../macro'
 
 const PAGE_SIZE = 10
 
@@ -13,22 +13,23 @@ Page({
     noticeTotal: 0,
   },
   onLoad() {
-    request.getUserInfo().then(({ openId }) => {
-      // 加载消息列表数据
-      request.get(`/friend/getinform/${openId}/1/3`).then(({ data }) => {
-        const { result, count } = data
-        result.forEach(item => {
-          const contactType = R.find(R.propEq('id', +item.state))(CONTACT_TYPE) || {}
-          item.status_name = contactType.name
-        })
-        this.setData({
-          noticeList: result,
-          noticeTotal: count,
-        })
-      }, () => {})
-      // 加载朋友列表数据
-      this.loadFriendList()
+    // 加载消息列表数据
+    Api.fetchNoticeList({
+      page: 1,
+      limit: 3,
+    }).then(data => {
+      const { result, count } = data
+      result.forEach(item => {
+        const contactType = R.find(R.propEq('id', +item.state))(CONTACT_TYPE) || {}
+        item.status_name = contactType.name
+      })
+      this.setData({
+        noticeList: result,
+        noticeTotal: count,
+      })
     }, () => {})
+    // 加载朋友列表数据
+    this.loadFriendList()
   },
   onReachBottom() {
     const { total, current } = this.data.friendPagination
@@ -38,28 +39,24 @@ Page({
     }
   },
   loadFriendList(pageNo = 1) {
-    return request.getUserInfo().then(({ openId }) => {
-      // 加载消息列表数据
-      const url = `/friend/getfriend/${openId}/${pageNo}/${PAGE_SIZE}`
-      return request.get(url).then(({ data }) => {
-        const { result, count } = data
-        this.setData({
-          friendList: pageNo === 1 ? result : this.data.friendList.concat(result),
-          friendPagination: {
-            current: pageNo,
-            total: count,
-          },
-        })
-      }, () => {})
+    // 加载朋友列表数据
+    return Api.fetchFriendList({
+      page: pageNo,
+      limit: PAGE_SIZE,
+    }).then(data => {
+      const { result, count } = data
+      this.setData({
+        friendList: pageNo === 1 ? result : this.data.friendList.concat(result),
+        friendPagination: {
+          current: pageNo,
+          total: count,
+        },
+      })
     }, () => {})
   },
   handleClickCard(e) {
-    let { id, status } = e.currentTarget.dataset
-    if (!status) {
-      const contactType = R.find(R.propEq('key', 'FRIEND'))(CONTACT_TYPE)
-      status = contactType.id
-    }
-    wxUtil.navigateTo('detail', { id, status })
+    const { id } = e.currentTarget.dataset
+    wxUtil.navigateTo('detail', { id })
   },
   handleToNotice() {
     wxUtil.navigateTo('notice')

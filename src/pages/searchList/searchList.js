@@ -1,22 +1,23 @@
 import wxUtil from '../../utils/wxUtil'
+import * as Api from '../api'
 
 Page({
   data: {
-    friendList: [
-      {
-        ID: 'string',
-        head_url: 'string',
-        real_name: 'string',
-        school: 'string',
-        department: 'string',
-        location: 'string',
-        company: 'string',
-        job: 'string',
-      }
-    ],
+    list: [],
+  },
+  onLoad({ content, way }) {
+    Api.fetchSearchResult({
+      content: decodeURI(content),
+      way,
+    }).then(data => {
+      this.setData({
+        list: data.content,
+      })
+    })
   },
   onReachBottom() {},
-  handleClickCard() {
-    wxUtil.navigateTo('detail')
+  handleClickCard(e) {
+    const { id } = e.currentTarget.dataset
+    wxUtil.navigateTo('detail', { id })
   },
 })
