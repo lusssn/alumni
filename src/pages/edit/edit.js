@@ -51,7 +51,7 @@ Page({
   handleLocation() {
     request.getLocation().then(res => {
       this.setData({ 'basic.city': res })
-    })
+    }, err => wxUtil.showToast(err.title))
   },
   handleInputChange(e) {
     const { name } = e.currentTarget.dataset
@@ -78,8 +78,8 @@ Page({
       }
       next.then(() => {
         const app = getApp()
-        type === 'education' && app.setNotice(NOTICE.editedEducation, true)
-        type === 'work' && app.setNotice(NOTICE.editedWork, true)
+        type === 'education' && app.setNotice('editedEducation', true)
+        type === 'work' && app.setNotice('editedWork', true)
         wxUtil.showToast('删除成功', 'success').then(() => {
           wx.navigateBack()
         })

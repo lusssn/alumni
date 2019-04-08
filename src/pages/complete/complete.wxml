@@ -14,7 +14,7 @@
     cancelText="取消"
     okText="授权"
     okOpenType="getUserInfo"
-    content="{{['小程序需要读取您的个人信息']}}"
+    content="{{['你的个人信息将用于小程序头像的效果展示']}}"
     bindcancel="handleCloseAuthModal"
     bindok="handleAuth"
   />

@@ -15,6 +15,7 @@
 
   <BusinessCard
     wx:for="{{friendList}}"
+    wx:key="friendid"
     bindtap="handleClickCard"
     data="{{item}}"
   />

@@ -42,7 +42,7 @@ Page({
   handleLocation() {
     request.getLocation().then(res => {
       this.setData({ 'basic.city': res })
-    })
+    }, err => wxUtil.showToast(err.title))
   },
   handleInputChange(e) {
     const { name } = e.currentTarget.dataset
@@ -82,7 +82,7 @@ Page({
   handleAuth(e) {
     const { event } = e.detail
     const { userInfo } = event.detail
-    this.setData({
+    userInfo && this.setData({
       basic: {
         head_url: userInfo.avatarUrl,
         gender: R.findIndex(R.propEq('id', userInfo.gender))(GENDER_TYPE),

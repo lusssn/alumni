@@ -1,7 +1,6 @@
 const qcloud = require('../vendor/wafer2-client-sdk/index')
 import server from '../server'
 import { promisify } from './util'
-import wxUtil from './wxUtil'
 
 const app = getApp()
 const regHttp = /^(http[s]{0,1}:\/\/)/
@@ -74,7 +73,6 @@ const _request = (url, params = {}, others = {}) => {
       code: data.status,
     })
   }).catch(err => {
-    wxUtil.showToast(err.title)
     return Promise.reject(err)
   })
 }
@@ -83,7 +81,6 @@ const _authRequest = (url, params = {}, others = {}) => {
   return getUserInfo().then(({ openId }) => {
     return _request(url, { openid: openId, ...params }, others)
   }).catch(err => {
-    wxUtil.showToast(err.title)
     return Promise.reject(err)
   })
 }

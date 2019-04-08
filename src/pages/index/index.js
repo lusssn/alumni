@@ -6,7 +6,7 @@ Page({
     isLoaded: false,
     friendList: [
       {
-        ID: 'string',
+        ID: '1',
         head_url: 'string',
         real_name: 'string',
         school: 'string',
@@ -16,7 +16,7 @@ Page({
         job: 'string',
       },
       {
-        ID: 'string',
+        ID: '2',
         head_url: 'string',
         real_name: 'string',
         school: 'string',
@@ -32,7 +32,7 @@ Page({
       this.setData({ isLoaded: true })
     }, () => {
       // 未授权，显示授权弹窗
-      wxUtil.navigateTo('complete', true)
+      wxUtil.navigateTo('complete', {},'all')
     })
   },
   onPullDownRefresh() {},

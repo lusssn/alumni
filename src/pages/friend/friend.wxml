@@ -4,7 +4,7 @@
     <view class="card-block">
       <NoticeItem
         wx:for="{{noticeList}}"
-        wx:key="*this"
+        wx:key="time"
         data="{{item}}"
         data-id="{{item.friendid}}"
         bindtap="handleClickCard"

@@ -9,21 +9,18 @@ Page({
     works: [],
   },
   onLoad() {
-    Api.fetchAllInfo().then(data => {
-      const { base, personal, education, work } = data
-      this.setData({
-        isLoaded: true,
-        basic: { ...base[0], ...personal[0] },
-        educations: education,
-        works: work,
-      })
-    }, () => {})
+    this.loadAllInfo()
   },
   onShow() {
     const app = getApp()
     app.checkNotice('editedBasic', true, this.updateBasic)
     app.checkNotice('editedEducation', true, this.updateEducation)
     app.checkNotice('editedWork', true, this.updateWork)
+  },
+  onPullDownRefresh() {
+    this.loadAllInfo().then(() => {
+      wx.stopPullDownRefresh()
+    })
   },
   handleBasicEdit() {
     wxUtil.navigateTo('edit', { type: 'basic' })
@@ -41,6 +38,17 @@ Page({
       type: 'work',
       id: num,
     })
+  },
+  loadAllInfo() {
+    return Api.fetchAllInfo().then(data => {
+      const { base, personal, education, work } = data
+      this.setData({
+        isLoaded: true,
+        basic: { ...base[0], ...personal[0] },
+        educations: education,
+        works: work,
+      })
+    }, () => {})
   },
   updateBasic() {
     Api.fetchBasicInfo().then(data => {
