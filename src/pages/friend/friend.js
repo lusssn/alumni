@@ -14,7 +14,7 @@ Page({
   },
   onLoad() {
     // 加载消息列表数据
-    Api.fetchNoticeList({
+    Api.getNoticeList({
       page: 1,
       limit: 3,
     }).then(data => {
@@ -40,7 +40,7 @@ Page({
   },
   loadFriendList(pageNo = 1) {
     // 加载朋友列表数据
-    return Api.fetchFriendList({
+    return Api.getFriendList({
       page: pageNo,
       limit: PAGE_SIZE,
     }).then(data => {

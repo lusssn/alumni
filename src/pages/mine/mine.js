@@ -40,7 +40,7 @@ Page({
     })
   },
   loadAllInfo() {
-    return Api.fetchAllInfo().then(data => {
+    return Api.getAllInfo().then(data => {
       const { base, personal, education, work } = data
       this.setData({
         isLoaded: true,
@@ -51,7 +51,7 @@ Page({
     }, () => {})
   },
   updateBasic() {
-    Api.fetchBasicInfo().then(data => {
+    Api.getBasicInfo().then(data => {
       const { base, personal } = data
       this.setData({
         basic: { ...base[0], ...personal[0] },
@@ -59,12 +59,12 @@ Page({
     }, () => {})
   },
   updateEducation() {
-    Api.fetchEducationInfo().then(data => {
+    Api.getEducationInfo().then(data => {
       this.setData({ educations: data })
     }, () => {})
   },
   updateWork() {
-    Api.fetchWorkInfo().then(({ data }) => {
+    Api.getWorkInfo().then(({ data }) => {
       this.setData({ works: data })
     }, () => {})
   },

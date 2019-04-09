@@ -1,6 +1,6 @@
 import * as R from '../../utils/ramda/index'
 import * as Api from '../api'
-import { promisify } from '../../utils/util'
+import { promisify, isComplete } from '../../utils/util'
 import request from '../../utils/request'
 import wxUtil from '../../utils/wxUtil'
 import { DEGREE_TYPE, GENDER_TYPE } from '../../macro'
@@ -60,11 +60,16 @@ Page({
     const degree = DEGREE_TYPE[education.background] || {}
     education = R.assoc('background', degree.name || 0, education)
 
+    if (!basic.real_name || !basic.descr || !education.school || !work.company) {
+      wxUtil.showToast('必填项未填完整')
+      return
+    }
+
     // 提交数据
     Promise.all([
-      Api.fetchSaveBasic(basic),
-      Api.fetchSaveEducation(education),
-      Api.fetchSaveWork(work),
+      Api.getSaveBasic(basic),
+      Api.getSaveEducation(education),
+      Api.getSaveWork(work),
     ]).then(() => {
       wxUtil.showToast('保存成功', 'success').then(() => {
         wxUtil.navigateTo('mine', {}, 'all')
@@ -82,12 +87,18 @@ Page({
   handleAuth(e) {
     const { event } = e.detail
     const { userInfo } = event.detail
-    userInfo && this.setData({
-      basic: {
-        head_url: userInfo.avatarUrl,
-        gender: R.findIndex(R.propEq('id', userInfo.gender))(GENDER_TYPE),
-      },
-      isShowAuthModal: false,
+    userInfo && isComplete().then(res => {
+      if (res) {
+        wxUtil.navigateTo('index', {}, true)
+        return
+      }
+      this.setData({
+        basic: {
+          head_url: userInfo.avatarUrl,
+          gender: R.findIndex(R.propEq('id', userInfo.gender))(GENDER_TYPE),
+        },
+        isShowAuthModal: false,
+      })
     })
   },
 })

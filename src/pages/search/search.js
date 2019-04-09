@@ -20,7 +20,7 @@ Page({
   },
   handleSearch(e) {
     const content = e.detail.value
-    Api.fetchSearch({ content }).then(data => {
+    Api.getSearch({ content }).then(data => {
       this.setData({
         content,
         result: data,

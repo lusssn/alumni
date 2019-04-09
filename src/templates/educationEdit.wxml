@@ -5,7 +5,7 @@
     </view>
     <view class="card-block">
       <view class="field">
-        <label class="field-label">学校名称：</label>
+        <label class="field-label"><text class="text-error">*</text>学校名称：</label>
         <view class="field-content">
           <input
             placeholder="请输入学校名称"

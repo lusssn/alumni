@@ -16,7 +16,7 @@ Page({
       return
     }
     // 加载详情数据
-    Api.fetchCardInfo({ cardid: id }).then(data => {
+    Api.getCardInfo({ cardid: id }).then(data => {
       const { personalinfor, personal, education, work, state } = data
       const contactType = R.find(R.propEq('id', +state))(CONTACT_TYPE)
       this.setData({
@@ -31,17 +31,17 @@ Page({
   },
   handleAccept() {
     const { basic } = this.data
-    Api.fetchAcceptFriend({ friendid: basic.id }).then(() => {
+    Api.getAcceptFriend({ friendid: basic.id }).then(() => {
     }, () => {})
   },
   handleRefuse() {
     const { basic } = this.data
-    Api.fetchRefuseFriend({ friendid: basic.id }).then(() => {
+    Api.getRefuseFriend({ friendid: basic.id }).then(() => {
     }, () => {})
   },
   handleApplyExchange() {
     const { basic } = this.data
-    Api.fetchInviteFriend({ friendid: basic.id }).then(() => {
+    Api.getInviteFriend({ friendid: basic.id }).then(() => {
     }, () => {})
   },
 })

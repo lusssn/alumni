@@ -1,3 +1,4 @@
+import { isComplete } from '../../utils/util'
 import wxUtil from '../../utils/wxUtil'
 import request from '../../utils/request'
 
@@ -28,11 +29,12 @@ Page({
     ],
   },
   onLoad() {
-    request.getUserInfo().then(() => {
-      this.setData({ isLoaded: true })
-    }, () => {
-      // 未授权，显示授权弹窗
-      wxUtil.navigateTo('complete', {},'all')
+    isComplete().then(res => {
+      if (res) {
+        this.setData({ isLoaded: true })
+        return
+      }
+      wxUtil.navigateTo('complete', {}, 'all')
     })
   },
   onPullDownRefresh() {},

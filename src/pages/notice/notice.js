@@ -27,7 +27,7 @@ Page({
   },
   loadList(pageNo = 1) {
     // 加载消息列表数据
-    return Api.fetchNoticeList({
+    return Api.getNoticeList({
       limit: PAGE_SIZE,
       page: pageNo,
     }).then(data => {

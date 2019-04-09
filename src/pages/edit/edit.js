@@ -72,9 +72,9 @@ Page({
       const { type, id } = this.data
       let next = null
       if (type === 'education') {
-        next = Api.fetchRemoveEducation({ num: id })
+        next = Api.getRemoveEducation({ num: id })
       } else if (type === 'work') {
-        next = Api.fetchRemoveWork({ num: id })
+        next = Api.getRemoveWork({ num: id })
       }
       next.then(() => {
         const app = getApp()
@@ -96,14 +96,14 @@ Page({
       // 处理gender
       const gender = GENDER_TYPE[params.gender] || {}
       params.gender = gender.id
-      next = Api.fetchSaveBasic(params)
+      next = Api.getSaveBasic(params)
     } else if (type === 'education') {
       // 处理degree
       const degree = DEGREE_TYPE[params.background] || {}
       params.background = degree.name
-      next = Api.fetchSaveEducation(params)
+      next = Api.getSaveEducation(params)
     } else if (type === 'work') {
-      next = Api.fetchSaveWork(params)
+      next = Api.getSaveWork(params)
     }
     // 发起请求
     next.then(() => {
@@ -119,7 +119,7 @@ Page({
     })
   },
   loadBasic() {
-    Api.fetchBasicInfo().then(data => {
+    Api.getBasicInfo().then(data => {
       const { base, personal } = data
       const basic = { ...base[0], ...personal[0] }
       // 处理性别
@@ -130,7 +130,7 @@ Page({
     }, () => {})
   },
   loadEducation(id) {
-    Api.fetchEducationInfo().then(data => {
+    Api.getEducationInfo().then(data => {
       // 找到id对应项
       const education = R.find(R.propEq('num', id))(data) || {}
       // 处理学历
@@ -141,7 +141,7 @@ Page({
     }, () => {})
   },
   loadWork(id) {
-    Api.fetchWorkInfo().then(data => {
+    Api.getWorkInfo().then(data => {
       // 找到id对应项
       const work = R.find(R.propEq('num', id))(data) || {}
       this.setData({ work })

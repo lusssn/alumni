@@ -1,6 +1,7 @@
 const qcloud = require('../vendor/wafer2-client-sdk/index')
 import server from '../server'
 import { promisify } from './util'
+import * as Error from '../error'
 
 const app = getApp()
 const regHttp = /^(http[s]{0,1}:\/\/)/
@@ -35,15 +36,9 @@ const getUserInfo = () => {
                 return res
               })
           }
-          return Promise.reject({
-            title: '未进行授权',
-            code: -1,
-          })
+          return Promise.reject(Error.UNAUTHORIZED)
         }, () => {
-          return Promise.reject({
-            title: '获取授权失败',
-            code: -1,
-          })
+          return Promise.reject(Error.AUTH_FAILED)
         },
       )
   }
@@ -59,10 +54,7 @@ const _request = (url, params = {}, others = {}) => {
     if (res.statusCode === 200) {
       return res.data
     }
-    return Promise.reject({
-      title: '请求失败',
-      code: -1,
-    })
+    return Promise.reject(Error.RESPONSE_ERROR)
   }).then(data => {
     // 特殊说明：qqMap接口返回的status为0时为成功
     if (+data.status === 200 || !data.status) {
@@ -70,7 +62,7 @@ const _request = (url, params = {}, others = {}) => {
     }
     return Promise.reject({
       title: data.message,
-      code: data.status,
+      errCode: data.status,
     })
   }).catch(err => {
     return Promise.reject(err)
@@ -122,10 +114,7 @@ const getLocation = () => {
       return address.city || address.province || address.nation
     })
   }, () => {
-    return Promise.reject({
-      title: '获取位置失败',
-      code: -1,
-    })
+    return Promise.reject(Error.LOCATION_FAILED)
   })
 }
 

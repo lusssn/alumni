@@ -6,7 +6,7 @@ Page({
     list: [],
   },
   onLoad({ content, way }) {
-    Api.fetchSearchResult({
+    Api.getSearchResult({
       content: decodeURI(content),
       way,
     }).then(data => {
