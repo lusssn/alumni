@@ -1,4 +1,4 @@
-<view wx:if="{{isLoaded}}" class="container">
+<view wx:if="{{list}}" class="container">
   <view class="card">
     <view class="card-block padding-t-lg padding-b-lg">
       <view class="search">
@@ -14,10 +14,11 @@
   </view>
 
   <BusinessCard
-    wx:for="{{friendList}}"
-    wx:key="friendid"
-    bindtap="handleClickCard"
+    wx:for="{{list}}"
+    wx:key="openid"
     data="{{item}}"
+    data-id="{{item.openid}}"
+    bindtap="handleClickCard"
   />
 </view>
 <Loading wx:else isFixed />

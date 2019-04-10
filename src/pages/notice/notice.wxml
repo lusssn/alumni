@@ -5,6 +5,7 @@
         wx:for="{{noticeList}}"
         wx:key="time"
         data="{{item}}"
+        data-id="{{item.friendid}}"
         bindtap="handleClickCard"
       />
     </view>

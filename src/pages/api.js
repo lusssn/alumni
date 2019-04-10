@@ -1,5 +1,9 @@
 import request from '../utils/request'
 
+// 首页-名片广场
+export const getSquareCards = params =>
+  request.get('/home/similar', { ...params }).then(res => res.data)
+
 // 搜索-搜索列表
 export const getSearch = params =>
   request.get('/search/searchdirect', { ...params }, {
@@ -11,6 +15,7 @@ export const getSearchResult = params =>
   request.get('/search/search', { ...params }, {
     noAuth: true,
   }).then(res => res.data)
+
 
 // 我的-获取所有名片信息
 export const getAllInfo = () =>

@@ -27,17 +27,25 @@ Page({
   },
   handleEducationAdd(e) {
     const { num } = e.currentTarget.dataset
-    wxUtil.navigateTo('edit', {
-      type: 'education',
-      id: num,
-    })
+    if (num) {
+      wxUtil.navigateTo('edit', {
+        type: 'education',
+        id: num,
+      })
+      return
+    }
+    wxUtil.navigateTo('edit', { type: 'education' })
   },
   handleWorkAdd(e) {
     const { num } = e.currentTarget.dataset
-    wxUtil.navigateTo('edit', {
-      type: 'work',
-      id: num,
-    })
+    if (num) {
+      wxUtil.navigateTo('edit', {
+        type: 'work',
+        id: num,
+      })
+      return
+    }
+    wxUtil.navigateTo('edit', { type: 'work' })
   },
   loadAllInfo() {
     return Api.getAllInfo().then(data => {
@@ -64,7 +72,7 @@ Page({
     }, () => {})
   },
   updateWork() {
-    Api.getWorkInfo().then(({ data }) => {
+    Api.getWorkInfo().then(data => {
       this.setData({ works: data })
     }, () => {})
   },

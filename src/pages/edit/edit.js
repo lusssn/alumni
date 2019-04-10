@@ -18,7 +18,9 @@ Page({
     degreeSelect: DEGREE_TYPE,
     genderSelect: GENDER_TYPE,
     basic: {},
-    education: {},
+    education: {
+      background: R.findIndex(R.propEq('name', '本科'))(DEGREE_TYPE),
+    },
     work: {},
   },
   onLoad({ type, id = null }) {
@@ -51,7 +53,7 @@ Page({
   handleLocation() {
     request.getLocation().then(res => {
       this.setData({ 'basic.city': res })
-    }, err => wxUtil.showToast(err.title))
+    }, err => wxUtil.showToast(err.errMsg))
   },
   handleInputChange(e) {
     const { name } = e.currentTarget.dataset

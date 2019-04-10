@@ -42,7 +42,7 @@ Page({
   handleLocation() {
     request.getLocation().then(res => {
       this.setData({ 'basic.city': res })
-    }, err => wxUtil.showToast(err.title))
+    }, err => wxUtil.showToast(err.errMsg))
   },
   handleInputChange(e) {
     const { name } = e.currentTarget.dataset
@@ -87,7 +87,13 @@ Page({
   handleAuth(e) {
     const { event } = e.detail
     const { userInfo } = event.detail
-    userInfo && isComplete().then(res => {
+    if (!userInfo) {
+      wxUtil.showToast('授权失败请重试')
+      return
+    }
+    this.setData({ isShowAuthModal: false })
+    // 判断是否信息完善
+    isComplete().then(res => {
       if (res) {
         wxUtil.navigateTo('index', {}, true)
         return
@@ -97,7 +103,6 @@ Page({
           head_url: userInfo.avatarUrl,
           gender: R.findIndex(R.propEq('id', userInfo.gender))(GENDER_TYPE),
         },
-        isShowAuthModal: false,
       })
     })
   },

@@ -45,7 +45,8 @@ Page({
       })
     }, () => {})
   },
-  handleClickCard() {
-    wxUtil.navigateTo('detail')
+  handleClickCard(e) {
+    const { id } = e.currentTarget.dataset
+    wxUtil.navigateTo('detail', { id })
   },
 })

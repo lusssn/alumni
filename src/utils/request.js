@@ -57,12 +57,12 @@ const _request = (url, params = {}, others = {}) => {
     return Promise.reject(Error.RESPONSE_ERROR)
   }).then(data => {
     // 特殊说明：qqMap接口返回的status为0时为成功
-    if (+data.status === 200 || !data.status) {
+    if (+data.status === 200 || data.status === 0) {
       return data
     }
     return Promise.reject({
-      title: data.message,
-      errCode: data.status,
+      errMsg: data.message || '服务暂不可用',
+      errCode: data.status || -1,
     })
   }).catch(err => {
     return Promise.reject(err)
