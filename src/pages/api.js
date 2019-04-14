@@ -43,24 +43,28 @@ export const getFriendList = params =>
   request.get('/friend/getfriend', { ...params }).then(res => res.data)
 
 
+// 完善-保存名片信息
+export const saveCardInfo = params =>
+  request.post('/edit/editfirst', { ...params })
+
 // 编辑-保存基本信息
-export const getSaveBasic = params =>
+export const saveBasic = params =>
   request.post('/edit/editbase', { ...params })
 
 // 编辑-保存教育信息
-export const getSaveEducation = params =>
+export const saveEducation = params =>
   request.post('/edit/editeducation', { ...params })
 
 // 编辑-删除教育信息
-export const getRemoveEducation = params =>
+export const removeEducation = params =>
   request.post('/edit/deleteeducation', { ...params })
 
 // 编辑-保存工作信息
-export const getSaveWork = params =>
+export const saveWork = params =>
   request.post('/edit/editwork', { ...params })
 
 // 编辑-删除工作信息
-export const getRemoveWork = params =>
+export const removeWork = params =>
   request.post('/edit/deletework', { ...params })
 
 

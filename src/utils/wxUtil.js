@@ -42,19 +42,22 @@ const navigateTo = (pageName, urlParams, close) => {
  * @param others
  * @returns { Promise }
  */
-const showToast = (title = '', icon = 'warning', others) => {
-  const params = {
-    title,
-    icon,
-    mask: true,
-    duration: 1500,
-    ...others,
-  }
-  if (icon === 'warning') {
-    params.image = '../../images/warning-o.png'
-  }
-  return promisify(wx.showToast)(params)
-}
+const showToast = (title = '', icon = 'warning', others) =>
+  new Promise((resolve, reject) => {
+    const params = {
+      title,
+      icon,
+      mask: true,
+      duration: 1500,
+      ...others,
+    }
+    if (icon === 'warning') {
+      params.image = '../../images/warning-o.png'
+    }
+    promisify(wx.showToast)(params).then(() => {
+      setTimeout(resolve, params.duration)
+    }, reject)
+  })
 
 export default {
   navigateTo,

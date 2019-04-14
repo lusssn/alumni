@@ -6,7 +6,7 @@
   <view class="field">
     <label class="field-label">职业名称：</label>
     <view class="field-content">
-      <text>{{data.job}}</text>
+      <text>{{data.job || '无'}}</text>
     </view>
   </view>
   <view class="field">

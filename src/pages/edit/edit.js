@@ -74,9 +74,9 @@ Page({
       const { type, id } = this.data
       let next = null
       if (type === 'education') {
-        next = Api.getRemoveEducation({ num: id })
+        next = Api.removeEducation({ num: id })
       } else if (type === 'work') {
-        next = Api.getRemoveWork({ num: id })
+        next = Api.removeWork({ num: id })
       }
       next.then(() => {
         const app = getApp()
@@ -98,14 +98,14 @@ Page({
       // 处理gender
       const gender = GENDER_TYPE[params.gender] || {}
       params.gender = gender.id
-      next = Api.getSaveBasic(params)
+      next = Api.saveBasic(params)
     } else if (type === 'education') {
       // 处理degree
       const degree = DEGREE_TYPE[params.background] || {}
       params.background = degree.name
-      next = Api.getSaveEducation(params)
+      next = Api.saveEducation(params)
     } else if (type === 'work') {
-      next = Api.getSaveWork(params)
+      next = Api.saveWork(params)
     }
     // 发起请求
     next.then(() => {

@@ -9,7 +9,7 @@
         </view>
         <view class="padding-b-sm">学校名称：{{data.school}}</view>
         <view>
-          公司：{{data.company}}{{(data.company && data.job) ? '－' : ''}}{{data.job}}
+          公司：{{data.company}}{{(data.company && data.job) ? '－' : ''}}{{data.job || ''}}
         </view>
       </view>
       <view class="self-top">

@@ -19,7 +19,11 @@ Page({
       wxUtil.navigateTo('complete', {}, 'all')
     })
   },
-  onPullDownRefresh() {},
+  onPullDownRefresh() {
+    this.loadSquareCards().then(() => {
+      wx.stopPullDownRefresh()
+    })
+  },
   onReachBottom() {
     const { current, total } = this.data.pagination
     // 是否为最后一页
@@ -28,7 +32,7 @@ Page({
     }
   },
   loadSquareCards(pageNo = 1) {
-    Api.getSquareCards({
+    return Api.getSquareCards({
       limit: PAGE_SIZE,
       page: pageNo,
     }).then(res => {

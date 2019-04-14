@@ -14,7 +14,25 @@ Page({
   },
   onLoad() {
     // 加载消息列表数据
-    Api.getNoticeList({
+    this.loadNoticeList()
+    // 加载朋友列表数据
+    this.loadFriendList()
+  },
+  onPullDownRefresh() {
+    this.loadFriendList()
+    this.loadNoticeList().then(() => {
+      wx.stopPullDownRefresh()
+    })
+  },
+  onReachBottom() {
+    const { total, current } = this.data.friendPagination
+    // 是否为最后一页
+    if (Math.ceil(total / PAGE_SIZE) > current) {
+      this.loadFriendList(current + 1)
+    }
+  },
+  loadNoticeList() {
+    return Api.getNoticeList({
       page: 1,
       limit: 3,
     }).then(data => {
@@ -28,15 +46,6 @@ Page({
         noticeTotal: count,
       })
     }, () => {})
-    // 加载朋友列表数据
-    this.loadFriendList()
-  },
-  onReachBottom() {
-    const { total, current } = this.data.friendPagination
-    // 是否为最后一页
-    if (Math.ceil(total / PAGE_SIZE) > current) {
-      this.loadFriendList(current + 1)
-    }
   },
   loadFriendList(pageNo = 1) {
     // 加载朋友列表数据

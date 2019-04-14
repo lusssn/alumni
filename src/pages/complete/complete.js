@@ -11,10 +11,15 @@ Page({
     degreeSelect: DEGREE_TYPE,
     genderSelect: GENDER_TYPE,
     basic: {},
-    education: {},
+    education: {
+      background: R.findIndex(R.propEq('name', '本科'))(DEGREE_TYPE),
+    },
     work: {},
+    redirect: '',
+    options: '',
   },
-  onLoad() {
+  onLoad({ redirect = 'mine', options = '{}' }) {
+    this.setData({ redirect, options })
     request.getUserInfo().then(userInfo => {
       this.setData({
         basic: {
@@ -64,18 +69,18 @@ Page({
       wxUtil.showToast('必填项未填完整')
       return
     }
-
+    // 数据格式转换
+    const params = { ...basic }
+    R.forEachObjIndexed((value, key) => params[`education_${key}`] = value, education)
+    R.forEachObjIndexed((value, key) => params[`work_${key}`] = value, work)
     // 提交数据
-    Promise.all([
-      Api.getSaveBasic(basic),
-      Api.getSaveEducation(education),
-      Api.getSaveWork(work),
-    ]).then(() => {
+    Api.saveCardInfo(params).then(() => {
       wxUtil.showToast('保存成功', 'success').then(() => {
-        wxUtil.navigateTo('mine', {}, 'all')
+        const { redirect, options } = this.data
+        wxUtil.navigateTo(redirect, JSON.parse(options), 'all')
       })
-    }, () => {
-      wxUtil.showToast('请重试')
+    }, err => {
+      wxUtil.showToast(err.errMsg)
     })
   },
   handleCloseAuthModal() {

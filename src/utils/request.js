@@ -112,6 +112,7 @@ const getLocation = () => {
     }, { noAuth: true }).then((res) => {
       const { address_component: address } = res.result
       return address.city || address.province || address.nation
+    }, (err) => {
     })
   }, () => {
     return Promise.reject(Error.LOCATION_FAILED)
