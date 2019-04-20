@@ -3,7 +3,7 @@
  */
 
 // 此处主机域名修改成腾讯云解决方案分配的域名
-const host = 'https://www.zimotiontec.cn'
+const host = 'https://www.seuclab.cn'
 const qqMapHost = 'https://apis.map.qq.com'
 
 const server = {

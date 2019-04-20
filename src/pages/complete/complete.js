@@ -46,8 +46,18 @@ Page({
   // 定位
   handleLocation() {
     request.getLocation().then(res => {
+      if (!res) {
+        wxUtil.showToast('没有定位到')
+        return
+      }
       this.setData({ 'basic.city': res })
-    }, err => wxUtil.showToast(err.errMsg))
+    }, err => {
+      wx.showModal({
+        title: '提示',
+        content: JSON.stringify(err)
+      })
+      // wxUtil.showToast(err.errMsg)
+    })
   },
   handleInputChange(e) {
     const { name } = e.currentTarget.dataset
@@ -80,7 +90,11 @@ Page({
         wxUtil.navigateTo(redirect, JSON.parse(options), 'all')
       })
     }, err => {
-      wxUtil.showToast(err.errMsg)
+      wx.showModal({
+        title: '提示',
+        content: JSON.stringify(err),
+      })
+      // wxUtil.showToast(err.errMsg)
     })
   },
   handleCloseAuthModal() {

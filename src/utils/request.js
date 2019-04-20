@@ -113,9 +113,11 @@ const getLocation = () => {
       const { address_component: address } = res.result
       return address.city || address.province || address.nation
     }, (err) => {
+      return Promise.reject(err)
     })
-  }, () => {
-    return Promise.reject(Error.LOCATION_FAILED)
+  }, (err) => {
+    // return Promise.reject(Error.LOCATION_FAILED)
+    return Promise.reject(err)
   })
 }
 
