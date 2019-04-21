@@ -14,7 +14,7 @@ import type from '../type.js';
 export default function _clone(value, refFrom, refTo, deep) {
   var copy = function copy(copiedValue) {
     var len = refFrom.length;
-    var idx = 0;c
+    var idx = 0;
     while (idx < len) {
       if (value === refFrom[idx]) {
         return refTo[idx];

@@ -20,7 +20,7 @@
         </view>
       </view>
       <view class="field">
-        <label class="field-label">学历：</label>
+        <label class="field-label"><text class="text-error">*</text>学历：</label>
         <view class="field-content">
           <picker
             range="{{degreeSelect}}"
@@ -38,7 +38,7 @@
         </view>
       </view>
       <view class="field">
-        <label class="field-label">院系：</label>
+        <label class="field-label"><text class="text-error">*</text>院系：</label>
         <view class="field-content">
           <input
             placeholder="请输入院系"
@@ -48,7 +48,7 @@
           />
         </view>
       </view>
-      <view class="field">
+      <view wx:if="{{!hideOptional}}" class="field">
         <label class="field-label">专业：</label>
         <view class="field-content">
           <input
@@ -59,7 +59,7 @@
           />
         </view>
       </view>
-      <view class="field">
+      <view wx:if="{{!hideOptional}}" class="field">
         <label class="field-label">入学年份：</label>
         <view class="field-content">
           <picker
@@ -80,7 +80,7 @@
           <icon class="icon-arrow-up" />
         </view>
       </view>
-      <view class="field">
+      <view wx:if="{{!hideOptional}}" class="field">
         <label class="field-label">毕业时间：</label>
         <view class="field-content">
           <picker

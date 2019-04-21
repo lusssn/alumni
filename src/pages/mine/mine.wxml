@@ -9,8 +9,8 @@
           </view>
           <view>ID: {{basic.id}}</view>
         </view>
-        <icon class="icon-ercode" />
-        <icon class="icon-arrow-right margin-l-sm" />
+        <!--<icon class="icon-ercode" />-->
+        <!--<icon class="icon-arrow-right margin-l-sm" />-->
       </view>
     </view>
   </view>
@@ -22,7 +22,7 @@
         <text class="h3">编辑</text>
       </view>
     </view>
-    <BasicInfo data="{{basic}}" />
+    <BasicInfo data="{{basic}}" isFriend />
   </view>
   <view class="card">
     <view class="card-header">

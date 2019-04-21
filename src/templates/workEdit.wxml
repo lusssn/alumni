@@ -16,7 +16,7 @@
         </view>
       </view>
       <view class="field">
-        <label class="field-label">职位名称：</label>
+        <label class="field-label"><text class="text-error">*</text>职位名称：</label>
         <view class="field-content">
           <input
             placeholder="请输入职位名称"

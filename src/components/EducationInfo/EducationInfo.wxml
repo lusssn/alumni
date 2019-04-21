@@ -1,12 +1,13 @@
 <view class="card-block padding-t-sm padding-b-sm{{border ? ' border-b' : ''}}">
   <view class="field">
     <label class="field-label">学历：</label>
-    <view class="field-content">{{data.profession || '无'}}</view>
+    <view class="field-content">{{data.background}}</view>
   </view>
   <view class="field">
     <label class="field-label">院系专业：</label>
-    <view class="field-content">
-      <text>{{data.school}}－{{data.department || '无'}}/{{data.background || '无'}}</text>
+    <view class="flex flex-direction-column text-strong">
+      <text>{{data.school}}<text wx:if="{{data.department}}">－{{data.department}}</text></text>
+      <text wx:if="{{data.profession}}">{{data.profession}}</text>
     </view>
   </view>
   <view class="field">

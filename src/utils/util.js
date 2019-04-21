@@ -26,10 +26,18 @@ export const isComplete = () => {
   // 是否授权
   // 获取基本信息，判断信息是否完善
   return Api.getAllInfo().then(data => {
-    const { base, education, work } = data
-    // 姓名、个人描述、学校名称、公司
-    return (!R.isEmpty(base) && !R.isEmpty(education) && !R.isEmpty(work) &&
-      !!base[0].real_name && !!base[0].descr && !!education[0].school && !!work[0].company)
+    const { base, personal, education } = data
+    if (R.isEmpty(base) || R.isEmpty(personal) || R.isEmpty(education)) {
+      return false
+    }
+    // 手机号、学校名称、院系
+    const _education = education[0]
+    if (!personal[0].phone || !_education.school || !_education.department) {
+      return false
+    }
+    // 姓名、个人描述、定位
+    const basic = base[0]
+    return !!basic.real_name && !!basic.descr && !!basic.city
   }, err => {
     if (err.errCode === Error.UNAUTHORIZED.errCode) {
       wxUtil.navigateTo('complete', {}, 'all')

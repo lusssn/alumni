@@ -115,9 +115,8 @@ const getLocation = () => {
     }, (err) => {
       return Promise.reject(err)
     })
-  }, (err) => {
-    // return Promise.reject(Error.LOCATION_FAILED)
-    return Promise.reject(err)
+  }, err => {
+    return Promise.reject(err.errMsg ? err : Error.LOCATION_FAILED)
   })
 }
 

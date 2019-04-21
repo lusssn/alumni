@@ -24,7 +24,7 @@
     <view class="card-header">
       <view class="card-title">基本信息</view>
     </view>
-    <BasicInfo data="{{basic}}" />
+    <BasicInfo data="{{basic}}" isFriend="{{status === 'FRIEND'}}" />
   </view>
 
   <view class="card">
@@ -79,7 +79,8 @@
       class="flex-item"
       type="primary"
       bindtap="handleApplyExchange"
-    >交换名片</button>
+    >交换名片
+    </button>
     <button
       wx:elif="{{status === 'SEASSI'}}"
       class="flex-item"

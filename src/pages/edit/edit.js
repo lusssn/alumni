@@ -3,7 +3,10 @@ import * as Api from '../api'
 import { promisify } from '../../utils/util'
 import request from '../../utils/request'
 import wxUtil from '../../utils/wxUtil'
-import { GENDER_TYPE, DEGREE_TYPE } from '../../macro'
+import {
+  GENDER_TYPE, DEGREE_TYPE,
+  BASIC_FIELD, EDUCATION_FIELD, WORK_FIELD,
+} from '../../macro'
 
 const EDIT_TYPE = [
   { type: 'basic', title: '编辑基本信息' },
@@ -92,19 +95,30 @@ Page({
   },
   handleSave() {
     const { type } = this.data
-    const params = this.data[type]
+    let params = R.clone(this.data[type])
     let next = null
     if (type === 'basic') {
       // 处理gender
       const gender = GENDER_TYPE[params.gender] || {}
       params.gender = gender.id
+      // 必填项
+      params = this.checkParams(BASIC_FIELD, params)
+      if (!params) return
       next = Api.saveBasic(params)
+
     } else if (type === 'education') {
       // 处理degree
       const degree = DEGREE_TYPE[params.background] || {}
       params.background = degree.name
+      // 必填项
+      params = this.checkParams(EDUCATION_FIELD, params)
+      if (!params) return
       next = Api.saveEducation(params)
+
     } else if (type === 'work') {
+      // 必填项
+      params = this.checkParams(WORK_FIELD, params)
+      if (!params) return
       next = Api.saveWork(params)
     }
     // 发起请求
@@ -119,6 +133,19 @@ Page({
     }, () => {
       wxUtil.showToast('保存失败')
     })
+  },
+  checkParams(checkList, params) {
+    const _params = R.clone(params)
+    for (let field of checkList) {
+      if (field.isMust && !_params[field.prop]) {
+        wxUtil.showToast(`${field.name}必填`)
+        return false
+      }
+      if (!_params[field.prop]) {
+        _params[field.prop] = field.defaultValue
+      }
+    }
+    return _params
   },
   loadBasic() {
     Api.getBasicInfo().then(data => {

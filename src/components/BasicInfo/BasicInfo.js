@@ -6,5 +6,8 @@ Component({
     data: {
       type: Object, value: {},
     },
+    isFriend: {
+      type: Boolean, value: false,
+    }
   },
 })
