@@ -22,6 +22,13 @@ Page({
       wx.stopPullDownRefresh()
     })
   },
+  onShareAppMessage() {
+    const { basic } = this.data
+    return {
+      title: `${basic.real_name}的名片`,
+      path: `/pages/detail/detail?id=${basic.openid}&isShare=1`,
+    }
+  },
   handleBasicEdit() {
     wxUtil.navigateTo('edit', { type: 'basic' })
   },

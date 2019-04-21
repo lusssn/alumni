@@ -57,7 +57,7 @@ Page({
     const { openid } = this.data.basic
     Api.getAcceptFriend({ friendid: openid }).then(() => {
       wxUtil.showToast('已同意', 'success')
-      this.loadCardInfo(basic.id)
+      this.loadCardInfo(openid)
     }, () => {
       wxUtil.showToast('操作失败')
     })
