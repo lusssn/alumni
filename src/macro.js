@@ -40,9 +40,8 @@ export const EDUCATION_FIELD = [
   { name: '学校名称', prop: 'school', isMust: true },
   { name: '学历', prop: 'background', isMust: true },
   { name: '院系', prop: 'department', isMust: true },
-  { name: '专业', prop: 'profession', defaultValue: '' },
-  { name: '入学年份', prop: 'start_year', defaultValue: '' },
-  { name: '毕业时间', prop: 'end_year', defaultValue: '' },
+  { name: '入学年份', prop: 'start_year', isMust: true },
+  { name: '毕业时间', prop: 'end_year', isMust: true },
 ]
 
 // 工作信息配置

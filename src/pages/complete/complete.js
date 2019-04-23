@@ -20,7 +20,7 @@ Page({
       background: R.findIndex(R.propEq('name', '本科'))(DEGREE_TYPE),
     },
     work: {},
-    isStudent: false,
+    isStudent: true,
     redirect: '', // 完善后跳转的路径
     options: '', // 完善后跳转的路径参数
   },

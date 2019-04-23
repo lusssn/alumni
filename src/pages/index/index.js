@@ -36,9 +36,9 @@ Page({
       limit: PAGE_SIZE,
       page: pageNo,
     }).then(res => {
-      const { data, count } = res
+      const { list, count } = res
       this.setData({
-        list: pageNo === 1 ? data : this.data.list.concat(data),
+        list: pageNo === 1 ? list : this.data.list.concat(list),
         pagination: {
           current: pageNo,
           total: count,

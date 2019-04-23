@@ -18,7 +18,7 @@
   "window":{
     "backgroundTextStyle":"dark",
     "navigationBarBackgroundColor": "#FFFFFF",
-    "navigationBarTitleText": "校友圈",
+    "navigationBarTitleText": "东大校友圈",
     "navigationBarTextStyle":"black"
   },
   "tabBar": {

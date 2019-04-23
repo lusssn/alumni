@@ -1,5 +1,5 @@
 {
-  "navigationBarTitleText": "名片",
+  "navigationBarTitleText": "东大校友圈",
   "enablePullDownRefresh": true,
   "usingComponents": {
     "Loading": "../../components/Loading/Loading",

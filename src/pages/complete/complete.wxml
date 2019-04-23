@@ -3,10 +3,10 @@
 <import src="../../templates/workEdit.wxml" />
 <view class="container">
   <template is="basicEdit" data="{{ genderSelect, basic, hideOptional: true }}" />
-  <template is="educationEdit" data="{{ degreeSelect, education, hideOptional: true }}" />
+  <template is="educationEdit" data="{{ degreeSelect, education }}" />
   <view class="card">
     <view class="card-header">
-      <view class="card-title">已就业</view>
+      <view class="card-title">是否就业</view>
       <switch
         type="checkbox"
         color="#2180E8"

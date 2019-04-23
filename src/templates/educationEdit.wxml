@@ -48,19 +48,8 @@
           />
         </view>
       </view>
-      <view wx:if="{{!hideOptional}}" class="field">
-        <label class="field-label">专业：</label>
-        <view class="field-content">
-          <input
-            placeholder="请输入专业"
-            value="{{education.profession}}"
-            data-name="education.profession"
-            bindinput="handleInputChange"
-          />
-        </view>
-      </view>
-      <view wx:if="{{!hideOptional}}" class="field">
-        <label class="field-label">入学年份：</label>
+      <view class="field">
+        <label class="field-label"><text class="text-error">*</text>入学年份：</label>
         <view class="field-content">
           <picker
             class="flex-item"
@@ -80,8 +69,8 @@
           <icon class="icon-arrow-up" />
         </view>
       </view>
-      <view wx:if="{{!hideOptional}}" class="field">
-        <label class="field-label">毕业时间：</label>
+      <view class="field">
+        <label class="field-label"><text class="text-error">*</text>毕业时间：</label>
         <view class="field-content">
           <picker
             class="flex-item"

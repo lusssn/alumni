@@ -1,8 +1,8 @@
 <template name="basicEdit">
   <view class="card padding-t-xl padding-b-xl">
-    <view class="avatar flex-center tap" bindtap="handleClickAvatar">
+    <view class="avatar flex-center">
       <image mode="aspectFill" src="{{basic.head_url}}" />
-      <icon class="icon-camera" />
+      <!--<icon class="icon-camera" />-->
     </view>
   </view>
   <view class="card">

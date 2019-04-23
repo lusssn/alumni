@@ -7,25 +7,20 @@
     <label class="field-label">定位：</label>
     <view class="field-content">{{data.city}}</view>
   </view>
-  <view class="field">
+  <view wx:if="{{data.birth}}" class="field">
     <label class="field-label">出生年月：</label>
-    <view class="field-content">
-      <text>{{data.birth || '暂无'}}</text>
-    </view>
+    <view class="field-content">{{data.birth}}</view>
   </view>
-  <view class="field">
+  <view wx:if="{{isFriend && data.phone}}" class="field">
     <label class="field-label">手机号码：</label>
-    <view wx:if="{{isFriend}}" class="field-content">{{data.phone || '暂无'}}</view>
-    <view wx:else class="field-content">交换名片后可见</view>
+    <view class="field-content">{{data.phone}}</view>
   </view>
-  <view class="field">
+  <view wx:if="{{isFriend && data.wechat}}" class="field">
     <label class="field-label">微信号：</label>
-    <view wx:if="{{isFriend}}" class="field-content">{{data.wechat || '暂无'}}</view>
-    <view wx:else class="field-content">交换名片后可见</view>
+    <view class="field-content">{{data.wechat}}</view>
   </view>
-  <view class="field">
+  <view wx:if="{{isFriend && data.email}}" class="field">
     <label class="field-label">邮箱：</label>
-    <view wx:if="{{isFriend}}" class="field-content">{{data.email || '暂无'}}</view>
-    <view wx:else class="field-content">交换名片后可见</view>
+    <view class="field-content">{{data.email}}</view>
   </view>
 </view>

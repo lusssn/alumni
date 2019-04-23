@@ -79,7 +79,8 @@
       class="flex-item"
       type="primary"
       bindtap="handleApplyExchange"
-    >交换名片
+    >
+      交换名片获取校友联系方式
     </button>
     <button
       wx:elif="{{status === 'SEASSI'}}"
