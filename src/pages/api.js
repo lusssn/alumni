@@ -83,3 +83,7 @@ export const getRefuseFriend = params =>
 // 详情-请求交换名片
 export const getInviteFriend = params =>
   request.get('/friend/invite', { ...params })
+
+//获取token
+export const getToken = params =>
+  request.get('/query/gettoken', { ...params })

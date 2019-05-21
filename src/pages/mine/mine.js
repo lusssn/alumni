@@ -25,12 +25,18 @@ Page({
   onShareAppMessage() {
     const { basic } = this.data
     return {
-      title: `${basic.real_name}的名片`,
+      title: `${basic.real_name}的SEU校友名片`,
       path: `/pages/detail/detail?id=${basic.openid}&isShare=1`,
     }
   },
   handleBasicEdit() {
     wxUtil.navigateTo('edit', { type: 'basic' })
+  },
+  handleShare() {
+    wxUtil.navigateTo('share', { type: 'basic' })
+  },
+  handleAbout() {
+    wxUtil.navigateTo('about', { type: 'basic' })
   },
   handleEducationAdd(e) {
     const { num } = e.currentTarget.dataset

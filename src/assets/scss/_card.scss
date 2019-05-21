@@ -3,6 +3,7 @@
 .card {
   margin-bottom: 20rpx;
   background-color: white;
+  box-shadow: 0 0 0.1px #CACACA;
   &-header {
     position: relative;
     display: flex;
@@ -37,6 +38,13 @@
       content: "";
       background-color: $theme-color;
     }
+  }
+  &-else {
+    float: center;
+    display: flex;
+    flex: 1;
+    font-size: 35rpx;
+    color: #CACACA;
   }
   &-block {
     margin: 0 32rpx;

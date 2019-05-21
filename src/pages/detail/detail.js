@@ -80,4 +80,28 @@ Page({
       wxUtil.showToast(err.errMsg || '操作失败')
     })
   },
+  handleAddWechat() {
+    if(this.data.basic.wechat == ""){
+      wxUtil.showToast('暂未填写微信','warning')
+    }else{
+      wx.setClipboardData({
+        data: this.data.basic.wechat,
+        success() {
+          wxUtil.showToast('复制微信号成功', 'success')
+        },fail(){
+          wxUtil.showToast(err.errMsg || '操作失败')
+        }
+      })
+    }
+  },
+  handleAddPhone() {
+    if(this.data.basic.phone == ""){
+      wxUtil.showToast('暂未填写电话','warning')
+    }else{
+      wx.addPhoneContact({
+        firstName: this.data.basic.real_name,//联系人姓名
+        mobilePhoneNumber: this.data.basic.phone,//联系人手机号
+      })
+    }
+  },
 })

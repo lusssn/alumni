@@ -5,9 +5,9 @@
         <icon type="search" size="16" color="#999999" />
         <input
           class="search-input h2"
-          placeholder="搜索"
           bindconfirm="handleSearch"
           focus="true"
+          confirm-type="search"
         />
         <text class="link h2 padding-l-lg" bindtap="handleGoBack">取消</text>
       </view>

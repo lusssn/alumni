@@ -8,7 +8,10 @@
     "pages/edit/edit",
     "pages/complete/complete",
     "pages/detail/detail",
-    "pages/notice/notice"
+    "pages/notice/notice",
+    "pages/share/share",
+    "pages/about/about",
+    "pages/check/check"
   ],
   "permission": {
     "scope.userLocation": {
@@ -18,31 +21,31 @@
   "window":{
     "backgroundTextStyle":"dark",
     "navigationBarBackgroundColor": "#FFFFFF",
-    "navigationBarTitleText": "东大校友圈",
+    "navigationBarTitleText": "SEU校友圈",
     "navigationBarTextStyle":"black"
   },
   "tabBar": {
     "color": "#CACACA",
     "selectedColor": "#2180E8",
-    "borderStyle": "black",
+    "borderStyle": "white",
     "list": [
       {
-        "pagePath": "pages/index/index",
+        "pagePath": "pages/friend/friend",
         "iconPath": "images/home-normal.png",
         "selectedIconPath": "images/home-selected.png",
-        "text": "首 页"
+        "text": "Friend"
       },
       {
-        "pagePath": "pages/friend/friend",
+        "pagePath": "pages/index/index",
         "iconPath": "images/friend-normal.png",
         "selectedIconPath": "images/friend-selected.png",
-        "text": "朋 友"
+        "text": "Circle"
       },
       {
         "pagePath": "pages/mine/mine",
         "iconPath": "images/mine-normal.png",
         "selectedIconPath": "images/mine-selected.png",
-        "text": "我 的"
+        "text": "Mine"
       }
     ]
   }

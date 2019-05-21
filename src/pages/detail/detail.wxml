@@ -80,8 +80,12 @@
       type="primary"
       bindtap="handleApplyExchange"
     >
-      交换名片获取校友联系方式
+      交换名片添加微信和通讯录
     </button>
+    <block wx:elif="{{status === 'FRIEND'}}">
+      <button class="flex-item" bindtap="handleAddPhone">添加通讯录</button>
+      <button class="flex-item" type="primary" bindtap="handleAddWechat">添加微信</button>
+    </block>
     <button
       wx:elif="{{status === 'SEASSI'}}"
       class="flex-item"

@@ -1,6 +1,6 @@
 <view wx:if="{{isLoaded}}" class="container padding-t-md">
   <view class="card">
-    <view class="card-block">
+    <view class="card-block" bindtap="handleShare">
       <view class="flex-align-center padding-t-lg padding-b-lg border-b">
         <image class="avatar" mode="aspectFill" src="{{basic.head_url}}" />
         <view class="flex-item padding-l-lg">
@@ -9,8 +9,8 @@
           </view>
           <view>ID: {{basic.id}}</view>
         </view>
-        <!--<icon class="icon-ercode" />-->
-        <!--<icon class="icon-arrow-right margin-l-sm" />-->
+        <icon class="icon-ercode" />
+        <icon class="icon-arrow-right margin-l-sm" />
       </view>
     </view>
   </view>
@@ -74,6 +74,14 @@
         src="../../images/experience-empty.png"
       />
       <view class="h4 text-primary">暂无工作经历，快去添加吧</view>
+    </view>
+  </view>
+  <view class="card" bindtap="handleAbout">
+    <view class="card-header">
+      <view class="card-else">关于校友圈</view>
+      <view class="link">
+        <icon class="icon-plane"/>
+      </view>
     </view>
   </view>
 </view>
