@@ -42,6 +42,7 @@ $svg: (
 			$svg-view-box: "0 0 32 32";
 			$svg-view-d: $icon;
 		}
+    $color: rgba(red($color), green($color), blue($color), 0.999);
 		background: url("data:image/svg+xml;utf-8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='#{$svg-view-box}'><path d='#{$svg-view-d}' fill='#{$color}'/></svg>") center no-repeat;
 		@if type-of($size) == 'number' {
 			width: $size;
