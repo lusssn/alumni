@@ -1,7 +1,7 @@
 import wxUtil from '../../utils/wxUtil'
 import * as R from '../../utils/ramda/index'
 import * as Api from '../api'
-import { CONTACT_TYPE } from '../../macro'
+import { CONTACT_TYPE } from '../../macros'
 import { isComplete } from '../../utils/util'
 
 Page({

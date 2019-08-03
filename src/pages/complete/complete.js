@@ -6,7 +6,7 @@ import wxUtil from '../../utils/wxUtil'
 import {
   DEGREE_TYPE, GENDER_TYPE,
   BASIC_FIELD, EDUCATION_FIELD, WORK_FIELD,
-} from '../../macro'
+} from '../../macros'
 
 Page({
   data: {
@@ -24,8 +24,13 @@ Page({
     redirect: '', // 完善后跳转的路径
     options: '', // 完善后跳转的路径参数
   },
-  onLoad({ redirect = 'mine', options = '{}' }) {
-    this.setData({ redirect, options })
+  onLoad(option) {
+    const { redirect = 'mine', options, isStudent } = option
+    this.setData({
+      redirect,
+      options: decodeURIComponent(options),
+      isStudent: +isStudent,
+    })
     request.getUserInfo().then(userInfo => {
       this.setData({
         basic: {
@@ -76,6 +81,10 @@ Page({
   },
   handleSwitchChange(e) {
     this.setData({ isStudent: !e.detail.value })
+  },
+  handleSkip() {
+    const { redirect, options } = this.data
+    wxUtil.navigateTo(redirect, JSON.parse(options), true)
   },
   handleSave() {
     let { basic, education, work, isStudent } = this.data

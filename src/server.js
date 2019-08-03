@@ -2,8 +2,13 @@
  * 小程序配置文件
  */
 
+const HOST = {
+  online: 'https://www.seuclab.cn',
+  dev: 'http://wangq.fun:18080',
+}
+
 // 此处主机域名修改成腾讯云解决方案分配的域名
-const host = 'https://www.seuclab.cn'
+const host = HOST.dev
 const qqMapHost = 'https://apis.map.qq.com'
 
 const server = {

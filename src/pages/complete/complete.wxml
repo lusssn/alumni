@@ -2,44 +2,11 @@
 <import src="../../templates/educationEdit.wxml" />
 <import src="../../templates/workEdit.wxml" />
 <view class="container">
-  <template is="basicEdit" data="{{ genderSelect, basic, hideOptional: true }}" />
+  <template is="basicEdit" data="{{ genderSelect, basic, isStudent }}" />
   <template is="educationEdit" data="{{ degreeSelect, education }}" />
-  <view class="card">
-    <view class="card-header">
-      <view class="card-title">是否就业</view>
-      <switch
-        type="checkbox"
-        color="#2180E8"
-        checked="{{!isStudent}}"
-        bindchange="handleSwitchChange"
-      />
-    </view>
-    <view wx:if="{{!isStudent}}" class="card-block">
-      <view class="field">
-        <label class="field-label"><text class="text-error">*</text>公司名称：</label>
-        <view class="field-content">
-          <input
-            placeholder="请输入公司名称"
-            value="{{work.company}}"
-            data-name="work.company"
-            bindinput="handleInputChange"
-          />
-        </view>
-      </view>
-      <view class="field">
-        <label class="field-label"><text class="text-error">*</text>职位名称：</label>
-        <view class="field-content">
-          <input
-            placeholder="请输入职位名称"
-            value="{{work.job}}"
-            data-name="work.job"
-            bindinput="handleInputChange"
-          />
-        </view>
-      </view>
-    </view>
-  </view>
-  <view class="fix-bottom padding-md border-t flex">
+  <template wx:if="{{!isStudent}}" is="workEdit" data="{{ work }}" />
+  <view class="fix-bottom flex">
+    <button class="flex-item" bindtap="handleSkip">跳过</button>
     <button class="flex-item" type="primary" bindtap="handleSave">保存</button>
   </view>
   <Modal

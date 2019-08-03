@@ -32,11 +32,9 @@ Page({
   handleBasicEdit() {
     wxUtil.navigateTo('edit', { type: 'basic' })
   },
-  handleShare() {
-    wxUtil.navigateTo('share', { type: 'basic' })
-  },
+  handleShare() {},
   handleAbout() {
-    wxUtil.navigateTo('about', { type: 'basic' })
+    wxUtil.navigateTo('about')
   },
   handleEducationAdd(e) {
     const { num } = e.currentTarget.dataset

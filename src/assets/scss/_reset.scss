@@ -14,12 +14,15 @@ button {
   color: $muted-color;
   border-radius: 0;
   background-color: white;
+
   &::after {
     border-color: rgba(black, .08);
     border-radius: 0;
   }
+
   &[type=primary] {
     background-color: $theme-color;
+
     &.button-hover {
       background-color: darken($theme-color, 10%);
     }
@@ -27,10 +30,21 @@ button {
     &[plain] {
       color: $theme-color;
       border-color: $theme-color;
+
       &.button-hover {
         color: lighten($theme-color, 16%);
         border-color: lighten($theme-color, 16%);
       }
     }
+  }
+}
+
+radio .wx-radio-input {
+  width: 28rpx !important;
+  height: 28rpx !important;
+
+  &.wx-radio-input-checked {
+    border-color: $theme-color !important;
+    background-color: $theme-color !important;
   }
 }

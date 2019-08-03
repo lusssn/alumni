@@ -9,9 +9,8 @@
     "pages/complete/complete",
     "pages/detail/detail",
     "pages/notice/notice",
-    "pages/share/share",
-    "pages/about/about",
-    "pages/check/check"
+    "pages/register/register",
+    "pages/about/about"
   ],
   "permission": {
     "scope.userLocation": {
@@ -33,19 +32,19 @@
         "pagePath": "pages/friend/friend",
         "iconPath": "images/home-normal.png",
         "selectedIconPath": "images/home-selected.png",
-        "text": "Friend"
+        "text": "朋友"
       },
       {
         "pagePath": "pages/index/index",
         "iconPath": "images/friend-normal.png",
         "selectedIconPath": "images/friend-selected.png",
-        "text": "Circle"
+        "text": "圈子"
       },
       {
         "pagePath": "pages/mine/mine",
         "iconPath": "images/mine-normal.png",
         "selectedIconPath": "images/mine-selected.png",
-        "text": "Mine"
+        "text": "我的"
       }
     ]
   }

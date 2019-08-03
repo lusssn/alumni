@@ -39,7 +39,18 @@
           </picker>
         </view>
       </view>
-      <view wx:if="{{!hideOptional}}" class="field">
+      <view wx:if="{{!isStudent}}" class="field">
+        <label class="field-label"><text class="text-error">*</text>所在行业：</label>
+        <view class="field-content">
+          <input
+            placeholder="请输入所在行业"
+            value="{{basic.industry}}"
+            data-name="basic.industry"
+            bindinput="handleInputChange"
+          />
+        </view>
+      </view>
+      <view class="field">
         <label class="field-label">出生年月：</label>
         <view class="field-content">
           <picker
@@ -59,7 +70,7 @@
         </view>
       </view>
       <view class="field">
-        <label class="field-label"><text class="text-error">*</text>自我描述：</label>
+        <label class="field-label">自我描述：</label>
         <view class="field-content">
           <input
             placeholder="请输入自我描述"
@@ -99,7 +110,7 @@
           />
         </view>
       </view>
-      <view wx:if="{{!hideOptional}}" class="field">
+      <view class="field">
         <label class="field-label">微信号：</label>
         <view class="field-content">
           <input
@@ -110,7 +121,7 @@
           />
         </view>
       </view>
-      <view wx:if="{{!hideOptional}}" class="field">
+      <view class="field">
         <label class="field-label">邮箱：</label>
         <view class="field-content">
           <input

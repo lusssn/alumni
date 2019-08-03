@@ -6,7 +6,7 @@ import wxUtil from '../../utils/wxUtil'
 import {
   GENDER_TYPE, DEGREE_TYPE,
   BASIC_FIELD, EDUCATION_FIELD, WORK_FIELD,
-} from '../../macro'
+} from '../../macros'
 
 const EDIT_TYPE = [
   { type: 'basic', title: '编辑基本信息' },
