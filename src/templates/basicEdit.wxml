@@ -1,7 +1,7 @@
 <template name="basicEdit">
   <view class="card padding-t-xl padding-b-xl">
     <view class="avatar flex-center">
-      <image mode="aspectFill" src="{{basic.head_url}}" />
+      <image mode="aspectFill" src="{{account.avatar}}" />
       <!--<icon class="icon-camera" />-->
     </view>
   </view>
@@ -15,8 +15,8 @@
         <view class="field-content">
           <input
             placeholder="请输入真实姓名"
-            value="{{basic.real_name}}"
-            data-name="basic.real_name"
+            value="{{account.name}}"
+            data-name="account.name"
             bindinput="handleInputChange"
           />
         </view>
@@ -27,13 +27,13 @@
           <picker
             range="{{genderSelect}}"
             range-key="name"
-            value="{{basic.gender}}"
-            data-name="basic.gender"
+            value="{{account.gender}}"
+            data-name="account.gender"
             bindchange="handleInputChange"
           >
             <input
               placeholder="请选择性别"
-              value="{{genderSelect[basic.gender].name}}"
+              value="{{genderSelect[account.gender].name}}"
               disabled
             />
           </picker>
@@ -44,8 +44,8 @@
         <view class="field-content">
           <input
             placeholder="请输入所在行业"
-            value="{{basic.industry}}"
-            data-name="basic.industry"
+            value="{{account.industry}}"
+            data-name="account.industry"
             bindinput="handleInputChange"
           />
         </view>
@@ -56,13 +56,13 @@
           <picker
             class="flex-item"
             mode="date"
-            value="{{basic.birth}}"
-            data-name="basic.birth"
+            value="{{account.birthday}}"
+            data-name="account.birthday"
             bindchange="handleInputChange"
           >
             <input
               placeholder="请选择出生年月"
-              value="{{basic.birth}}"
+              value="{{account.birthday}}"
               disabled
             />
           </picker>
@@ -74,8 +74,8 @@
         <view class="field-content">
           <input
             placeholder="请输入自我描述"
-            value="{{basic.descr}}"
-            data-name="basic.descr"
+            value="{{account.selfDesc}}"
+            data-name="account.selfDesc"
             bindinput="handleInputChange"
           />
         </view>
@@ -92,8 +92,8 @@
         <view class="field-content">
           <input
             placeholder="请输入定位"
-            value="{{basic.city}}"
-            data-name="basic.city"
+            value="{{account.city}}"
+            data-name="account.city"
             bindinput="handleInputChange"
           />
           <view class="h3 link" bindtap="handleLocation">获取定位</view>
@@ -104,8 +104,8 @@
         <view class="field-content">
           <input
             placeholder="请输入手机号码"
-            value="{{basic.phone}}"
-            data-name="basic.phone"
+            value="{{account.phone}}"
+            data-name="account.phone"
             bindinput="handleInputChange"
           />
         </view>
@@ -115,8 +115,8 @@
         <view class="field-content">
           <input
             placeholder="请输入微信号"
-            value="{{basic.wechat}}"
-            data-name="basic.wechat"
+            value="{{account.wechat}}"
+            data-name="account.wechat"
             bindinput="handleInputChange"
           />
         </view>
@@ -126,8 +126,8 @@
         <view class="field-content">
           <input
             placeholder="请输入邮箱"
-            value="{{basic.email}}"
-            data-name="basic.email"
+            value="{{account.email}}"
+            data-name="account.email"
             bindinput="handleInputChange"
           />
         </view>

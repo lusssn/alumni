@@ -2,7 +2,7 @@
 <import src="../../templates/educationEdit.wxml" />
 <import src="../../templates/workEdit.wxml" />
 <view class="container">
-  <template is="basicEdit" data="{{ genderSelect, basic, isStudent }}" />
+  <template is="basicEdit" data="{{ genderSelect, account, isStudent }}" />
   <template is="educationEdit" data="{{ degreeSelect, education }}" />
   <template wx:if="{{!isStudent}}" is="workEdit" data="{{ work }}" />
   <view class="fix-bottom flex">

@@ -13,11 +13,11 @@ Page({
     isShowAuthModal: false,
     degreeSelect: DEGREE_TYPE,
     genderSelect: GENDER_TYPE,
-    basic: {
-      birth: '1990-01-01',
+    account: {
+      birthday: '1990-01-01',
     },
     education: {
-      background: R.findIndex(R.propEq('name', '本科'))(DEGREE_TYPE),
+      education: R.findIndex(R.propEq('name', '本科'))(DEGREE_TYPE),
     },
     work: {},
     isStudent: true,
@@ -25,20 +25,24 @@ Page({
     options: '', // 完善后跳转的路径参数
   },
   onLoad(option) {
-    const { redirect = 'mine', options, isStudent } = option
+    const { redirect = 'mine', options = '{}', isStudent } = option
     this.setData({
       redirect,
       options: decodeURIComponent(options),
       isStudent: +isStudent,
     })
+
     request.getUserInfo().then(userInfo => {
-      this.setData({
-        basic: {
-          ...this.data.basic,
-          head_url: userInfo.avatarUrl,
-          gender: R.findIndex(R.propEq('id', userInfo.gender))(GENDER_TYPE),
-        },
+      Api.getAccountDetail({
+        openid: userInfo.openId,
       })
+      // this.setData({
+      //   account: {
+      //     ...this.data.account,
+      //     avatar: userInfo.avatarUrl,
+      //     gender: R.findIndex(R.propEq('id', userInfo.gender))(GENDER_TYPE),
+      //   },
+      // })
     }, () => {
       // 未授权，显示授权弹窗
       this.setData({
@@ -51,7 +55,7 @@ Page({
       count: 1,
     }).then(res => {
       this.setData({
-        'basic.head_url': res.tempFilePaths.pop(),
+        'account.avatar': res.tempFilePaths.pop(),
       })
     })
   },
@@ -62,7 +66,7 @@ Page({
         wxUtil.showToast('没有定位到')
         return
       }
-      this.setData({ 'basic.city': res })
+      this.setData({ 'account.city': res })
     }, err => {
       promisify(wx.showModal)({
         title: '错误提示',
@@ -87,25 +91,29 @@ Page({
     wxUtil.navigateTo(redirect, JSON.parse(options), true)
   },
   handleSave() {
-    let { basic, education, work, isStudent } = this.data
+    let { account, education, work, isStudent } = this.data
+    if (work) {
+      console.log(work)
+      return
+    }
     // 处理gender
-    const gender = GENDER_TYPE[basic.gender] || {}
-    basic = R.assoc('gender', gender.id || 0, basic)
+    const gender = GENDER_TYPE[account.gender] || {}
+    account = R.assoc('gender', gender.id || 0, account)
 
     // 处理degree
-    const degree = DEGREE_TYPE[education.background] || {}
-    education = R.assoc('background', degree.name || 0, education)
+    const degree = DEGREE_TYPE[education.education] || {}
+    education = R.assoc('education', degree.name || 0, education)
 
     // 必填项判断
-    basic = this.checkParams(BASIC_FIELD, basic)
-    if (!basic) return
+    account = this.checkParams(BASIC_FIELD, account)
+    if (!account) return
     education = this.checkParams(EDUCATION_FIELD, education)
     if (!education) return
     work = isStudent ? {} : this.checkParams(WORK_FIELD, work)
     if (!work) return
 
     // 数据格式转换
-    const params = { ...basic }
+    const params = { ...account }
     R.forEachObjIndexed((value, key) => params[`education_${key}`] = value, education)
     R.forEachObjIndexed((value, key) => params[`work_${key}`] = value, work)
     // 提交数据
@@ -158,8 +166,8 @@ Page({
         return
       }
       this.setData({
-        basic: {
-          head_url: userInfo.avatarUrl,
+        account: {
+          avatar: userInfo.avatarUrl,
           gender: R.findIndex(R.propEq('id', userInfo.gender))(GENDER_TYPE),
         },
       })

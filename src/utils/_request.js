@@ -45,7 +45,7 @@ const getUserInfo = () => {
 }
 
 const _request = (url, params = {}, others = {}) => {
-  const _url = `${regHttp.test(url) ? '' : server.service.baseUrl}${url}`
+  const _url = `${regHttp.test(url) ? '' : server.service.host}${url}`
   return promisify(qcloud.request)({
     url: _url,
     data: params,
@@ -70,47 +70,35 @@ const _request = (url, params = {}, others = {}) => {
   })
 }
 
-const _authRequest = (url, params = {}, others = {}) => {
-  return getUserInfo().then(({ openId }) => {
-    return _request(url, { openid: openId, ...params }, others)
-  }).catch(err => {
-    return Promise.reject(err)
+const get = (url, params = {}, custom = {}) => {
+  return _request(url, params, {
+    method: 'GET',
+    ...custom,
   })
 }
 
-const get = (url, params = {}, custom = {}) => {
-  const { noAuth, ..._others } = custom
-  if (noAuth) {
-    return _request(url, params, _others)
-  }
-  return _authRequest(url, params, _others)
-}
-
 const post = (url, params = {}, custom = {}) => {
-  const { header = {}, noAuth, ...others } = custom
-  const _others = {
+  const { header = {}, ...others } = custom
+  return _request(url, params, {
     method: 'POST',
     header: {
       'content-type': 'application/x-www-form-urlencoded',
       ...header,
     },
     ...others,
-  }
-  if (noAuth) {
-    return _request(url, params, _others)
-  }
-  return _authRequest(url, params, _others)
+  })
 }
 
 const getLocation = () => {
   return promisify(wx.getLocation)({
     type: 'wgs84',
   }).then(({ latitude, longitude }) => {
-    const _url = `${server.service.qqMapHost}/ws/geocoder/v1/`
-    return get(_url, {
+    const url = `${server.service.qqMapHost}/ws/geocoder/v1/`
+    const params = {
       location: `${latitude},${longitude}`,
       key: server.qqMapKey,
-    }, { noAuth: true }).then((res) => {
+    }
+    return get(url, params).then((res) => {
       const { address_component: address } = res.result
       return address.city || address.province || address.nation
     }, (err) => {

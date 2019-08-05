@@ -2,6 +2,7 @@ import { GENDER_TYPE } from '../../macros'
 import * as R from '../../utils/ramda/index'
 import request from '../../utils/request'
 import wxUtil from '../../utils/wxUtil'
+import * as Api from '../api'
 import { isComplete } from '../../utils/util'
 
 Page({
@@ -51,7 +52,6 @@ Page({
     })
   },
   handleNext() {
-    // TODO 注册接口
     const { redirect, options, basic } = this.data
     if (!basic.name.trim()) {
       wxUtil.showToast('请填写姓名')
@@ -61,12 +61,19 @@ Page({
       wxUtil.showToast('请选择身份')
       return
     }
-    console.log(basic)
-    // wxUtil.navigateTo('complete', {
-    //   redirect,
-    //   options,
-    //   isStudent: !basic.type,
-    // }, true)
+    Api.createAccount(basic).then(
+      () => {
+        console.log(11)
+        wxUtil.navigateTo('complete', {
+          redirect,
+          options,
+          isStudent: !basic.type,
+        }, true)
+      },
+      () => {
+        console.log(22)
+      },
+    )
   },
   initBasic(userInfo) {
     console.log('openId', userInfo.openId)

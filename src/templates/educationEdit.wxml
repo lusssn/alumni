@@ -25,13 +25,13 @@
           <picker
             range="{{degreeSelect}}"
             range-key="name"
-            value="{{education.background}}"
-            data-name="education.background"
+            value="{{education.education}}"
+            data-name="education.education"
             bindchange="handleInputChange"
           >
             <input
               placeholder="请选择学历"
-              value="{{degreeSelect[education.background].name}}"
+              value="{{degreeSelect[education.education].name}}"
               disabled
             />
           </picker>
@@ -42,8 +42,8 @@
         <view class="field-content">
           <input
             placeholder="请输入院系"
-            value="{{education.department}}"
-            data-name="education.department"
+            value="{{education.college}}"
+            data-name="education.college"
             bindinput="handleInputChange"
           />
         </view>
@@ -55,13 +55,13 @@
             class="flex-item"
             mode="date"
             fields="year"
-            value="{{education.start_year}}"
-            data-name="education.start_year"
+            value="{{education.startTime}}"
+            data-name="education.startTime"
             bindchange="handleInputChange"
           >
             <input
               placeholder="请选择入学年份"
-              value="{{education.start_year}}"
+              value="{{education.startTime}}"
               disabled
             />
           </picker>
@@ -75,13 +75,13 @@
             class="flex-item"
             mode="date"
             fields="year"
-            value="{{education.end_year}}"
-            data-name="education.end_year"
+            value="{{education.endTime}}"
+            data-name="education.endTime"
             bindchange="handleInputChange"
           >
             <input
               placeholder="请选择毕业时间"
-              value="{{education.end_year}}"
+              value="{{education.endTime}}"
               disabled
             />
           </picker>
