@@ -1,9 +1,9 @@
 import { GENDER_TYPE } from '../../macros'
 import * as R from '../../utils/ramda/index'
-import request from '../../utils/request'
+import _request from '../../utils/_request'
 import wxUtil from '../../utils/wxUtil'
 import * as Api from '../api'
-import { isComplete } from '../../utils/util'
+import { isComplete, promisify } from '../../utils/util'
 
 Page({
   data: {
@@ -15,7 +15,7 @@ Page({
   },
   onLoad({ redirect = 'mine', options = '{}' }) {
     this.setData({ redirect, options })
-    request.getUserInfo().then(this.initBasic, () => {
+    _request.getUserInfo().then(this.initBasic, () => {
       // 未授权，显示授权弹窗
       this.setData({
         isShowAuthModal: true,
@@ -61,26 +61,40 @@ Page({
       wxUtil.showToast('请选择身份')
       return
     }
-    Api.createAccount(basic).then(
-      () => {
-        console.log(11)
-        wxUtil.navigateTo('complete', {
-          redirect,
-          options,
-          isStudent: !basic.type,
-        }, true)
-      },
-      () => {
-        console.log(22)
-      },
-    )
+    promisify(wx.login)().then(({ code }) => {
+      if (code) {
+        _request.get('/v2/wechat/code2Session', {
+          js_code: code,
+        }).then(
+          res => {
+            Api.createAccount({
+              ...basic,
+              accountId: res.data,
+            }).then(
+              () => {
+                console.log(11)
+                wxUtil.navigateTo('complete', {
+                  redirect,
+                  options,
+                  isStudent: !basic.type,
+                }, true)
+              },
+              () => {
+                console.log(22)
+              },
+            )
+          },
+          () => {},
+        )
+      } else {
+        console.log('in login has no code')
+      }
+    })
   },
   initBasic(userInfo) {
-    console.log('openId', userInfo.openId)
     this.setData({
       basic: {
         name: '',
-        openid: userInfo.openId,
         avatar: userInfo.avatarUrl,
         gender: R.findIndex(R.propEq('id', userInfo.gender), GENDER_TYPE),
         type: -1,

@@ -1,4 +1,3 @@
-const qcloud = require('../vendor/wafer2-client-sdk/index')
 import server from '../server'
 import { promisify } from './util'
 import * as Error from '../error'
@@ -12,41 +11,46 @@ const getUserInfo = () => {
   if (userInfo) {
     return Promise.resolve(userInfo)
   }
-  const session = qcloud.Session.get()
-  if (session) {
-    // 如果有session，则使用code登录
-    return promisify(qcloud.loginWithCode)()
-      .then(res => {
-        // 将个人信息存储到global
-        app.setConfig({ userInfo: res })
-        return res
-      })
-  } else {
-    // 无session情况下的登录
-    // 需要先判断是否授权
-    return promisify(wx.getSetting)()
-      .then(
-        ({ authSetting }) => {
-          if (authSetting['scope.userInfo']) {
-            // 进行登录
-            return promisify(qcloud.login)()
-              .then(res => {
-                // 将个人信息存储到global
-                app.setConfig({ userInfo: res })
-                return res
-              })
-          }
-          return Promise.reject(Error.UNAUTHORIZED)
-        }, () => {
-          return Promise.reject(Error.AUTH_FAILED)
-        },
-      )
-  }
+  return promisify(wx.login)().then(
+    ({ code }) => {
+      if (code) {
+        return get('/v2/wechat/code2Session', {
+          js_code: code,
+        }).then(
+          res => {
+            // 需要先判断是否授权
+            return promisify(wx.getSetting)().then(
+              ({ authSetting }) => {
+                if (authSetting['scope.userInfo']) {
+                  return promisify(wx.getUserInfo)().then(
+                    ({ userInfo }) => {
+                      // 将个人信息存储到global
+                      const userInfoTemp = {
+                        ...userInfo,
+                        accountId: res.data,
+                      }
+                      app.setConfig({ userInfo: userInfoTemp })
+                      return userInfoTemp
+                    },
+                    () => Promise.reject(Error.AUTH_FAILED),
+                  )
+                }
+                return Promise.reject(Error.UNAUTHORIZED)
+              },
+              () => Promise.reject(Error.AUTH_FAILED),
+            )
+          },
+          () => Promise.reject(Error.RESPONSE_ERROR),
+        )
+      }
+    },
+    () => Promise.reject(Error.LOGIN_FAILED),
+  )
 }
 
 const _request = (url, params = {}, others = {}) => {
   const _url = `${regHttp.test(url) ? '' : server.service.host}${url}`
-  return promisify(qcloud.request)({
+  return promisify(wx.request)({
     url: _url,
     data: params,
     ...others,
@@ -78,14 +82,9 @@ const get = (url, params = {}, custom = {}) => {
 }
 
 const post = (url, params = {}, custom = {}) => {
-  const { header = {}, ...others } = custom
   return _request(url, params, {
     method: 'POST',
-    header: {
-      'content-type': 'application/x-www-form-urlencoded',
-      ...header,
-    },
-    ...others,
+    ...custom,
   })
 }
 

@@ -93,4 +93,4 @@ export const createAccount = params =>
   _request.post('/v2/account/create', params)
 
 export const getAccountDetail = params =>
-  _request.post('/v2/account', params)
+  _request.get('/v2/account', params)

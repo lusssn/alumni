@@ -1,7 +1,7 @@
 import * as R from '../../utils/ramda/index'
 import * as Api from '../api'
 import { promisify, isComplete } from '../../utils/util'
-import request from '../../utils/request'
+import _request from '../../utils/_request'
 import wxUtil from '../../utils/wxUtil'
 import {
   DEGREE_TYPE, GENDER_TYPE,
@@ -32,9 +32,9 @@ Page({
       isStudent: +isStudent,
     })
 
-    request.getUserInfo().then(userInfo => {
+    _request.getUserInfo().then(userInfo => {
       Api.getAccountDetail({
-        openid: userInfo.openId,
+        accountId: userInfo.accountId,
       })
       // this.setData({
       //   account: {
@@ -45,9 +45,9 @@ Page({
       // })
     }, () => {
       // 未授权，显示授权弹窗
-      this.setData({
-        isShowAuthModal: true,
-      })
+      // this.setData({
+      //   isShowAuthModal: true,
+      // })
     })
   },
   handleClickAvatar() {
@@ -61,7 +61,7 @@ Page({
   },
   // 定位
   handleLocation() {
-    request.getLocation().then(res => {
+    _request.getLocation().then(res => {
       if (!res) {
         wxUtil.showToast('没有定位到')
         return

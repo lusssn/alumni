@@ -25,7 +25,9 @@ import wxUtil from './wxUtil'
 export const isComplete = () => {
   // 是否授权
   // 获取基本信息，判断信息是否完善
-  return Api.getAllInfo().then(data => {
+  return Api.getAccountDetail({
+    accountId: getApp().global.accountId,
+  }).then(data => {
     const { base, personal, education } = data
     if (R.isEmpty(base) || R.isEmpty(personal) || R.isEmpty(education)) {
       return false
