@@ -5,11 +5,11 @@ import * as Error from '../error'
 const app = getApp()
 const regHttp = /^(http[s]{0,1}:\/\/)/
 
-const getUserInfo = () => {
+const login = () => {
   // 优先从global中读取数据
-  const { userInfo } = app.global
-  if (userInfo) {
-    return Promise.resolve(userInfo)
+  const { accountId } = app.global
+  if (accountId) {
+    return Promise.resolve(accountId)
   }
   return promisify(wx.login)().then(
     ({ code }) => {
@@ -18,6 +18,31 @@ const getUserInfo = () => {
           js_code: code,
         }).then(
           res => {
+            app.setConfig({ accountId: res.data })
+            return Promise.resolve(res.data)
+          },
+          () => Promise.reject(Error.RESPONSE_ERROR),
+        )
+      }
+    },
+    () => Promise.reject(Error.LOGIN_FAILED),
+  )
+}
+
+const getUserInfo = () => {
+  // 优先从global中读取数据
+  const { userInfo, accountId } = app.global
+  if (userInfo) {
+    return Promise.resolve({ userInfo, accountId })
+  }
+  return promisify(wx.login)().then(
+    ({ code }) => {
+      if (code) {
+        return get('/v2/wechat/code2Session', {
+          js_code: code,
+        }).then(
+          res => {
+            app.setConfig({ accountId: res.data })
             // 需要先判断是否授权
             return promisify(wx.getSetting)().then(
               ({ authSetting }) => {
@@ -25,12 +50,8 @@ const getUserInfo = () => {
                   return promisify(wx.getUserInfo)().then(
                     ({ userInfo }) => {
                       // 将个人信息存储到global
-                      const userInfoTemp = {
-                        ...userInfo,
-                        accountId: res.data,
-                      }
-                      app.setConfig({ userInfo: userInfoTemp })
-                      return userInfoTemp
+                      app.setConfig({ userInfo })
+                      return { userInfo, accountId: res.data }
                     },
                     () => Promise.reject(Error.AUTH_FAILED),
                   )
@@ -109,6 +130,7 @@ const getLocation = () => {
 }
 
 export default {
+  login,
   getLocation,
   getUserInfo,
   get,

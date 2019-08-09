@@ -6,13 +6,13 @@
   <view class="field">
     <label class="field-label">职业名称：</label>
     <view class="field-content">
-      <text>{{data.job}}</text>
+      <text>{{data.position}}</text>
     </view>
   </view>
-  <view wx:if="{{data.start_year || data.end_year}}" class="field">
+  <view wx:if="{{data.startTime || data.endTime}}" class="field">
     <label class="field-label">入职／离职：</label>
     <view class="field-content">
-      {{data.start_year || '未填写'}}／{{data.end_year || '未填写'}}
+      {{data.startTime || '未填写'}}／{{data.endTime || '未填写'}}
     </view>
   </view>
 </view>

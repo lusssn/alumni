@@ -27,8 +27,8 @@ export const getBasicInfo = () =>
   request.get('/query/getbase').then(res => res.data)
 
 // 我的-获取名片教育信息
-export const getEducationInfo = () =>
-  request.get('/query/geteducation').then(res => res.data)
+export const getEducationInfo = params =>
+  _request.get('/v2/education', params).then(res => res.data)
 
 // 我的-获取名片工作信息
 export const getWorkInfo = () =>
@@ -50,11 +50,11 @@ export const saveCardInfo = params =>
 
 // 编辑-保存基本信息
 export const saveBasic = params =>
-  request.post('/edit/editbase', params)
+  _request.post('/v2/account', params)
 
 // 编辑-保存教育信息
 export const saveEducation = params =>
-  request.post('/edit/editeducation', params)
+  _request.post('/v2/education', params)
 
 // 编辑-删除教育信息
 export const removeEducation = params =>
@@ -62,7 +62,7 @@ export const removeEducation = params =>
 
 // 编辑-保存工作信息
 export const saveWork = params =>
-  request.post('/edit/editwork', params)
+  _request.post('/v2/job', params)
 
 // 编辑-删除工作信息
 export const removeWork = params =>
@@ -92,5 +92,8 @@ export const getToken = params =>
 export const createAccount = params =>
   _request.post('/v2/account/create', params)
 
-export const getAccountDetail = params =>
-  _request.get('/v2/account', params)
+export const getAccountAll = params =>
+  _request.get('/v2/accountAll', params).then(res => res.data)
+
+export const getAccount = params =>
+  _request.get('/v2/account', params).then(res => res.data)

@@ -1,18 +1,21 @@
 <view class="card-block padding-t-sm padding-b-sm{{border ? ' border-b' : ''}}">
   <view class="field">
     <label class="field-label">学历：</label>
-    <view class="field-content">{{data.background}}</view>
+    <view class="field-content">{{data.education}}</view>
   </view>
   <view class="field">
     <label class="field-label">院系：</label>
     <view class="text-strong">
-      <text>{{data.school}}<text wx:if="{{data.department}}">－{{data.department}}</text></text>
+      <text class="flex flex-align-center">
+        <text>{{data.school}}</text>
+        <text wx:if="{{data.college}}">－{{data.college}}</text>
+      </text>
     </view>
   </view>
-  <view wx:if="{{data.start_year || data.end_year}}" class="field">
+  <view wx:if="{{data.startTime || data.endTime}}" class="field">
     <label class="field-label">入学／毕业：</label>
     <view class="field-content">
-      {{data.start_year || '未填写'}}／{{data.end_year || '未填写'}}
+      {{data.startTime || '未填写'}}／{{data.endTime || '未填写'}}
     </view>
   </view>
 </view>

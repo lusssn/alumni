@@ -32,22 +32,28 @@ Page({
       isStudent: +isStudent,
     })
 
-    _request.getUserInfo().then(userInfo => {
-      Api.getAccountDetail({
-        accountId: userInfo.accountId,
-      })
-      // this.setData({
-      //   account: {
-      //     ...this.data.account,
-      //     avatar: userInfo.avatarUrl,
-      //     gender: R.findIndex(R.propEq('id', userInfo.gender))(GENDER_TYPE),
-      //   },
-      // })
-    }, () => {
+    _request.getUserInfo().then(({ accountId, userInfo }) => {
+      console.log(accountId, userInfo)
+      Api.getAccountAll({
+        accountId: accountId,
+      }).then(
+        res => {
+          this.setData({ account: res.account })
+          // this.setData({
+          //   account: {
+          //     ...this.data.account,
+          //     avatar: userInfo.avatarUrl,
+          //     gender: R.findIndex(R.propEq('id', userInfo.gender))(GENDER_TYPE),
+          //   },
+          // })
+        },
+        () => {},
+      )
+    }, e => {
       // 未授权，显示授权弹窗
-      // this.setData({
-      //   isShowAuthModal: true,
-      // })
+      this.setData({
+        isShowAuthModal: true,
+      })
     })
   },
   handleClickAvatar() {

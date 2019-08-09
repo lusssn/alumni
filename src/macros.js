@@ -25,10 +25,11 @@ export const CONTACT_TYPE = [
 
 // 个人信息配置
 export const BASIC_FIELD = [
-  { name: '真实姓名', prop: 'real_name', isMust: true },
-  { name: '性别', prop: 'real_name', isMust: true },
-  { name: '出生年月', prop: 'birth', defaultValue: '' },
-  { name: '自我描述', prop: 'descr', isMust: true },
+  { name: '姓名', prop: 'name', isMust: true },
+  { name: '性别', prop: 'gender', isMust: true },
+  { name: '所在行业', prop: 'industry', isMust: true },
+  { name: '出生年月', prop: 'birthday', defaultValue: '' },
+  { name: '自我描述', prop: 'selfDesc', defaultValue: '' },
   { name: '定位', prop: 'city', isMust: true },
   { name: '手机号码', prop: 'phone', isMust: true },
   { name: '微信号', prop: 'wechat', defaultValue: '' },
@@ -38,18 +39,18 @@ export const BASIC_FIELD = [
 // 教育信息配置
 export const EDUCATION_FIELD = [
   { name: '学校名称', prop: 'school', isMust: true },
-  { name: '学历', prop: 'background', isMust: true },
-  { name: '院系', prop: 'department', isMust: true },
-  { name: '入学年份', prop: 'start_year', isMust: true },
-  { name: '毕业时间', prop: 'end_year', isMust: true },
+  { name: '学历', prop: 'education', isMust: true },
+  { name: '院系', prop: 'college', isMust: true },
+  { name: '入学年份', prop: 'startTime', isMust: true },
+  { name: '毕业时间', prop: 'endTime', isMust: true },
 ]
 
 // 工作信息配置
 export const WORK_FIELD = [
   { name: '公司名称', prop: 'company', isMust: true },
-  { name: '职位名称', prop: 'job', isMust: true },
-  { name: '入职时间', prop: 'start_year', defaultValue: '' },
-  { name: '离职时间', prop: 'end_year', defaultValue: '' },
+  { name: '职位名称', prop: 'position', isMust: true },
+  { name: '入职时间', prop: 'startTime', defaultValue: '' },
+  { name: '离职时间', prop: 'endTime', defaultValue: '' },
 ]
 
 
@@ -91,4 +92,3 @@ export const DEPARTMENT_TYPE = [
 
 ]
 
-    

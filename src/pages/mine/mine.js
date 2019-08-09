@@ -1,12 +1,13 @@
 import wxUtil from '../../utils/wxUtil'
 import * as Api from '../api'
+import _request from '../../utils/_request'
 
 Page({
   data: {
     isLoaded: false,
-    basic: {},
+    account: {},
     educations: [],
-    works: [],
+    jobs: [],
   },
   onLoad() {
     this.loadAllInfo()
@@ -23,57 +24,60 @@ Page({
     })
   },
   onShareAppMessage() {
-    const { basic } = this.data
+    const { account } = this.data
     return {
-      title: `${basic.real_name}的SEU校友名片`,
-      path: `/pages/detail/detail?id=${basic.openid}&isShare=1`,
+      title: `${account.real_name}的SEU校友名片`,
+      path: `/pages/detail/detail?id=${account.openid}&isShare=1`,
     }
   },
   handleBasicEdit() {
-    wxUtil.navigateTo('edit', { type: 'basic' })
+    wxUtil.navigateTo('edit', { type: 'account' })
   },
   handleShare() {},
   handleAbout() {
     wxUtil.navigateTo('about')
   },
   handleEducationAdd(e) {
-    const { num } = e.currentTarget.dataset
-    if (num) {
+    const { id } = e.target.dataset
+    if (id) {
       wxUtil.navigateTo('edit', {
-        type: 'education',
-        id: num,
+        type: 'education', id,
       })
       return
     }
     wxUtil.navigateTo('edit', { type: 'education' })
   },
   handleWorkAdd(e) {
-    const { num } = e.currentTarget.dataset
+    const { num } = e.target.dataset
     if (num) {
       wxUtil.navigateTo('edit', {
-        type: 'work',
+        type: 'job',
         id: num,
       })
       return
     }
-    wxUtil.navigateTo('edit', { type: 'work' })
+    wxUtil.navigateTo('edit', { type: 'job' })
   },
   loadAllInfo() {
-    return Api.getAllInfo().then(data => {
-      const { base, personal, education, work } = data
-      this.setData({
-        isLoaded: true,
-        basic: { ...base[0], ...personal[0] },
-        educations: education,
-        works: work,
-      })
-    }, () => {})
+    return _request.login().then(
+      accountId => {
+        return Api.getAccountAll({ accountId }).then(
+          data => {
+            this.setData({
+              isLoaded: true,
+              ...data,
+            })
+          },
+          () => {},
+        )
+      },
+    )
   },
   updateBasic() {
     Api.getBasicInfo().then(data => {
       const { base, personal } = data
       this.setData({
-        basic: { ...base[0], ...personal[0] },
+        account: { ...base[0], ...personal[0] },
       })
     }, () => {})
   },
@@ -84,7 +88,7 @@ Page({
   },
   updateWork() {
     Api.getWorkInfo().then(data => {
-      this.setData({ works: data })
+      this.setData({ jobs: data })
     }, () => {})
   },
 })

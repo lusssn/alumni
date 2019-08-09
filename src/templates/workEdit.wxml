@@ -9,8 +9,8 @@
         <view class="field-content">
           <input
             placeholder="请输入公司名称"
-            value="{{work.company}}"
-            data-name="work.company"
+            value="{{job.company}}"
+            data-name="job.company"
             bindinput="handleInputChange"
           />
         </view>
@@ -20,8 +20,8 @@
         <view class="field-content">
           <input
             placeholder="请输入职位名称"
-            value="{{work.position}}"
-            data-name="work.position"
+            value="{{job.position}}"
+            data-name="job.position"
             bindinput="handleInputChange"
           />
         </view>
@@ -33,13 +33,13 @@
             class="flex-item"
             mode="date"
             fields="year"
-            value="{{work.startTime}}"
-            data-name="work.startTime"
+            value="{{job.startTime}}"
+            data-name="job.startTime"
             bindchange="handleInputChange"
           >
             <input
               placeholder="请选择入职时间"
-              value="{{work.startTime}}"
+              value="{{job.startTime}}"
               disabled
             />
           </picker>
@@ -53,13 +53,13 @@
             class="flex-item"
             mode="date"
             fields="year"
-            value="{{work.endTime}}"
-            data-name="work.endTime"
+            value="{{job.endTime}}"
+            data-name="job.endTime"
             bindchange="handleInputChange"
           >
             <input
               placeholder="请选择离职时间"
-              value="{{work.endTime}}"
+              value="{{job.endTime}}"
               disabled
             />
           </picker>

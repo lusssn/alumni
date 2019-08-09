@@ -1,7 +1,7 @@
 import * as R from '../../utils/ramda/index'
 import * as Api from '../api'
 import { promisify } from '../../utils/util'
-import request from '../../utils/request'
+import _request from '../../utils/_request'
 import wxUtil from '../../utils/wxUtil'
 import {
   GENDER_TYPE, DEGREE_TYPE,
@@ -9,10 +9,12 @@ import {
 } from '../../macros'
 
 const EDIT_TYPE = [
-  { type: 'basic', title: '编辑基本信息' },
+  { type: 'account', title: '编辑基本信息' },
   { type: 'education', title: '添加教育经历' },
-  { type: 'work', title: '添加工作经历' },
+  { type: 'job', title: '添加工作经历' },
 ]
+
+const app = getApp()
 
 Page({
   data: {
@@ -20,11 +22,11 @@ Page({
     id: null, // 若不为null，表示为编辑状态
     degreeSelect: DEGREE_TYPE,
     genderSelect: GENDER_TYPE,
-    basic: {},
+    account: {},
     education: {
-      background: R.findIndex(R.propEq('name', '本科'))(DEGREE_TYPE),
+      education: R.findIndex(R.propEq('name', '本科'))(DEGREE_TYPE),
     },
-    work: {},
+    job: {},
   },
   onLoad({ type, id = null }) {
     // 动态设置页面标题
@@ -33,13 +35,15 @@ Page({
       title: editType.title,
     })
     // 判断修改类型，加载对应数据
-    if (type === 'basic') {
-      this.loadBasic()
-    } else if (type === 'education' && id) {
-      this.loadEducation(id)
-    } else if (type === 'work' && id) {
-      this.loadWork(id)
-    }
+    _request.login().then(() => {
+      if (type === 'account') {
+        this.loadBasic()
+      } else if (type === 'education' && id) {
+        this.loadEducation(id)
+      } else if (type === 'job' && id) {
+        this.loadWork(id)
+      }
+    })
     this.setData({ type, id })
   },
   // 点击头像
@@ -48,14 +52,14 @@ Page({
       count: 1,
     }).then(res => {
       this.setData({
-        'basic.head_url': res.tempFilePaths.pop(),
+        'account.avatar': res.tempFilePaths.pop(),
       })
     })
   },
   // 定位
   handleLocation() {
-    request.getLocation().then(res => {
-      this.setData({ 'basic.city': res })
+    _request.getLocation().then(res => {
+      this.setData({ 'account.city': res })
     }, err => wxUtil.showToast(err.errMsg))
   },
   handleInputChange(e) {
@@ -78,13 +82,13 @@ Page({
       let next = null
       if (type === 'education') {
         next = Api.removeEducation({ num: id })
-      } else if (type === 'work') {
+      } else if (type === 'job') {
         next = Api.removeWork({ num: id })
       }
       next.then(() => {
         const app = getApp()
         type === 'education' && app.setNotice('editedEducation', true)
-        type === 'work' && app.setNotice('editedWork', true)
+        type === 'job' && app.setNotice('editedWork', true)
         wxUtil.showToast('删除成功', 'success').then(() => {
           wx.navigateBack()
         })
@@ -97,36 +101,33 @@ Page({
     const { type } = this.data
     let params = R.clone(this.data[type])
     let next = null
-    if (type === 'basic') {
-      // 处理gender
-      const gender = GENDER_TYPE[params.gender] || {}
-      params.gender = gender.id
+    if (type === 'account') {
       // 必填项
       params = this.checkParams(BASIC_FIELD, params)
-      if (!params) return
+      if (R.isEmpty(params)) return
       next = Api.saveBasic(params)
-
     } else if (type === 'education') {
       // 处理degree
-      const degree = DEGREE_TYPE[params.background] || {}
-      params.background = degree.name
+      const degree = DEGREE_TYPE[params.education] || {}
+      params.education = degree.name
       // 必填项
       params = this.checkParams(EDUCATION_FIELD, params)
-      if (!params) return
+      if (R.isEmpty(params)) return
+      params.accountId = app.global.accountId
       next = Api.saveEducation(params)
-
-    } else if (type === 'work') {
+    } else if (type === 'job') {
       // 必填项
       params = this.checkParams(WORK_FIELD, params)
       if (!params) return
+      params.accountId = app.global.accountId
       next = Api.saveWork(params)
     }
     // 发起请求
-    next.then(() => {
+    next && next.then(() => {
       const app = getApp()
-      type === 'basic' && app.setNotice('editedBasic', true)
+      type === 'account' && app.setNotice('editedBasic', true)
       type === 'education' && app.setNotice('editedEducation', true)
-      type === 'work' && app.setNotice('editedWork', true)
+      type === 'job' && app.setNotice('editedWork', true)
       wxUtil.showToast('保存成功', 'success').then(() => {
         wx.navigateBack()
       })
@@ -139,7 +140,7 @@ Page({
     for (let field of checkList) {
       if (field.isMust && !_params[field.prop]) {
         wxUtil.showToast(`${field.name}必填`)
-        return false
+        return {}
       }
       if (!_params[field.prop]) {
         _params[field.prop] = field.defaultValue
@@ -148,32 +149,34 @@ Page({
     return _params
   },
   loadBasic() {
-    Api.getBasicInfo().then(data => {
-      const { base, personal } = data
-      const basic = { ...base[0], ...personal[0] }
-      // 处理性别
-      basic.gender = R.findIndex(
-        R.propEq('id', Number(basic.gender)),
-      )(GENDER_TYPE)
-      this.setData({ basic })
+    const { accountId } = app.global
+    Api.getAccount({ accountId }).then(data => {
+      this.setData({
+        account: R.assoc('gender', Number(data.gender), data),
+      })
     }, () => {})
   },
   loadEducation(id) {
-    Api.getEducationInfo().then(data => {
-      // 找到id对应项
-      const education = R.find(R.propEq('num', id))(data) || {}
+    const { accountId } = app.global
+    Api.getEducationInfo({
+      accountId,
+      educationId: id,
+    }).then(data => {
       // 处理学历
-      education.background = R.findIndex(
-        R.propEq('name', education.background),
+      const index = R.findIndex(
+        R.propEq('name', data.education),
       )(DEGREE_TYPE)
-      this.setData({ education })
+      this.setData({
+        education: R.assoc('education', index, data),
+      })
     }, () => {})
   },
   loadWork(id) {
-    Api.getWorkInfo().then(data => {
+    const { accountId } = app.global
+    Api.getWorkInfo({ accountId }).then(data => {
       // 找到id对应项
-      const work = R.find(R.propEq('num', id))(data) || {}
-      this.setData({ work })
+      const job = R.find(R.propEq('num', id))(data) || {}
+      this.setData({ job })
     }, () => {})
   },
 })

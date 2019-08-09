@@ -2,12 +2,12 @@
   <view class="card">
     <view class="card-block" bindtap="handleShare">
       <view class="flex-align-center padding-t-lg padding-b-lg border-b">
-        <image class="avatar" mode="aspectFill" src="{{basic.head_url}}" />
+        <image class="avatar" mode="aspectFill" src="{{account.avatar}}" />
         <view class="flex-item padding-l-lg">
           <view class="h1 text-strong padding-b-md">
-            <text>{{basic.real_name}}</text>
+            <text>{{account.name}}</text>
           </view>
-          <view>ID: {{basic.id}}</view>
+          <view>ID: {{account.accountId}}</view>
         </view>
         <icon class="icon-ercode" />
         <icon class="icon-arrow-right margin-l-sm" />
@@ -22,7 +22,7 @@
         <text class="h3">编辑</text>
       </view>
     </view>
-    <BasicInfo data="{{basic}}" isFriend />
+    <BasicInfo data="{{account}}" isFriend />
   </view>
   <view class="card">
     <view class="card-header">
@@ -38,7 +38,7 @@
         wx:key="num"
         data="{{item}}"
         border="{{index < educations.length - 1 }}"
-        data-num="{{item.num}}"
+        data-id="{{item.educationId}}"
         bindtap="handleEducationAdd"
       />
     </block>
