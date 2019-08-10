@@ -2,9 +2,7 @@ const qcloud = require('./vendor/wafer2-client-sdk/index')
 import server from './server'
 
 const NOTICE = {
-  editedBasic: Symbol('editedBasic'),
-  editedEducation: Symbol('hasEditEducation'),
-  editedWork: Symbol('editedWork')
+  edited: Symbol('edited'),
 }
 
 App({

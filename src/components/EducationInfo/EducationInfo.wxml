@@ -15,7 +15,7 @@
   <view wx:if="{{data.startTime || data.endTime}}" class="field">
     <label class="field-label">入学／毕业：</label>
     <view class="field-content">
-      {{data.startTime || '未填写'}}／{{data.endTime || '未填写'}}
+      {{data.startTime}}／{{data.endTime}}
     </view>
   </view>
 </view>

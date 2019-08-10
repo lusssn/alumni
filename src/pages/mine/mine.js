@@ -1,6 +1,9 @@
 import wxUtil from '../../utils/wxUtil'
 import * as Api from '../api'
 import _request from '../../utils/_request'
+import moment from '../../utils/moment.min'
+
+const app = getApp()
 
 Page({
   data: {
@@ -13,10 +16,7 @@ Page({
     this.loadAllInfo()
   },
   onShow() {
-    const app = getApp()
-    app.checkNotice('editedBasic', true, this.updateBasic)
-    app.checkNotice('editedEducation', true, this.updateEducation)
-    app.checkNotice('editedWork', true, this.updateWork)
+    app.checkNotice('edited', true, this.loadAllInfo)
   },
   onPullDownRefresh() {
     this.loadAllInfo().then(() => {
@@ -48,11 +48,10 @@ Page({
     wxUtil.navigateTo('edit', { type: 'education' })
   },
   handleWorkAdd(e) {
-    const { num } = e.target.dataset
-    if (num) {
+    const { id } = e.target.dataset
+    if (id) {
       wxUtil.navigateTo('edit', {
-        type: 'job',
-        id: num,
+        type: 'job', id,
       })
       return
     }
@@ -63,6 +62,17 @@ Page({
       accountId => {
         return Api.getAccountAll({ accountId }).then(
           data => {
+            // 处理时间
+            const { birthday } = data.account
+            data.account.birthday = moment(birthday).format('YYYY-MM-DD')
+            for (let item of data.educations) {
+              item.startTime = moment(item.startTime).format('YYYY')
+              item.endTime = moment(item.endTime).format('YYYY')
+            }
+            for (let item of data.jobs) {
+              item.startTime = item.startTime ? moment(item.startTime).format('YYYY') : ''
+              item.endTime = item.endTime ? moment(item.endTime).format('YYYY') : ''
+            }
             this.setData({
               isLoaded: true,
               ...data,
@@ -72,23 +82,5 @@ Page({
         )
       },
     )
-  },
-  updateBasic() {
-    Api.getBasicInfo().then(data => {
-      const { base, personal } = data
-      this.setData({
-        account: { ...base[0], ...personal[0] },
-      })
-    }, () => {})
-  },
-  updateEducation() {
-    Api.getEducationInfo().then(data => {
-      this.setData({ educations: data })
-    }, () => {})
-  },
-  updateWork() {
-    Api.getWorkInfo().then(data => {
-      this.setData({ jobs: data })
-    }, () => {})
   },
 })

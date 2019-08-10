@@ -1,10 +1,11 @@
 import wxUtil from '../../utils/wxUtil'
 import * as R from '../../utils/ramda/index'
+import _request from '../../utils/_request'
 import * as Api from '../api'
 import { CONTACT_TYPE } from '../../macros'
 
 const PAGE_SIZE = 10
-
+const app = getApp()
 Page({
   data: {
     friendList: null, // 初始化为null，方便页面加载动画展示
@@ -14,9 +15,11 @@ Page({
   },
   onLoad() {
     // 加载消息列表数据
-    this.loadNoticeList()
-    // 加载朋友列表数据
-    this.loadFriendList()
+    // this.loadNoticeList()
+    _request.login().then(() => {
+      // 加载朋友列表数据
+      this.loadFriendList()
+    })
   },
   onPullDownRefresh() {
     this.loadFriendList()
@@ -50,10 +53,11 @@ Page({
   loadFriendList(pageNo = 1) {
     // 加载朋友列表数据
     return Api.getFriendList({
+      accountId: app.global.accountId,
       page: pageNo,
       limit: PAGE_SIZE,
     }).then(data => {
-      const { result, count } = data
+      const { list, count } = data
       this.setData({
         friendList: pageNo === 1 ? result : this.data.friendList.concat(result),
         friendPagination: {

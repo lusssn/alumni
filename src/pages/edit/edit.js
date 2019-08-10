@@ -1,3 +1,4 @@
+import moment from '../../utils/moment.min'
 import * as R from '../../utils/ramda/index'
 import * as Api from '../api'
 import { promisify } from '../../utils/util'
@@ -81,14 +82,12 @@ Page({
       const { type, id } = this.data
       let next = null
       if (type === 'education') {
-        next = Api.removeEducation({ num: id })
+        next = Api.removeEducation({ educationId: id })
       } else if (type === 'job') {
-        next = Api.removeWork({ num: id })
+        next = Api.removeWork({ jobId: id })
       }
-      next.then(() => {
-        const app = getApp()
-        type === 'education' && app.setNotice('editedEducation', true)
-        type === 'job' && app.setNotice('editedWork', true)
+      next && next.then(() => {
+        app.setNotice('edited', true)
         wxUtil.showToast('删除成功', 'success').then(() => {
           wx.navigateBack()
         })
@@ -124,10 +123,7 @@ Page({
     }
     // 发起请求
     next && next.then(() => {
-      const app = getApp()
-      type === 'account' && app.setNotice('editedBasic', true)
-      type === 'education' && app.setNotice('editedEducation', true)
-      type === 'job' && app.setNotice('editedWork', true)
+      app.setNotice('edited', true)
       wxUtil.showToast('保存成功', 'success').then(() => {
         wx.navigateBack()
       })
@@ -138,12 +134,17 @@ Page({
   checkParams(checkList, params) {
     const _params = R.clone(params)
     for (let field of checkList) {
-      if (field.isMust && !_params[field.prop]) {
+      const { prop } = field
+      if (field.isMust && !_params[prop]) {
         wxUtil.showToast(`${field.name}必填`)
         return {}
       }
-      if (!_params[field.prop]) {
-        _params[field.prop] = field.defaultValue
+      if (!_params[prop]) {
+        _params[prop] = field.defaultValue
+      }
+      // 处理时间类型的参数
+      if (field.type === 'date') {
+        _params[prop] = moment(_params[prop], field.format).valueOf()
       }
     }
     return _params
@@ -151,8 +152,13 @@ Page({
   loadBasic() {
     const { accountId } = app.global
     Api.getAccount({ accountId }).then(data => {
+      // 处理时间
+      if (data.birthday) {
+        data.birthday = moment(data.birthday).format('YYYY-MM-DD')
+      }
+      data.gender = Number(data.gender)
       this.setData({
-        account: R.assoc('gender', Number(data.gender), data),
+        account: data,
       })
     }, () => {})
   },
@@ -162,21 +168,36 @@ Page({
       accountId,
       educationId: id,
     }).then(data => {
+      // 处理时间
+      if (data.startTime) {
+        data.startTime = moment(data.startTime).format('YYYY')
+      }
+      if (data.endTime) {
+        data.endTime = moment(data.endTime).format('YYYY')
+      }
       // 处理学历
-      const index = R.findIndex(
+      data.education = R.findIndex(
         R.propEq('name', data.education),
       )(DEGREE_TYPE)
       this.setData({
-        education: R.assoc('education', index, data),
+        education: data,
       })
     }, () => {})
   },
   loadWork(id) {
     const { accountId } = app.global
-    Api.getWorkInfo({ accountId }).then(data => {
-      // 找到id对应项
-      const job = R.find(R.propEq('num', id))(data) || {}
-      this.setData({ job })
+    Api.getWorkInfo({
+      accountId,
+      jobId: id,
+    }).then(data => {
+      // 处理时间
+      if (data.startTime) {
+        data.startTime = moment(data.startTime).format('YYYY')
+      }
+      if (data.endTime) {
+        data.endTime = moment(data.endTime).format('YYYY')
+      }
+      this.setData({ job: data })
     }, () => {})
   },
 })

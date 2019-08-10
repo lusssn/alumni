@@ -17,22 +17,13 @@ export const getSearchResult = params =>
     noAuth: true,
   }).then(res => res.data)
 
-
-// 我的-获取所有名片信息
-export const getAllInfo = () =>
-  request.get('/query/getall').then(res => res.data)
-
-// 我的-获取名片基本信息
-export const getBasicInfo = () =>
-  request.get('/query/getbase').then(res => res.data)
-
 // 我的-获取名片教育信息
 export const getEducationInfo = params =>
   _request.get('/v2/education', params).then(res => res.data)
 
 // 我的-获取名片工作信息
-export const getWorkInfo = () =>
-  request.get('/query/getwork').then(res => res.data)
+export const getWorkInfo = params =>
+  _request.get('/v2/job', params).then(res => res.data)
 
 
 // 朋友-获取通知列表
@@ -41,7 +32,7 @@ export const getNoticeList = params =>
 
 // 朋友-获取朋友列表
 export const getFriendList = params =>
-  request.get('/friend/getfriend', params).then(res => res.data)
+  _request.get('/v2/friends', params).then(res => res.data)
 
 
 // 完善-保存名片信息
@@ -58,7 +49,7 @@ export const saveEducation = params =>
 
 // 编辑-删除教育信息
 export const removeEducation = params =>
-  request.post('/edit/deleteeducation', params)
+  _request.del('/v2/education', params)
 
 // 编辑-保存工作信息
 export const saveWork = params =>
@@ -66,7 +57,7 @@ export const saveWork = params =>
 
 // 编辑-删除工作信息
 export const removeWork = params =>
-  request.post('/edit/deletework', params)
+  _request.del('/v2/job', params)
 
 
 // 详情-名片详情
@@ -84,10 +75,6 @@ export const getRefuseFriend = params =>
 // 详情-请求交换名片
 export const getInviteFriend = params =>
   request.get('/friend/invite', params)
-
-//获取token
-export const getToken = params =>
-  request.get('/query/gettoken', params)
 
 export const createAccount = params =>
   _request.post('/v2/account/create', params)

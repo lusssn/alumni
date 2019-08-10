@@ -1,5 +1,4 @@
-import wxUtil from '../../utils/wxUtil'
-import * as Api from '../api'
+import moment from '../../utils/moment.min'
 
 Page({
 
@@ -11,6 +10,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad() {
+    console.log(moment().valueOf())
   },
 
   /**

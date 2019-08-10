@@ -109,6 +109,13 @@ const post = (url, params = {}, custom = {}) => {
   })
 }
 
+const del = (url, params = {}, custom = {}) => {
+  return _request(url, params, {
+    method: 'DELETE',
+    ...custom,
+  })
+}
+
 const getLocation = () => {
   return promisify(wx.getLocation)({
     type: 'wgs84',
@@ -135,4 +142,5 @@ export default {
   getUserInfo,
   get,
   post,
+  del,
 }

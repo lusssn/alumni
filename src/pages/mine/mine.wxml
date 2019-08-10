@@ -35,7 +35,7 @@
     <block wx:if="{{educations.length}}">
       <EducationInfo
         wx:for="{{educations}}"
-        wx:key="num"
+        wx:key="educationId"
         data="{{item}}"
         border="{{index < educations.length - 1 }}"
         data-id="{{item.educationId}}"
@@ -58,13 +58,13 @@
         <text class="h3">添加</text>
       </view>
     </view>
-    <block wx:if="{{works.length}}">
+    <block wx:if="{{jobs.length}}">
       <WorkInfo
-        wx:for="{{works}}"
-        wx:key="num"
+        wx:for="{{jobs}}"
+        wx:key="jobId"
         data="{{item}}"
-        border="{{index < works.length - 1 }}"
-        data-num="{{item.num}}"
+        border="{{index < jobs.length - 1 }}"
+        data-id="{{item.jobId}}"
         bindtap="handleWorkAdd"
       />
     </block>

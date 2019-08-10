@@ -8,6 +8,6 @@ Component({
     },
     isFriend: {
       type: Boolean, value: false,
-    }
+    },
   },
 })
