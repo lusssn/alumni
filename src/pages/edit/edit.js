@@ -1,8 +1,7 @@
 import moment from '../../utils/moment.min'
 import * as R from '../../utils/ramda/index'
 import * as Api from '../api'
-import { promisify } from '../../utils/util'
-import _request from '../../utils/_request'
+import { promisify, checkParams } from '../../utils/util'
 import wxUtil from '../../utils/wxUtil'
 import {
   GENDER_TYPE, DEGREE_TYPE,
@@ -36,7 +35,7 @@ Page({
       title: editType.title,
     })
     // 判断修改类型，加载对应数据
-    _request.login().then(() => {
+    wxUtil.login().then(() => {
       if (type === 'account') {
         this.loadBasic()
       } else if (type === 'education' && id) {
@@ -59,7 +58,7 @@ Page({
   },
   // 定位
   handleLocation() {
-    _request.getLocation().then(res => {
+    wxUtil.getLocation().then(res => {
       this.setData({ 'account.city': res })
     }, err => wxUtil.showToast(err.errMsg))
   },
@@ -102,7 +101,7 @@ Page({
     let next = null
     if (type === 'account') {
       // 必填项
-      params = this.checkParams(BASIC_FIELD, params)
+      params = checkParams(BASIC_FIELD, params)
       if (R.isEmpty(params)) return
       next = Api.saveBasic(params)
     } else if (type === 'education') {
@@ -110,13 +109,13 @@ Page({
       const degree = DEGREE_TYPE[params.education] || {}
       params.education = degree.name
       // 必填项
-      params = this.checkParams(EDUCATION_FIELD, params)
+      params = checkParams(EDUCATION_FIELD, params)
       if (R.isEmpty(params)) return
       params.accountId = app.global.accountId
       next = Api.saveEducation(params)
     } else if (type === 'job') {
       // 必填项
-      params = this.checkParams(WORK_FIELD, params)
+      params = checkParams(WORK_FIELD, params)
       if (!params) return
       params.accountId = app.global.accountId
       next = Api.saveWork(params)
@@ -130,24 +129,6 @@ Page({
     }, () => {
       wxUtil.showToast('保存失败')
     })
-  },
-  checkParams(checkList, params) {
-    const _params = R.clone(params)
-    for (let field of checkList) {
-      const { prop } = field
-      if (field.isMust && !_params[prop]) {
-        wxUtil.showToast(`${field.name}必填`)
-        return {}
-      }
-      if (!_params[prop]) {
-        _params[prop] = field.defaultValue
-      }
-      // 处理时间类型的参数
-      if (field.type === 'date') {
-        _params[prop] = moment(_params[prop], field.format).valueOf()
-      }
-    }
-    return _params
   },
   loadBasic() {
     const { accountId } = app.global
@@ -191,12 +172,8 @@ Page({
       jobId: id,
     }).then(data => {
       // 处理时间
-      if (data.startTime) {
-        data.startTime = moment(data.startTime).format('YYYY')
-      }
-      if (data.endTime) {
-        data.endTime = moment(data.endTime).format('YYYY')
-      }
+      data.startTime = data.startTime ? moment(data.startTime).format('YYYY') : ''
+      data.endTime = data.endTime ? moment(data.endTime).format('YYYY') : ''
       this.setData({ job: data })
     }, () => {})
   },

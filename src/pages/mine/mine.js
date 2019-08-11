@@ -1,6 +1,5 @@
 import wxUtil from '../../utils/wxUtil'
 import * as Api from '../api'
-import _request from '../../utils/_request'
 import moment from '../../utils/moment.min'
 
 const app = getApp()
@@ -58,9 +57,11 @@ Page({
     wxUtil.navigateTo('edit', { type: 'job' })
   },
   loadAllInfo() {
-    return _request.login().then(
-      accountId => {
-        return Api.getAccountAll({ accountId }).then(
+    return wxUtil.login().then(
+      () => {
+        return Api.getAccountAll({
+          accountId: app.global.accountId,
+        }).then(
           data => {
             // 处理时间
             const { birthday } = data.account

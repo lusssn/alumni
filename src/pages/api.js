@@ -1,6 +1,11 @@
 import request from '../utils/request'
 import _request from '../utils/_request'
 
+/*************************************** 注册 ***************************************/
+export const createAccount = params =>
+  _request.post('/v2/account/create', params)
+
+/*************************************** 圈子 ***************************************/
 // 首页-名片广场
 export const getSquareCards = params =>
   request.get('/home/similar', params).then(res => res.data)
@@ -17,6 +22,15 @@ export const getSearchResult = params =>
     noAuth: true,
   }).then(res => res.data)
 
+/*************************************** 我的 ***************************************/
+// 我的-获取名片全部信息
+export const getAccountAll = params =>
+  _request.get('/v2/accountAll', params).then(res => res.data)
+
+// 我的-获取名片信息
+export const getAccount = params =>
+  _request.get('/v2/account', params).then(res => res.data)
+
 // 我的-获取名片教育信息
 export const getEducationInfo = params =>
   _request.get('/v2/education', params).then(res => res.data)
@@ -25,7 +39,7 @@ export const getEducationInfo = params =>
 export const getWorkInfo = params =>
   _request.get('/v2/job', params).then(res => res.data)
 
-
+/*************************************** 朋友 ***************************************/
 // 朋友-获取通知列表
 export const getNoticeList = params =>
   request.get('/friend/getinform', params).then(res => res.data)
@@ -34,11 +48,11 @@ export const getNoticeList = params =>
 export const getFriendList = params =>
   _request.get('/v2/friends', params).then(res => res.data)
 
-
 // 完善-保存名片信息
-export const saveCardInfo = params =>
-  request.post('/edit/editfirst', params)
+export const completeCard = params =>
+  _request.put('/v2/account/complete', params)
 
+/************************************ 编辑、完善 *************************************/
 // 编辑-保存基本信息
 export const saveBasic = params =>
   _request.post('/v2/account', params)
@@ -59,7 +73,7 @@ export const saveWork = params =>
 export const removeWork = params =>
   _request.del('/v2/job', params)
 
-
+/************************************* 名片详情 *************************************/
 // 详情-名片详情
 export const getCardInfo = params =>
   request.get('/card/readcard', params).then(res => res.data)
@@ -75,12 +89,3 @@ export const getRefuseFriend = params =>
 // 详情-请求交换名片
 export const getInviteFriend = params =>
   request.get('/friend/invite', params)
-
-export const createAccount = params =>
-  _request.post('/v2/account/create', params)
-
-export const getAccountAll = params =>
-  _request.get('/v2/accountAll', params).then(res => res.data)
-
-export const getAccount = params =>
-  _request.get('/v2/account', params).then(res => res.data)

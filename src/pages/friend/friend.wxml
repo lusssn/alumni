@@ -23,17 +23,17 @@
     <view wx:elif="{{friendList.length}}" class="card-block">
       <view
         wx:for="{{friendList}}"
-        wx:key="friendid"
+        wx:key="friendAccountId"
         class="flex-align-center padding-t-lg padding-b-lg border-b tap"
-        data-id="{{item.friendid}}"
+        data-id="{{item.friendAccountId}}"
         bindtap="handleClickCard"
       >
-        <image class="avatar" mode="aspectFill" src="{{item.head_url}}" />
+        <image class="avatar" mode="aspectFill" src="{{item.avatar}}" />
         <view class="flex-item padding-l-lg">
           <view class="h1 text-strong padding-b-sm">
-            <text>{{item.real_name}}</text>
+            <text>{{item.name}}</text>
           </view>
-          <view>{{item.company}}－{{item.job}}</view>
+          <view>{{item.company || '暂无公司'}}－{{item.position || '暂无职位'}}</view>
         </view>
         <view class="self-top">
           <icon class="icon-location" />

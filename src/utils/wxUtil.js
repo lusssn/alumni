@@ -1,4 +1,83 @@
 import { promisify } from './util'
+import * as Error from '../error'
+import _request from './_request'
+import server from '../server'
+
+const app = getApp()
+
+const login = () => {
+  // 优先从global中读取数据
+  const { accountId } = app.global
+  if (accountId) {
+    return Promise.resolve(accountId)
+  }
+  return promisify(wx.login)().then(
+    ({ code }) => {
+      if (code) {
+        return _request.get('/v2/wechat/code2Session', {
+          js_code: code,
+        }).then(
+          res => {
+            app.setConfig({ accountId: res.data })
+            return Promise.resolve(res.data)
+          },
+          () => Promise.reject(Error.RESPONSE_ERROR),
+        )
+      }
+    },
+    () => Promise.reject(Error.LOGIN_FAILED),
+  )
+}
+
+const getUserInfo = () => {
+  // 优先从global中读取数据
+  const { userInfo, accountId } = app.global
+  if (userInfo) {
+    return Promise.resolve({ userInfo, accountId })
+  }
+  return login().then(
+    () => {
+      // 需要先判断是否授权
+      return promisify(wx.getSetting)().then(
+        ({ authSetting }) => {
+          if (authSetting['scope.userInfo']) {
+            return promisify(wx.getUserInfo)().then(
+              ({ userInfo }) => {
+                // 将个人信息存储到global
+                app.setConfig({ userInfo })
+                return userInfo
+              },
+              () => Promise.reject(Error.AUTH_FAILED),
+            )
+          }
+          return Promise.reject(Error.UNAUTHORIZED)
+        },
+        () => Promise.reject(Error.AUTH_FAILED),
+      )
+    },
+    err => Promise.reject(err),
+  )
+}
+
+const getLocation = () => {
+  return promisify(wx.getLocation)({
+    type: 'wgs84',
+  }).then(({ latitude, longitude }) => {
+    const url = `${server.service.qqMapHost}/ws/geocoder/v1/`
+    const params = {
+      location: `${latitude},${longitude}`,
+      key: server.qqMapKey,
+    }
+    return _request.get(url, params).then((res) => {
+      const { address_component: address } = res.result
+      return address.city || address.province || address.nation
+    }, (err) => {
+      return Promise.reject(err)
+    })
+  }, err => {
+    return Promise.reject(err.errMsg ? err : Error.LOCATION_FAILED)
+  })
+}
 
 // 需要手动配置tabbar页面列表
 const TABBAR_PAGES = ['index', 'friend', 'mine']
@@ -60,6 +139,9 @@ const showToast = (title = '', icon = 'warning', others) =>
   })
 
 export default {
+  login,
+  getUserInfo,
+  getLocation,
   navigateTo,
   showToast,
 }

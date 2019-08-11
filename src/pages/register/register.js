@@ -1,9 +1,9 @@
 import { GENDER_TYPE } from '../../macros'
 import * as R from '../../utils/ramda/index'
-import _request from '../../utils/_request'
 import wxUtil from '../../utils/wxUtil'
 import * as Api from '../api'
-import { isComplete, promisify } from '../../utils/util'
+
+const app = getApp()
 
 Page({
   data: {
@@ -15,7 +15,7 @@ Page({
   },
   onLoad({ redirect = 'mine', options = '{}' }) {
     this.setData({ redirect, options })
-    _request.getUserInfo().then(this.initBasic, () => {
+    wxUtil.getUserInfo().then(this.initBasic, () => {
       // 未授权，显示授权弹窗
       this.setData({
         isShowAuthModal: true,
@@ -31,7 +31,6 @@ Page({
   handleAuth(e) {
     const { event } = e.detail
     const { userInfo } = event.detail
-    console.log('userInfo', userInfo)
     if (!userInfo) {
       wxUtil.showToast('授权失败请重试')
       return
@@ -48,7 +47,7 @@ Page({
   handleRoleChange(event) {
     const { value } = event.detail
     this.setData({
-      'basic.type': +value
+      'basic.type': +value,
     })
   },
   handleNext() {
@@ -61,35 +60,19 @@ Page({
       wxUtil.showToast('请选择身份')
       return
     }
-    promisify(wx.login)().then(({ code }) => {
-      if (code) {
-        _request.get('/v2/wechat/code2Session', {
-          js_code: code,
-        }).then(
-          res => {
-            Api.createAccount({
-              ...basic,
-              accountId: res.data,
-            }).then(
-              () => {
-                console.log(11)
-                wxUtil.navigateTo('complete', {
-                  redirect,
-                  options,
-                  isStudent: !basic.type,
-                }, true)
-              },
-              () => {
-                console.log(22)
-              },
-            )
-          },
-          () => {},
-        )
-      } else {
-        console.log('in login has no code')
-      }
-    })
+    Api.createAccount({
+      ...basic,
+      accountId: app.global.accountId,
+    }).then(
+      () => {
+        wxUtil.navigateTo('complete', {
+          redirect,
+          options,
+          isStudent: !basic.type,
+        }, true)
+      },
+      () => {},
+    )
   },
   initBasic(userInfo) {
     this.setData({
@@ -100,5 +83,5 @@ Page({
         type: -1,
       },
     })
-  }
+  },
 })

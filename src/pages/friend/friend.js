@@ -1,6 +1,5 @@
 import wxUtil from '../../utils/wxUtil'
 import * as R from '../../utils/ramda/index'
-import _request from '../../utils/_request'
 import * as Api from '../api'
 import { CONTACT_TYPE } from '../../macros'
 
@@ -16,7 +15,7 @@ Page({
   onLoad() {
     // 加载消息列表数据
     // this.loadNoticeList()
-    _request.login().then(() => {
+    wxUtil.login().then(() => {
       // 加载朋友列表数据
       this.loadFriendList()
     })
@@ -54,12 +53,12 @@ Page({
     // 加载朋友列表数据
     return Api.getFriendList({
       accountId: app.global.accountId,
-      page: pageNo,
-      limit: PAGE_SIZE,
+      pageIndex: pageNo,
+      pageSize: PAGE_SIZE,
     }).then(data => {
       const { list, count } = data
       this.setData({
-        friendList: pageNo === 1 ? result : this.data.friendList.concat(result),
+        friendList: pageNo === 1 ? list : this.data.friendList.concat(list),
         friendPagination: {
           current: pageNo,
           total: count,

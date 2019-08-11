@@ -17,20 +17,24 @@ Page({
       return
     }
     // 加载详情数据
-    if (isShare) {
-      isComplete().then(res => {
-        if (res) {
-          this.loadCardInfo(id)
+    wxUtil.login().then(
+      () => {
+        if (isShare) {
+          isComplete().then(res => {
+            if (res) {
+              this.loadCardInfo(id)
+              return
+            }
+            wxUtil.navigateTo('complete', {
+              redirect: 'detail',
+              options: JSON.stringify(this.options),
+            }, 'all')
+          })
           return
         }
-        wxUtil.navigateTo('complete', {
-          redirect: 'detail',
-          options: JSON.stringify(this.options),
-        }, 'all')
-      })
-      return
-    }
-    this.loadCardInfo(id)
+        this.loadCardInfo(id)
+      }
+    )
   },
   onShareAppMessage() {
     const { basic } = this.data

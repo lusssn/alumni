@@ -1,73 +1,8 @@
 import server from '../server'
 import { promisify } from './util'
-import * as Error from '../error'
+import Error from '../error'
 
-const app = getApp()
 const regHttp = /^(http[s]{0,1}:\/\/)/
-
-const login = () => {
-  // 优先从global中读取数据
-  const { accountId } = app.global
-  if (accountId) {
-    return Promise.resolve(accountId)
-  }
-  return promisify(wx.login)().then(
-    ({ code }) => {
-      if (code) {
-        return get('/v2/wechat/code2Session', {
-          js_code: code,
-        }).then(
-          res => {
-            app.setConfig({ accountId: res.data })
-            return Promise.resolve(res.data)
-          },
-          () => Promise.reject(Error.RESPONSE_ERROR),
-        )
-      }
-    },
-    () => Promise.reject(Error.LOGIN_FAILED),
-  )
-}
-
-const getUserInfo = () => {
-  // 优先从global中读取数据
-  const { userInfo, accountId } = app.global
-  if (userInfo) {
-    return Promise.resolve({ userInfo, accountId })
-  }
-  return promisify(wx.login)().then(
-    ({ code }) => {
-      if (code) {
-        return get('/v2/wechat/code2Session', {
-          js_code: code,
-        }).then(
-          res => {
-            app.setConfig({ accountId: res.data })
-            // 需要先判断是否授权
-            return promisify(wx.getSetting)().then(
-              ({ authSetting }) => {
-                if (authSetting['scope.userInfo']) {
-                  return promisify(wx.getUserInfo)().then(
-                    ({ userInfo }) => {
-                      // 将个人信息存储到global
-                      app.setConfig({ userInfo })
-                      return { userInfo, accountId: res.data }
-                    },
-                    () => Promise.reject(Error.AUTH_FAILED),
-                  )
-                }
-                return Promise.reject(Error.UNAUTHORIZED)
-              },
-              () => Promise.reject(Error.AUTH_FAILED),
-            )
-          },
-          () => Promise.reject(Error.RESPONSE_ERROR),
-        )
-      }
-    },
-    () => Promise.reject(Error.LOGIN_FAILED),
-  )
-}
 
 const _request = (url, params = {}, others = {}) => {
   const _url = `${regHttp.test(url) ? '' : server.service.host}${url}`
@@ -116,31 +51,16 @@ const del = (url, params = {}, custom = {}) => {
   })
 }
 
-const getLocation = () => {
-  return promisify(wx.getLocation)({
-    type: 'wgs84',
-  }).then(({ latitude, longitude }) => {
-    const url = `${server.service.qqMapHost}/ws/geocoder/v1/`
-    const params = {
-      location: `${latitude},${longitude}`,
-      key: server.qqMapKey,
-    }
-    return get(url, params).then((res) => {
-      const { address_component: address } = res.result
-      return address.city || address.province || address.nation
-    }, (err) => {
-      return Promise.reject(err)
-    })
-  }, err => {
-    return Promise.reject(err.errMsg ? err : Error.LOCATION_FAILED)
+const put = (url, params = {}, custom = {}) => {
+  return _request(url, params, {
+    method: 'PUT',
+    ...custom,
   })
 }
 
 export default {
-  login,
-  getLocation,
-  getUserInfo,
   get,
   post,
   del,
+  put,
 }
