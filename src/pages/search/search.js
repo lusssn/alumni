@@ -4,11 +4,11 @@ import * as Api from '../api'
 const SEARCH_TYPE = [
   { key: 'name', name: '姓名' },
   { key: 'school', name: '学校' },
-  { key: 'department', name: '学院' },
+  { key: 'college', name: '学院' },
   { key: 'city', name: '城市' },
   { key: 'company', name: '公司' },
-  { key: 'job', name: '职位' },
-  { key: 'descr', name: '自述' },
+  { key: 'position', name: '职位' },
+  { key: 'selfDesc', name: '自述' },
 ]
 
 Page({
@@ -18,18 +18,27 @@ Page({
     content: '',
     result: {},
   },
-  handleSearch(e) {
-    const content = e.detail.value
-    Api.getSearch({ content }).then(data => {
+  handleSearch(event) {
+    const content = event.detail.value
+    Api.getSearch({
+      content,
+      type: '',
+      pageIndex: 1,
+      pageSize: 1,
+    }).then(data => {
+      const result = {}
+      data.forEach(item => {
+        result[item.type] = item.count
+      })
       this.setData({
         content,
-        result: data,
+        result,
         isSearched: true,
       })
     }, () => {})
   },
-  handleSearchDetail(e) {
-    const { way } = e.currentTarget.dataset
+  handleSearchDetail(event) {
+    const { way } = event.currentTarget.dataset
     wxUtil.navigateTo('searchList', {
       content: this.data.content,
       way

@@ -18,7 +18,7 @@ const login = () => {
           js_code: code,
         }).then(
           res => {
-            app.setConfig({ accountId: res.data })
+            app.setConfig({ accountId: Number(res.data) })
             return Promise.resolve(res.data)
           },
           () => Promise.reject(Error.RESPONSE_ERROR),

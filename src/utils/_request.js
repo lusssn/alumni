@@ -1,6 +1,6 @@
 import server from '../server'
 import { promisify } from './util'
-import Error from '../error'
+import * as Error from '../error'
 
 const regHttp = /^(http[s]{0,1}:\/\/)/
 
@@ -17,8 +17,7 @@ const _request = (url, params = {}, others = {}) => {
     return Promise.reject(Error.RESPONSE_ERROR)
   }).then(data => {
     // 特殊说明：qqMap接口返回的status为0时为成功
-    // -1：已注册
-    if (+data.status === 200 || data.status === 0 || data.status === -1) {
+    if (+data.status === 200 || data.status === 0) {
       return data
     }
     return Promise.reject({

@@ -1,7 +1,8 @@
 <import src="../../templates/basicEdit.wxml" />
 <import src="../../templates/educationEdit.wxml" />
 <import src="../../templates/workEdit.wxml" />
-<view class="container">
+
+<view wx:if="{{isLoaded}}" class="container">
   <template is="basicEdit" data="{{ genderSelect, account, isStudent }}" />
   <template is="educationEdit" data="{{ degreeSelect, education }}" />
   <template wx:if="{{!isStudent}}" is="workEdit" data="{{ job }}" />
@@ -20,3 +21,4 @@
     bindok="handleAuth"
   />
 </view>
+<Loading wx:else isFixed />

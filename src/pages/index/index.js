@@ -1,8 +1,8 @@
-import { isComplete } from '../../utils/util'
 import wxUtil from '../../utils/wxUtil'
 import * as Api from '../api'
 
 const PAGE_SIZE = 10
+const app = getApp()
 
 Page({
   data: {
@@ -11,13 +11,11 @@ Page({
     pagination: { current: 1, total: 0 },
   },
   onLoad() {
-    isComplete().then(res => {
-      if (res) {
+    wxUtil.login().then(
+      () => {
         this.loadSquareCards()
-        return
-      }
-      wxUtil.navigateTo('complete', {}, 'all')
-    })
+      },
+    )
   },
   onPullDownRefresh() {
     this.loadSquareCards().then(() => {
@@ -33,8 +31,9 @@ Page({
   },
   loadSquareCards(pageNo = 1) {
     return Api.getSquareCards({
-      limit: PAGE_SIZE,
-      page: pageNo,
+      accountId: app.global.accountId,
+      pageSize: PAGE_SIZE,
+      pageIndex: pageNo,
     }).then(res => {
       const { list, count } = res
       this.setData({

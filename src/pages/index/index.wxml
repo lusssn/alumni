@@ -15,9 +15,9 @@
 
   <BusinessCard
     wx:for="{{list}}"
-    wx:key="openid"
+    wx:key="accountId"
     data="{{item}}"
-    data-id="{{item.openid}}"
+    data-id="{{item.accountId}}"
     bindtap="handleClickCard"
   />
 </view>

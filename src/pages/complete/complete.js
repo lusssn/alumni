@@ -13,6 +13,7 @@ const app = getApp()
 
 Page({
   data: {
+    isLoaded: false,
     degreeSelect: DEGREE_TYPE,
     genderSelect: GENDER_TYPE,
     account: {
@@ -38,6 +39,7 @@ Page({
       () => {
         // 获取用户信息
         Api.getAccountAll({
+          myAccountId: app.global.accountId,
           accountId: app.global.accountId,
         }).then(
           data => {
@@ -58,6 +60,7 @@ Page({
               item.endTime = item.endTime ? moment(item.endTime).format('YYYY') : ''
             }
             this.setData({
+              isLoaded: true,
               account,
               education: educations[0] || {},
               job: jobs[0] || {},

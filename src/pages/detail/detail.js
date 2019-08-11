@@ -2,13 +2,16 @@ import wxUtil from '../../utils/wxUtil'
 import * as R from '../../utils/ramda/index'
 import * as Api from '../api'
 import { CONTACT_TYPE } from '../../macros'
-import { isComplete } from '../../utils/util'
+import { isComplete, promisify } from '../../utils/util'
+import moment from '../../utils/moment.min'
+
+const app = getApp()
 
 Page({
   data: {
-    basic: {},
+    account: {},
     educations: [],
-    works: [],
+    jobs: [],
     status: '',
   },
   onLoad({ id, isShare }) {
@@ -33,79 +36,109 @@ Page({
           return
         }
         this.loadCardInfo(id)
-      }
+      },
     )
   },
   onShareAppMessage() {
-    const { basic } = this.data
+    const { account } = this.data
     return {
-      title: `${basic.real_name}的名片`,
-      path: `/pages/detail/detail?id=${basic.openid}&isShare=1`,
+      title: `${account.name}的名片`,
+      path: `/pages/detail/detail?id=${account.accountId}&isShare=1`,
     }
   },
-  loadCardInfo(cardId) {
-    return Api.getCardInfo({ cardid: cardId }).then(data => {
-      const { personalinfor, personal = [], education, work, state } = data
-      const contactType = R.find(R.propEq('id', +state))(CONTACT_TYPE)
-      this.setData({
-        basic: { ...personalinfor[0], ...personal[0] },
-        educations: education,
-        works: work,
-        status: contactType.key,
-      })
-    }, () => {
-      wxUtil.showToast('获取详情失败')
-    })
+  loadCardInfo(friendAccountId) {
+    return Api.getAccountAll({
+      myAccountId: friendAccountId,
+      accountId: app.global.accountId,
+    }).then(
+      res => {
+        const { relationShip, ...data } = res
+        const contactType = R.find(R.propEq('id', +relationShip))(CONTACT_TYPE)
+        // 处理时间
+        const { birthday } = data.account
+        if (birthday) {
+          data.account.birthday = moment(birthday).format('YYYY-MM-DD')
+        }
+        for (let item of data.educations) {
+          item.startTime = moment(item.startTime).format('YYYY')
+          item.endTime = moment(item.endTime).format('YYYY')
+        }
+        for (let item of data.jobs) {
+          item.startTime = item.startTime ? moment(item.startTime).format('YYYY') : ''
+          item.endTime = item.endTime ? moment(item.endTime).format('YYYY') : ''
+        }
+        this.setData({
+          ...data,
+          status: contactType.key,
+        })
+      },
+      () => {
+        wxUtil.showToast('获取详情失败')
+      },
+    )
   },
   handleAccept() {
-    const { openid } = this.data.basic
-    Api.getAcceptFriend({ friendid: openid }).then(() => {
+    const { accountId } = this.data.account
+    Api.getAcceptFriend({
+      A: app.global.accountId,
+      B: accountId,
+    }).then(() => {
       wxUtil.showToast('已同意', 'success')
-      this.loadCardInfo(openid)
+      this.loadCardInfo(accountId)
     }, () => {
       wxUtil.showToast('操作失败')
     })
   },
   handleRefuse() {
-    const { openid } = this.data.basic
-    Api.getRefuseFriend({ friendid: openid }).then(() => {
+    const { accountId } = this.data.account
+    Api.getRefuseFriend({
+      A: app.global.accountId,
+      B: accountId,
+    }).then(() => {
       wxUtil.showToast('已拒绝', 'success')
-      this.loadCardInfo(openid)
+      this.loadCardInfo(accountId)
     }, () => {
       wxUtil.showToast('操作失败')
     })
   },
   handleApplyExchange() {
-    const { openid } = this.data.basic
-    Api.getInviteFriend({ friendid: openid }).then(() => {
+    const { accountId } = this.data.account
+    Api.getInviteFriend({
+      A: app.global.accountId,
+      B: accountId,
+    }).then(() => {
       wxUtil.showToast('申请已发出', 'success')
-      this.loadCardInfo(openid)
+      this.loadCardInfo(accountId)
     }, err => {
       wxUtil.showToast(err.errMsg || '操作失败')
     })
   },
   handleAddWechat() {
-    if(this.data.basic.wechat == ""){
-      wxUtil.showToast('暂未填写微信','warning')
-    }else{
-      wx.setClipboardData({
-        data: this.data.basic.wechat,
-        success() {
-          wxUtil.showToast('复制微信号成功', 'success')
-        },fail(){
-          wxUtil.showToast(err.errMsg || '操作失败')
-        }
-      })
+    const { wechat } = this.data.account
+    if (!wechat) {
+      wxUtil.showToast('暂未填写微信')
+      return
     }
+    promisify(wx.setClipboardData)({
+      data: wechat,
+    }).then(
+      () => {
+        wxUtil.showToast('复制微信号成功', 'success')
+      },
+      () => {
+        wxUtil.showToast('操作失败')
+      },
+    )
   },
   handleAddPhone() {
-    if(this.data.basic.phone == ""){
-      wxUtil.showToast('暂未填写电话','warning')
-    }else{
-      wx.addPhoneContact({
-        firstName: this.data.basic.real_name,//联系人姓名
-        mobilePhoneNumber: this.data.basic.phone,//联系人手机号
-      })
+    const { phone, name } = this.data.account
+    if (!phone) {
+      wxUtil.showToast('暂未填写电话')
+      return
     }
+    wx.addPhoneContact({
+      firstName: name, //联系人姓名
+      mobilePhoneNumber: phone, //联系人手机号
+    })
   },
 })

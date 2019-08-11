@@ -2,8 +2,10 @@ import wxUtil from '../../utils/wxUtil'
 import * as R from '../../utils/ramda/index'
 import * as Api from '../api'
 import { CONTACT_TYPE } from '../../macros'
+import moment from '../../utils/moment.min'
 
 const PAGE_SIZE = 10
+const app = getApp()
 
 Page({
   data: {
@@ -11,7 +13,9 @@ Page({
     pagination: { current: 1, total: 0 },
   },
   onLoad() {
-    this.loadList()
+    wxUtil.login().then(() => {
+      this.loadList()
+    })
   },
   onPullDownRefresh() {
     this.loadList().then(() => {
@@ -28,16 +32,18 @@ Page({
   loadList(pageNo = 1) {
     // 加载消息列表数据
     return Api.getNoticeList({
-      limit: PAGE_SIZE,
-      page: pageNo,
+      accountId: app.global.accountId,
+      pageIndex: pageNo,
+      pageSize: PAGE_SIZE,
     }).then(data => {
-      const { result, count } = data
-      result.forEach(item => {
-        const contactType = R.find(R.propEq('id', +item.state))(CONTACT_TYPE) || {}
+      const { list, count } = data
+      list.forEach(item => {
+        const contactType = R.find(R.propEq('id', +item.status))(CONTACT_TYPE) || {}
         item.status_name = contactType.name
+        item.createTime = moment(item.createTime).format('YYYY-MM-DD')
       })
       this.setData({
-        noticeList: pageNo === 1 ? result : this.data.noticeList.concat(result),
+        noticeList: pageNo === 1 ? list : this.data.noticeList.concat(list),
         pagination: {
           current: pageNo,
           total: count,

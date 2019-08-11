@@ -21,13 +21,14 @@ export const promisify = fn => {
 
 import * as Api from '../pages/api'
 import * as R from './ramda/index'
-import Error from '../error'
+import * as Error from '../error'
 import wxUtil from './wxUtil'
 
 export const isComplete = () => {
   // 是否授权
   // 获取基本信息，判断信息是否完善
   return Api.getAccountAll({
+    myAccountId: getApp().global.accountId,
     accountId: getApp().global.accountId,
   }).then(data => {
     const { base, personal, education } = data

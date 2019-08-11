@@ -2,6 +2,7 @@ import wxUtil from '../../utils/wxUtil'
 import * as R from '../../utils/ramda/index'
 import * as Api from '../api'
 import { CONTACT_TYPE } from '../../macros'
+import moment from '../../utils/moment.min'
 
 const PAGE_SIZE = 10
 const app = getApp()
@@ -13,9 +14,9 @@ Page({
     noticeTotal: 0,
   },
   onLoad() {
-    // 加载消息列表数据
-    // this.loadNoticeList()
     wxUtil.login().then(() => {
+      // 加载消息列表数据
+      this.loadNoticeList()
       // 加载朋友列表数据
       this.loadFriendList()
     })
@@ -35,19 +36,23 @@ Page({
   },
   loadNoticeList() {
     return Api.getNoticeList({
-      page: 1,
-      limit: 3,
+      accountId: app.global.accountId,
+      pageIndex: 1,
+      pageSize: 3,
     }).then(data => {
-      const { result, count } = data
-      result.forEach(item => {
-        const contactType = R.find(R.propEq('id', +item.state))(CONTACT_TYPE) || {}
+      const { list, count } = data
+      list.forEach(item => {
+        const contactType = R.find(R.propEq('id', +item.status))(CONTACT_TYPE) || {}
         item.status_name = contactType.name
+        item.createTime = moment(item.createTime).format('YYYY-MM-DD')
       })
       this.setData({
-        noticeList: result,
+        noticeList: list,
         noticeTotal: count,
       })
-    }, () => {})
+    }, err => {
+      wxUtil.showToast(err.errMsg)
+    })
   },
   loadFriendList(pageNo = 1) {
     // 加载朋友列表数据

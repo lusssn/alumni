@@ -8,13 +8,11 @@ export const createAccount = params =>
 /*************************************** 圈子 ***************************************/
 // 首页-名片广场
 export const getSquareCards = params =>
-  request.get('/home/similar', params).then(res => res.data)
+  _request.get('/v2/recommand', params).then(res => res.data)
 
 // 搜索-搜索列表
 export const getSearch = params =>
-  request.get('/search/searchdirect', params, {
-    noAuth: true,
-  }).then(res => res.data)
+  _request.get('/v2/query', params).then(res => res.data)
 
 // 搜索-搜索结果列表
 export const getSearchResult = params =>
@@ -42,7 +40,7 @@ export const getWorkInfo = params =>
 /*************************************** 朋友 ***************************************/
 // 朋友-获取通知列表
 export const getNoticeList = params =>
-  request.get('/friend/getinform', params).then(res => res.data)
+  _request.get('/v2/message', params).then(res => res.data)
 
 // 朋友-获取朋友列表
 export const getFriendList = params =>
@@ -74,18 +72,14 @@ export const removeWork = params =>
   _request.del('/v2/job', params)
 
 /************************************* 名片详情 *************************************/
-// 详情-名片详情
-export const getCardInfo = params =>
-  request.get('/card/readcard', params).then(res => res.data)
-
 // 详情-同意交换名片
 export const getAcceptFriend = params =>
-  request.get('/friend/accept', params)
+  _request.post('/v2/friend/manage', { action: 1, ...params })
 
 // 详情-拒绝交换名片
 export const getRefuseFriend = params =>
-  request.get('/friend/refuse', params)
+  _request.post('/v2/friend/manage', { action: 0, ...params })
 
 // 详情-请求交换名片
 export const getInviteFriend = params =>
-  request.get('/friend/invite', params)
+  _request.post('/v2/friend/apply', params)

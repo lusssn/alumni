@@ -16,11 +16,11 @@ export const DEGREE_TYPE = [
 // 关系类型
 export const CONTACT_TYPE = [
   { id: 0, name: '陌生人', key: 'STRANGER' },
-  { id: 1, name: '好友', key: 'FRIEND' },
-  { id: 2, name: '请求交换名片', key: 'YES_OR_NO' },
-  { id: 3, name: '已申请交换名片', key: 'SEASSI' },
-  { id: 4, name: '拒绝了您的请求', key: 'BE_REFUSED' },
-  { id: 5, name: '同意了您的请求', key: 'BE_AGREED' },
+  { id: 1, name: '已申请交换名片', key: 'SEASSI' },
+  { id: 2, name: '好友', key: 'FRIEND' },
+  { id: 3, name: '请求交换名片', key: 'YES_OR_NO' },
+  //{ id: 4, name: '拒绝了您的请求', key: 'BE_REFUSED' },
+  //{ id: 5, name: '同意了您的请求', key: 'BE_AGREED' },
 ]
 
 // 个人信息配置

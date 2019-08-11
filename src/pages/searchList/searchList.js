@@ -13,7 +13,7 @@ Page({
     this.setData({
       params: {
         content: decodeURI(content),
-        way,
+        type: way,
       }
     })
     this.loadSearchList()
@@ -26,14 +26,15 @@ Page({
     }
   },
   loadSearchList(pageNo = 1) {
-    Api.getSearchResult({
+    Api.getSearch({
       ...this.data.params,
-      limit: PAGE_SIZE,
-      page: pageNo,
-    }).then(data => {
-      const { content, count } = data
+      pageIndex: pageNo,
+      pageSize: PAGE_SIZE,
+    }).then(res => {
+      const data = res[0] || {}
+      const { list = [], count = 0 } = data
       this.setData({
-        list: pageNo === 1 ? content : this.data.list.concat(content),
+        list: pageNo === 1 ? list : this.data.list.concat(list),
         pagination: {
           current: pageNo,
           total: count,

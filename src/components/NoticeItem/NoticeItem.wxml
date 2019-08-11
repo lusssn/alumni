@@ -1,13 +1,13 @@
 <view class="flex-align-center padding-t-lg padding-b-lg border-b tap">
-  <image class="avatar" mode="aspectFill" src="{{data.head_url}}" />
+  <image class="avatar" mode="aspectFill" src="{{data.avatar}}" />
   <view class="flex-item padding-l-lg">
     <view class="h1 text-strong padding-b-sm">
-      <text>{{data.real_name}}</text>
+      <text>{{data.fromUserName}}</text>
     </view>
     <view>{{data.status_name}}</view>
   </view>
   <view class="self-top">
-    <text class="h6 text-muted">{{data.time}}</text>
+    <text class="h6 text-muted">{{data.createTime}}</text>
   </view>
   <icon class="icon-arrow-right margin-l-lg" />
 </view>
