@@ -1,14 +1,8 @@
-const qcloud = require('./vendor/wafer2-client-sdk/index')
-import server from './server'
-
 const NOTICE = {
   edited: Symbol('edited'),
 }
 
 App({
-  onLaunch() {
-    qcloud.setLoginUrl(server.service.loginUrl)
-  },
   global: {},
   setConfig(conf) {
     Object.assign(this.global, conf)

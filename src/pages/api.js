@@ -1,4 +1,3 @@
-import request from '../utils/request'
 import _request from '../utils/_request'
 
 /*************************************** 注册 ***************************************/
@@ -13,12 +12,6 @@ export const getSquareCards = params =>
 // 搜索-搜索列表
 export const getSearch = params =>
   _request.get('/v2/query', params).then(res => res.data)
-
-// 搜索-搜索结果列表
-export const getSearchResult = params =>
-  request.get('/search/search', params, {
-    noAuth: true,
-  }).then(res => res.data)
 
 /*************************************** 我的 ***************************************/
 // 我的-获取名片全部信息
