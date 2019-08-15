@@ -3,7 +3,7 @@
  */
 const HOST = {
   online: 'https://www.seuclab.cn',
-  dev: 'http://www.seuclab.cn:18080',
+  dev: 'https://www.seuclab.cn',
 }
 
 // 此处主机域名修改成腾讯云解决方案分配的域名

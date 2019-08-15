@@ -1,11 +1,14 @@
 import moment from '../../utils/moment.min'
 import * as R from '../../utils/ramda/index'
 import * as Api from '../api'
-import { promisify, checkParams } from '../../utils/util'
+import { checkParams, promisify } from '../../utils/util'
 import wxUtil from '../../utils/wxUtil'
 import {
-  GENDER_TYPE, DEGREE_TYPE,
-  BASIC_FIELD, EDUCATION_FIELD, WORK_FIELD,
+  BASIC_FIELD,
+  DEGREE_TYPE,
+  EDUCATION_FIELD,
+  GENDER_TYPE,
+  WORK_FIELD,
 } from '../../macros'
 
 const EDIT_TYPE = [
@@ -28,7 +31,7 @@ Page({
     },
     job: {},
   },
-  onLoad({ type, id = null }) {
+  onLoad ({ type, id = null }) {
     // 动态设置页面标题
     const editType = R.find(R.propEq('type', type))(EDIT_TYPE)
     wx.setNavigationBarTitle({
@@ -47,7 +50,7 @@ Page({
     this.setData({ type, id })
   },
   // 点击头像
-  handleClickAvatar() {
+  handleClickAvatar () {
     promisify(wx.chooseImage)({
       count: 1,
     }).then(res => {
@@ -57,18 +60,26 @@ Page({
     })
   },
   // 定位
-  handleLocation() {
+  handleLocation () {
     wxUtil.getLocation().then(res => {
       this.setData({ 'account.city': res })
     }, err => wxUtil.showToast(err.errMsg))
   },
-  handleInputChange(e) {
+  handleInputChange (e) {
     const { name } = e.currentTarget.dataset
+    // if (name === 'account.gender') {
+    //   // 性别取值问题
+    //   this.setData({
+    //     [name]: GENDER_TYPE[e.detail.value].id,
+    //     // [name]: e.detail.value,
+    //   })
+    // }
     this.setData({
+      // [name]: GENDER_TYPE[e.detail.value].id,
       [name]: e.detail.value,
     })
   },
-  handleRemove() {
+  handleRemove () {
     promisify(wx.showModal)({
       title: '提示',
       content: '你确认要删除该条信息吗？',
@@ -95,7 +106,7 @@ Page({
       })
     })
   },
-  handleSave() {
+  handleSave () {
     const { type } = this.data
     let params = R.clone(this.data[type])
     let next = null
@@ -130,7 +141,7 @@ Page({
       wxUtil.showToast('保存失败')
     })
   },
-  loadBasic() {
+  loadBasic () {
     const { accountId } = app.global
     Api.getAccount({ accountId }).then(data => {
       // 处理时间
@@ -143,7 +154,7 @@ Page({
       })
     }, () => {})
   },
-  loadEducation(id) {
+  loadEducation (id) {
     const { accountId } = app.global
     Api.getEducationInfo({
       accountId,
@@ -165,14 +176,16 @@ Page({
       })
     }, () => {})
   },
-  loadWork(id) {
+  loadWork (id) {
     const { accountId } = app.global
     Api.getWorkInfo({
       accountId,
       jobId: id,
     }).then(data => {
       // 处理时间
-      data.startTime = data.startTime ? moment(data.startTime).format('YYYY') : ''
+      data.startTime = data.startTime
+        ? moment(data.startTime).format('YYYY')
+        : ''
       data.endTime = data.endTime ? moment(data.endTime).format('YYYY') : ''
       this.setData({ job: data })
     }, () => {})
