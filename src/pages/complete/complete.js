@@ -118,13 +118,18 @@ Page({
     wxUtil.navigateTo(redirect, JSON.parse(options), true)
   },
   handleSave() {
-    let { account, education, job, isStudent } = this.data
+    const { isStudent } = this.data
+    let account = R.clone(this.data.account)
+    let education = R.clone(this.data.education)
+    let job = R.clone(this.data.job)
+    // 处理性别
+    account.gender = GENDER_TYPE[account.gender].id
     // 处理学历
     const degree = DEGREE_TYPE[education.education] || {}
-    education = R.assoc('education', degree.name, education)
+    education.education = degree.name
     // 处理学院
     const college = COLLEGE_TYPE[education.college] || {}
-    education = R.assoc('college', college.id, education)
+    education.college = college.id
 
     // 必填项判断
     account = checkParams(BASIC_FIELD, account)
@@ -145,6 +150,7 @@ Page({
       educations: [education],
       jobs: [job],
     }).then(() => {
+      app.setConfig({ registered: true })
       wxUtil.showToast('保存成功', 'success').then(() => {
         const { redirect, options } = this.data
         wxUtil.navigateTo(redirect, JSON.parse(options), true)

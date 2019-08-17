@@ -105,6 +105,8 @@ Page({
     let params = R.clone(this.data[type])
     let next = null
     if (type === 'account') {
+      // 处理性别
+      params.gender = GENDER_TYPE[params.gender].id
       // 必填项
       params = checkParams(BASIC_FIELD, params)
       if (R.isEmpty(params)) return
