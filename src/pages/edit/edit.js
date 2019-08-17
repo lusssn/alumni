@@ -67,15 +67,7 @@ Page({
   },
   handleInputChange (e) {
     const { name } = e.currentTarget.dataset
-    // if (name === 'account.gender') {
-    //   // 性别取值问题
-    //   this.setData({
-    //     [name]: GENDER_TYPE[e.detail.value].id,
-    //     // [name]: e.detail.value,
-    //   })
-    // }
     this.setData({
-      // [name]: GENDER_TYPE[e.detail.value].id,
       [name]: e.detail.value,
     })
   },

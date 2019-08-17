@@ -4,7 +4,7 @@
 
 <view wx:if="{{isLoaded}}" class="container">
   <template is="basicEdit" data="{{ genderSelect, account, isStudent }}" />
-  <template is="educationEdit" data="{{ degreeSelect, education }}" />
+  <template is="educationEdit" data="{{ degreeSelect, collegeSelect, education }}" />
   <template wx:if="{{!isStudent}}" is="workEdit" data="{{ job }}" />
   <view class="fix-bottom flex">
     <button class="flex-item" bindtap="handleSkip">跳过</button>

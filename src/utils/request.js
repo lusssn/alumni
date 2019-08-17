@@ -4,7 +4,7 @@ import * as Error from '../error'
 
 const regHttp = /^(http[s]{0,1}:\/\/)/
 
-const _request = (url, params = {}, others = {}) => {
+const request = (url, params = {}, others = {}) => {
   const _url = `${regHttp.test(url) ? '' : server.service.host}${url}`
   return promisify(wx.request)({
     url: _url,
@@ -30,28 +30,28 @@ const _request = (url, params = {}, others = {}) => {
 }
 
 const get = (url, params = {}, custom = {}) => {
-  return _request(url, params, {
+  return request(url, params, {
     method: 'GET',
     ...custom,
   })
 }
 
 const post = (url, params = {}, custom = {}) => {
-  return _request(url, params, {
+  return request(url, params, {
     method: 'POST',
     ...custom,
   })
 }
 
 const del = (url, params = {}, custom = {}) => {
-  return _request(url, params, {
+  return request(url, params, {
     method: 'DELETE',
     ...custom,
   })
 }
 
 const put = (url, params = {}, custom = {}) => {
-  return _request(url, params, {
+  return request(url, params, {
     method: 'PUT',
     ...custom,
   })

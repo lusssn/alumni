@@ -1,7 +1,6 @@
 import { promisify } from './util'
 import * as Error from '../error'
-import _request from './_request'
-import server from '../server'
+import * as Api from '../pages/api'
 
 const app = getApp()
 
@@ -9,17 +8,22 @@ const login = () => {
   // 优先从global中读取数据
   const { accountId } = app.global
   if (accountId) {
-    return Promise.resolve(accountId)
+    return Promise.resolve()
   }
   return promisify(wx.login)().then(
     ({ code }) => {
       if (code) {
-        return _request.get('/v2/wechat/code2Session', {
-          js_code: code,
-        }).then(
-          res => {
-            app.setConfig({ accountId: Number(res.data) })
-            return Promise.resolve(res.data)
+        return Api.login({ js_code: code }).then(
+          data => {
+            app.setConfig(data)
+            if (data.registered) {
+              return Promise.resolve()
+            }
+            const { route, options } = getCurrentPages().pop()
+            navigateTo('register', {
+              redirect: route.split('/')[1],
+              options: JSON.stringify(options),
+            }, 'all')
           },
           () => Promise.reject(Error.RESPONSE_ERROR),
         )
@@ -63,12 +67,9 @@ const getLocation = () => {
   return promisify(wx.getLocation)({
     type: 'wgs84',
   }).then(({ latitude, longitude }) => {
-    const url = `${server.service.qqMapHost}/ws/geocoder/v1/`
-    const params = {
+    return Api.getLocation({
       location: `${latitude},${longitude}`,
-      key: server.qqMapKey,
-    }
-    return _request.get(url, params).then((res) => {
+    }).then((res) => {
       const { address_component: address } = res.result
       return address.city || address.province || address.nation
     }, (err) => {

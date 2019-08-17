@@ -14,7 +14,7 @@ Page({
     options: '', // 完善后跳转的路径参数
   },
   onLoad({ redirect = 'mine', options = '{}' }) {
-    this.setData({ redirect, options })
+    this.setData({ redirect, options: decodeURIComponent(options) })
     wxUtil.getUserInfo().then(this.initBasic, () => {
       // 未授权，显示授权弹窗
       this.setData({
@@ -61,7 +61,7 @@ Page({
       return
     }
     Api.createAccount({
-      ...basic,
+      ...R.assoc('gender', GENDER_TYPE[basic.gender].id, basic),
       accountId: app.global.accountId,
     }).then(
       () => {

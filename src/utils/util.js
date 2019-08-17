@@ -19,6 +19,13 @@ export const promisify = fn => {
   }
 }
 
+export const getYear = timestamp => {
+  if (isNaN(timestamp) || !timestamp) {
+    return ''
+  }
+  return moment(timestamp).format('YYYY')
+}
+
 import * as Api from '../pages/api'
 import * as R from './ramda/index'
 import * as Error from '../error'
