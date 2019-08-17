@@ -2,8 +2,8 @@
 <import src="../../templates/educationEdit.wxml" />
 <import src="../../templates/workEdit.wxml" />
 
-<view wx:if="{{isLoaded}}" class="container">
-  <template is="basicEdit" data="{{ genderSelect, account }}" />
+<view wx:if="{{isLoaded}}" class="container padding-t-md">
+  <template is="basicEdit" data="{{ genderSelect, account, isComplete: true }}" />
   <template is="educationEdit" data="{{ degreeSelect, collegeSelect, education }}" />
   <template wx:if="{{account.type}}" is="workEdit" data="{{ job }}" />
   <view class="fix-bottom flex">
