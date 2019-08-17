@@ -5,7 +5,7 @@ import * as Error from '../error'
 const regHttp = /^(http[s]{0,1}:\/\/)/
 
 const request = (url, params = {}, others = {}) => {
-  const _url = `${regHttp.test(url) ? '' : server.service.host}${url}`
+  const _url = `${regHttp.test(url) ? '' : server.host}${url}`
   return promisify(wx.request)({
     url: _url,
     data: params,

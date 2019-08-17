@@ -2,7 +2,7 @@ import request from '../utils/request'
 import server from '../server'
 
 export const getLocation = params =>
-  request.get(`${server.service.qqMapHost}/ws/geocoder/v1/`, {
+  request.get(`${server.qqMapHost}/ws/geocoder/v1/`, {
     ...params,
     key: server.qqMapKey,
   })
