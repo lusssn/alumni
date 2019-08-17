@@ -61,7 +61,8 @@ Page({
   },
   handleAccept() {
     const { accountId } = this.data.account
-    Api.getAcceptFriend({
+    Api.requestFriend({
+      action: 1,
       A: app.global.accountId,
       B: accountId,
     }).then(() => {
@@ -73,7 +74,8 @@ Page({
   },
   handleRefuse() {
     const { accountId } = this.data.account
-    Api.getRefuseFriend({
+    Api.requestFriend({
+      action: 0,
       A: app.global.accountId,
       B: accountId,
     }).then(() => {
@@ -86,7 +88,7 @@ Page({
   handleApplyExchange() {
     if (!Util.isRegistered()) return
     const { accountId } = this.data.account
-    Api.getInviteFriend({
+    Api.applyFriend({
       A: app.global.accountId,
       B: accountId,
     }).then(() => {

@@ -75,14 +75,10 @@ export const getFriendList = params =>
   request.get('/v2/friends', params).then(res => res.data)
 
 /************************************* 名片详情 *************************************/
-// 详情-同意交换名片
-export const getAcceptFriend = params =>
-  request.post('/v2/friend/manage', { action: 1, ...params })
-
-// 详情-拒绝交换名片
-export const getRefuseFriend = params =>
-  request.post('/v2/friend/manage', { action: 0, ...params })
+// 详情-同意/拒绝交换名片
+export const requestFriend = params =>
+  request.post('/v2/friend/manage', params )
 
 // 详情-请求交换名片
-export const getInviteFriend = params =>
+export const applyFriend = params =>
   request.post('/v2/friend/apply', params)
