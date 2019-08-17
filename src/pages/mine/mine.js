@@ -1,6 +1,8 @@
 import wxUtil from '../../utils/wxUtil'
 import * as Api from '../api'
+import * as R from '../../utils/ramda/index'
 import moment from '../../utils/moment.min'
+import { COLLEGE_TYPE } from '../../macros'
 
 const app = getApp()
 
@@ -70,6 +72,9 @@ Page({
             for (let item of data.educations) {
               item.startTime = moment(item.startTime).format('YYYY')
               item.endTime = moment(item.endTime).format('YYYY')
+              // 处理院系
+              const college = R.find(R.propEq('id', +item.college), COLLEGE_TYPE) || {}
+              item.college = college.name
             }
             for (let item of data.jobs) {
               item.startTime = item.startTime ? moment(item.startTime).format('YYYY') : ''

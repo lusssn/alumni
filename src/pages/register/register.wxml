@@ -1,66 +1,66 @@
 <view class="container">
-<view class="card padding-t-xl padding-b-xl">
-  <view class="avatar flex-center">
-    <image mode="aspectFill" src="{{basic.avatar}}" />
-    <!--<icon class="icon-camera" />-->
-  </view>
-</view>
-<view class="card">
-  <view class="card-header">
-    <view class="card-title">个人信息</view>
-  </view>
-  <view class="card-block">
-    <view class="field">
-      <label class="field-label">真实姓名：</label>
-      <view class="field-content">
-        <input
-          placeholder="请输入真实姓名"
-          value="{{basic.name}}"
-          data-name="basic.name"
-          bindinput="handleInputChange"
-        />
-      </view>
+  <view class="card padding-t-xl padding-b-xl">
+    <view class="avatar flex-center">
+      <image mode="aspectFill" src="{{basic.avatar}}" />
     </view>
-    <view class="field">
-      <label class="field-label">性别：</label>
-      <view class="field-content">
-        <picker
-          range="{{genderSelect}}"
-          range-key="name"
-          value="{{basic.gender}}"
-          data-name="basic.gender"
-          bindchange="handleInputChange"
-        >
+  </view>
+  <view class="card">
+    <view class="card-header">
+      <view class="card-title">个人信息</view>
+    </view>
+    <view class="card-block">
+      <view class="field">
+        <label class="field-label">真实姓名：</label>
+        <view class="field-content">
           <input
-            placeholder="请选择性别"
-            value="{{genderSelect[basic.gender].name}}"
-            disabled
+            placeholder="请输入真实姓名"
+            value="{{basic.name}}"
+            data-name="basic.name"
+            bindinput="handleInputChange"
           />
-        </picker>
+        </view>
       </view>
-    </view>
-    <view class="field">
-      <label class="field-label">身份选择：</label>
-      <view class="field-content">
-        <radio-group bindchange="handleRoleChange">
-          <radio class="margin-r-lg" value="{{0}}" checked="{{basic.type === 0}}">在校学生</radio>
-          <radio value="{{1}}" checked="{{basic.type === 1}}">职场人士</radio>
-        </radio-group>
+      <view class="field">
+        <label class="field-label">性别：</label>
+        <view class="field-content">
+          <picker
+            range="{{genderSelect}}"
+            range-key="name"
+            value="{{basic.gender}}"
+            data-name="basic.gender"
+            bindchange="handleInputChange"
+          >
+            <input
+              placeholder="请选择性别"
+              value="{{genderSelect[basic.gender].name}}"
+              disabled
+            />
+          </picker>
+        </view>
+      </view>
+      <view class="field">
+        <label class="field-label">身份选择：</label>
+        <view class="field-content">
+          <radio-group bindchange="handleRoleChange">
+            <radio class="margin-r-lg" value="{{0}}" checked="{{basic.type === 0}}">在校学生</radio>
+            <radio value="{{1}}" checked="{{basic.type === 1}}">职场人士</radio>
+          </radio-group>
+        </view>
       </view>
     </view>
   </view>
-</view>
-<view class="fix-bottom padding-md border-t flex">
-  <button class="flex-item" type="primary" bindtap="handleNext">下一步</button>
-</view>
-<Modal
-  isOpen="{{isShowAuthModal}}"
-  title="提示"
-  cancelText="取消"
-  okText="授权"
-  okOpenType="getUserInfo"
-  content="{{['你的个人信息将用于小程序头像的效果展示']}}"
-  bindcancel="handleCloseAuthModal"
-  bindok="handleAuth"
-/>
+  <view class="fix-bottom flex">
+    <button class="flex-item" bindtap="handleSkip">跳过</button>
+    <button class="flex-item" type="primary" bindtap="handleNext">下一步</button>
+  </view>
+  <Modal
+    isOpen="{{isShowAuthModal}}"
+    title="提示"
+    cancelText="取消"
+    okText="授权"
+    okOpenType="getUserInfo"
+    content="{{['你的个人信息将用于小程序头像的效果展示']}}"
+    bindcancel="handleCloseAuthModal"
+    bindok="handleAuth"
+  />
 </view>

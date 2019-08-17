@@ -61,11 +61,12 @@ export const checkParams = (checkList, params) => {
   const _params = R.clone(params)
   for (let field of checkList) {
     const { prop } = field
-    if (field.isMust && !_params[prop]) {
+    // _params[prop]可以为0
+    if (field.isMust && (_params[prop] === '' || _params[prop] === undefined)) {
       wxUtil.showToast(`${field.name}必填`)
       return {}
     }
-    if (!_params[prop]) {
+    if (_params[prop] === '' || _params[prop] === undefined) {
       _params[prop] = field.defaultValue
     }
     // 处理时间类型的参数

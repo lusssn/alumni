@@ -102,6 +102,14 @@ Page({
     })
   },
   handleApplyExchange() {
+    if (!app.global.registered) {
+      const { route, options } = getCurrentPages().pop()
+      wxUtil.navigateTo('register', {
+        redirect: route.split('/')[1],
+        options: JSON.stringify(options),
+      }, true)
+      return
+    }
     const { accountId } = this.data.account
     Api.getInviteFriend({
       A: app.global.accountId,

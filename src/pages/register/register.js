@@ -23,6 +23,7 @@ Page({
     })
   },
   handleCloseAuthModal() {
+    this.initBasic()
     // 关闭弹窗
     this.setData({
       isShowAuthModal: false,
@@ -50,6 +51,10 @@ Page({
       'basic.type': +value,
     })
   },
+  handleSkip() {
+    const { redirect, options } = this.data
+    wxUtil.navigateTo(redirect, JSON.parse(options), true)
+  },
   handleNext() {
     const { redirect, options, basic } = this.data
     if (!basic.name.trim()) {
@@ -68,18 +73,18 @@ Page({
         wxUtil.navigateTo('complete', {
           redirect,
           options,
-          isStudent: !basic.type,
+          isStudent: basic.type === 0 ? 1 : 0,
         }, true)
       },
       () => {},
     )
   },
-  initBasic(userInfo) {
+  initBasic(userInfo = {}) {
     this.setData({
       basic: {
         name: '',
         avatar: userInfo.avatarUrl,
-        gender: R.findIndex(R.propEq('id', userInfo.gender), GENDER_TYPE),
+        gender: R.findIndex(R.propEq('id', userInfo.gender || GENDER_TYPE[0].id), GENDER_TYPE),
         type: -1,
       },
     })

@@ -27,7 +27,6 @@ Page({
   },
   onLoad(option) {
     const { redirect = 'mine', options = '{}', isStudent } = option
-    console.log('comp', options)
     this.setData({
       redirect,
       options: decodeURIComponent(options),
@@ -52,6 +51,10 @@ Page({
             const education = educations[0] || {}
             education.startTime = getYear(education.startTime)
             education.endTime = getYear(education.endTime)
+            // 处理院系
+            if (education.college) {
+              education.college = R.findIndex(R.propEq('id', +education.college), COLLEGE_TYPE)
+            }
             // 处理学历
             education.education = R.findIndex(
               R.propEq('name', education.education || '本科'),
@@ -139,12 +142,12 @@ Page({
     // 提交数据
     Api.completeCard({
       account,
-      education,
-      job,
+      educations: [education],
+      jobs: [job],
     }).then(() => {
       wxUtil.showToast('保存成功', 'success').then(() => {
         const { redirect, options } = this.data
-        wxUtil.navigateTo(redirect, JSON.parse(options), 'all')
+        wxUtil.navigateTo(redirect, JSON.parse(options), true)
       })
     }, err => {
       promisify(wx.showModal)({

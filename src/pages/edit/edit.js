@@ -1,13 +1,14 @@
 import moment from '../../utils/moment.min'
 import * as R from '../../utils/ramda/index'
 import * as Api from '../api'
-import { checkParams, promisify } from '../../utils/util'
+import { promisify, checkParams, getYear } from '../../utils/util'
 import wxUtil from '../../utils/wxUtil'
 import {
-  BASIC_FIELD,
-  DEGREE_TYPE,
-  EDUCATION_FIELD,
   GENDER_TYPE,
+  DEGREE_TYPE,
+  COLLEGE_TYPE,
+  BASIC_FIELD,
+  EDUCATION_FIELD,
   WORK_FIELD,
 } from '../../macros'
 
@@ -23,8 +24,9 @@ Page({
   data: {
     type: '', // 当前编辑的信息类型
     id: null, // 若不为null，表示为编辑状态
-    degreeSelect: DEGREE_TYPE,
     genderSelect: GENDER_TYPE,
+    degreeSelect: DEGREE_TYPE,
+    collegeSelect: COLLEGE_TYPE,
     account: {},
     education: {
       education: R.findIndex(R.propEq('name', '本科'))(DEGREE_TYPE),
@@ -111,6 +113,9 @@ Page({
       // 处理degree
       const degree = DEGREE_TYPE[params.education] || {}
       params.education = degree.name
+      // 处理院系
+      const college = COLLEGE_TYPE[params.college] || {}
+      params.college = college.id
       // 必填项
       params = checkParams(EDUCATION_FIELD, params)
       if (R.isEmpty(params)) return
@@ -140,7 +145,7 @@ Page({
       if (data.birthday) {
         data.birthday = moment(data.birthday).format('YYYY-MM-DD')
       }
-      data.gender = Number(data.gender)
+      data.gender = R.findIndex(R.propEq('id', data.gender), GENDER_TYPE)
       this.setData({
         account: data,
       })
@@ -153,16 +158,14 @@ Page({
       educationId: id,
     }).then(data => {
       // 处理时间
-      if (data.startTime) {
-        data.startTime = moment(data.startTime).format('YYYY')
-      }
-      if (data.endTime) {
-        data.endTime = moment(data.endTime).format('YYYY')
-      }
+      data.startTime = getYear(data.startTime)
+      data.endTime = getYear(data.endTime)
       // 处理学历
       data.education = R.findIndex(
         R.propEq('name', data.education),
       )(DEGREE_TYPE)
+      // 处理院系
+      data.college = R.findIndex(R.propEq('id', +data.college), COLLEGE_TYPE)
       this.setData({
         education: data,
       })
@@ -175,10 +178,8 @@ Page({
       jobId: id,
     }).then(data => {
       // 处理时间
-      data.startTime = data.startTime
-        ? moment(data.startTime).format('YYYY')
-        : ''
-      data.endTime = data.endTime ? moment(data.endTime).format('YYYY') : ''
+      data.startTime = getYear(data.startTime)
+      data.endTime = getYear(data.endTime)
       this.setData({ job: data })
     }, () => {})
   },
