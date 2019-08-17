@@ -1,4 +1,4 @@
-import { promisify } from './util'
+import { promisify, isRegistered } from './util'
 import * as Error from '../error'
 import * as Api from '../pages/api'
 
@@ -8,7 +8,7 @@ const login = () => {
   // 优先从global中读取数据
   const { accountId } = app.global
   if (accountId) {
-    return Promise.resolve()
+    return Promise.resolve(true)
   }
   return promisify(wx.login)().then(
     ({ code }) => {
@@ -16,14 +16,7 @@ const login = () => {
         return Api.login({ js_code: code }).then(
           data => {
             app.setConfig(data)
-            if (data.registered) {
-              return Promise.resolve()
-            }
-            const { route, options } = getCurrentPages().pop()
-            navigateTo('register', {
-              redirect: route.split('/')[1],
-              options: JSON.stringify(options),
-            }, 'all')
+            return Promise.resolve(isRegistered())
           },
           () => Promise.reject(Error.RESPONSE_ERROR),
         )

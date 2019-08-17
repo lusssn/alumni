@@ -3,9 +3,9 @@
 <import src="../../templates/workEdit.wxml" />
 
 <view wx:if="{{isLoaded}}" class="container">
-  <template is="basicEdit" data="{{ genderSelect, account, isStudent }}" />
+  <template is="basicEdit" data="{{ genderSelect, account }}" />
   <template is="educationEdit" data="{{ degreeSelect, collegeSelect, education }}" />
-  <template wx:if="{{!isStudent}}" is="workEdit" data="{{ job }}" />
+  <template wx:if="{{account.type}}" is="workEdit" data="{{ job }}" />
   <view class="fix-bottom flex">
     <button class="flex-item" bindtap="handleSkip">跳过</button>
     <button class="flex-item" type="primary" bindtap="handleSave">保存</button>

@@ -1,7 +1,7 @@
 import wxUtil from '../../utils/wxUtil'
 import * as Api from '../api'
 import * as R from '../../utils/ramda/index'
-import moment from '../../utils/moment.min'
+import * as Util from '../../utils/util'
 import { COLLEGE_TYPE } from '../../macros'
 
 const app = getApp()
@@ -34,10 +34,6 @@ Page({
   handleBasicEdit() {
     wxUtil.navigateTo('edit', { type: 'account' })
   },
-  handleShare() {},
-  handleAbout() {
-    wxUtil.navigateTo('about')
-  },
   handleEducationAdd(e) {
     const { id } = e.target.dataset
     if (id) {
@@ -60,7 +56,11 @@ Page({
   },
   loadAllInfo() {
     return wxUtil.login().then(
-      () => {
+      isLogin => {
+        if (!isLogin) {
+          this.setData({ isLoaded: true })
+          return Promise.resolve()
+        }
         return Api.getAccountAll({
           myAccountId: app.global.accountId,
           accountId: app.global.accountId,
@@ -68,17 +68,17 @@ Page({
           data => {
             // 处理时间
             const { birthday } = data.account
-            data.account.birthday = moment(birthday).format('YYYY-MM-DD')
+            data.account.birthday = Util.getYearMonthDate(birthday)
             for (let item of data.educations) {
-              item.startTime = moment(item.startTime).format('YYYY')
-              item.endTime = moment(item.endTime).format('YYYY')
+              item.startTime = Util.getYear(item.startTime)
+              item.endTime = Util.getYear(item.endTime)
               // 处理院系
               const college = R.find(R.propEq('id', +item.college), COLLEGE_TYPE) || {}
               item.college = college.name
             }
             for (let item of data.jobs) {
-              item.startTime = item.startTime ? moment(item.startTime).format('YYYY') : ''
-              item.endTime = item.endTime ? moment(item.endTime).format('YYYY') : ''
+              item.startTime = Util.getYear(item.startTime)
+              item.endTime = Util.getYear(item.endTime)
             }
             this.setData({
               isLoaded: true,
@@ -90,4 +90,7 @@ Page({
       },
     )
   },
+  handleRegister() {
+    Util.isRegistered()
+  }
 })

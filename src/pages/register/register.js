@@ -70,11 +70,8 @@ Page({
       accountId: app.global.accountId,
     }).then(
       () => {
-        wxUtil.navigateTo('complete', {
-          redirect,
-          options,
-          isStudent: basic.type === 0 ? 1 : 0,
-        }, true)
+        app.setConfig({ step1Finished: true })
+        wxUtil.navigateTo('complete', { redirect, options }, true)
       },
       () => {},
     )

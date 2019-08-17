@@ -1,8 +1,8 @@
 import wxUtil from '../../utils/wxUtil'
 import * as R from '../../utils/ramda/index'
 import * as Api from '../api'
+import * as Util from '../../utils/util'
 import { CONTACT_TYPE } from '../../macros'
-import moment from '../../utils/moment.min'
 
 const PAGE_SIZE = 10
 const app = getApp()
@@ -44,7 +44,7 @@ Page({
       list.forEach(item => {
         const contactType = R.find(R.propEq('id', +item.status))(CONTACT_TYPE) || {}
         item.status_name = contactType.name
-        item.createTime = moment(item.createTime).format('YYYY-MM-DD')
+        item.createTime = Util.getYearMonthDate(item.createTime)
       })
       this.setData({
         noticeList: list,

@@ -39,7 +39,7 @@
           </picker>
         </view>
       </view>
-      <view wx:if="{{!isStudent}}" class="field">
+      <view wx:if="{{account.type}}" class="field">
         <label class="field-label"><text class="text-error">*</text>所在行业：</label>
         <view class="field-content">
           <input

@@ -11,13 +11,13 @@
             <text class="text-muted">{{data.city}}</text>
           </view>
         </view>
-        <view wx:if="{{data.college}}" class="padding-b-sm">学院：{{data.college}}</view>
+        <view wx:if="{{data.college}}" class="padding-b-sm">学院：{{collegeTypeMap[data.college]}}</view>
         <view wx:if="{{data.company}}">公司：{{data.company}}－{{data.position}}</view>
       </view>
     </view>
-    <view class="padding-t-md padding-b-md">
+    <view wx:if="{{data.selfDesc}}" class="padding-t-md padding-b-md">
       <icon class="icon-plane margin-r-sm" />
-      <text class="text-muted">{{data.selfDesc || '暂无描述'}}</text>
+      <text class="text-muted">{{data.selfDesc}}</text>
     </view>
   </view>
 </view>

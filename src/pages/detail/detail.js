@@ -2,8 +2,7 @@ import wxUtil from '../../utils/wxUtil'
 import * as R from '../../utils/ramda/index'
 import * as Api from '../api'
 import { CONTACT_TYPE } from '../../macros'
-import { isComplete, promisify } from '../../utils/util'
-import moment from '../../utils/moment.min'
+import * as Util from '../../utils/util'
 
 const app = getApp()
 
@@ -20,24 +19,9 @@ Page({
       return
     }
     // 加载详情数据
-    wxUtil.login().then(
-      () => {
-        if (isShare) {
-          isComplete().then(res => {
-            if (res) {
-              this.loadCardInfo(id)
-              return
-            }
-            wxUtil.navigateTo('complete', {
-              redirect: 'detail',
-              options: JSON.stringify(this.options),
-            }, 'all')
-          })
-          return
-        }
-        this.loadCardInfo(id)
-      },
-    )
+    wxUtil.login().then(() => {
+      this.loadCardInfo(id)
+    })
   },
   onShareAppMessage() {
     const { account } = this.data
@@ -56,16 +40,14 @@ Page({
         const contactType = R.find(R.propEq('id', +relationShip))(CONTACT_TYPE)
         // 处理时间
         const { birthday } = data.account
-        if (birthday) {
-          data.account.birthday = moment(birthday).format('YYYY-MM-DD')
-        }
+        data.account.birthday = Util.getYearMonthDate(birthday)
         for (let item of data.educations) {
-          item.startTime = moment(item.startTime).format('YYYY')
-          item.endTime = moment(item.endTime).format('YYYY')
+          item.startTime = Util.getYear(item.startTime)
+          item.endTime = Util.getYear(item.endTime)
         }
         for (let item of data.jobs) {
-          item.startTime = item.startTime ? moment(item.startTime).format('YYYY') : ''
-          item.endTime = item.endTime ? moment(item.endTime).format('YYYY') : ''
+          item.startTime = Util.getYear(item.startTime)
+          item.endTime = Util.getYear(item.endTime)
         }
         this.setData({
           ...data,
@@ -102,14 +84,7 @@ Page({
     })
   },
   handleApplyExchange() {
-    if (!app.global.registered) {
-      const { route, options } = getCurrentPages().pop()
-      wxUtil.navigateTo('register', {
-        redirect: route.split('/')[1],
-        options: JSON.stringify(options),
-      }, true)
-      return
-    }
+    if (!Util.isRegistered()) return
     const { accountId } = this.data.account
     Api.getInviteFriend({
       A: app.global.accountId,
@@ -127,7 +102,7 @@ Page({
       wxUtil.showToast('暂未填写微信')
       return
     }
-    promisify(wx.setClipboardData)({
+    Util.promisify(wx.setClipboardData)({
       data: wechat,
     }).then(
       () => {

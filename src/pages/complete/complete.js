@@ -1,16 +1,13 @@
 import * as R from '../../utils/ramda/index'
 import * as Api from '../api'
-import { promisify, checkParams, getYear } from '../../utils/util'
+import * as Util from '../../utils/util'
 import wxUtil from '../../utils/wxUtil'
 import {
   GENDER_TYPE, DEGREE_TYPE, COLLEGE_TYPE,
   BASIC_FIELD, EDUCATION_FIELD, WORK_FIELD,
 } from '../../macros'
-import moment from '../../utils/moment.min'
 
 const app = getApp()
-// 1990-01-01
-const BIRTHDAY_INIT = 631123200000
 
 Page({
   data: {
@@ -21,16 +18,14 @@ Page({
     account: {},
     education: {},
     job: {},
-    isStudent: true,
     redirect: '', // 完善后跳转的路径
     options: '', // 完善后跳转的路径参数
   },
   onLoad(option) {
-    const { redirect = 'mine', options = '{}', isStudent } = option
+    const { redirect = 'mine', options = '{}' } = option
     this.setData({
       redirect,
       options: decodeURIComponent(options),
-      isStudent: +isStudent,
     })
     // 登录
     wxUtil.login().then(
@@ -44,13 +39,13 @@ Page({
             const { account, educations, jobs } = data
             account.gender = Number(account.gender)
             // 处理时间
-            account.birthday = moment(account.birthday || BIRTHDAY_INIT).format('YYYY-MM-DD')
+            account.birthday = Util.getYearMonthDate(account.birthday)
             // 处理性别
             account.gender = R.findIndex(R.propEq('id', account.gender), GENDER_TYPE)
 
             const education = educations[0] || {}
-            education.startTime = getYear(education.startTime)
-            education.endTime = getYear(education.endTime)
+            education.startTime = Util.getYear(education.startTime)
+            education.endTime = Util.getYear(education.endTime)
             // 处理院系
             if (education.college) {
               education.college = R.findIndex(R.propEq('id', +education.college), COLLEGE_TYPE)
@@ -65,8 +60,8 @@ Page({
             )(COLLEGE_TYPE)
 
             const job = jobs[0] || {}
-            job.startTime = getYear(job.startTime)
-            job.endTime = getYear(job.endTime)
+            job.startTime = Util.getYear(job.startTime)
+            job.endTime = Util.getYear(job.endTime)
 
             this.setData({
               isLoaded: true,
@@ -81,7 +76,7 @@ Page({
     )
   },
   handleClickAvatar() {
-    promisify(wx.chooseImage)({
+    Util.promisify(wx.chooseImage)({
       count: 1,
     }).then(res => {
       this.setData({
@@ -98,7 +93,7 @@ Page({
       }
       this.setData({ 'account.city': res })
     }, err => {
-      promisify(wx.showModal)({
+      Util.promisify(wx.showModal)({
         title: '错误提示',
         content: err.errMsg,
         confirmText: '关闭',
@@ -118,7 +113,6 @@ Page({
     wxUtil.navigateTo(redirect, JSON.parse(options), true)
   },
   handleSave() {
-    const { isStudent } = this.data
     let account = R.clone(this.data.account)
     let education = R.clone(this.data.education)
     let job = R.clone(this.data.job)
@@ -132,15 +126,16 @@ Page({
     education.college = college.id
 
     // 必填项判断
-    account = checkParams(BASIC_FIELD, account)
+    account = Util.checkParams(BASIC_FIELD, account)
     if (R.isEmpty(account)) return
 
-    education = checkParams(EDUCATION_FIELD, education)
+    education = Util.checkParams(EDUCATION_FIELD, education)
     if (R.isEmpty(education)) return
     education.accountId = app.global.accountId
 
-    if (!isStudent) {
-      job = checkParams(WORK_FIELD, job)
+    // type: true-职场 false-学生
+    if (account.type) {
+      job = Util.checkParams(WORK_FIELD, job)
       if (R.isEmpty(job)) return
       job.accountId = app.global.accountId
     }
@@ -148,7 +143,7 @@ Page({
     Api.completeCard({
       account,
       educations: [education],
-      jobs: [job],
+      jobs: account.type ? [job] : [],
     }).then(() => {
       app.setConfig({ registered: true })
       wxUtil.showToast('保存成功', 'success').then(() => {
@@ -156,7 +151,7 @@ Page({
         wxUtil.navigateTo(redirect, JSON.parse(options), true)
       })
     }, err => {
-      promisify(wx.showModal)({
+      Util.promisify(wx.showModal)({
         title: '错误提示',
         content: JSON.stringify(err),
         confirmText: '关闭',

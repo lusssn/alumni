@@ -1,7 +1,6 @@
-import moment from '../../utils/moment.min'
 import * as R from '../../utils/ramda/index'
 import * as Api from '../api'
-import { promisify, checkParams, getYear } from '../../utils/util'
+import * as Util from '../../utils/util'
 import wxUtil from '../../utils/wxUtil'
 import {
   GENDER_TYPE,
@@ -53,7 +52,7 @@ Page({
   },
   // 点击头像
   handleClickAvatar () {
-    promisify(wx.chooseImage)({
+    Util.promisify(wx.chooseImage)({
       count: 1,
     }).then(res => {
       this.setData({
@@ -74,7 +73,7 @@ Page({
     })
   },
   handleRemove () {
-    promisify(wx.showModal)({
+    Util.promisify(wx.showModal)({
       title: '提示',
       content: '你确认要删除该条信息吗？',
       confirmColor: '#2180E8',
@@ -108,7 +107,7 @@ Page({
       // 处理性别
       params.gender = GENDER_TYPE[params.gender].id
       // 必填项
-      params = checkParams(BASIC_FIELD, params)
+      params = Util.checkParams(BASIC_FIELD, params)
       if (R.isEmpty(params)) return
       next = Api.saveBasic(params)
     } else if (type === 'education') {
@@ -119,13 +118,13 @@ Page({
       const college = COLLEGE_TYPE[params.college] || {}
       params.college = college.id
       // 必填项
-      params = checkParams(EDUCATION_FIELD, params)
+      params = Util.checkParams(EDUCATION_FIELD, params)
       if (R.isEmpty(params)) return
       params.accountId = app.global.accountId
       next = Api.saveEducation(params)
     } else if (type === 'job') {
       // 必填项
-      params = checkParams(WORK_FIELD, params)
+      params = Util.checkParams(WORK_FIELD, params)
       if (!params) return
       params.accountId = app.global.accountId
       next = Api.saveWork(params)
@@ -144,9 +143,7 @@ Page({
     const { accountId } = app.global
     Api.getAccount({ accountId }).then(data => {
       // 处理时间
-      if (data.birthday) {
-        data.birthday = moment(data.birthday).format('YYYY-MM-DD')
-      }
+      data.birthday = Util.getYearMonthDate(data.birthday)
       data.gender = R.findIndex(R.propEq('id', data.gender), GENDER_TYPE)
       this.setData({
         account: data,
@@ -160,8 +157,8 @@ Page({
       educationId: id,
     }).then(data => {
       // 处理时间
-      data.startTime = getYear(data.startTime)
-      data.endTime = getYear(data.endTime)
+      data.startTime = Util.getYear(data.startTime)
+      data.endTime = Util.getYear(data.endTime)
       // 处理学历
       data.education = R.findIndex(
         R.propEq('name', data.education),
@@ -180,8 +177,8 @@ Page({
       jobId: id,
     }).then(data => {
       // 处理时间
-      data.startTime = getYear(data.startTime)
-      data.endTime = getYear(data.endTime)
+      data.startTime = Util.getYear(data.startTime)
+      data.endTime = Util.getYear(data.endTime)
       this.setData({ job: data })
     }, () => {})
   },

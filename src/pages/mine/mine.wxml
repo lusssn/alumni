@@ -1,6 +1,6 @@
 <view wx:if="{{isLoaded}}" class="container padding-t-md">
-  <view class="card">
-    <view class="card-block" bindtap="handleShare">
+  <view wx:if="{{account.name}}" class="card">
+    <view class="card-block">
       <view class="flex-align-center padding-t-lg padding-b-lg border-b">
         <image class="avatar" mode="aspectFill" src="{{account.avatar}}" />
         <view class="flex-item padding-l-lg">
@@ -9,78 +9,80 @@
           </view>
           <view>ID: {{account.accountId}}</view>
         </view>
-        <icon class="icon-ercode" />
-        <icon class="icon-arrow-right margin-l-sm" />
+        <!--        <icon class="icon-ercode" />-->
+        <!--        <icon class="icon-arrow-right margin-l-sm" />-->
       </view>
     </view>
   </view>
-  <view class="card">
-    <view class="card-header">
-      <view class="card-title">基本信息</view>
-      <view class="link" bindtap="handleBasicEdit">
-        <icon class="icon-edit margin-r-sm" />
-        <text class="h3">编辑</text>
+  <view wx:if="{{!account.phone}}" class="card" bindtap="handleRegister">
+    <view class="card-block flex-align-center padding-t-lg padding-b-lg">
+      <view class="flex-item h1 text-strong">
+        完善信息，结识优秀人脉
       </view>
-    </view>
-    <BasicInfo data="{{account}}" isFriend />
-  </view>
-  <view class="card">
-    <view class="card-header">
-      <view class="card-title">教育经历</view>
-      <view class="link" bindtap="handleEducationAdd">
-        <icon class="icon-plus margin-r-sm" />
-        <text class="h3">添加</text>
-      </view>
-    </view>
-    <block wx:if="{{educations.length}}">
-      <EducationInfo
-        wx:for="{{educations}}"
-        wx:key="educationId"
-        data="{{item}}"
-        border="{{index < educations.length - 1 }}"
-        data-id="{{item.educationId}}"
-        bindtap="handleEducationAdd"
-      />
-    </block>
-    <view wx:else class="card-block padding-b-xl text-center">
-      <image
-        class="experience-empty margin-t-xl margin-b-xl"
-        src="../../images/experience-empty.png"
-      />
-      <view class="h4 text-primary">暂无教育经历，快去添加吧</view>
+      <icon class="icon-arrow-right margin-l-sm" />
     </view>
   </view>
-  <view class="card">
-    <view class="card-header">
-      <view class="card-title">工作经历</view>
-      <view class="link" bindtap="handleWorkAdd">
-        <icon class="icon-plus margin-r-sm" />
-        <text class="h3">添加</text>
+  <view wx:else>
+    <view class="card">
+      <view class="card-header">
+        <view class="card-title">基本信息</view>
+        <view class="link" bindtap="handleBasicEdit">
+          <icon class="icon-edit margin-r-sm" />
+          <text class="h3">编辑</text>
+        </view>
+      </view>
+      <BasicInfo data="{{account}}" isFriend />
+    </view>
+    <view class="card">
+      <view class="card-header">
+        <view class="card-title">教育经历</view>
+        <view class="link" bindtap="handleEducationAdd">
+          <icon class="icon-plus margin-r-sm" />
+          <text class="h3">添加</text>
+        </view>
+      </view>
+      <block wx:if="{{educations.length}}">
+        <EducationInfo
+          wx:for="{{educations}}"
+          wx:key="educationId"
+          data="{{item}}"
+          border="{{index < educations.length - 1 }}"
+          data-id="{{item.educationId}}"
+          bindtap="handleEducationAdd"
+        />
+      </block>
+      <view wx:else class="card-block padding-b-xl text-center">
+        <image
+          class="experience-empty margin-t-xl margin-b-xl"
+          src="../../images/experience-empty.png"
+        />
+        <view class="h4 text-primary">暂无教育经历，快去添加吧</view>
       </view>
     </view>
-    <block wx:if="{{jobs.length}}">
-      <WorkInfo
-        wx:for="{{jobs}}"
-        wx:key="jobId"
-        data="{{item}}"
-        border="{{index < jobs.length - 1 }}"
-        data-id="{{item.jobId}}"
-        bindtap="handleWorkAdd"
-      />
-    </block>
-    <view wx:else class="card-block padding-b-xl text-center">
-      <image
-        class="experience-empty margin-t-xl margin-b-xl"
-        src="../../images/experience-empty.png"
-      />
-      <view class="h4 text-primary">暂无工作经历，快去添加吧</view>
-    </view>
-  </view>
-  <view class="card" bindtap="handleAbout">
-    <view class="card-header">
-      <view class="card-else">关于校友圈</view>
-      <view class="link">
-        <icon class="icon-plane"/>
+    <view class="card">
+      <view class="card-header">
+        <view class="card-title">工作经历</view>
+        <view class="link" bindtap="handleWorkAdd">
+          <icon class="icon-plus margin-r-sm" />
+          <text class="h3">添加</text>
+        </view>
+      </view>
+      <block wx:if="{{jobs.length}}">
+        <WorkInfo
+          wx:for="{{jobs}}"
+          wx:key="jobId"
+          data="{{item}}"
+          border="{{index < jobs.length - 1 }}"
+          data-id="{{item.jobId}}"
+          bindtap="handleWorkAdd"
+        />
+      </block>
+      <view wx:else class="card-block padding-b-xl text-center">
+        <image
+          class="experience-empty margin-t-xl margin-b-xl"
+          src="../../images/experience-empty.png"
+        />
+        <view class="h4 text-primary">暂无工作经历，快去添加吧</view>
       </view>
     </view>
   </view>
