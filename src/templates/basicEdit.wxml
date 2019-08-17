@@ -1,7 +1,7 @@
 <template name="basicEdit">
   <view class="card padding-t-xl padding-b-xl">
     <view class="avatar flex-center">
-      <image mode="aspectFill" src="{{account.avatar}}" />
+      <image mode="aspectFill" src="{{account.avatar || '../../images/avatar_default.jpeg'}}" />
       <!--<icon class="icon-camera" />-->
     </view>
   </view>

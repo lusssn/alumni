@@ -29,7 +29,7 @@
         data-id="{{item.friendAccountId}}"
         bindtap="handleClickCard"
       >
-        <image class="avatar" mode="aspectFill" src="{{item.avatar}}" />
+        <image class="avatar" mode="aspectFill" src="{{item.avatar || '../../images/avatar_default.jpeg'}}" />
         <view class="flex-item padding-l-lg">
           <view class="h1 text-strong padding-b-sm">
             <text>{{item.name}}</text>

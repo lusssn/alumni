@@ -7,7 +7,6 @@
   <template is="educationEdit" data="{{ degreeSelect, collegeSelect, education }}" />
   <template wx:if="{{account.type}}" is="workEdit" data="{{ job }}" />
   <view class="fix-bottom flex">
-    <button class="flex-item" bindtap="handleSkip">跳过</button>
     <button class="flex-item" type="primary" bindtap="handleSave">保存</button>
   </view>
   <Modal

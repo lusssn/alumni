@@ -1,12 +1,12 @@
-@import "./assets/scss/reset";
+@import "./scss/reset";
 
-@import "./assets/scss/layout";
-@import "./assets/scss/border";
-@import "./assets/scss/font";
+@import "./scss/layout";
+@import "./scss/border";
+@import "./scss/font";
 
-@import "./assets/scss/card";
-@import "./assets/scss/field";
-@import "./assets/scss/tag";
+@import "./scss/card";
+@import "./scss/field";
+@import "./scss/tag";
 
 .search {
   position: relative;
@@ -36,7 +36,7 @@
   opacity: .7;
 }
 
-@import "./assets/scss/svg";
+@import "./scss/svg";
 .icon-location {
   @include svg("location");
 }

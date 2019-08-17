@@ -2,7 +2,7 @@
   <view class="card">
     <view class="card-block">
       <view class="flex-align-center padding-t-lg padding-b-lg border-b">
-        <image class="avatar" mode="aspectFill" src="{{account.avatar}}" />
+        <image class="avatar" mode="aspectFill" src="{{account.avatar || '../../images/avatar_default.jpeg'}}" />
         <view class="flex-item padding-l-lg">
           <view class="h1 text-strong padding-b-md">
             <text class="margin-r-sm">{{account.name}}</text>

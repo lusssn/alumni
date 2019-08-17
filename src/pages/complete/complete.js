@@ -108,10 +108,6 @@ Page({
       [name]: e.detail.value,
     })
   },
-  handleSkip() {
-    const { redirect, options } = this.data
-    wxUtil.navigateTo(redirect, JSON.parse(options), true)
-  },
   handleSave() {
     let account = R.clone(this.data.account)
     let education = R.clone(this.data.education)

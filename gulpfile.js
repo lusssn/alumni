@@ -9,7 +9,7 @@ const clean = () => fs.emptyDir('dist')
 const SRC = {
   styles: 'src/**/*.scss',
   scripts: 'src/**/*.{js,json,wxml}',
-  images: 'src/assets/images/**/*.{png,jpg,jpeg,svg}',
+  images: 'src/images/**/*.{png,jpg,jpeg,svg}',
 }
 const DEST_DIR = './dist'
 

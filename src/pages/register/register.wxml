@@ -1,7 +1,7 @@
 <view class="container">
   <view class="card padding-t-xl padding-b-xl">
     <view class="avatar flex-center">
-      <image mode="aspectFill" src="{{basic.avatar}}" />
+      <image mode="aspectFill" src="{{basic.avatar || '../../images/avatar_default.jpeg'}}" />
     </view>
   </view>
   <view class="card">
