@@ -32,8 +32,8 @@ Page({
   },
   loadCardInfo(friendAccountId) {
     return Api.getAccountAll({
-      myAccountId: friendAccountId,
-      accountId: app.global.accountId,
+      myAccountId: app.global.accountId,
+      accountId: friendAccountId,
     }).then(
       res => {
         const { relationShip, ...data } = res
