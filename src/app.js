@@ -1,5 +1,6 @@
 const NOTICE = {
   edited: Symbol('edited'),
+  favorited: Symbol('favorited'),
 }
 
 App({

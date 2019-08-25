@@ -70,6 +70,9 @@
   </view>
 
   <view class="fix-bottom flex">
+    <button class="flex-item" bindtap="handleFavorite">
+      {{favorite ? '取消收藏' : '收藏名片'}}
+    </button>
     <block wx:if="{{status === 'YES_OR_NO'}}">
       <button class="flex-item" bindtap="handleRefuse">拒绝</button>
       <button class="flex-item" type="primary" bindtap="handleAccept">同意</button>
@@ -80,7 +83,7 @@
       type="primary"
       bindtap="handleApplyExchange"
     >
-      交换名片添加微信和通讯录
+      交换名片
     </button>
     <block wx:elif="{{status === 'FRIEND'}}">
       <button class="flex-item" bindtap="handleAddPhone">添加通讯录</button>

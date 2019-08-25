@@ -74,6 +74,10 @@ export const getNoticeList = params =>
 export const getFriendList = params =>
   request.get('/v2/friends', params).then(res => res.data)
 
+// 朋友-收藏列表
+export const getFavoriteList = params =>
+  request.get('/v2/favorite', params).then(res => res.data)
+
 /************************************* 名片详情 *************************************/
 // 详情-同意/拒绝交换名片
 export const requestFriend = params =>
@@ -82,3 +86,7 @@ export const requestFriend = params =>
 // 详情-请求交换名片
 export const applyFriend = params =>
   request.post('/v2/friend/apply', params)
+
+// 详情-收藏、取消
+export const favoriteFriend = params =>
+  request.post('/v2/favorite', params)

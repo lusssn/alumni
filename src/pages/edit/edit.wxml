@@ -1,6 +1,7 @@
 <import src="../../templates/basicEdit.wxml" />
 <import src="../../templates/educationEdit.wxml" />
 <import src="../../templates/workEdit.wxml" />
+
 <view class="container{{type !== 'account' ? ' padding-t-md' : ''}}">
   <template
     wx:if="{{type === 'account'}}"

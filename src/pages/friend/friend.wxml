@@ -1,3 +1,5 @@
+<import src="./tmplList.wxml" />
+
 <view class="container padding-t-md">
   <view wx:if="{{noticeList.length}}" class="card">
     <view class="card-header">消息通知</view>
@@ -19,35 +21,30 @@
     </view>
   </view>
   <view class="card">
-    <view class="card-header">我的朋友</view>
-    <Loading wx:if="{{!friendList}}" />
-    <view wx:elif="{{friendList.length}}" class="card-block">
-      <view
-        wx:for="{{friendList}}"
-        wx:key="friendAccountId"
-        class="flex-align-center padding-t-lg padding-b-lg border-b tap"
-        data-id="{{item.friendAccountId}}"
-        bindtap="handleClickCard"
+    <view class="card-header" bindtap="handleSwitch">
+      <span
+        class="{{currentTab === 'friend' ? 'text-primary' : ''}}"
+        data-id="friend"
       >
-        <image class="avatar" mode="aspectFill" src="{{item.avatar || '../../images/avatar_default.jpeg'}}" />
-        <view class="flex-item padding-l-lg">
-          <view class="h1 text-strong padding-b-sm">
-            <text>{{item.name}}</text>
-          </view>
-          <view>{{item.company || '暂无公司'}}－{{item.position || '暂无职位'}}</view>
-        </view>
-        <view class="self-top">
-          <icon class="icon-location" />
-          <text class="text-muted">{{item.city}}</text>
-        </view>
-      </view>
+        我的朋友
+      </span>
+      <span class="margin-r-md margin-l-md">|</span>
+      <span
+        class="{{currentTab === 'favorite' ? 'text-primary' : ''}}"
+        data-id="favorite"
+      >
+        我的收藏
+      </span>
     </view>
-    <view wx:else class="card-block padding-b-xl text-center">
-      <image
-        class="friend-empty margin-t-xl margin-b-xl"
-        src="../../images/friend-empty.png"
-      />
-      <view class="h4 text-primary">暂无朋友，快去交换名片吧</view>
-    </view>
+    <template
+      wx:if="{{currentTab === 'friend'}}"
+      is="tmplList"
+      data="{{ list: friendList, placeholder: '暂无朋友，快去交换名片吧' }}"
+    />
+    <template
+      wx:else
+      is="tmplList"
+      data="{{ list: favoriteList, placeholder: '暂无收藏，快去收藏名片吧' }}"
+    />
   </view>
 </view>

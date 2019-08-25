@@ -126,4 +126,21 @@ Page({
       mobilePhoneNumber: phone, //联系人手机号
     })
   },
+  handleFavorite() {
+    const { account, favorite } = this.data
+    const status = favorite ? 0 : 1
+    Api.favoriteFriend({
+      accountId: app.global.accountId,
+      favoriteAccountId: account.accountId,
+      status,
+    }).then(() => {
+      this.setData({
+        favorite: status,
+      })
+      app.setNotice('favorited', true)
+      wxUtil.showToast('操作成功', 'success')
+    }, () => {
+      wxUtil.showToast('操作失败')
+    })
+  },
 })
