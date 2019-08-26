@@ -3,13 +3,19 @@ import { promisify } from './util'
 import * as Error from '../error'
 
 const regHttp = /^(http[s]{0,1}:\/\/)/
+const app = getApp()
 
 const request = (url, params = {}, others = {}) => {
+  const { header = {}, ...other } = others
+  header['X-Wx-Token'] = app.global.token || ''
+
   const _url = `${regHttp.test(url) ? '' : server.host}${url}`
+
   return promisify(wx.request)({
     url: _url,
     data: params,
-    ...others,
+    header,
+    ...other,
   }).then(res => {
     if (res.statusCode === 200) {
       return res.data

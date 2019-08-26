@@ -10,7 +10,8 @@ const qqMapHost = 'https://apis.map.qq.com'
 const qqMapKey = 'AWIBZ-EZJ34-AULUQ-DO546-YFS5T-6ZFNX'
 
 export default {
-  qqMapKey,
+  // 请求的服务器域名
   host: HOST.dev,
+  qqMapKey,
   qqMapHost,
 }
