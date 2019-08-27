@@ -10,7 +10,7 @@
             <text wx:else class="text-primary">♂</text>
           </view>
           <view class="padding-b-sm">ID: {{account.accountId}}</view>
-          <view>{{account.selfDesc}}</view>
+          <view wx:if="{{account.selfDesc}}">{{account.selfDesc}}</view>
         </view>
         <view class="self-top">
           <icon class="icon-location" />
@@ -24,7 +24,7 @@
     <view class="card-header">
       <view class="card-title">基本信息</view>
     </view>
-    <BasicInfo data="{{account}}" isFriend="{{status === 'FRIEND'}}" />
+    <BasicInfo data="{{account}}" />
   </view>
 
   <view class="card">

@@ -31,7 +31,7 @@
           <text class="h3">编辑</text>
         </view>
       </view>
-      <BasicInfo data="{{account}}" isFriend />
+      <BasicInfo data="{{account}}" />
     </view>
     <view class="card">
       <view class="card-header">

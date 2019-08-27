@@ -4,10 +4,10 @@ import * as Api from '../pages/api'
 
 const app = getApp()
 
-const login = () => {
+const login = ({ isForceUpdate } = {}) => {
   // 优先从global中读取数据
   const { accountId } = app.global
-  if (accountId) {
+  if (!isForceUpdate && accountId) {
     return Promise.resolve(true)
   }
   return promisify(wx.login)().then(
