@@ -1,7 +1,7 @@
 import wxUtil from '../../utils/wxUtil'
 import * as R from '../../utils/ramda/index'
 import * as Api from '../api'
-import { CONTACT_TYPE } from '../../macros'
+import { GENDER_TYPE, CONTACT_TYPE } from '../../macros'
 import * as Util from '../../utils/util'
 
 const app = getApp()
@@ -35,21 +35,25 @@ Page({
       accountId: friendAccountId,
     }).then(
       res => {
-        const { relationShip, ...data } = res
+        const { relationShip, account, educations, jobs, ...data } = res
         const contactType = R.find(R.propEq('id', +relationShip))(CONTACT_TYPE)
+        // 处理性别
+        account.gender = R.find(R.propEq('id', account.gender), GENDER_TYPE).key
         // 处理时间
-        const { birthday } = data.account
-        data.account.birthday = Util.getYearMonthDate(birthday)
-        for (let item of data.educations) {
+        account.birthday = Util.getYearMonthDate(account.birthday)
+        for (let item of educations) {
           item.startTime = Util.getYear(item.startTime)
           item.endTime = Util.getYear(item.endTime)
         }
-        for (let item of data.jobs) {
+        for (let item of jobs) {
           item.startTime = Util.getYear(item.startTime)
           item.endTime = Util.getYear(item.endTime)
         }
         this.setData({
           ...data,
+          account,
+          educations,
+          jobs,
           status: contactType.key,
         })
       },

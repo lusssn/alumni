@@ -6,7 +6,7 @@
         <view class="flex-item padding-l-lg">
           <view class="h1 text-strong padding-b-md">
             <text class="margin-r-sm">{{account.name}}</text>
-            <text wx:if="{{account.gender}}" class="text-error">♀</text>
+            <text wx:if="{{account.gender === 'Female'}}" class="text-error">♀</text>
             <text wx:else class="text-primary">♂</text>
           </view>
           <view class="padding-b-sm">ID: {{account.accountId}}</view>

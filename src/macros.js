@@ -1,7 +1,7 @@
 // 性别
 export const GENDER_TYPE = [
-  { id: 1, name: '男' },
-  { id: 2, name: '女' },
+  { id: 1, name: '男', key: 'Male' },
+  { id: 2, name: '女', key: 'Female' },
 ]
 
 // 学历
