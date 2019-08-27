@@ -25,10 +25,11 @@ Page({
     })
   },
   onShareAppMessage() {
-    const { account } = this.data
+    const { account, educations } = this.data
+    const education = educations[0] || {}
     return {
-      title: `${account.real_name}的SEU校友名片`,
-      path: `/pages/detail/detail?id=${account.openid}&isShare=1`,
+      title: `${education.school || ''}校友：${account.name}的名片`,
+      path: `/pages/detail/detail?id=${account.accountId}&isShare=1`,
     }
   },
   handleBasicEdit() {
