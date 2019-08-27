@@ -140,8 +140,7 @@ Page({
     })
   },
   loadBasic () {
-    const { accountId } = app.global
-    Api.getAccount({ accountId }).then(data => {
+    Api.getAccount().then(data => {
       // 处理时间
       data.birthday = Util.getYearMonthDate(data.birthday)
       data.gender = R.findIndex(R.propEq('id', data.gender), GENDER_TYPE)

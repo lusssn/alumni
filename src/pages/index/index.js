@@ -2,7 +2,6 @@ import wxUtil from '../../utils/wxUtil'
 import * as Api from '../api'
 
 const PAGE_SIZE = 10
-const app = getApp()
 
 Page({
   data: {
@@ -31,7 +30,6 @@ Page({
   },
   loadSquareCards(pageNo = 1) {
     return Api.getSquareCards({
-      accountId: app.global.accountId,
       pageSize: PAGE_SIZE,
       pageIndex: pageNo,
     }).then(res => {

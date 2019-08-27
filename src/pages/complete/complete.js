@@ -32,7 +32,6 @@ Page({
       () => {
         // 获取用户信息
         Api.getAccountAll({
-          myAccountId: app.global.accountId,
           accountId: app.global.accountId,
         }).then(
           data => {

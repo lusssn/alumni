@@ -68,7 +68,10 @@ export const getAccountAll = params =>
 /*************************************** 朋友 ***************************************/
 // 朋友-获取通知列表
 export const getNoticeList = params =>
-  request.get('/v2/message', params).then(res => res.data)
+  request.get('/v2/message', {
+    status: 0, // 0-未读，1-已读
+    ...params,
+  }).then(res => res.data)
 
 // 朋友-获取朋友列表
 export const getFriendList = params =>

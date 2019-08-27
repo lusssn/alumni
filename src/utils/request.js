@@ -1,6 +1,7 @@
 import server from '../server'
 import { promisify } from './util'
 import * as Error from '../error'
+import wxUtil from './wxUtil'
 
 const regHttp = /^(http[s]{0,1}:\/\/)/
 const app = getApp()
@@ -22,13 +23,21 @@ const request = (url, params = {}, others = {}) => {
     }
     return Promise.reject(Error.RESPONSE_ERROR)
   }).then(data => {
+    const { status = -1, message = '服务暂不可用' } = data
     // 特殊说明：qqMap接口返回的status为0时为成功
-    if (+data.status === 200 || data.status === 0) {
+    if (status === 200 || status === 0) {
       return data
     }
+    // 登录失效，重新登录
+    if (status === Error.INVALID_TOKEN.errCode) {
+      return wxUtil.login().then(
+        () => request(url, params, others),
+        err => Promise.reject(err),
+      )
+    }
     return Promise.reject({
-      errMsg: data.message || '服务暂不可用',
-      errCode: data.status || -1,
+      errMsg: message,
+      errCode: status,
     })
   }).catch(err => {
     return Promise.reject(err)

@@ -6,6 +6,7 @@ import { CONTACT_TYPE } from '../../macros'
 
 const PAGE_SIZE = 10
 const app = getApp()
+
 Page({
   data: {
     friendList: null, // 初始化为null，方便页面加载动画展示
@@ -56,7 +57,6 @@ Page({
   },
   loadNoticeList() {
     return Api.getNoticeList({
-      accountId: app.global.accountId,
       pageIndex: 1,
       pageSize: 3,
     }).then(data => {
@@ -77,7 +77,6 @@ Page({
   loadFriendList(pageNo = 1) {
     // 加载朋友列表数据
     return Api.getFriendList({
-      accountId: app.global.accountId,
       pageIndex: pageNo,
       pageSize: PAGE_SIZE,
     }).then(data => {
@@ -94,7 +93,6 @@ Page({
   loadFavoriteList(pageNo = 1) {
     // 加载收藏列表数据
     return Api.getFavoriteList({
-      accountId: app.global.accountId,
       pageIndex: pageNo,
       pageSize: PAGE_SIZE,
     }).then(data => {

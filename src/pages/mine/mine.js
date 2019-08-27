@@ -62,7 +62,6 @@ Page({
           return Promise.resolve()
         }
         return Api.getAccountAll({
-          myAccountId: app.global.accountId,
           accountId: app.global.accountId,
         }).then(
           data => {

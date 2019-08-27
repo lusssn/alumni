@@ -5,7 +5,6 @@ import * as Api from '../api'
 import { CONTACT_TYPE } from '../../macros'
 
 const PAGE_SIZE = 10
-const app = getApp()
 
 Page({
   data: {
@@ -32,7 +31,6 @@ Page({
   loadList(pageNo = 1) {
     // 加载消息列表数据
     return Api.getNoticeList({
-      accountId: app.global.accountId,
       pageIndex: pageNo,
       pageSize: PAGE_SIZE,
     }).then(data => {

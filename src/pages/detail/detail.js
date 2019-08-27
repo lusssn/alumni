@@ -32,7 +32,6 @@ Page({
   },
   loadCardInfo(friendAccountId) {
     return Api.getAccountAll({
-      myAccountId: app.global.accountId,
       accountId: friendAccountId,
     }).then(
       res => {
@@ -130,7 +129,6 @@ Page({
     const { account, favorite } = this.data
     const status = favorite ? 0 : 1
     Api.favoriteFriend({
-      accountId: app.global.accountId,
       favoriteAccountId: account.accountId,
       status,
     }).then(() => {
