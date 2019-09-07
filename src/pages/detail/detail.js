@@ -83,7 +83,7 @@ Page({
       A: app.global.accountId,
       B: accountId,
     }).then(() => {
-      wxUtil.showToast('已拒绝', 'success')
+      wxUtil.showToast('已忽略', 'success')
       this.loadCardInfo(accountId)
     }, () => {
       wxUtil.showToast('操作失败')

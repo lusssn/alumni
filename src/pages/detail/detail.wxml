@@ -74,7 +74,7 @@
       {{favorite ? '取消收藏' : '收藏名片'}}
     </button>
     <block wx:if="{{status === 'YES_OR_NO'}}">
-      <button class="flex-item" bindtap="handleRefuse">拒绝</button>
+      <button class="flex-item" bindtap="handleRefuse">忽略</button>
       <button class="flex-item" type="primary" bindtap="handleAccept">同意</button>
     </block>
     <button
