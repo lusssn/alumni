@@ -1,8 +1,6 @@
 import wxUtil from '../../utils/wxUtil'
 import * as Api from '../api'
-import * as R from '../../utils/ramda/index'
 import * as Util from '../../utils/util'
-import { COLLEGE_TYPE } from '../../macros'
 
 const app = getApp()
 
@@ -72,9 +70,6 @@ Page({
             for (let item of data.educations) {
               item.startTime = Util.getYear(item.startTime)
               item.endTime = Util.getYear(item.endTime)
-              // 处理院系
-              const college = R.find(R.propEq('id', +item.college), COLLEGE_TYPE) || {}
-              item.college = college.name
             }
             for (let item of data.jobs) {
               item.startTime = Util.getYear(item.startTime)

@@ -29,15 +29,15 @@
     "list": [
       {
         "pagePath": "pages/friend/friend",
-        "iconPath": "images/home-normal.png",
-        "selectedIconPath": "images/home-selected.png",
-        "text": "朋友"
+        "iconPath": "images/cards-normal.png",
+        "selectedIconPath": "images/cards-selected.png",
+        "text": "名片夹"
       },
       {
         "pagePath": "pages/index/index",
-        "iconPath": "images/friend-normal.png",
-        "selectedIconPath": "images/friend-selected.png",
-        "text": "圈子"
+        "iconPath": "images/contact-normal.png",
+        "selectedIconPath": "images/contact-selected.png",
+        "text": "人脉"
       },
       {
         "pagePath": "pages/mine/mine",

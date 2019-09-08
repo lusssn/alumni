@@ -1,5 +1,7 @@
 {
-  "navigationBarTitleText": "名片",
+  "navigationBarTitleText": "名片详情",
+  "navigationBarTextStyle": "white",
+  "navigationBarBackgroundColor": "#3A82E6",
   "usingComponents": {
     "BasicInfo": "../../components/BasicInfo/BasicInfo",
     "EducationInfo": "../../components/EducationInfo/EducationInfo",

@@ -5,7 +5,6 @@ import wxUtil from '../../utils/wxUtil'
 import {
   GENDER_TYPE,
   DEGREE_TYPE,
-  COLLEGE_TYPE,
   BASIC_FIELD,
   EDUCATION_FIELD,
   WORK_FIELD,
@@ -25,7 +24,6 @@ Page({
     id: null, // 若不为null，表示为编辑状态
     genderSelect: GENDER_TYPE,
     degreeSelect: DEGREE_TYPE,
-    collegeSelect: COLLEGE_TYPE,
     account: {},
     education: {
       education: R.findIndex(R.propEq('name', '本科'))(DEGREE_TYPE),
@@ -114,9 +112,6 @@ Page({
       // 处理degree
       const degree = DEGREE_TYPE[params.education] || {}
       params.education = degree.name
-      // 处理院系
-      const college = COLLEGE_TYPE[params.college] || {}
-      params.college = college.id
       // 必填项
       params = Util.checkParams(EDUCATION_FIELD, params)
       if (R.isEmpty(params)) return
@@ -162,8 +157,6 @@ Page({
       data.education = R.findIndex(
         R.propEq('name', data.education),
       )(DEGREE_TYPE)
-      // 处理院系
-      data.college = R.findIndex(R.propEq('id', +data.college), COLLEGE_TYPE)
       this.setData({
         education: data,
       })

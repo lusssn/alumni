@@ -1,5 +1,9 @@
 @import "variables";
 
+// bold
+.text-bold {
+  font-weight: bold;
+}
 // align
 .text-center {
   text-align: center;
@@ -19,7 +23,7 @@
 }
 // size
 .h1 {
-  font-size: 32rpx;
+  font-size: 34rpx;
 }
 .h2 {
   font-size: 30rpx;

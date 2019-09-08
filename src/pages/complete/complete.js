@@ -3,7 +3,7 @@ import * as Api from '../api'
 import * as Util from '../../utils/util'
 import wxUtil from '../../utils/wxUtil'
 import {
-  GENDER_TYPE, DEGREE_TYPE, COLLEGE_TYPE,
+  GENDER_TYPE, DEGREE_TYPE,
   BASIC_FIELD, EDUCATION_FIELD, WORK_FIELD,
 } from '../../macros'
 
@@ -14,7 +14,6 @@ Page({
     isLoaded: false,
     genderSelect: GENDER_TYPE,
     degreeSelect: DEGREE_TYPE,
-    collegeSelect: COLLEGE_TYPE,
     account: {},
     education: {},
     job: {},
@@ -45,18 +44,10 @@ Page({
             const education = educations[0] || {}
             education.startTime = Util.getYear(education.startTime)
             education.endTime = Util.getYear(education.endTime)
-            // 处理院系
-            if (education.college) {
-              education.college = R.findIndex(R.propEq('id', +education.college), COLLEGE_TYPE)
-            }
             // 处理学历
             education.education = R.findIndex(
               R.propEq('name', education.education || '本科'),
             )(DEGREE_TYPE)
-            // 处理院系
-            education.college = R.findIndex(
-              R.propEq('id', education.college),
-            )(COLLEGE_TYPE)
 
             const job = jobs[0] || {}
             job.startTime = Util.getYear(job.startTime)
@@ -116,9 +107,6 @@ Page({
     // 处理学历
     const degree = DEGREE_TYPE[education.education] || {}
     education.education = degree.name
-    // 处理学院
-    const college = COLLEGE_TYPE[education.college] || {}
-    education.college = college.id
 
     // 必填项判断
     account = Util.checkParams(BASIC_FIELD, account)

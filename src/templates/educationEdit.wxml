@@ -40,19 +40,12 @@
       <view class="field">
         <label class="field-label"><text class="text-error">*</text>院系：</label>
         <view class="field-content">
-          <picker
-            range="{{collegeSelect}}"
-            range-key="name"
+          <input
+            placeholder="请输入院系"
             value="{{education.college}}"
             data-name="education.college"
-            bindchange="handleInputChange"
-          >
-            <input
-              placeholder="请输入院系"
-              value="{{collegeSelect[education.college].name}}"
-              disabled
-            />
-          </picker>
+            bindinput="handleInputChange"
+          />
         </view>
       </view>
       <view class="field">

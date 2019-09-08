@@ -11,7 +11,7 @@
             <text class="text-muted">{{data.city}}</text>
           </view>
         </view>
-        <view wx:if="{{data.college}}" class="padding-b-sm">学院：{{collegeTypeMap[data.college]}}</view>
+        <view wx:if="{{data.college}}" class="padding-b-sm">学院：{{data.college}}</view>
         <view wx:if="{{data.company}}">公司：{{data.company}}－{{data.position}}</view>
       </view>
     </view>

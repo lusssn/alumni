@@ -11,7 +11,7 @@
   <template
     wx:if="{{type === 'education'}}"
     is="educationEdit"
-    data="{{ degreeSelect, collegeSelect, education }}"
+    data="{{ degreeSelect, education }}"
   />
   <template
     wx:if="{{type === 'job'}}"

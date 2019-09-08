@@ -1,22 +1,18 @@
-<view wx:if="{{status}}" class="container padding-t-md">
-  <view class="card">
-    <view class="card-block">
-      <view class="flex-align-center padding-t-lg padding-b-lg border-b">
-        <image class="avatar" mode="aspectFill" src="{{account.avatar || '../../images/avatar_default.jpeg'}}" />
-        <view class="flex-item padding-l-lg">
-          <view class="h1 text-strong padding-b-md">
-            <text class="margin-r-sm">{{account.name}}</text>
-            <text wx:if="{{account.gender === 'Female'}}" class="text-error">♀</text>
-            <text wx:else class="text-primary">♂</text>
-          </view>
-          <view class="padding-b-sm">ID: {{account.accountId}}</view>
-          <view wx:if="{{account.selfDesc}}">{{account.selfDesc}}</view>
-        </view>
-        <view class="self-top">
-          <icon class="icon-location" />
-          <text class="text-muted">{{account.city}}</text>
-        </view>
+<view wx:if="{{status}}" class="container">
+  <view class="header margin-b-md">
+    <image class="avatar" mode="aspectFill" src="{{account.avatar || '../../images/avatar_default.jpeg'}}" />
+    <view class="flex-item padding-l-lg">
+      <view class="h1 text-bold">
+        <text class="margin-r-sm">{{account.name}}</text>
+        <text wx:if="{{account.gender === 'Female'}}" class="text-error">♀</text>
+        <text wx:else class="text-primary">♂</text>
       </view>
+      <view>ID: {{account.accountId}}</view>
+      <view wx:if="{{account.selfDesc}}">{{account.selfDesc}}</view>
+    </view>
+    <view class="h1 self-top">
+      <icon class="icon-location" />
+      <text>{{account.city}}</text>
     </view>
   </view>
 
