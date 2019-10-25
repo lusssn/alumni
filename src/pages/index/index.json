@@ -1,5 +1,7 @@
 {
-  "navigationBarTitleText": "SEU校友圈",
+  "navigationBarTitleText": "人脉",
+  "navigationBarTextStyle": "white",
+  "navigationBarBackgroundColor": "#3A82E6",
   "enablePullDownRefresh": true,
   "usingComponents": {
     "Loading": "../../components/Loading/Loading",

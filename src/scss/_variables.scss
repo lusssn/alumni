@@ -1,3 +1,4 @@
+$blue-dark: #1C567A;
 $blue-base: #3A82E6;
 $red-base: #F76260;
 
@@ -5,7 +6,7 @@ $gray-deepest: #333333;
 $gray-deeper: #666666;
 $gray-deep: #999999;
 $gray-base: #CACACA; // tabbar icon
-$gray-light: #E5E5E5;
+$gray-light: #DCDCDC;
 $gray-lighter: #EEEEEE;
 $gray-lightest: #F5F5F5;
 
@@ -15,6 +16,7 @@ $error-color: $red-base;
 $border-color: $gray-light; // 边
 $bg-color: $gray-lighter; // 背景
 $ground-color: $gray-lightest; // 大背景
+$shadow-color: $blue-dark;
 
 $strong-color: $gray-deepest; // 标题文字
 $main-color: $gray-deeper; // 主要文字

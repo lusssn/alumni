@@ -3,16 +3,16 @@
 
 .header {
   display: flex;
-  padding: 53rpx 42rpx;
   align-items: center;
   font-size: 28rpx;
   color: $gray-lighter;
-  border-radius: 0 0 40rpx 40rpx;
+  border-radius: 0 0 20rpx 20rpx;
   background-color: $theme-color;
+  box-shadow: 0 6rpx 18rpx 0 rgba($shadow-color, .25);
 
   .avatar {
-    width: 143rpx;
-    height: 143rpx;
+    width: 142rpx;
+    height: 142rpx;
     border-radius: 50%;
     background-color: $bg-color;
   }

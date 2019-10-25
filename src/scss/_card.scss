@@ -1,9 +1,10 @@
 @import "variables";
 
 .card {
-  margin-bottom: 20rpx;
+  margin-bottom: 36rpx;
   background-color: white;
-  box-shadow: 0 0 0.1px #CACACA;
+  border-radius: 10rpx;
+  box-shadow: 0 0 20rpx 0 rgba($shadow-color, .1);
   &-header {
     position: relative;
     display: flex;
@@ -40,8 +41,8 @@
     }
   }
   &-else {
-    float: center;
     display: flex;
+    float: center;
     flex: 1;
     font-size: 35rpx;
     color: #CACACA;
