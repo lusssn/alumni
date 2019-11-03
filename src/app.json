@@ -1,6 +1,6 @@
 {
   "pages":[
-    "pages/index/index",
+    "pages/connections/connections",
     "pages/friend/friend",
     "pages/mine/mine",
     "pages/search/search",
@@ -28,7 +28,7 @@
     "borderStyle": "white",
     "list": [
       {
-        "pagePath": "pages/index/index",
+        "pagePath": "pages/connections/connections",
         "iconPath": "images/contact-normal.png",
         "selectedIconPath": "images/contact-selected.png",
         "text": "人脉"

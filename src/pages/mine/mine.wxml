@@ -4,7 +4,7 @@
       <view class="flex-align-center padding-t-lg padding-b-lg border-b">
         <image class="avatar" mode="aspectFill" src="{{account.avatar || '../../images/avatar_default.jpeg'}}" />
         <view class="flex-item padding-l-lg">
-          <view class="h1 text-strong padding-b-md">
+          <view class="h1 text-title padding-b-md">
             <text>{{account.name}}</text>
           </view>
           <view>ID: {{account.accountId}}</view>
@@ -16,7 +16,7 @@
   </view>
   <view wx:if="{{!account.phone}}" class="card" bindtap="handleRegister">
     <view class="card-block flex-align-center padding-t-lg padding-b-lg">
-      <view class="flex-item h1 text-strong">
+      <view class="flex-item h1 text-title">
         完善信息，结识优秀人脉
       </view>
       <icon class="icon-arrow-right margin-l-sm" />

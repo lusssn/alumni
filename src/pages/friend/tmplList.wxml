@@ -10,7 +10,7 @@
     >
       <image class="avatar" mode="aspectFill" src="{{item.avatar || '../../images/avatar_default.jpeg'}}" />
       <view class="flex-item padding-l-lg">
-        <view class="h1 text-strong padding-b-sm">
+        <view class="h1 text-title padding-b-sm">
           <text>{{item.name}}</text>
         </view>
         <view>{{item.company || '暂无公司'}}－{{item.position || '暂无职位'}}</view>

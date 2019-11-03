@@ -4,29 +4,11 @@
 @import "./scss/border";
 @import "./scss/font";
 
+@import "./scss/search";
 @import "./scss/header";
 @import "./scss/card";
 @import "./scss/field";
 @import "./scss/tag";
-
-.search {
-  position: relative;
-  display: flex;
-  align-items: center;
-  box-shadow: 0 6rpx 18rpx 0 rgba($shadow-color, .1);
-  border-radius: 14rpx;
-  overflow: hidden;
-  & > icon {
-    position: absolute;
-    top: 30rpx;
-    left: 20rpx;
-  }
-  &-input {
-    padding: 20rpx 15rpx 18rpx 70rpx;
-    flex: 1;
-    background-color: white;
-  }
-}
 
 .link {
   color: $theme-color;

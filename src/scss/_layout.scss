@@ -14,6 +14,10 @@
   display: flex;
   align-items: flex-start;
 }
+.flex-align-bottom {
+  display: flex;
+  align-items: flex-end;
+}
 .flex-direction-column {
   flex-direction: column;
 }
@@ -44,7 +48,7 @@ $sizeMap: (
     no: 0,
     sm: 10rpx,
     md: 20rpx,
-    lg: 32rpx,
+    lg: 30rpx,
     xl: 36rpx
 );
 @each $direction, $prefix in $directionList {

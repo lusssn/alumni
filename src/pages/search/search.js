@@ -44,7 +44,4 @@ Page({
       way
     })
   },
-  handleGoBack() {
-    wx.navigateBack()
-  },
 })

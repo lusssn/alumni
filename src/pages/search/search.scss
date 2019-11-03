@@ -1,26 +1,34 @@
 @import "../../scss/variables";
 
-// 搜索结果
-.search-result {
-  position: absolute;
-  top: 134rpx;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  margin-bottom: 0;
-}
-.search-item {
-  padding: 26rpx 0;
-  &:active {
-    opacity: .7;
+// 搜索框样式
+.search-header {
+  position: relative;
+  display: flex;
+  margin: 0 34rpx;
+  padding-left: 42rpx;
+  overflow: hidden;
+  align-items: center;
+  border: 2rpx solid $border-color;
+  border-radius: 14rpx;
+  & > icon {
+    position: absolute;
+    top: 50%;
+    left: 42rpx;
+    transform: translateY(-50%);
+  }
+  &-input {
+    padding: 20rpx 15rpx 18rpx 68rpx;
+    flex: 1;
+    background-color: white;
   }
 }
+
 // 准备搜索
 .ready-text {
   padding-top: 50rpx;
   & > text {
     position: relative;
-    padding: 0 50rpx;
+    padding: 0 34rpx;
     &:not(:last-child)::before {
       position: absolute;
       top: 6rpx;
@@ -31,5 +39,30 @@
       transform: scaleX(.5);
       background-color: $gray-deep;
     }
+  }
+}
+
+// 搜索结果
+.search-result {
+  position: absolute;
+  top: 114rpx;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin-bottom: 0;
+}
+.search-result-capsule {
+  padding: 0 36rpx;
+  font-size: 24rpx;
+  line-height: 50rpx;
+  color: rgba($strong-color, .5);
+  border-radius: 25rpx;
+  background-color: $bg-color;
+}
+
+.search-item {
+  padding: 20rpx 40rpx 20rpx 54rpx;
+  &:active {
+    opacity: .7;
   }
 }

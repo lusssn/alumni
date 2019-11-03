@@ -1,8 +1,14 @@
 @import "../../scss/variables";
 
-.avatar {
-  width: 132rpx;
-  height: 132rpx;
+.business-card-avatar {
+  width: 96rpx;
+  height: 96rpx;
   border-radius: 50%;
   background-color: $bg-color;
+}
+
+.business-card-header {
+  display: flex;
+  padding-bottom: 14rpx;
+  align-items: flex-end;
 }

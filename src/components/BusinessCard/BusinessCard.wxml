@@ -1,23 +1,27 @@
 <view wx:if="{{data.name}}" class="card">
   <view class="card-block">
-    <view class="flex-align-center padding-t-lg padding-b-lg border-b">
-      <image class="avatar" mode="aspectFill" src="{{data.avatar || '../../images/avatar_default.jpeg'}}" />
-      <view class="flex-item padding-l-lg">
-        <view class="flex padding-b-sm">
-          <text class="flex-item h1 text-strong">{{data.name}}</text>
-          <!--<text class="tag margin-l-md">{{data.status}}</text>-->
+    <view class="flex-align-center padding-t-lg padding-b-lg">
+      <image
+        class="business-card-avatar"
+        mode="aspectFill"
+        src="{{data.avatar || '../../images/avatar_default.jpeg'}}"
+      />
+      <view class="flex-item padding-l-md">
+        <view class="business-card-header">
+          <text class="flex-item h1 text-title">{{data.name}}</text>
           <view wx:if="{{data.city}}">
             <icon class="icon-location" />
             <text class="text-muted">{{data.city}}</text>
           </view>
         </view>
-        <view wx:if="{{data.college}}" class="padding-b-sm">学院：{{data.college}}</view>
-        <view wx:if="{{data.company}}">公司：{{data.company}}－{{data.position}}</view>
+        <view wx:if="{{data.company}}" class="h3">
+          <text class="text-primary margin-r-sm">{{data.position}}</text>
+          <text class="text-title">{{data.company}}</text>
+        </view>
+        <view wx:if="{{data.college}}">
+          2012级，东南大学，{{data.college}}
+        </view>
       </view>
-    </view>
-    <view wx:if="{{data.selfDesc}}" class="padding-t-md padding-b-md">
-      <icon class="icon-plane margin-r-sm" />
-      <text class="text-muted">{{data.selfDesc}}</text>
     </view>
   </view>
 </view>

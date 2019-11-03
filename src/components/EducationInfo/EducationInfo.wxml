@@ -5,7 +5,7 @@
   </view>
   <view class="field">
     <label class="field-label">院系：</label>
-    <view class="text-strong">
+    <view class="text-title">
       <text class="flex flex-align-center">
         <text>{{data.school}}</text>
         <text wx:if="{{data.college}}">－{{data.college}}</text>
