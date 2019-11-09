@@ -10,6 +10,7 @@ Page({
     account: {},
     educations: [],
     jobs: [],
+    messageCount: 0,
   },
   onLoad() {
     this.loadAllInfo()
@@ -30,28 +31,20 @@ Page({
       path: `/pages/detail/detail?id=${account.accountId}&isShare=1`,
     }
   },
-  handleBasicEdit() {
+  handleEdit() {
     wxUtil.navigateTo('edit', { type: 'account' })
   },
-  handleEducationAdd(e) {
-    const { id } = e.target.dataset
-    if (id) {
-      wxUtil.navigateTo('edit', {
-        type: 'education', id,
-      })
-      return
-    }
-    wxUtil.navigateTo('edit', { type: 'education' })
+  handleToCardcase(){
+    wxUtil.navigateTo('friend', { type: 'account' })
   },
-  handleWorkAdd(e) {
-    const { id } = e.target.dataset
-    if (id) {
-      wxUtil.navigateTo('edit', {
-        type: 'job', id,
-      })
-      return
-    }
-    wxUtil.navigateTo('edit', { type: 'job' })
+  handleToAlumni(){
+    wxUtil.navigateTo('friend', { type: 'account' })
+  },
+  handleToActivity(){
+    wxUtil.navigateTo('friend', { type: 'account' })
+  },
+  handleToMsgs(){
+    wxUtil.navigateTo('friend', { type: 'account' })
   },
   loadAllInfo() {
     return wxUtil.login().then(

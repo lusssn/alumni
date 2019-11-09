@@ -1,0 +1,35 @@
+<view class="flex-align-center flex-direction-column info-area card">
+  <view class="avater-field">
+    <image class="avatar" mode="aspectFill" src="{{data[0].avatar || '../../images/avatar_default.jpeg'}}" />
+  </view>
+  <view class="name-field">
+    <text class="h3 text-title">{{data[0].name}}</text>
+    <icon bindtap="handleEdit" />
+  </view>
+  <view class="text-primary">
+    {{data[1][0].startTime%100}}级-{{data[1][0].school}}-{{data[1][0].college}}-{{data[1][0].education}}
+  </view>
+  <view class="flex info-list">
+    <view wx:if="{{data[2][0].company}}" class="field">
+      <label>公司：</label>
+      <text class="text-title">{{data[2][0].company}}</text>
+    </view>
+    <view wx:if="{{data[2][0].position}}" class="field">
+      <label>职位：</label>
+      <text class="text-title">{{data[2][0].position}}</text>
+    </view>
+    <view wx:if="{{data[0].email}}" class="field">
+      <label>邮箱：</label>
+      <text class="text-title">{{data[0].email}}</text>
+    </view>
+    <view wx:if="{{data[0].phone}}" class="field">
+      <label>手机：</label>
+      <text class="text-title">{{data[0].phone}}</text>
+    </view>
+    <view wx:if="{{data[0].wechat}}" class="field">
+      <label>微信：</label>
+      <text class="text-title">{{data[0].wechat}}</text>
+    </view>
+  </view>
+  <slot></slot>
+</view>

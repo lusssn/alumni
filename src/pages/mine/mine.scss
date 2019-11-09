@@ -1,11 +1,99 @@
 @import "../../scss/variables";
+@import "../../scss/svg";
+@import "../../scss/border";
 
-.avatar {
-  width: 132rpx;
-  height: 132rpx;
-  border-radius: 50%;
-  background-color: $bg-color;
+.base-header {
+  height: 200rpx;
+  border-radius: 0 0 20rpx 20rpx;
+  box-shadow: 0 6rpx 18rpx 0 rgba(28,86,122,0.25);
+  background-color: $theme-color;
 }
+
+.content {
+  position: absolute;
+  top: 60rpx;
+  right: 32rpx;
+  left: 32rpx;
+  .info-area{
+    align-items: center;
+    background-color: #fff;
+    .avater-field {
+      position: absolute;
+      transform: translateY(-50%);
+      .avatar {
+        width: 100rpx;
+        height: 100rpx;
+        border-radius: 50%;
+        border: 5rpx solid #fff;
+        background-color: $bg-color;
+      }
+    }
+    .name-field{
+      position: relative;
+      margin-top: 60rpx;
+      & > icon{
+        @include svg("edit", white);
+        position: absolute;
+        right: -50rpx;
+        width: 40rpx;
+        height: 40rpx;
+        border-radius: 50%;
+        background-color: $theme-color;
+      }
+    }
+    .info-list{
+      justify-content: left;
+      flex-wrap: wrap;
+      padding: 0 28rpx 15rpx;
+      & > view{
+        padding: 5rpx 0;
+        font-size: 24rpx;
+        width: 50%;
+      }
+      & text{
+        font-size: 24rpx;
+        overflow: hidden;
+      }
+    }
+    .share-field{
+      width: 620rpx;
+      padding: 15rpx 0;
+      margin: 0 35rpx;
+      justify-content: space-between;
+      .share-img{
+        width: 40rpx;
+        height: 40rpx;
+        margin-right: 6rpx;
+      }
+    }
+  }
+  .nav-list{
+    padding: 0 40rpx;
+    .nav-item{
+      height: 122rpx;
+      & + .nav-item{
+        @include borderPoint5("t");
+      }
+      & image{
+        width: 48rpx;
+        height: 48rpx;
+        margin-right: 12rpx;
+      }
+      .red-number{
+        width: 34rpx;
+        height: 34rpx;
+        border-radius: 50%;
+        color: #fff;
+        background-color: #FD3F3F;
+      }
+    }
+    .message-field{
+      justify-content: space-between;
+    }
+  }
+}
+
+
 .experience-empty {
   width: 189rpx;
   height: 203rpx;
