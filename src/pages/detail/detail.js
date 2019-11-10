@@ -12,6 +12,7 @@ Page({
     educations: [],
     jobs: [],
     status: '',
+    currentTab: 0,
   },
   onLoad({ id, isShare }) {
     if (!id) {
@@ -131,19 +132,20 @@ Page({
     })
   },
   handleFavorite() {
-    const { account, favorite } = this.data
-    const status = favorite ? 0 : 1
-    Api.favoriteFriend({
-      favoriteAccountId: account.accountId,
-      status,
-    }).then(() => {
-      this.setData({
-        favorite: status,
-      })
-      app.setNotice('favorited', true)
-      wxUtil.showToast('操作成功', 'success')
-    }, () => {
-      wxUtil.showToast('操作失败')
-    })
+    // const { account, favorite } = this.data
+    // const status = favorite ? 0 : 1
+    // Api.favoriteFriend({
+    //   favoriteAccountId: account.accountId,
+    //   status,
+    // }).then(() => {
+    //   this.setData({
+    //     favorite: status,
+    //   })
+    //   app.setNotice('favorited', true)
+    //   wxUtil.showToast('操作成功', 'success')
+    // }, () => {
+    //   wxUtil.showToast('操作失败')
+    // })
+    console.log(this.data)
   },
 })
