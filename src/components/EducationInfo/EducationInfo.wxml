@@ -3,7 +3,7 @@
   <view class="flex-align-center education">
     <view class="text-primary h3">{{data.education}}</view>
     <view class="text-muted h5 time" wx:if="{{data.startTime || data.endTime}}">
-      {{data.startTime || '未填写'}}-{{data.endTime || '未填写'}}
+      {{data.startTime || '未填写'}}级,{{data.college}},{{data.college}}
     </view>
   </view>
 </view>
