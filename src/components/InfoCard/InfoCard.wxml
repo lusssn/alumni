@@ -4,7 +4,7 @@
   </view>
   <view class="name-field">
     <text class="h3 text-title">{{data[0].name}}</text>
-    <icon bindtap="handleEdit" />
+    <icon wx:if="{{handleEdit}}" bindtap="handleEdit" />
   </view>
   <view class="text-primary">
     {{data[1][0].startTime%100}}级-{{data[1][0].school}}-{{data[1][0].college}}-{{data[1][0].education}}

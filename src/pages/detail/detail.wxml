@@ -16,11 +16,11 @@
     <view class="h1 text-title sub-title">校友档案</view>
     <view class="card">
       <TabBox tabs="{{[{label:'工作经历'},{label:'教育经历'}]}}">
-        <view slot="slot-0" wx:for="{{jobs}}" wx:key="{{index}}">
-          <WorkInfo data="{{item}}" border="{{index>0}}"/>
+        <view slot="slot-0" style="height: 100%; overflow: auto;">
+          <WorkInfo wx:for="{{jobs}}" wx:key="{{index}}" data="{{item}}" border="{{index>0}}"/>
         </view>
-        <view slot="slot-1" wx:for="{{educations}}" wx:key="{{index}}">
-          <EducationInfo data="{{item}}" border="{{index>0}}"/>
+        <view slot="slot-1" style="height: 100%; overflow: auto;">
+          <EducationInfo wx:for="{{educations}}" wx:key="{{index}}" data="{{item}}" border="{{index>0}}"/>
         </view>
       </TabBox>
     </view>
