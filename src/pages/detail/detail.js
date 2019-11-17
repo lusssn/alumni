@@ -103,36 +103,8 @@ Page({
       wxUtil.showToast(err.errMsg || '操作失败')
     })
   },
-  handleAddWechat() {
-    const { wechat } = this.data.account
-    if (!wechat) {
-      wxUtil.showToast('暂未填写微信')
-      return
-    }
-    Util.promisify(wx.setClipboardData)({
-      data: wechat,
-    }).then(
-      () => {
-        wxUtil.showToast('复制微信号成功', 'success')
-      },
-      () => {
-        wxUtil.showToast('操作失败')
-      },
-    )
-  },
-  handleAddPhone() {
-    const { phone, name } = this.data.account
-    if (!phone) {
-      wxUtil.showToast('暂未填写电话')
-      return
-    }
-    wx.addPhoneContact({
-      firstName: name, //联系人姓名
-      mobilePhoneNumber: phone, //联系人手机号
-    })
-  },
   handleFavorite() {
-    // const { account, favorite } = this.data
+    const { account, favorite } = this.data
     // const status = favorite ? 0 : 1
     // Api.favoriteFriend({
     //   favoriteAccountId: account.accountId,
@@ -146,6 +118,6 @@ Page({
     // }, () => {
     //   wxUtil.showToast('操作失败')
     // })
-    console.log(this.data)
+    console.log(this.data.status)
   },
 })

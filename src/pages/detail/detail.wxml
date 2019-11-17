@@ -1,25 +1,25 @@
 <view wx:if="{{status}}" class="container">
   <view class="base-header"></view>
   <view class="content">
-    <InfoCard data="{{[account,educations,jobs]}}"></InfoCard>
+    <InfoCard data="{{[account,educations,jobs]}}" allField="{{status === FRIEND}}"></InfoCard>
     <view class="h1 text-title sub-title">基本信息</view>
     <view class="base-card card">
-      <view class="field">
+      <view wx:if="{{account.birthday}}" class="field">
         <label class="field-label text-muted">生日：</label>
-        <view class="field-content text-muted">1994-02-04</view>
+        <view class="field-content text-muted">{{account.birthday}}</view>
       </view>
-      <view class="field">
+      <view wx:if="{{account.selfDesc}}" class="field">
         <label class="field-label text-muted">自我描述：</label>
-        <view class="field-content text-muted">做最好的自己～</view>
+        <view class="field-content text-muted">{{account.selfDesc}}</view>
       </view>
     </view>
     <view class="h1 text-title sub-title">校友档案</view>
     <view class="card">
       <TabBox tabs="{{[{label:'工作经历'},{label:'教育经历'}]}}">
-        <view slot="slot-0" style="height: 100%; overflow: auto;">
+        <view slot="slot-0" class="experience">
           <WorkInfo wx:for="{{jobs}}" wx:key="{{index}}" data="{{item}}" border="{{index>0}}"/>
         </view>
-        <view slot="slot-1" style="height: 100%; overflow: auto;">
+        <view slot="slot-1" class="experience">
           <EducationInfo wx:for="{{educations}}" wx:key="{{index}}" data="{{item}}" border="{{index>0}}"/>
         </view>
       </TabBox>

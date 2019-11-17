@@ -6,6 +6,9 @@ Component({
     data: {
       type: Object, value: {},
     },
+    allField: {
+      type: Boolean, value: true
+    },
     handleEdit: {
       type: Function
     }
