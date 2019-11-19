@@ -12,7 +12,8 @@ Page({
     educations: [],
     jobs: [],
     status: '',
-    currentTab: 0,
+    showModal: false,
+    message: '',
   },
   onLoad({ id, isShare }) {
     if (!id) {
@@ -93,31 +94,50 @@ Page({
   handleApplyExchange() {
     if (!Util.isRegistered()) return
     const { accountId } = this.data.account
+    this.setData({
+      showModal: true
+    })
+  },
+  handleMessageInput(event) {
+    this.setData({
+      message: event.detail.value
+    })
+  },
+  handlepplyCancel() {
+    this.setData({
+      showModal: false,
+      message: '',
+    })
+  },
+  handlepplySend() {
     Api.applyFriend({
       A: app.global.accountId,
       B: accountId,
     }).then(() => {
       wxUtil.showToast('申请已发出', 'success')
       this.loadCardInfo(accountId)
+      this.setData({
+        showModal: false,
+        message: '',
+      })
     }, err => {
       wxUtil.showToast(err.errMsg || '操作失败')
     })
   },
   handleFavorite() {
     const { account, favorite } = this.data
-    // const status = favorite ? 0 : 1
-    // Api.favoriteFriend({
-    //   favoriteAccountId: account.accountId,
-    //   status,
-    // }).then(() => {
-    //   this.setData({
-    //     favorite: status,
-    //   })
-    //   app.setNotice('favorited', true)
-    //   wxUtil.showToast('操作成功', 'success')
-    // }, () => {
-    //   wxUtil.showToast('操作失败')
-    // })
-    console.log(this.data.status)
+    const status = favorite ? 0 : 1
+    Api.favoriteFriend({
+      favoriteAccountId: account.accountId,
+      status,
+    }).then(() => {
+      this.setData({
+        favorite: status,
+      })
+      app.setNotice('favorited', true)
+      wxUtil.showToast('操作成功', 'success')
+    }, () => {
+      wxUtil.showToast('操作失败')
+    })
   },
 })

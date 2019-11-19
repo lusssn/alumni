@@ -17,10 +17,10 @@
     <view class="card">
       <TabBox tabs="{{[{label:'工作经历'},{label:'教育经历'}]}}">
         <view slot="slot-0" class="experience">
-          <WorkInfo wx:for="{{jobs}}" wx:key="{{index}}" data="{{item}}" border="{{index>0}}"/>
+          <WorkInfo wx:for="{{jobs}}" wx:key="{{index}}" data="{{item}}" border="{{index>0}}" />
         </view>
         <view slot="slot-1" class="experience">
-          <EducationInfo wx:for="{{educations}}" wx:key="{{index}}" data="{{item}}" border="{{index>0}}"/>
+          <EducationInfo wx:for="{{educations}}" wx:key="{{index}}" data="{{item}}" border="{{index>0}}" />
         </view>
       </TabBox>
     </view>
@@ -38,9 +38,24 @@
       <button class="flex-item" bindtap="handleAddPhone">添加通讯录</button>
       <button class="flex-item" type="primary" bindtap="handleAddWechat">添加微信</button>
     </block>
-    <button wx:elif="{{status === 'SEASSI'}}" class="flex-item" type="default" disabled>
+    <button wx:elif="{{status === 'SEASSI'}}" class="flex-item" type="default"  disabled>
       已申请交换名片
     </button>
+  </view>
+  <view wx:if="{{showModal}}" class='mask'>
+    <view class='modal-content'>
+      <view class="flex tips">
+        <image src="../../images/avatar_default.jpeg" />
+        <text class="h3 text-muted">给他留言，能够增加名片交换的通过率哦</text>
+      </view>
+      <view>
+        <input class="message-input h2" bindinput="handleMessageInput"/>
+      </view>
+      <view class='flex modal-btn-wrapper'>
+        <view class='cancel-btn h1' bindtap='handlepplyCancel'>取消</view>
+        <view class='confirm-btn h1' bindtap='handlepplySend'>确定</view>
+      </view>
+    </view>
   </view>
 </view>
 <Loading wx:else isFixed />
