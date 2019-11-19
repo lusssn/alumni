@@ -3,6 +3,7 @@
   "enablePullDownRefresh": true,
   "usingComponents": {
     "Loading": "../../components/Loading/Loading",
-    "NoticeItem": "../../components/NoticeItem/NoticeItem"
+    "Nav": "../../components/Nav/Nav",
+    "BusinessCard": "../../components/BusinessCard/BusinessCard"
   }
 }

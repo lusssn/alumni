@@ -1,0 +1,31 @@
+@import "../../scss/variables";
+
+.nav {
+  display: flex;
+  background-color: white;
+
+  .nav-item {
+    position: relative;
+    padding-top: 10rpx;
+    flex: 1;
+    font-size: 32rpx;
+    line-height: 62rpx;
+    text-align: center;
+    color: $main-color;
+    &::before {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      width: 42rpx;
+      height: 4rpx;
+      margin-left: -21rpx;
+      content: "";
+      transition: all .18s ease;
+      border-radius: 2rpx;
+      background-color: transparent;
+    }
+    &.active::before {
+      background-color: $theme-color;
+    }
+  }
+}
