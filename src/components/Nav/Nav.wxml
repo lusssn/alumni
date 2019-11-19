@@ -1,0 +1,11 @@
+<view class="nav {{className}}">
+  <view
+    wx:for="{{data}}"
+    wx:key="id"
+    class="nav-item {{current === item.id ? 'active' : ''}}"
+    data-id="{{item.id}}"
+    bindtap="handleClickNav"
+  >
+    {{item.name}}
+  </view>
+</view>

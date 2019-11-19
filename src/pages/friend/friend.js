@@ -1,26 +1,26 @@
 import wxUtil from '../../utils/wxUtil'
-import * as R from '../../utils/ramda/index'
 import * as Api from '../api'
-import * as Util from '../../utils/util'
-import { CONTACT_TYPE } from '../../macros'
+import * as R from '../../utils/ramda/index'
 
 const PAGE_SIZE = 10
 const app = getApp()
 
+const NAV_CONFIG = [
+  { id: 1, name: '我的人脉', key: 'Friend' },
+  { id: 2, name: '我的收藏', key: 'Favorite' },
+]
+
 Page({
   data: {
+    NAV: NAV_CONFIG,
+    currentTab: NAV_CONFIG[0],
     friendList: null, // 初始化为null，方便页面加载动画展示
     friendPagination: { current: 1, total: 0 },
-    noticeList: [],
-    noticeTotal: 0,
     favoriteList: null, // 初始化为null，方便页面加载动画展示
     favoritePagination: { current: 1, total: 0 },
-    currentTab: 'friend',
   },
   onLoad() {
     wxUtil.login().then(() => {
-      // 加载消息列表数据
-      this.loadNoticeList()
       // 加载朋友列表数据
       this.loadFriendList()
       // 加载收藏列表
@@ -32,7 +32,6 @@ Page({
   },
   onPullDownRefresh() {
     Promise.all([
-      this.loadNoticeList(),
       this.loadFriendList(),
       this.loadFavoriteList(),
     ]).then(() => {
@@ -41,7 +40,7 @@ Page({
   },
   onReachBottom() {
     const { currentTab } = this.data
-    if (currentTab === 'friend') {
+    if (currentTab.key === 'Friend') {
       const { total, current } = this.data.friendPagination
       // 是否为最后一页
       if (Math.ceil(total / PAGE_SIZE) > current) {
@@ -54,25 +53,6 @@ Page({
     if (Math.ceil(total / PAGE_SIZE) > current) {
       this.loadFavoriteList(current + 1)
     }
-  },
-  loadNoticeList() {
-    return Api.getNoticeList({
-      pageIndex: 1,
-      pageSize: 3,
-    }).then(data => {
-      const { list, count } = data
-      list.forEach(item => {
-        const contactType = R.find(R.propEq('id', +item.status))(CONTACT_TYPE) || {}
-        item.status_name = contactType.name
-        item.createTime = Util.getYearMonthDate(item.createTime)
-      })
-      this.setData({
-        noticeList: list,
-        noticeTotal: count,
-      })
-    }, err => {
-      wxUtil.showToast(err.errMsg)
-    })
   },
   loadFriendList(pageNo = 1) {
     // 加载朋友列表数据
@@ -106,18 +86,14 @@ Page({
       })
     }, () => {})
   },
-  handleSwitch(e) {
-    const { id } = e.target.dataset
-    if (!id) return
+  handleSwitch(event) {
+    const { id } = event.detail
     this.setData({
-      currentTab: id,
+      currentTab: R.find(R.propEq('id', id), NAV_CONFIG),
     })
   },
   handleClickCard(e) {
     const { id } = e.currentTarget.dataset
     wxUtil.navigateTo('detail', { id })
-  },
-  handleToNotice() {
-    wxUtil.navigateTo('notice')
   },
 })
