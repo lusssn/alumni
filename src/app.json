@@ -10,7 +10,9 @@
     "pages/complete/complete",
     "pages/detail/detail",
     "pages/notice/notice",
-    "pages/register/register"
+    "pages/register/register",
+    "pages/myActivity/myActivity",
+    "pages/activityDetail/activityDetail"
   ],
   "permission": {
     "scope.userLocation": {

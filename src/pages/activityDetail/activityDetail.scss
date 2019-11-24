@@ -1,0 +1,13 @@
+@import "../../scss/variables";
+
+.activity-title {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: $strong-color;
+}
+.avatar {
+  width: 60rpx;
+  height: 60rpx;
+  border-radius: 50%;
+  background-color: $bg-color;
+}

@@ -1,0 +1,38 @@
+<view class="padding-t-lg padding-l-xl padding-r-xl">
+  <view class="card">
+    <view class="card-header activity-title">
+      2019年牛首山马拉松东南大学校友队
+    </view>
+    <view class="card-block">
+      <view class="flex-align-center padding-t-sm padding-b-sm">
+        <image
+          class="avatar"
+          mode="aspectFill"
+          src="{{originator.avatar || '../../images/avatar_default.jpeg'}}"
+        />
+        <view class="flex-item padding-l-sm h6 text-title">
+          <view>
+            <text>{{originator.name}}</text>
+            <text>{{originator.school}}-{{originator.college}}</text>
+          </view>
+          <view>
+            发布时间：2019-11-11 20：00
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="h3 title">活动介绍</view>
+
+  <view class="card">
+    <view class="padding-lg h3 text-title">
+      乌七八糟
+    </view>
+  </view>
+  <view class="fix-bottom flex">
+    <button class="flex-item" type="primary">
+      报名
+    </button>
+  </view>
+</view>

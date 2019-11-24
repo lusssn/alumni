@@ -1,0 +1,45 @@
+<view class="padding-t-lg padding-l-xl padding-r-xl">
+  <view class="card">
+    <view class="card-block">
+      <view class="flex-align-center padding-t-sm padding-b-sm">
+        <image
+          class="activity-avatar"
+          mode="aspectFill"
+          src="{{data.avatar || '../../images/avatar_default.jpeg'}}"
+        />
+        <view class="flex-item padding-l-md">
+          <text class="flex-item h1 text-title">活动名称</text>
+          <view class="flex h5 padding-t-sm">
+            <view class="margin-r-sm">
+              <icon class="icon-location margin-r-sm" />
+              <text>2019-11-11</text>
+            </view>
+            <view class="text-primary margin-r-sm">
+              <icon class="icon-location margin-r-sm" />
+              <text>报名中</text>
+            </view>
+            <view class="text-primary margin-r-sm">
+              <icon class="icon-location margin-r-sm" />
+              <text>60人报名</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="h3 title">成员详情</view>
+  <BusinessCard
+    wx:for="{{participants}}"
+    wx:key="accountId"
+    data="{{item}}"
+    data-id="{{item.accountId}}"
+    bindtap="handleClickCard"
+  />
+
+  <view class="fix-bottom flex">
+    <button class="flex-item" type="primary">
+      一键通知
+    </button>
+  </view>
+</view>
