@@ -1,7 +1,7 @@
 <view wx:if="{{isLoaded}}" class="container">
   <view class="base-header"></view>
   <view class="content">
-    <InfoCard data="{{[account,educations,jobs]}}">
+    <InfoCard data="{{[account,educations,jobs]}}" bind:handleEdit="handleEdit">
       <view class="flex border-t share-field">
         <view class="flex-align-center">
           <image class="share-img" src="../../images/cards-selected.png" />

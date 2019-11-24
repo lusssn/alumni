@@ -4,7 +4,7 @@
   </view>
   <view class="name-field">
     <text class="h3 text-title">{{data[0].name}}</text>
-    <icon bindtap="handleEdit" />
+    <icon wx:if="{{handleEdit}}" bindtap="handleEdit" />
   </view>
   <view class="text-primary">
     {{data[1][0].startTime%100}}级-{{data[1][0].school}}-{{data[1][0].college}}-{{data[1][0].education}}
@@ -18,15 +18,15 @@
       <label>职位：</label>
       <text class="text-title">{{data[2][0].position}}</text>
     </view>
-    <view wx:if="{{data[0].email}}" class="field">
+    <view wx:if="{{allField && data[0].email}}" class="field">
       <label>邮箱：</label>
       <text class="text-title">{{data[0].email}}</text>
     </view>
-    <view wx:if="{{data[0].phone}}" class="field">
+    <view wx:if="{{allField && data[0].phone}}" class="field">
       <label>手机：</label>
       <text class="text-title">{{data[0].phone}}</text>
     </view>
-    <view wx:if="{{data[0].wechat}}" class="field">
+    <view wx:if="{{allField && data[0].wechat}}" class="field">
       <label>微信：</label>
       <text class="text-title">{{data[0].wechat}}</text>
     </view>

@@ -4,7 +4,7 @@
 .base-header {
   height: 200rpx;
   border-radius: 0 0 20rpx 20rpx;
-  box-shadow: 0 6rpx 18rpx 0 rgba(28,86,122,0.25);
+  box-shadow: 0 6rpx 18rpx 0 rgba(28, 86, 122, 0.25);
   background-color: $theme-color;
 }
 
@@ -16,15 +16,78 @@
   padding-bottom: 92rpx;
   .base-card{
     padding: 0 34rpx;
-    .field{
+    .field {
       & + .field {
         @include borderPoint5("t");
       }
-      label{
+      label {
         width: 180rpx;
       }
     }
   }
+  .experience {
+    height: 100%;
+    overflow: auto;
+  }
+}
+.mask {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.2);
+  z-index: 9999;
+  .modal-content {
+    display: flex;
+    flex-direction: column;
+    padding: 48rpx;
+    background-color: white;
+    border-radius: 5rpx;
+    .tips {
+      image {
+        width: 44rpx;
+        height: 44rpx;
+        margin-right: 18rpx;
+      }
+    }
+    .message-input {
+      height: 40rpx;
+      margin: 40rpx 0;
+      padding: 12rpx;
+      border: 1rpx solid $border-color;
+    }
+    .modal-btn-wrapper {
+      flex-direction: row;
+      justify-content: space-between;
+    }
+    .cancel-btn,
+    .confirm-btn {
+      width: 252rpx;
+      height: 72rpx;
+      line-height: 72rpx;
+      text-align: center;
+    }
+    .cancel-btn {
+      box-sizing: border-box;
+      border: 1rpx solid $border-color;
+      border-radius: 4rpx;
+    }
+    .confirm-btn {
+      background: $theme-color;
+      border-radius: 4px;
+      color: white;
+    }
+  }
+}
+
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  color: transparent;
 }
 
 .experience-empty {
