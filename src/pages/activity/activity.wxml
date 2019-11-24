@@ -1,0 +1,19 @@
+<import src="./tmplList.wxml" />
+
+<view class="padding-t-md">
+  <view class="margin-l-xl margin-r-xl">
+    <Nav className="margin-t-sm margin-b-md" data="{{NAV}}" current="{{currentTab.id}}" bindswitch="handleSwitch" />
+    <!-- 样式测试，待删除 -->
+    <ActivityCard></ActivityCard>
+    <template
+      wx:if="{{currentTab.key === 'Enrolled'}}"
+      is="tmplList"
+      data="{{ list: enrolledList, placeholder: '还没有参加活动，去参加一些吧' }}"
+    />
+    <template
+      wx:else
+      is="tmplList"
+      data="{{ list: startedList, placeholder: '还没有发起的活动' }}"
+    />
+  </view>
+</view>

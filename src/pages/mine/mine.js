@@ -44,7 +44,7 @@ Page({
     wxUtil.navigateTo('friend', { type: 'account' })
   },
   handleToMsgs(){
-    wxUtil.navigateTo('friend', { type: 'account' })
+    wxUtil.navigateTo('notice', { type: 'account' })
   },
   loadAllInfo() {
     return wxUtil.login().then(
