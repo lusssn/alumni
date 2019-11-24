@@ -1,5 +1,6 @@
 {
   "pages":[
+    "pages/activity/activity",
     "pages/connections/connections",
     "pages/friend/friend",
     "pages/mine/mine",
