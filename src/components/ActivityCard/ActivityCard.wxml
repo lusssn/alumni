@@ -1,0 +1,19 @@
+<view class="card">
+  <view class="card-block">
+    <view class="flex-align-center padding-t-lg padding-b-lg">
+      <image class="activity-card-avatar" mode="aspectFill" src="{{data.img1 || '../../images/avatar_default.jpeg'}}" />
+      <view class="flex-item padding-l-md">
+        <view class="padding-b-sm">
+          <text class="flex-item h1 text-title">"测试活动名称"</text>
+        </view>
+        <view class="flex-align-center h5">
+            <image class="tip-icon" src="../../images/mine-selected.png" />
+            <text class="text-title padding-l-sm padding-r-sm">2019-12-20</text>
+            <image class="tip-icon" src="../../images/mine-selected.png" />
+            <text class="text-title padding-l-sm padding-r-sm">发起人未确认</text>
+        </view>
+      </view>
+      <view>></view>
+    </view>
+  </view>
+</view>
