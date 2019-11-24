@@ -1,0 +1,10 @@
+{
+  "navigationBarTitleText": "活动详情",
+  "navigationBarTextStyle": "white",
+  "navigationBarBackgroundColor": "#3A82E6",
+  "enablePullDownRefresh": true,
+  "usingComponents": {
+    "Loading": "../../components/Loading/Loading",
+    "BusinessCard": "../../components/BusinessCard/BusinessCard"
+  }
+}

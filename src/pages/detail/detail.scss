@@ -14,21 +14,6 @@
   right: 32rpx;
   left: 32rpx;
   padding-bottom: 92rpx;
-  .sub-title{
-    position: relative;
-    margin: 0 20rpx 25rpx;
-    &::before{
-      position: absolute;
-      left: -20rpx;
-      top: 50%;
-      transform: translateY(-50%);
-      content:'';
-      width: 8rpx;
-      height: 8rpx;
-      border-radius: 50%;
-      background-color: $theme-color;
-    }
-  }
   .base-card{
     padding: 0 34rpx;
     .field{

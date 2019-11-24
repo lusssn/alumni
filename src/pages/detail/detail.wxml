@@ -2,7 +2,7 @@
   <view class="base-header"></view>
   <view class="content">
     <InfoCard data="{{[account,educations,jobs]}}"></InfoCard>
-    <view class="h1 text-title sub-title">基本信息</view>
+    <view class="h1 title">基本信息</view>
     <view class="base-card card">
       <view class="field">
         <label class="field-label text-muted">生日：</label>
@@ -13,7 +13,7 @@
         <view class="field-content text-muted">做最好的自己～</view>
       </view>
     </view>
-    <view class="h1 text-title sub-title">校友档案</view>
+    <view class="h1 title">校友档案</view>
     <view class="card">
       <TabBox tabs="{{[{label:'工作经历'},{label:'教育经历'}]}}">
         <view slot="slot-0" wx:for="{{jobs}}" wx:key="{{index}}">
