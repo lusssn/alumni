@@ -65,7 +65,7 @@ Page({
           total: count,
         },
       })
-    }, () => {})
+    }, () => { })
   },
   loadstartedList(pageNo = 1) {
     // 加载发起的活动列表
@@ -90,8 +90,12 @@ Page({
       currentTab: R.find(R.propEq('id', id), NAV_CONFIG),
     })
   },
-  handleClickCard(e) {
+  handleToActivityDetail(e) {
     const { id } = e.currentTarget.dataset
-    wxUtil.navigateTo('detail', { id })
+    wxUtil.navigateTo('activityDetail', { id })
+  }, 
+  handleToMyActivity(e) {
+    const { id } = e.currentTarget.dataset
+    wxUtil.navigateTo('myActivity', { id })
   },
 })

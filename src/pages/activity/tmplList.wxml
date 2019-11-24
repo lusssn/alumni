@@ -1,12 +1,12 @@
 <template name="tmplList">
   <Loading wx:if="{{!list}}" />
   <block wx:elif="{{list.length}}">
-    <ActiviCard
+    <ActivityCard
       wx:for="{{list}}"
       wx:key="activityId"
       data="{{item}}"
       data-id="{{item.activityId}}"
-      bindtap="handleClickCard"
+      bindtap="{{type == 'Enrolled' ? handleToActivityDetail : handleToMyActivity }}"
     />
   </block>
   <view wx:else class="card-block padding-b-xl text-center">

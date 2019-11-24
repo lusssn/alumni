@@ -8,12 +8,12 @@
     <template
       wx:if="{{currentTab.key === 'Enrolled'}}"
       is="tmplList"
-      data="{{ list: enrolledList, placeholder: '还没有参加活动，去参加一些吧' }}"
+      data="{{ list: enrolledList, type: 'Enrolled',placeholder: '还没有参加活动，去参加一些吧' }}"
     />
     <template
       wx:else
       is="tmplList"
-      data="{{ list: startedList, placeholder: '还没有发起的活动' }}"
+      data="{{ list: startedList, type: 'Started',placeholder: '还没有发起的活动' }}"
     />
   </view>
 </view>
