@@ -1,35 +1,29 @@
 <view wx:if="{{isLoaded}}" class="container">
-  <view class="base-header"></view>
-  <view class="content">
-    <InfoCard data="{{[account,educations,jobs]}}" bind:handleEdit="handleEdit">
-      <view class="flex border-t share-field">
-        <view class="flex-align-center">
-          <image class="share-img" src="../../images/cards-selected.png" />
-          <text class="text-primary">分享名片给好友</text>
-        </view>
-        <view>箭头</view>
-      </view>
-    </InfoCard>
-    <view class="card nav-list">
-      <view class="flex-align-center h3 nav-item text-title" bindtap="handleToCardcase">
-        <image src="../../images/cards-selected.png" />
-        <text>我的名片夹</text>
-      </view>
-      <view class="flex-align-center h3 nav-item text-title" bindtap="handleToAlumni">
-        <image src="../../images/cards-selected.png" />
-        <text>我的校友圈</text>
-      </view>
-      <view class="flex-align-center h3 nav-item text-title" bindtap="handleToActivity">
-        <image src="../../images/cards-selected.png" />
-        <text>我的活动</text>
-      </view>
-      <view class="flex-align-center h3 nav-item message-field" bindtap="handleToMsgs">
-        <view class="flex-align-center text-title">
-          <image src="../../images/cards-selected.png" />
-          <text>我的消息</text>
-        </view>
-        <view wx:if="{{messageCount > 0}}" class="red-number text-center h6">{{messageCount}}</view>
-      </view>
+  <view class="header" />
+  <InfoCard data="{{[account,educations,jobs]}}" bind:handleEdit="handleEdit">
+    <view class="flex-align-center border-t text-primary padding-t-sm padding-b-sm">
+      <view class="iconfont icon-link margin-r-xs" />
+      <text class="flex-item h5">分享名片给好友</text>
+      <view class="iconfont icon-arrow-right text-muted" />
+    </view>
+  </InfoCard>
+  <view class="card nav-list">
+    <view class="nav-item" bindtap="handleToCardcase">
+      <view class="iconfont icon-card text-primary margin-r-md" />
+      <text>我的名片夹</text>
+    </view>
+    <view class="nav-item" bindtap="handleToAlumni">
+      <view class="iconfont icon-round text-primary margin-r-md" style="font-size: 38rpx;" />
+      <text>我的校友圈</text>
+    </view>
+    <view class="nav-item" bindtap="handleToActivity">
+      <view class="iconfont icon-hand text-primary margin-r-md" style="font-size: 44rpx; margin-left: -2px;" />
+      <text>我的活动</text>
+    </view>
+    <view class="nav-item" bindtap="handleToMsgs">
+      <view class="iconfont icon-message text-primary margin-r-md" />
+      <text class="flex-item">我的消息</text>
+      <view wx:if="{{messageCount > 0}}" class="red-number text-center h6">{{messageCount}}</view>
     </view>
   </view>
 </view>

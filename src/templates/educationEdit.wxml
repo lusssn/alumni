@@ -13,10 +13,6 @@
             data-name="education.school"
             bindinput="handleInputChange"
           />
-          <view hidden class="h3 text-error">
-            <icon class="icon-error margin-r-sm" />
-            <text>信息未填写</text>
-          </view>
         </view>
       </view>
       <view class="field">
@@ -65,7 +61,7 @@
               disabled
             />
           </picker>
-          <icon class="icon-arrow-up" />
+          <view class="iconfont icon-arrow-up text-muted" />
         </view>
       </view>
       <view class="field">
@@ -85,7 +81,7 @@
               disabled
             />
           </picker>
-          <icon class="icon-arrow-up" />
+          <view class="iconfont icon-arrow-up text-muted" />
         </view>
       </view>
     </view>

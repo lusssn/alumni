@@ -1,46 +1,29 @@
 @import "../../scss/variables";
-@import "../../scss/svg";
 
-.info-area{
-  align-items: center;
-  background-color: #fff;
-  .avater-field {
-    position: absolute;
-    transform: translateY(-50%);
-    .avatar {
-      width: 100rpx;
-      height: 100rpx;
-      border-radius: 50%;
-      border: 5rpx solid #fff;
-      background-color: $bg-color;
-    }
-  }
-  .name-field{
+.info-card {
+  margin: -32rpx 32rpx 0;
+  padding: 0 32rpx;
+  .avatar {
     position: relative;
-    margin-top: 60rpx;
-    & > icon{
-      @include svg("edit", white);
-      position: absolute;
-      right: -50rpx;
-      width: 40rpx;
-      height: 40rpx;
-      border-radius: 50%;
-      background-color: $theme-color;
-    }
+    top: -52rpx;
+    display: block;
+    width: 98rpx;
+    height: 98rpx;
+    margin: 0 auto -52rpx;
+    border: 6rpx solid white;
+    border-radius: 50%;
+    background-color: $bg-color;
   }
-  .info-list{
-    justify-content: left;
-    flex-wrap: wrap;
-    padding: 0 28rpx 15rpx;
-    width: 630rpx;
-    & > view{
-      padding: 5rpx 0;
-      font-size: 24rpx;
-      width: 50%;
-    }
-    & text{
-      font-size: 24rpx;
-      overflow: hidden;
-    }
+}
+
+.info-list {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 16rpx 0;
+
+  & > .field {
+    width: 50%;
+    font-size: 24rpx;
+    padding: 8rpx 0;
   }
 }

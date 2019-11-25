@@ -1,22 +1,20 @@
-<view class="flex-align-center flex-direction-column info-area card">
-  <view class="avater-field">
-    <image class="avatar" mode="aspectFill" src="{{data[0].avatar || '../../images/avatar_default.jpeg'}}" />
-  </view>
-  <view class="name-field">
+<view class="card info-card">
+  <image class="avatar" mode="aspectFill" src="{{data[0].avatar || '../../images/avatar_default.jpeg'}}" />
+  <view class="text-center">
     <text class="h3 text-title">{{data[0].name}}</text>
-    <icon wx:if="{{handleEdit}}" bindtap="handleEdit" />
+    <view wx:if="{{handleEdit}}" class="iconfont icon-edit text-primary margin-l-md" bindtap="handleEdit" />
   </view>
-  <view class="text-primary">
+  <view class="text-center text-primary">
     {{data[1][0].startTime%100}}级-{{data[1][0].school}}-{{data[1][0].college}}-{{data[1][0].education}}
   </view>
-  <view class="flex info-list">
+  <view class="info-list">
     <view wx:if="{{data[2][0].company}}" class="field">
       <label>公司：</label>
-      <text class="text-title">{{data[2][0].company}}</text>
+      <view class="field-content">{{data[2][0].company}}</view>
     </view>
     <view wx:if="{{data[2][0].position}}" class="field">
       <label>职位：</label>
-      <text class="text-title">{{data[2][0].position}}</text>
+      <text class="field-content">{{data[2][0].position}}</text>
     </view>
     <view wx:if="{{allField && data[0].email}}" class="field">
       <label>邮箱：</label>

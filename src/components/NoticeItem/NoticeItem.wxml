@@ -9,5 +9,5 @@
   <view class="self-top">
     <text class="h6 text-muted">{{data.createTime}}</text>
   </view>
-  <icon class="icon-arrow-right margin-l-lg" />
+  <view class="iconfont icon-arrow-right margin-l-lg" />
 </view>

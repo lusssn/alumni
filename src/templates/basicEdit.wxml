@@ -2,7 +2,6 @@
   <view wx:if="{{!isComplete}}" class="card padding-t-xl padding-b-xl">
     <view class="avatar flex-center">
       <image mode="aspectFill" src="{{account.avatar || '../../images/avatar_default.jpeg'}}" />
-      <!--<icon class="icon-camera" />-->
     </view>
   </view>
   <view class="card">
@@ -66,7 +65,7 @@
               disabled
             />
           </picker>
-          <icon class="icon-arrow-up" />
+          <view class="iconfont icon-arrow-up text-muted" />
         </view>
       </view>
       <view class="field">

@@ -1,35 +1,26 @@
 @import "../../scss/variables";
 @import "../../scss/border";
 
-.base-header {
-  height: 200rpx;
-  border-radius: 0 0 20rpx 20rpx;
-  box-shadow: 0 6rpx 18rpx 0 rgba(28, 86, 122, 0.25);
-  background-color: $theme-color;
+.header {
+  height: 90rpx;
 }
 
-.content {
-  position: absolute;
-  top: 60rpx;
-  right: 32rpx;
-  left: 32rpx;
-  padding-bottom: 92rpx;
-  .base-card{
-    padding: 0 34rpx;
-    .field {
-      & + .field {
-        @include borderPoint5("t");
-      }
-      label {
-        width: 180rpx;
-      }
+.base-card{
+  padding: 0 34rpx;
+  .field {
+    & + .field {
+      @include borderPoint5("t");
+    }
+    label {
+      width: 180rpx;
     }
   }
-  .experience {
-    height: 100%;
-    overflow: auto;
-  }
 }
+.experience {
+  height: 100%;
+  overflow: auto;
+}
+
 .mask {
   position: absolute;
   left: 0;
