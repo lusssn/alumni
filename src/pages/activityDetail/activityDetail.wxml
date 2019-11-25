@@ -2,6 +2,7 @@
   <view class="card">
     <view class="card-header activity-title">
       2019年牛首山马拉松东南大学校友队
+      <view class="iconfont iconmessage" />
     </view>
     <view class="card-block">
       <view class="flex-align-center padding-t-sm padding-b-sm">

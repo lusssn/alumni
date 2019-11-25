@@ -1,7 +1,7 @@
 <view wx:if="{{status}}" class="container">
-  <view class="base-header"></view>
-  <view class="content">
-    <InfoCard data="{{[account,educations,jobs]}}" allField="{{status === FRIEND}}"></InfoCard>
+  <view class="header" />
+  <InfoCard data="{{[account,educations,jobs]}}" allField="{{status === FRIEND}}" />
+  <view class="padding-l-lg padding-r-lg padding-t-md">
     <view class="h1 title">基本信息</view>
     <view class="base-card card">
       <view wx:if="{{account.birthday}}" class="field">
@@ -25,6 +25,7 @@
       </TabBox>
     </view>
   </view>
+
   <view class="fix-bottom flex">
     <button class="flex-item" bindtap="handleFavorite">{{favorite ? '取消收藏' : '收藏名片'}}</button>
     <block wx:if="{{status === 'YES_OR_NO'}}">

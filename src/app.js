@@ -5,6 +5,21 @@ const NOTICE = {
 
 App({
   global: {},
+  // onLaunch() {
+  //   wx.loadFontFace({
+  //     family: 'iconfont',
+  //     source: 'url("https://at.alicdn.com/t/font_1527314_e7mvie6cm0h.ttf")',
+  //     success(res) {
+  //       console.log('success:', res.status)
+  //     },
+  //     fail: function(res) {
+  //       console.log('fail:',res.status)
+  //     },
+  //     complete: function(res) {
+  //       console.log('complete:',res.status)
+  //     }
+  //   });
+  // },
   setConfig(conf) {
     Object.assign(this.global, conf)
   },

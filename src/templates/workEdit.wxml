@@ -43,7 +43,7 @@
               disabled
             />
           </picker>
-          <icon class="icon-arrow-up" />
+          <view class="iconfont icon-arrow-up text-muted" />
         </view>
       </view>
       <view class="field">
@@ -63,7 +63,7 @@
               disabled
             />
           </picker>
-          <icon class="icon-arrow-up" />
+          <view class="iconfont icon-arrow-up text-muted" />
         </view>
       </view>
     </view>

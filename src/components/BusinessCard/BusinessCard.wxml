@@ -10,7 +10,7 @@
         <view class="business-card-header">
           <text class="flex-item h1 text-title">{{data.name}}</text>
           <view wx:if="{{data.city}}">
-            <icon class="icon-location" />
+            <view class="iconfont icon-location text-muted" />
             <text class="text-muted">{{data.city}}</text>
           </view>
         </view>
