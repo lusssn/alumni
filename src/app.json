@@ -13,7 +13,8 @@
     "pages/notice/notice",
     "pages/register/register",
     "pages/myActivity/myActivity",
-    "pages/activityDetail/activityDetail"
+    "pages/activityDetail/activityDetail",
+    "pages/createGroupBook/createGroupBook"
   ],
   "permission": {
     "scope.userLocation": {

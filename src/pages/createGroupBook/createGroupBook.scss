@@ -1,0 +1,19 @@
+@import "../../scss/variables";
+
+.input-card{
+  position: relative;
+  .word-tip{
+    position: absolute;
+    right: 16rpx;
+    bottom: 16rpx;
+  }
+}
+.intro-input {
+  height: 340rpx;
+}
+
+.confirm-btn {
+  background: $theme-color;
+  color: white;
+  box-shadow: 0px 6px 20px 0px rgba(28, 86, 122, 0.46);
+}
