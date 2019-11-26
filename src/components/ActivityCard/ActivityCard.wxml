@@ -6,14 +6,14 @@
         <view class="padding-b-sm">
           <text class="flex-item h1 text-title">"测试活动名称"</text>
         </view>
-        <view class="flex-align-center h5">
-            <image class="tip-icon" src="../../images/mine-selected.png" />
-            <text class="text-title padding-l-sm padding-r-sm">2019-12-20</text>
-            <image class="tip-icon" src="../../images/mine-selected.png" />
-            <text class="text-title padding-l-sm padding-r-sm">发起人未确认</text>
+        <view class="flex-align-center h5 activity-info">
+          <view class="iconfont icon-calendar text-muted h4" />
+          <text class="text-title padding-l-xs padding-r-xs text-muted">2019-12-20</text>
+          <view class="iconfont icon-error text-primary h4" />
+          <text class="text-title padding-l-xs padding-r-xs text-primary">{{data.activityMembersNum}}人报名</text>
         </view>
       </view>
-      <view>></view>
+      <view class="iconfont icon-arrow-right text-muted" />
     </view>
   </view>
 </view>

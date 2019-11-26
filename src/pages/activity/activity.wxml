@@ -3,8 +3,6 @@
 <view class="padding-t-md">
   <view class="margin-l-xl margin-r-xl">
     <Nav className="margin-t-sm margin-b-md" data="{{NAV}}" current="{{currentTab.id}}" bindswitch="handleSwitch" />
-    <!-- 样式测试，待删除 -->
-    <ActivityCard></ActivityCard>
     <template
       wx:if="{{currentTab.key === 'Enrolled'}}"
       is="tmplList"
