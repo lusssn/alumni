@@ -102,3 +102,12 @@ export const getEnrolledActivities = params =>
 // 活动-我发起的活动列表
 export const getStartedActivities = params =>
   request.get('/v2/activities/startedActivities', params).then(res => res.data)
+
+/************************************* 消息列表 *************************************/
+// 消息-获取消息列表
+export const getMessages = params =>
+  request.get('/v2/message', params).then(res => res.data)
+
+// 消息-改变消息阅读状态
+export const readMessage = params =>
+  request.get('/v2/message/changeStatus', params).then(res => res.data)
