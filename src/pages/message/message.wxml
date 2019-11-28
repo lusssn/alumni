@@ -4,7 +4,7 @@
     <view wx wx:for="{{messageList}}" class="card">
       <view class="card-block" data-id="{{item.messageId}}" bindtap="handleClickMessage">
         <view class="flex-align-center padding-t-lg padding-b-lg">
-          <image class="message-card-avatar" mode="aspectFill" src="{{data.img1 || '../../images/avatar_default.jpeg'}}" />
+          <image class="message-card-avatar" mode="aspectFill" src="{{'../../images/avatar_default.jpeg'}}" />
           <view class="flex-item padding-l-md">
             <view class="padding-b-xs">
               <text class="flex-item h1 text-title">{{item.fromUserName}}</text>

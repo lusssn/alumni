@@ -3,6 +3,8 @@ import * as Api from '../api'
 
 const app = getApp()
 
+const PAGE_SIZE = 10
+
 Page({
   data: {
     messageList: [{
@@ -26,11 +28,11 @@ Page({
   },
   onLoad() {
     wxUtil.login().then(() => {
-      this.loadstartedList()
+      this.loadMessageList()
     })
   },
   onPullDownRefresh() {
-    this.loadstartedList().then(() => {
+    this.loadMessageList().then(() => {
       wx.stopPullDownRefresh()
     })
   },
