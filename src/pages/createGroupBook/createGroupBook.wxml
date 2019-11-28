@@ -2,16 +2,16 @@
   <view class="margin-l-xl margin-r-xl">
     <view class="h1 title">群名称</view>
     <view class="card input-card">
-      <input class="name-input h2 padding-sm" placeholder="请输入群名称" placeholder-class="search-placeholder" />
+      <input class="name-input h2 padding-sm" placeholder="请输入群名称" maxlength="15" placeholder-class="search-placeholder" bindinput="handleGroupNameChange" />
       <text class="word-tip h3 text-muted">15个字</text>
     </view>
     <view class="h1 title">群简介</view>
     <view class="card input-card">
-      <textarea class="intro-input h2 padding-sm" placeholder="请输入群简介" placeholder-class="search-placeholder" />
+      <textarea class="intro-input h2 padding-sm" placeholder="请输入群简介" maxlength="5000" placeholder-class="search-placeholder" bindinput="handleGroupIntroChange" />
       <text class="word-tip h3 text-muted">5000个字</text>
     </view>
   </view>
   <view class="fix-bottom">
-    <button class="confirm-btn" bindtap="">完成</button>
+    <button class="confirm-btn" bindtap="handleComplete">完成</button>
   </view>
 </view>
