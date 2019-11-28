@@ -1,0 +1,20 @@
+@import "../../scss/variables";
+@import "../../scss/svg";
+@import "../../scss/border";
+
+
+.header {
+  height: 70rpx;
+  margin-bottom: 60rpx;
+}
+.search {
+  position: absolute;
+  top: 20rpx;
+  right: 36rpx;
+  left: 36rpx;
+}
+
+.list-empty {
+  width: 248rpx;
+  height: 204rpx;
+}

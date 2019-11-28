@@ -1,0 +1,12 @@
+{
+  "navigationBarTitleText": "校友圈",
+  "navigationBarBackgroundColor": "#3A82E6",
+  "navigationBarTextStyle": "white",
+  "usingComponents": {
+    "Loading": "../../components/Loading/Loading",
+    "InfoCard": "../../components/InfoCard/InfoCard",
+    "TabBox": "../../components/TabBox/TabBox",
+    "Nav": "../../components/Nav/Nav",
+    "AlumniSpaceCard": "../../components/AlumniSpace/AlumniSpaceCard/AlumniSpaceCard"
+  }
+}
