@@ -103,13 +103,13 @@ Page({
       message: event.detail.value
     })
   },
-  handlepplyCancel() {
+  handleApplyCancel() {
     this.setData({
       showModal: false,
       message: '',
     })
   },
-  handlepplySend() {
+  handleApplySend() {
     Api.applyFriend({
       A: app.global.accountId,
       B: accountId,
