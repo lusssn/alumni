@@ -17,6 +17,7 @@
     "pages/register/register",
     "pages/myActivity/myActivity",
     "pages/activityDetail/activityDetail",
+    "pages/activityCreate/activityCreate",
     "pages/createGroupBook/createGroupBook"
   ],
   "permission": {
@@ -46,12 +47,6 @@
         "iconPath": "images/cards-normal.png",
         "selectedIconPath": "images/cards-selected.png",
         "text": "名片夹"
-      },
-      {
-        "pagePath": "pages/alumniSpace/alumniSpace",
-        "iconPath": "images/mine-normal.png",
-        "selectedIconPath": "images/mine-selected.png",
-        "text": "校友圈"
       },
       {
         "pagePath": "pages/mine/mine",
