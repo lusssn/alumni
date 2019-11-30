@@ -35,16 +35,16 @@ Page({
     wxUtil.navigateTo('edit', { type: 'account' })
   },
   handleToCardcase(){
-    wxUtil.navigateTo('friend', { type: 'account' })
+    wxUtil.navigateTo('friend')
   },
   handleToAlumni(){
-    wxUtil.navigateTo('friend', { type: 'account' })
+    wxUtil.navigateTo('alumniSpace')
   },
   handleToActivity(){
-    wxUtil.navigateTo('friend', { type: 'account' })
+    wxUtil.navigateTo('myActivity')
   },
   handleToMsgs(){
-    wxUtil.navigateTo('notice', { type: 'account' })
+    wxUtil.navigateTo('notice')
   },
   loadAllInfo() {
     return wxUtil.login().then(

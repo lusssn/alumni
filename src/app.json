@@ -41,10 +41,10 @@
         "text": "人脉"
       },
       {
-        "pagePath": "pages/friend/friend",
+        "pagePath": "pages/alumniSpace/alumniSpace",
         "iconPath": "images/cards-normal.png",
         "selectedIconPath": "images/cards-selected.png",
-        "text": "名片夹"
+        "text": "校友圈"
       },
       {
         "pagePath": "pages/mine/mine",

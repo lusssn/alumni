@@ -74,7 +74,7 @@ const getLocation = () => {
 }
 
 // 需要手动配置tabbar页面列表
-const TABBAR_PAGES = ['connections', 'friend', 'mine']
+const TABBAR_PAGES = ['connections', 'alumniSpace', 'mine']
 /**
  * 页面跳转重载
  * @param pageName String 必填，页面文件名称

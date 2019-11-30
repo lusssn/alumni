@@ -13,7 +13,7 @@
           <image
             mode="aspectFill"
             src="{{data.avatar || '../../../images/avatar_default.jpeg'}}"
-          ></image>
+          />
           <text class="">官方认证</text>
           <text class=" ">校友圈</text>
         </view>
