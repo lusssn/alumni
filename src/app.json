@@ -1,5 +1,8 @@
 {
-  "pages":[
+  "pages": [
+    "pages/alumniSpace/alumniSpace",
+    "pages/activity/activity",
+    "pages/message/message",
     "pages/connections/connections",
     "pages/friend/friend",
     "pages/mine/mine",
@@ -12,7 +15,8 @@
     "pages/register/register",
     "pages/myActivity/myActivity",
     "pages/activityDetail/activityDetail",
-    "pages/activityCreate/activityCreate"
+    "pages/activityCreate/activityCreate",
+    "pages/createGroupBook/createGroupBook"
   ],
   "permission": {
     "scope.userLocation": {

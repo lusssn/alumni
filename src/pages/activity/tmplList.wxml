@@ -1,0 +1,19 @@
+<template name="tmplList">
+  <Loading wx:if="{{!list}}" />
+  <block wx:elif="{{list.length}}">
+    <ActivityCard
+      wx:for="{{list}}"
+      wx:key="activityId"
+      data="{{item}}"
+      data-id="{{item.activityId}}"
+      bindtap="{{type == 'Enrolled' ? handleToActivityDetail : handleToMyActivity }}"
+    />
+  </block>
+  <view wx:else class="card-block padding-b-xl text-center">
+    <image
+      class="activity-empty margin-t-xl margin-b-xl"
+      src="../../images/friend-empty.png"
+    />
+    <view class="h4 text-primary">{{placeholder}}</view>
+  </view>
+</template>

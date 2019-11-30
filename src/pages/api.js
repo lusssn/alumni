@@ -84,7 +84,7 @@ export const getFavoriteList = params =>
 /************************************* 名片详情 *************************************/
 // 详情-同意/拒绝交换名片
 export const requestFriend = params =>
-  request.post('/v2/friend/manage', params )
+  request.post('/v2/friend/manage', params)
 
 // 详情-请求交换名片
 export const applyFriend = params =>
@@ -93,3 +93,21 @@ export const applyFriend = params =>
 // 详情-收藏、取消
 export const favoriteFriend = params =>
   request.post('/v2/favorite', params)
+
+/************************************* 活动列表 *************************************/
+// 活动-我参与的活动列表
+export const getEnrolledActivities = params =>
+  request.get('/v2/activities/enrolledActivities', params).then(res => res.data)
+
+// 活动-我发起的活动列表
+export const getStartedActivities = params =>
+  request.get('/v2/activities/startedActivities', params).then(res => res.data)
+
+/************************************* 消息列表 *************************************/
+// 消息-获取消息列表
+export const getMessages = params =>
+  request.get('/v2/message', params).then(res => res.data)
+
+// 消息-改变消息阅读状态
+export const readMessage = params =>
+  request.get('/v2/message/changeStatus', params).then(res => res.data)

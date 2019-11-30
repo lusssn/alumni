@@ -1,0 +1,19 @@
+<view class="card">
+  <view class="card-block">
+    <view class="flex-align-center padding-t-lg padding-b-lg">
+      <image class="activity-card-avatar" mode="aspectFill" src="{{data.img1 || '../../images/avatar_default.jpeg'}}" />
+      <view class="flex-item padding-l-md">
+        <view class="padding-b-sm">
+          <text class="flex-item h1 text-title">"测试活动名称"</text>
+        </view>
+        <view class="flex-align-center h5 activity-info">
+          <view class="iconfont icon-calendar text-muted h4" />
+          <text class="text-title padding-l-xs padding-r-xs text-muted">2019-12-20</text>
+          <view class="iconfont icon-error text-primary h4" />
+          <text class="text-title padding-l-xs padding-r-xs text-primary">{{data.activityMembersNum}}人报名</text>
+        </view>
+      </view>
+      <view class="iconfont icon-arrow-right text-muted" />
+    </view>
+  </view>
+</view>

@@ -1,0 +1,19 @@
+<template name="tmplList">
+  <Loading wx:if="{{!list}}" />
+  <block wx:elif="{{list.length}}">
+    <AlumniSpaceCard
+      wx:for="{{list}}"
+      wx:key="friendAccountId"
+      data="{{item}}"
+      data-id="{{item.friendAccountId || item.favoriteAccountId}}"
+      bindtap="handleClickCard"
+    />
+  </block>
+  <view wx:else class="card-block padding-b-xl text-center">
+    <image
+      class="list-empty margin-t-xl margin-b-xl"
+      src="../../images/friend-empty.png"
+    />
+    <view class="h4 text-primary">{{placeholder}}</view>
+  </view>
+</template>
