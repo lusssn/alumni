@@ -11,7 +11,8 @@
     "pages/notice/notice",
     "pages/register/register",
     "pages/myActivity/myActivity",
-    "pages/activityDetail/activityDetail"
+    "pages/activityDetail/activityDetail",
+    "pages/activityCreate/activityCreate"
   ],
   "permission": {
     "scope.userLocation": {
