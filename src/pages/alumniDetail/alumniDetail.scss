@@ -1,0 +1,40 @@
+@import "../../scss/variables";
+
+.alumni-card-avatar {
+  width: 94rpx;
+  height: 94rpx;
+  border-radius: 50%;
+  background-color: $bg-color;
+}
+.alumni-member-avatar {
+  width: 48rpx;
+  height: 48rpx;
+  margin: 5rpx;
+  border-radius: 50%;
+  background-color: $bg-color;
+}
+.alumni-member {
+  justify-content: space-between;
+  height: 80rpx;
+}
+.activity-btn {
+  position: fixed;
+  bottom: 130rpx;
+  right: 0;
+  padding: 20rpx 0 10rpx 20rpx;
+  width: 130rpx;
+  height: 120rpx;
+  border-radius: 60rpx 0 0 60rpx;
+  background-color: $theme-color;
+  border: none;
+  box-shadow: 0 6rpx 18rpx 0 rgba($shadow-color, 0.25);
+  font-size: 20rpx;
+  color: white;
+  image {
+    display: block;
+    margin: auto;
+  }
+}
+.manager-btn {
+  box-shadow: 0px 6px 20px 0px rgba(28, 86, 122, 0.46);
+}
