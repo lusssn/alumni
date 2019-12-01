@@ -118,3 +118,8 @@ export const getMessages = params =>
 // 消息-改变消息阅读状态
 export const readMessage = params =>
   request.get('/v2/message/changeStatus', params).then(res => res.data)
+
+/************************************* 我的圈子 *************************************/
+// 我的圈子-获取用户参与的圈群的基本信息
+export const getMyAlumni = params =>
+  request.get('/v2/alumniCircles/enrolledAlumniCircles', params).then(res => res.data)

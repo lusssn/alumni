@@ -1,8 +1,8 @@
-<view class="padding-t-md">
+<view class="container padding-t-md">
   <view class="margin-l-xl margin-r-xl">
     <view class="h1 title">群名称</view>
     <view class="card input-card">
-      <input class="name-input h2 padding-sm" placeholder="请输入群名称" maxlength="15" placeholder-class="search-placeholder" bindinput="handleGroupNameChange" />
+      <input class="h2 padding-sm" value="{{groupName}}" placeholder="请输入群名称" maxlength="15" placeholder-class="search-placeholder" bindinput="handleGroupNameChange" />
       <text class="word-tip h3 text-muted">15个字</text>
     </view>
     <view class="h1 title">群简介</view>
@@ -12,6 +12,19 @@
     </view>
   </view>
   <view class="fix-bottom">
-    <button class="confirm-btn" bindtap="handleComplete">完成</button>
+    <button class="complete-btn" bindtap="handleComplete">完成</button>
+  </view>
+  <view wx:if="{{showModal}}" class="mask">
+    <view class="modal-content margin-xl">
+      <view class="h1 text-muted text-center">
+        <text>已申请创建群通讯录</text>
+      </view>
+      <view class="h3 text-muted text-center padding-xl">
+        <text>当您或微信群友在微信群中点击加入即可完成创建</text>
+      </view>
+      <view>
+        <view class='confirm-btn h1' bindtap='handleConfirm'>确定</view>
+      </view>
+    </view>
   </view>
 </view>

@@ -53,8 +53,8 @@
         <input class="message-input h2" bindinput="handleMessageInput"/>
       </view>
       <view class='flex modal-btn-wrapper'>
-        <view class='cancel-btn h1' bindtap='handlepplyCancel'>取消</view>
-        <view class='confirm-btn h1' bindtap='handlepplySend'>确定</view>
+        <view class='cancel-btn h1' bindtap='handleApplyCancel'>取消</view>
+        <view class='confirm-btn h1' bindtap='handleApplySend'>确定</view>
       </view>
     </view>
   </view>

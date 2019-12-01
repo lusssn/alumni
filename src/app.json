@@ -1,5 +1,7 @@
 {
   "pages": [
+    "pages/myAlumni/myAlumni",
+    "pages/alumniDetail/alumniDetail",
     "pages/alumniSpace/alumniSpace",
     "pages/activity/activity",
     "pages/message/message",
