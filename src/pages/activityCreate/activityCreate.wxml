@@ -61,7 +61,7 @@
     />
     <view class="h3 text-title text-right">500字</view>
   </view>
-  <view class="h3 title">添加图片（0/6）</view>
+  <view class="h3 title">添加图片（{{images.length}}/{{MAX_IMAGE_AMOUNT}}）</view>
   <view
     wx:for="{{images}}"
     wx:key="*this"

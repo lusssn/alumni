@@ -17,19 +17,19 @@ Page({
     enrolledList: null,
     enrolledPagination: { current: 1, total: 0 },
     startedList: null,
-    startedList: { current: 1, total: 0 },
+    startedPagination: { current: 1, total: 0 },
   },
   onLoad() {
     wxUtil.login().then(() => {
       // 加载参与的活动和组织的活动
-      this.loadenrolledList()
-      this.loadstartedList()
+      this.loadEnrolledList()
+      this.loadStartedList()
     })
   },
   onPullDownRefresh() {
     Promise.all([
-      this.loadenrolledList(),
-      this.loadstartedList(),
+      this.loadEnrolledList(),
+      this.loadStartedList(),
     ]).then(() => {
       wx.stopPullDownRefresh()
     })
@@ -50,7 +50,7 @@ Page({
       this.loadStartedList(current + 1)
     }
   },
-  loadenrolledList(pageNo = 1) {
+  loadEnrolledList(pageNo = 1) {
     // 加载参与的活动列表数据
     return Api.getEnrolledActivities({
       accountId: app.global.accountId,
@@ -67,7 +67,7 @@ Page({
       })
     }, () => { })
   },
-  loadstartedList(pageNo = 1) {
+  loadStartedList(pageNo = 1) {
     // 加载发起的活动列表
     return Api.getStartedActivities({
       accountId: app.global.accountId,
@@ -93,7 +93,7 @@ Page({
   handleToActivityDetail(e) {
     const { id } = e.currentTarget.dataset
     wxUtil.navigateTo('activityDetail', { id })
-  }, 
+  },
   handleToMyActivity(e) {
     const { id } = e.currentTarget.dataset
     wxUtil.navigateTo('myActivity', { id })

@@ -41,7 +41,7 @@ Page({
     wxUtil.navigateTo('alumniSpace')
   },
   handleToActivity(){
-    wxUtil.navigateTo('myActivity')
+    wxUtil.navigateTo('activity')
   },
   handleToMsgs(){
     wxUtil.navigateTo('notice')

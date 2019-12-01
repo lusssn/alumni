@@ -1,17 +1,17 @@
 <import src="./tmplList.wxml" />
 
-<view class="padding-t-md">
+<view class="padding-b-md">
   <view class="margin-l-xl margin-r-xl">
     <Nav className="margin-t-sm margin-b-md" data="{{NAV}}" current="{{currentTab.id}}" bindswitch="handleSwitch" />
     <template
       wx:if="{{currentTab.key === 'Enrolled'}}"
       is="tmplList"
-      data="{{ list: enrolledList, type: 'Enrolled',placeholder: '还没有参加活动，去参加一些吧' }}"
+      data="{{ list: enrolledList, type: 'Enrolled', placeholder: '还没有参加活动，去参加一些吧' }}"
     />
     <template
       wx:else
       is="tmplList"
-      data="{{ list: startedList, type: 'Started',placeholder: '还没有发起的活动' }}"
+      data="{{ list: startedList, type: 'Started', placeholder: '还没有发起的活动' }}"
     />
   </view>
 </view>

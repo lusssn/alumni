@@ -1,10 +1,10 @@
 <view class="card">
   <view class="card-block">
     <view class="flex-align-center padding-t-lg padding-b-lg">
-      <image class="activity-card-avatar" mode="aspectFill" src="{{data.img1 || '../../images/avatar_default.jpeg'}}" />
+      <image class="activity-card-avatar" mode="aspectFill" src="{{data.alumniCircleAvatar || '../../images/avatar_default.jpeg'}}" />
       <view class="flex-item padding-l-md">
         <view class="padding-b-sm">
-          <text class="flex-item h1 text-title">"测试活动名称"</text>
+          <text class="flex-item h1 text-title">{{data.activityName}}</text>
         </view>
         <view class="flex-align-center h5 activity-info">
           <view class="iconfont icon-calendar text-muted h4" />

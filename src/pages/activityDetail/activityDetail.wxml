@@ -1,8 +1,7 @@
 <view class="padding-t-lg padding-l-xl padding-r-xl">
   <view class="card">
     <view class="card-header activity-title">
-      2019年牛首山马拉松东南大学校友队
-      <view class="iconfont iconmessage" />
+      {{activity.activityName}}
     </view>
     <view class="card-block">
       <view class="flex-align-center padding-t-sm padding-b-sm">
@@ -28,7 +27,7 @@
 
   <view class="card">
     <view class="padding-lg h3 text-title">
-      乌七八糟
+      {{activity.activityDesc}}
     </view>
   </view>
   <view class="fix-bottom flex">

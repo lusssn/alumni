@@ -103,6 +103,13 @@ export const getEnrolledActivities = params =>
 export const getStartedActivities = params =>
   request.get('/v2/activities/startedActivities', params).then(res => res.data)
 
+/************************************* 发起活动 *************************************/
+export const getActivityDetail = params =>
+  request.get('/v2/activities', params).then(res => res.data)
+
+export const createActivity = params =>
+  request.post('/v2/activities', params).then(res => res.data)
+
 /************************************* 消息列表 *************************************/
 // 消息-获取消息列表
 export const getMessages = params =>

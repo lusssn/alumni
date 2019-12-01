@@ -1,4 +1,9 @@
 import * as Util from '../../utils/util'
+import wxUtil from '../../utils/wxUtil'
+import * as Api from  '../api'
+import moment from '../../utils/moment.min'
+
+const app = getApp()
 
 Page({
   data: {
@@ -11,8 +16,23 @@ Page({
     },
     images: [],
   },
+  onLoad() {
+    wxUtil.login()
+  },
   handleSubmit() {
-    console.log(this.data.info)
+    const { info } = this.data
+    const { accountId } = app.global
+    Api.createActivity({
+      accountId,
+      alumniCircleId: 71101,
+      activityName: info.activityName,
+      activityDesc: info.activityDesc,
+      activityTime: moment(info.activityTime).format('YYYY-MM-DD HH:mm:ss'),
+      expirationTime: moment(info.expirationTime).format('YYYY-MM-DD HH:mm:ss'),
+    }).then(
+      () => {},
+      () => {},
+    )
   },
   handleInputChange(event) {
     const { name } = event.currentTarget.dataset
