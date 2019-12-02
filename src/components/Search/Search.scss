@@ -1,0 +1,42 @@
+@import "../../scss/variables";
+
+// 搜索框样式
+.search-wrap {
+  position: relative;
+  display: flex;
+  padding-left: 42rpx;
+  overflow: hidden;
+  align-items: center;
+  border: 2rpx solid $border-color;
+  border-radius: 14rpx;
+  background-color: white;
+  & > icon {
+    position: absolute;
+    top: 50%;
+    left: 42rpx;
+    transform: translateY(-50%);
+  }
+  & > .search-header-input {
+    padding: 20rpx 15rpx 18rpx 68rpx;
+    flex: 1;
+    font-size: 30rpx;
+  }
+
+  // 居中的样式
+  &.search-center {
+    padding-left: 120rpx;
+    // TODO：可以提出来作为一个props
+    border-width: 0;
+    box-shadow: 0 6rpx 18rpx 0 rgba($shadow-color, .1);
+    & > icon {
+      left: 120rpx;
+    }
+  }
+}
+// 搜索框占位文案样式
+.search-placeholder {
+  font-size: 28rpx;
+  letter-spacing: 2rpx;
+  opacity: .7;
+  color: $muted-color;
+}

@@ -1,0 +1,7 @@
+<view class="empty">
+  <image
+    class="empty-img"
+    src="{{image || '../../images/friend-empty.png'}}"
+  />
+  <view class="empty-text">{{description}}</view>
+</view>

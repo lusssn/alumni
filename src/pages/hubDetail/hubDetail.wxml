@@ -35,7 +35,7 @@
     <ActivityCard />
     <ActivityCard />
     <!-- 发起活动 button -->
-    <button class="activity-btn">
+    <button class="activity-btn" bindtap="handleToCreateActivity">
       <image style="width:50rpx; height:50rpx;" mode="aspectFill" src="{{'../../images/avatar_default.jpeg'}}" />
       <text>发起活动</text>
     </button>

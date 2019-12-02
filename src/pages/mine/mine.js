@@ -38,7 +38,7 @@ Page({
     wxUtil.navigateTo('friend')
   },
   handleToAlumni(){
-    wxUtil.navigateTo('alumniSpace')
+    wxUtil.navigateTo('hubs')
   },
   handleToActivity(){
     wxUtil.navigateTo('activity')

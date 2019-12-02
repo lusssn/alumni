@@ -1,8 +1,8 @@
 {
   "pages": [
-    "pages/myAlumni/myAlumni",
-    "pages/alumniDetail/alumniDetail",
-    "pages/alumniSpace/alumniSpace",
+    "pages/hubs/hubs",
+    "pages/myHub/myHub",
+    "pages/hubDetail/hubDetail",
     "pages/activity/activity",
     "pages/message/message",
     "pages/connections/connections",
@@ -18,7 +18,8 @@
     "pages/myActivity/myActivity",
     "pages/activityDetail/activityDetail",
     "pages/activityCreate/activityCreate",
-    "pages/createGroupBook/createGroupBook"
+    "pages/createGroupBook/createGroupBook",
+    "pages/hubMembers/hubMembers"
   ],
   "permission": {
     "scope.userLocation": {
@@ -43,7 +44,7 @@
         "text": "人脉"
       },
       {
-        "pagePath": "pages/alumniSpace/alumniSpace",
+        "pagePath": "pages/hubs/hubs",
         "iconPath": "images/cards-normal.png",
         "selectedIconPath": "images/cards-selected.png",
         "text": "校友圈"
