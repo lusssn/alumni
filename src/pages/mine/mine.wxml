@@ -9,19 +9,19 @@
   </InfoCard>
   <view class="card nav-list">
     <view class="nav-item" bindtap="handleToCardcase">
-      <view class="iconfont icon-card text-primary margin-r-md" />
+      <view class="iconfont icon-card" />
       <text>我的名片夹</text>
     </view>
     <view class="nav-item" bindtap="handleToAlumni">
-      <view class="iconfont icon-round text-primary margin-r-md" style="font-size: 38rpx;" />
+      <view class="iconfont icon-round" />
       <text>我的校友圈</text>
     </view>
     <view class="nav-item" bindtap="handleToActivity">
-      <view class="iconfont icon-hand text-primary margin-r-md" style="font-size: 44rpx; margin-left: -2px;" />
+      <view class="iconfont icon-hand" />
       <text>我的活动</text>
     </view>
     <view class="nav-item" bindtap="handleToMsgs">
-      <view class="iconfont icon-message text-primary margin-r-md" />
+      <view class="iconfont icon-message" />
       <text class="flex-item">我的消息</text>
       <view wx:if="{{messageCount > 0}}" class="red-number text-center h6">{{messageCount}}</view>
     </view>

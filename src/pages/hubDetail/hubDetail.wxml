@@ -12,7 +12,7 @@
             <view class="flex-align-center h5 activity-info">
               <view class="iconfont icon-calendar text-primary h4" />
               <text class="padding-l-xs padding-r-xs text-primary">官方认证</text>
-              <view class="iconfont icon-error text-primary h4" />
+              <view class="iconfont icon-excl-o text-primary h4" />
               <text class="padding-l-xs padding-r-xs text-primary">校友圈运营</text>
             </view>
           </view>
