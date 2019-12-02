@@ -1,28 +1,5 @@
 @import "../../scss/variables";
 
-// 搜索框样式
-.search-header {
-  position: relative;
-  display: flex;
-  margin: 0 34rpx;
-  padding-left: 42rpx;
-  overflow: hidden;
-  align-items: center;
-  border: 2rpx solid $border-color;
-  border-radius: 14rpx;
-  & > icon {
-    position: absolute;
-    top: 50%;
-    left: 42rpx;
-    transform: translateY(-50%);
-  }
-  &-input {
-    padding: 16rpx 15rpx 16rpx 68rpx;
-    flex: 1;
-    background-color: white;
-  }
-}
-
 // 准备搜索
 .ready-text {
   padding-top: 50rpx;

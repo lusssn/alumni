@@ -1,4 +1,5 @@
-<template name="tmplList">
+<view class="padding-lg">
+  <Search className="margin-b-lg" placeholder="搜索圈子成员" />
   <Loading wx:if="{{!list}}" />
   <block wx:elif="{{list.length}}">
     <BusinessCard
@@ -9,5 +10,5 @@
       bindtap="handleClickCard"
     />
   </block>
-  <ListEmpty wx:else description="{{placeholder}}" />
-</template>
+  <ListEmpty wx:else description="圈子内暂无成员" />
+</view>

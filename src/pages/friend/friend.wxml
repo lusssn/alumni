@@ -1,17 +1,11 @@
 <import src="./tmplList.wxml" />
 
 <view class="padding-t-md">
-  <view class="search-header">
-    <icon type="search" size="19" color="#CACACA" />
-    <input
-      class="search-header-input h2"
-      placeholder="名片夹内搜索"
-      placeholder-class="search-placeholder"
-      bindconfirm="handleSearch"
-      focus="true"
-      confirm-type="search"
-    />
-  </view>
+  <Search
+    className="margin-l-lg margin-r-lg"
+    placeholder="名片夹内搜索"
+    bindconfirm="handleSearch"
+  />
   <view class="margin-l-xl margin-r-xl">
     <Nav
       className="margin-t-sm margin-b-md"

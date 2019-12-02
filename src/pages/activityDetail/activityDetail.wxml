@@ -8,15 +8,17 @@
         <image
           class="avatar"
           mode="aspectFill"
-          src="{{originator.avatar || '../../images/avatar_default.jpeg'}}"
+          src="{{activity.starterAvatar || '../../images/avatar_default.jpeg'}}"
         />
         <view class="flex-item padding-l-sm h6 text-title">
           <view>
-            <text>{{originator.name}}</text>
-            <text>{{originator.school}}-{{originator.college}}</text>
+            <text>{{activity.starterName}}</text>
+            <text>·{{activity.starterEducationGrade}}</text>
+            <text>-{{activity.starterEducationSchool}}</text>
+            <text>-{{activity.starterEducationCollege}}</text>
           </view>
           <view>
-            发布时间：2019-11-11 20：00
+            发布时间：{{activity.activityCreatedDateTime}}
           </view>
         </view>
       </view>

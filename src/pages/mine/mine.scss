@@ -20,6 +20,12 @@
       @include borderPoint5("t");
     }
 
+    & > .iconfont {
+      font-size: 40rpx;
+      color: $theme-color;
+      margin-right: 24rpx;
+    }
+
     .red-number {
       width: 34rpx;
       height: 34rpx;

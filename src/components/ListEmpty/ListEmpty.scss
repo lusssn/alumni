@@ -1,0 +1,15 @@
+@import "../../scss/variables";
+
+.empty {
+  text-align: center;
+  padding-top: 160rpx;
+}
+.empty-img {
+  margin-bottom: 40rpx;
+  width: 248rpx;
+  height: 204rpx;
+}
+.empty-text {
+  font-size: 26rpx;
+  color: $theme-color;
+}

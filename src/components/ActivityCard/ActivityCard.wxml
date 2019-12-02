@@ -7,10 +7,10 @@
           <text class="flex-item h1 text-title">{{data.activityName}}</text>
         </view>
         <view class="flex-align-center h5 activity-info">
-          <view class="iconfont icon-calendar text-muted h4" />
-          <text class="text-title padding-l-xs padding-r-xs text-muted">2019-12-20</text>
-          <view class="iconfont icon-error text-primary h4" />
-          <text class="text-title padding-l-xs padding-r-xs text-primary">{{data.activityMembersNum}}人报名</text>
+          <view class="iconfont icon-calendar text-muted" />
+          <view class="text-title padding-l-xs padding-r-xs text-muted">2019-12-20</view>
+          <view class="iconfont icon-card text-primary" />
+          <text class="text-title padding-l-xs padding-r-xs text-primary">{{data.enrolledNumber}}人报名</text>
         </view>
       </view>
       <view class="iconfont icon-arrow-right text-muted" />

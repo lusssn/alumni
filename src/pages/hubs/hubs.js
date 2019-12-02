@@ -3,7 +3,7 @@ import * as R from '../../utils/ramda/index'
 const app = getApp()
 
 const NAV_CONFIG = [
-  { id: 1, name: '校友圈推荐', key: 'alumniSpace' },
+  { id: 1, name: '校友圈推荐', key: 'hubs' },
   { id: 2, name: '活动推荐', key: 'activity' },
 ]
 Page({

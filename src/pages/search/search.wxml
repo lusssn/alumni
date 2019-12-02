@@ -1,15 +1,9 @@
 <view class="container">
-  <view class="search-header">
-    <icon type="search" size="19" color="#CACACA" />
-    <input
-      class="search-header-input h2"
-      placeholder="海量校友资源，一键搜索找人"
-      placeholder-class="search-placeholder"
-      bindconfirm="handleSearch"
-      focus="true"
-      confirm-type="search"
-    />
-  </view>
+  <Search
+    className="margin-l-lg margin-r-lg"
+    placeholder="海量校友资源，一键搜索找人"
+    bindconfirm="handleSearch"
+  />
   <!-- 搜索结果 -->
   <view hidden="{{!isSearched}}" class="search-result">
     <view

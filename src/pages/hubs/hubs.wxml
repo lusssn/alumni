@@ -2,16 +2,13 @@
 
 <view wx:if="{{isLoaded}}" class="container">
   <view class="header">
-    <view class="search">
-      <icon type="search" size="19" color="#CACACA"/>
-      <input
-        class="search-input h2"
-        placeholder="海量校友资源，一键搜索找人"
-        placeholder-class="search-placeholder"
-        bindtap="handleClickSearch"
-        disabled
-      />
-    </view>
+    <Search
+      className="search"
+      placeholder="海量校友资源，一键搜索找人"
+      alignType="center"
+      bindtap="handleClickSearch"
+      disabled
+    />
   </view>
 
   <view class="margin-l-xl margin-r-xl">
@@ -22,7 +19,7 @@
       bindswitch="handleSwitch"
     />
     <template
-      wx:if="{{currentTab.key === 'alumniSpace'}}"
+      wx:if="{{currentTab.key === 'hubs'}}"
       is="tmplList"
       data="{{ list: alumniSpaceList, placeholder: '暂无校友圈' }}"
     />

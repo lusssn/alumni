@@ -1,0 +1,12 @@
+@import "../../scss/variables";
+
+.header {
+  height: 50rpx;
+  margin-bottom: 60rpx;
+}
+.search {
+  top: 20rpx;
+  left: 50vw;
+  width: 100%;
+  transform: translateX(-50%);
+}
