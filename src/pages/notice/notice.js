@@ -1,56 +1,70 @@
 import wxUtil from '../../utils/wxUtil'
-import * as R from '../../utils/ramda/index'
-import * as Util from '../../utils/util'
 import * as Api from '../api'
-import { CONTACT_TYPE } from '../../macros'
+
+const app = getApp()
 
 const PAGE_SIZE = 10
 
 Page({
   data: {
-    noticeList: [],
-    pagination: { current: 1, total: 0 },
+    messageList: [{
+      "messageId": 96971,
+      "type": 64932,
+      "payload": "kHfgpav8ar",
+      "status": 40180,
+      "fromUser": 44947,
+      "toUser": 38249,
+      "fromUserName": "IE7yQI2MmF"
+    }, {
+      "messageId": 96972,
+      "type": 64932,
+      "payload": "kHfgpav8arkHfgpav8arkHfgpav8arkHfgpav8arkHfgpav8ar",
+      "status": 40180,
+      "fromUser": 44947,
+      "toUser": 38249,
+      "fromUserName": "IE7yQI2MmF"
+    }],
+    messagePagination: { current: 1, total: 0 },
   },
   onLoad() {
     wxUtil.login().then(() => {
-      this.loadList()
+      this.loadMessageList()
     })
   },
   onPullDownRefresh() {
-    this.loadList().then(() => {
+    this.loadMessageList().then(() => {
       wx.stopPullDownRefresh()
     })
   },
   onReachBottom() {
-    const { total, current } = this.data.pagination
+    const { total, current } = this.data.startedPagination
     // 是否为最后一页
     if (Math.ceil(total / PAGE_SIZE) > current) {
-      this.loadList(current + 1)
+      this.loadMessageList(current + 1)
     }
   },
-  loadList(pageNo = 1) {
-    // 加载消息列表数据
-    return Api.getNoticeList({
+  loadMessageList(pageNo = 1) {
+    return Api.getMessages({
       pageIndex: pageNo,
       pageSize: PAGE_SIZE,
     }).then(data => {
       const { list, count } = data
-      list.forEach(item => {
-        const contactType = R.find(R.propEq('id', +item.status))(CONTACT_TYPE) || {}
-        item.status_name = contactType.name
-        item.createTime = Util.getYearMonthDate(item.createTime)
-      })
       this.setData({
-        noticeList: pageNo === 1 ? list : this.data.noticeList.concat(list),
-        pagination: {
+        startedList: pageNo === 1 ? list : this.data.startedList.concat(list),
+        startedPagination: {
           current: pageNo,
           total: count,
         },
       })
-    }, () => {})
+    }, () => { })
   },
-  handleClickCard(e) {
-    const { id } = e.currentTarget.dataset
-    wxUtil.navigateTo('detail', { id })
-  },
+  // 点击消息列表，将未读更改为已读
+  handleClickMessage(e) {
+    const { id } = e.currentTarget.dataset;
+    const clickedItem = this.data.messageList.find(item => item.messageId === id);
+    if ( clickedItem.status === 0 ) {
+      const { messageId, status, fromUserName } = clickedItem;
+      readMessage({ messageId, status, fromUserName })
+    }
+  }
 })

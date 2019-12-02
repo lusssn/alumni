@@ -1,13 +1,13 @@
-<view class="flex-align-center padding-t-lg padding-b-lg border-b tap">
-  <image class="avatar" mode="aspectFill" src="{{data.avatar || '../../images/avatar_default.jpeg'}}" />
-  <view class="flex-item padding-l-lg">
-    <view class="h1 text-title padding-b-sm">
-      <text>{{data.fromUserName}}</text>
+<view class="card">
+  <view class="card-block" data-id="{{data.messageId}}" bindtap="handleClickMessage">
+    <view class="flex-align-center padding-t-lg padding-b-lg">
+      <image class="message-card-avatar" mode="aspectFill" src="{{'../../images/avatar_default.jpeg'}}" />
+      <view class="flex-item padding-l-md">
+        <view class="padding-b-xs">
+          <text class="flex-item h1 text-title">{{data.fromUserName}}</text>
+        </view>
+        <view class="flex-align-center h5 text-title text-muted payload">{{data.payload}}</view>
+      </view>
     </view>
-    <view>{{data.status_name}}</view>
   </view>
-  <view class="self-top">
-    <text class="h6 text-muted">{{data.createTime}}</text>
-  </view>
-  <view class="iconfont icon-arrow-right margin-l-lg" />
 </view>
