@@ -28,13 +28,14 @@ Page({
     }
   },
   loadNoticeList(pageNo = 1) {
-    return Api.getNotices({
+    return Api.getMessage({
       pageIndex: pageNo,
       pageSize: PAGE_SIZE,
+      status: 0,
     }).then(data => {
       const { list, count } = data
       this.setData({
-        noticeList: pageNo === 1 ? list : this.data.startedList.concat(list),
+        noticeList: pageNo === 1 ? list : this.data.noticeList.concat(list),
         noticePagination: {
           current: pageNo,
           total: count,

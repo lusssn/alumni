@@ -10,7 +10,7 @@ Page({
     account: {},
     educations: [],
     jobs: [],
-    messageCount: 0,
+    noticeCount: 0,
   },
   onLoad() {
     this.loadAllInfo()
@@ -34,17 +34,29 @@ Page({
   handleEdit() {
     wxUtil.navigateTo('edit', { type: 'account' })
   },
-  handleToCardcase(){
+  handleToCardcase() {
     wxUtil.navigateTo('friend')
   },
-  handleToAlumni(){
+  handleToAlumni() {
     wxUtil.navigateTo('hubs')
   },
-  handleToActivity(){
+  handleToActivity() {
     wxUtil.navigateTo('activity')
   },
-  handleToMsgs(){
+  handleToMsgs() {
     wxUtil.navigateTo('notice')
+  },
+  loadNoticeList() {
+    return Api.getMessages({
+      pageIndex: 1,
+      pageSize: 10,
+      status: 0,
+    }).then(data => {
+      const { count } = data
+      this.setData({
+        noticeCount: count
+      })
+    }, () => { })
   },
   loadAllInfo() {
     return wxUtil.login().then(
@@ -57,14 +69,8 @@ Page({
           accountId: app.global.accountId,
         }).then(
           data => {
-            // 处理时间
-            const { birthday } = data.account
-            data.account.birthday = Util.getYearMonthDate(birthday)
+            this.loadNoticeList()
             for (let item of data.educations) {
-              item.startTime = Util.getYear(item.startTime)
-              item.endTime = Util.getYear(item.endTime)
-            }
-            for (let item of data.jobs) {
               item.startTime = Util.getYear(item.startTime)
               item.endTime = Util.getYear(item.endTime)
             }
@@ -73,7 +79,7 @@ Page({
               ...data,
             })
           },
-          () => {},
+          () => { },
         )
       },
     )
