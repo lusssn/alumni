@@ -7,51 +7,35 @@ const PAGE_SIZE = 10
 
 Page({
   data: {
-    messageList: [{
-      "messageId": 96971,
-      "type": 64932,
-      "payload": "kHfgpav8ar",
-      "status": 40180,
-      "fromUser": 44947,
-      "toUser": 38249,
-      "fromUserName": "IE7yQI2MmF"
-    }, {
-      "messageId": 96972,
-      "type": 64932,
-      "payload": "kHfgpav8arkHfgpav8arkHfgpav8arkHfgpav8arkHfgpav8ar",
-      "status": 40180,
-      "fromUser": 44947,
-      "toUser": 38249,
-      "fromUserName": "IE7yQI2MmF"
-    }],
-    messagePagination: { current: 1, total: 0 },
+    noticeList: null,
+    noticePagination: { current: 1, total: 0 },
   },
   onLoad() {
     wxUtil.login().then(() => {
-      this.loadMessageList()
+      this.loadNoticeList()
     })
   },
   onPullDownRefresh() {
-    this.loadMessageList().then(() => {
+    this.loadNoticeList().then(() => {
       wx.stopPullDownRefresh()
     })
   },
   onReachBottom() {
-    const { total, current } = this.data.startedPagination
+    const { total, current } = this.data.noticePagination
     // 是否为最后一页
     if (Math.ceil(total / PAGE_SIZE) > current) {
-      this.loadMessageList(current + 1)
+      this.loadNoticeList(current + 1)
     }
   },
-  loadMessageList(pageNo = 1) {
-    return Api.getMessages({
+  loadNoticeList(pageNo = 1) {
+    return Api.getNotices({
       pageIndex: pageNo,
       pageSize: PAGE_SIZE,
     }).then(data => {
       const { list, count } = data
       this.setData({
-        startedList: pageNo === 1 ? list : this.data.startedList.concat(list),
-        startedPagination: {
+        noticeList: pageNo === 1 ? list : this.data.startedList.concat(list),
+        noticePagination: {
           current: pageNo,
           total: count,
         },
@@ -59,12 +43,12 @@ Page({
     }, () => { })
   },
   // 点击消息列表，将未读更改为已读
-  handleClickMessage(e) {
+  handleClickNotice(e) {
     const { id } = e.currentTarget.dataset;
-    const clickedItem = this.data.messageList.find(item => item.messageId === id);
+    const clickedItem = this.data.noticeList.find(item => item.noticeId === id);
     if ( clickedItem.status === 0 ) {
-      const { messageId, status, fromUserName } = clickedItem;
-      readMessage({ messageId, status, fromUserName })
+      const { noticeId, status, fromUserName } = clickedItem;
+      readNotice({ noticeId, status, fromUserName })
     }
   }
 })
