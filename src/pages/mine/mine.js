@@ -47,10 +47,9 @@ Page({
     wxUtil.navigateTo('notice')
   },
   loadNoticeList() {
-    return Api.getMessages({
+    return Api.getNoticeList({
       pageIndex: 1,
       pageSize: 10,
-      status: 0,
     }).then(data => {
       const { count } = data
       this.setData({

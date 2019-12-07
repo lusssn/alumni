@@ -111,13 +111,9 @@ export const createActivity = params =>
   request.post('/v2/activities', params).then(res => res.data)
 
 /************************************* 消息列表 *************************************/
-// 消息-获取消息列表
-export const getMessages = params =>
-  request.get('/v2/message', params).then(res => res.data)
-
 // 消息-改变消息阅读状态
-export const readMessage = params =>
-  request.get('/v2/message/changeStatus', params).then(res => res.data)
+export const readNotice = params =>
+  request.post('/v2/message/changeStatus', params)
 
 /************************************* 我的圈子 *************************************/
 // 我的圈子-获取用户参与的圈群的基本信息

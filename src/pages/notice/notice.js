@@ -1,5 +1,6 @@
 import wxUtil from '../../utils/wxUtil'
 import * as Api from '../api'
+import * as R from '../../utils/ramda/index'
 
 const app = getApp()
 
@@ -28,10 +29,9 @@ Page({
     }
   },
   loadNoticeList(pageNo = 1) {
-    return Api.getMessage({
+    return Api.getNoticeList({
       pageIndex: pageNo,
       pageSize: PAGE_SIZE,
-      status: 0,
     }).then(data => {
       const { list, count } = data
       this.setData({
@@ -46,10 +46,21 @@ Page({
   // 点击消息列表，将未读更改为已读
   handleClickNotice(e) {
     const { id } = e.currentTarget.dataset;
-    const clickedItem = this.data.noticeList.find(item => item.noticeId === id);
-    if ( clickedItem.status === 0 ) {
-      const { noticeId, status, fromUserName } = clickedItem;
-      readNotice({ noticeId, status, fromUserName })
-    }
+    Api.readNotice({ messageId: id, status: 0 }).then(res => {
+      const readedIndex = this.data.noticeList.findIndex(item => item.messageId === id)
+      let tempList = R.clone(this.data.noticeList)
+      tempList.splice(readedIndex, 1)
+      this.setData({
+        noticeList: tempList
+      })
+    }).catch(() => {
+      wx.showToast({
+        title: "阅读消息失败，请稍后重试",
+        icon: "none"
+      })
+    })
+    setTimeout(() => {
+      wx.hideToast()
+    }, 1500)
   }
 })

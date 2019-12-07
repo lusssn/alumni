@@ -1,5 +1,5 @@
 <view class="card">
-  <view class="card-block" data-id="{{data.messageId}}" bindtap="handleClickMessage">
+  <view class="card-block" data-id="{{data.messageId}}">
     <view class="flex-align-center padding-t-lg padding-b-lg">
       <image class="message-card-avatar" mode="aspectFill" src="{{'../../images/avatar_default.jpeg'}}" />
       <view class="flex-item padding-l-md">

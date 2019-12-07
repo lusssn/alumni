@@ -4,6 +4,7 @@
   "navigationBarTextStyle": "white",
   "usingComponents": {
     "Loading": "../../components/Loading/Loading",
-    "NoticeItem": "../../components/NoticeItem/NoticeItem"
+    "NoticeItem": "../../components/NoticeItem/NoticeItem",
+    "ListEmpty": "../../components/ListEmpty/ListEmpty"
   }
 }
