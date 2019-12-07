@@ -3,8 +3,7 @@
  */
 const HOST = {
   online: 'https://www.seuclab.cn',
-  dev: 'https://www.seuclab.cn',
-  // dev: 'http://localhost:18080',
+  dev: 'https://www.seuclab.cn/test',
 }
 
 const qqMapHost = 'https://apis.map.qq.com'
