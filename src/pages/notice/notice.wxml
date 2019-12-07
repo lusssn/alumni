@@ -1,6 +1,9 @@
 <view class="padding-t-md">
   <view class="margin-l-xl margin-r-xl">
-    <Loading wx:if="{{!messageList}}" />
-    <NoticeItem wx:key="messageId" wx:for="{{messageList}}" data="{{item}}" bindtap="handleClickMessage"/>
+    <Loading wx:if="{{!noticeList}}" />
+    <block wx:elif="{{noticeList.length}}">
+      <NoticeItem wx:key="messageId" wx:for="{{noticeList}}" data-id="{{item.messageId}}" data="{{item}}" bindtap="handleClickNotice" />
+    </block>
+    <ListEmpty wx:else description="暂无未读消息" />
   </view>
 </view>
