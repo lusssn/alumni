@@ -8,6 +8,15 @@
       border-radius: 50%;
       background-color: $bg-color;
     }
+    .author-tag {
+      border: 1px solid $theme-color;
+      padding: 0 12rpx;
+      font-size: 18rpx;
+      border-radius: 13rpx;
+      background-color: $theme-color;
+      color: white;
+    }
+
     .type-tag {
       border: 1px solid $theme-color;
       padding: 0 12rpx;

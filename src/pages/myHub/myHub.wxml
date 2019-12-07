@@ -1,22 +1,26 @@
 <view class="padding-t-md container">
   <view class="margin-l-xl margin-r-xl">
-    <Loading wx:if="{{!alumniList}}" />
-    <view wx wx:for="{{alumniList}}" wx:key="{{alumniCircleId}}" class="card alumni-item">
-      <view class="card-block" data-id="{{item.alumniCircleId}}" bindtap="">
-        <view class="flex-align-center padding-t-lg padding-b-lg">
-          <image class="alumni-card-avatar" mode="aspectFill" src="{{item.item || '../../images/avatar_default.jpeg'}}" />
+    <Loading wx:if="{{!hubList}}" />
+    <block wx:elif="{{hubList.length}}">
+      <view wx:for="{{hubList}}" wx:key="{{alumniCircleId}}" class="card alumni-item" data-id="{{item.alumniCircleId}}" bindtap="handleClickHub">
+        <view class="flex-align-center padding-t-lg padding-b-lg card-block">
+          <image class="alumni-card-avatar" mode="aspectFill" src="{{item.avatar || '../../images/avatar_default.jpeg'}}" />
           <view class="flex-item padding-l-md">
             <view class="flex-align-center padding-b-xs">
               <text class="h1 text-title">{{item.alumniCircleName}}</text>
-              <view class="text-primary margin-l-sm type-tag">{{item.alumniCircleType === 1 ? '校友圈' : '组群'}}</view>
+              <view wx:if="{{item.authorizationStatus === IS_AUTHORIZED}}" class="text-primary margin-l-sm author-tag">
+                官方认证
+              </view>
+              <view class="text-primary margin-l-sm type-tag">
+                {{item.alumniCircleType === ALUMNI_CIRCLE ? '校友圈' : '组群'}}
+              </view>
             </view>
-            <view class="flex-align-center h5 activity-info">
-              <text class="text-title padding-l-xs padding-r-xs text-muted">{{item.alumniCircleDesc}}</text>
-            </view>
+            <view class="h5 hub-info text-muted">{{item.alumniCircleDesc}}</view>
           </view>
         </view>
       </view>
-    </view>
+    </block>
+    <ListEmpty wx:else description="还没有加入圈子" />
   </view>
   <view class="fix-bottom">
     <button class="create-btn" bindtap="">创建群通讯录</button>

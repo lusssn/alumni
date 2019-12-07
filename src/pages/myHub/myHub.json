@@ -4,6 +4,7 @@
   "navigationBarBackgroundColor": "#3A82E6",
   "navigationBarTextStyle": "white",
   "usingComponents": {
-    "Loading": "../../components/Loading/Loading"
+    "Loading": "../../components/Loading/Loading",
+    "ListEmpty": "../../components/ListEmpty/ListEmpty"
   }
 }
