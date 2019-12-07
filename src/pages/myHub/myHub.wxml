@@ -23,6 +23,6 @@
     <ListEmpty wx:else description="还没有加入圈子" />
   </view>
   <view class="fix-bottom">
-    <button class="create-btn" bindtap="">创建群通讯录</button>
+    <button class="create-btn" bindtap="handleCreateGroup">创建群通讯录</button>
   </view>
 </view>

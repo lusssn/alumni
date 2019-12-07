@@ -55,5 +55,9 @@ Page({
   handleClickHub(e) {
     const { id } = e.currentTarget.dataset;
     wxUtil.navigateTo('hubDetail', { id })
+  },
+  // 创建群通讯录
+  handleCreateGroup() {
+    wxUtil.navigateTo('createGroupBook')
   }
 })
