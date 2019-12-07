@@ -126,5 +126,5 @@ export const readNotice = params =>
 
 /************************************* 我的圈子 *************************************/
 // 我的圈子-获取用户参与的圈群的基本信息
-export const getMyAlumni = params =>
+export const getMyHubs = params =>
   request.get('/v2/alumniCircles/enrolledAlumniCircles', params).then(res => res.data)
