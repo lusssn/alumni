@@ -1,6 +1,8 @@
 import wxUtil from '../../utils/wxUtil'
 import * as Api from '../api'
 
+const app = getApp()
+
 Page({
   data: {
     activity: {},
@@ -17,5 +19,14 @@ Page({
         () => {},
       )
     })
+  },
+  handleJoinActivity() {
+    Api.joinActivity({
+      activityId: this.data.activity.activityId,
+      accountId: app.global.accountId,
+    }).then(
+      () => {},
+      () => {},
+    )
   }
 })
