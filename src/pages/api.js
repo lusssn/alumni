@@ -103,12 +103,21 @@ export const getEnrolledActivities = params =>
 export const getStartedActivities = params =>
   request.get('/v2/activities/startedActivities', params).then(res => res.data)
 
-/************************************* 发起活动 *************************************/
+/************************************** 活动 **************************************/
 export const getActivityDetail = params =>
   request.get('/v2/activities', params).then(res => res.data)
 
+// 创建一个活动
 export const createActivity = params =>
   request.post('/v2/activities', params).then(res => res.data)
+
+// 活动详情-获取活动下的成员
+export const getActivityMembers = params =>
+  request.get('/v2/activities/members', params).then(res => res.data)
+
+// 活动详情-参与活动
+export const joinActivity = params =>
+  request.post('/v2/activities/members', params).then(res => res.data)
 
 /************************************* 消息列表 *************************************/
 // 消息-获取消息列表

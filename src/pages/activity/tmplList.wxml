@@ -6,7 +6,7 @@
       wx:key="activityId"
       data="{{item}}"
       data-id="{{item.activityId}}"
-      bindtap="{{type == 'Enrolled' ? handleToActivityDetail : handleToMyActivity }}"
+      bindtap="{{type == 'Enrolled' ? 'handleToActivityDetail' : 'handleToMyActivity' }}"
     />
   </block>
   <ListEmpty wx:else description="{{placeholder}}" />

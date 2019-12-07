@@ -45,8 +45,8 @@
       },
       {
         "pagePath": "pages/hubs/hubs",
-        "iconPath": "images/cards-normal.png",
-        "selectedIconPath": "images/cards-selected.png",
+        "iconPath": "images/round-normal.png",
+        "selectedIconPath": "images/round-selected.png",
         "text": "校友圈"
       },
       {

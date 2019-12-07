@@ -33,7 +33,7 @@
     </view>
   </view>
   <view class="fix-bottom flex">
-    <button class="flex-item" type="primary">
+    <button class="flex-item" type="primary" bindtap="handleJoinActivity">
       报名
     </button>
   </view>

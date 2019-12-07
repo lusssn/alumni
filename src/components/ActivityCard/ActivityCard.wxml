@@ -1,8 +1,7 @@
-<view class="card">
+<view class="card tap">
   <view class="card-block">
     <view class="flex-align-center padding-t-lg padding-b-lg">
-      <image class="activity-card-avatar" mode="aspectFill" src="{{data.alumniCircleAvatar || '../../images/avatar_default.jpeg'}}" />
-      <view class="flex-item padding-l-md">
+      <view class="flex-item">
         <view class="padding-b-sm">
           <text class="flex-item h1 text-title">{{data.activityName}}</text>
         </view>
