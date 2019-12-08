@@ -11,12 +11,10 @@ export const getLocation = params =>
 export const login = params =>
   request.get('/v2/login/wechat', params).then(res => res.data)
 
-export const createAccount = params =>
-  request.post('/v2/account/step1', params)
+export const createAccount = params => request.post('/v2/account/step1', params)
 
 // 完善-保存名片信息
-export const completeCard = params =>
-  request.put('/v2/account/step2', params)
+export const completeCard = params => request.put('/v2/account/step2', params)
 
 /************************************ 编辑、完善 *************************************/
 // 获取-基本信息
@@ -32,27 +30,27 @@ export const getWorkInfo = params =>
   request.get('/v2/job', params).then(res => res.data)
 
 // 保存-基本信息
-export const saveBasic = params =>
-  request.post('/v2/account', params)
+export const saveBasic = params => request.post('/v2/account', params)
 
 // 保存-教育信息
-export const saveEducation = params =>
-  request.post('/v2/education', params)
+export const saveEducation = params => request.post('/v2/education', params)
 
 // 删除-教育信息
-export const removeEducation = params =>
-  request.del('/v2/education', params)
+export const removeEducation = params => request.del('/v2/education', params)
 
 // 保存-工作信息
-export const saveWork = params =>
-  request.post('/v2/job', params)
+export const saveWork = params => request.post('/v2/job', params)
 
 // 删除-工作信息
-export const removeWork = params =>
-  request.del('/v2/job', params)
+export const removeWork = params => request.del('/v2/job', params)
 
-/*************************************** 圈子 ***************************************/
-// 首页-名片广场
+/*************************************** 人脉 ***************************************/
+// 圈子推荐列表
+export const getHubsRecommend = params =>
+  request.get('/v2/alumniCircles/recommend', params)
+
+/*************************************** 人脉 ***************************************/
+// 人脉-名片广场
 export const getSquareCards = params =>
   request.get('/v2/recommand', params).then(res => res.data)
 
@@ -83,16 +81,13 @@ export const getFavoriteList = params =>
 
 /************************************* 名片详情 *************************************/
 // 详情-同意/拒绝交换名片
-export const requestFriend = params =>
-  request.post('/v2/friend/manage', params)
+export const requestFriend = params => request.post('/v2/friend/manage', params)
 
 // 详情-请求交换名片
-export const applyFriend = params =>
-  request.post('/v2/friend/apply', params)
+export const applyFriend = params => request.post('/v2/friend/apply', params)
 
 // 详情-收藏、取消
-export const favoriteFriend = params =>
-  request.post('/v2/favorite', params)
+export const favoriteFriend = params => request.post('/v2/favorite', params)
 
 /************************************* 活动列表 *************************************/
 // 活动-我参与的活动列表

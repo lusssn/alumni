@@ -1,0 +1,4 @@
+<view class="tag {{active ? 'active' : ''}}">
+  <view wx:if="{{icon}}" class="iconfont icon-{{icon}}" />
+  <text>{{text}}</text>
+</view>

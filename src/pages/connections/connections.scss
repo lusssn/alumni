@@ -4,11 +4,10 @@
   height: 50rpx;
   margin-bottom: 60rpx;
 }
-.search {
-  top: 20rpx;
-  left: 50vw;
-  width: 100%;
-  transform: translateX(-50%);
+
+search {
+  flex: 1;
+  margin: 42rpx 32rpx 0;
 }
 
 .capsule {

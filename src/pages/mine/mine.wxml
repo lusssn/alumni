@@ -12,7 +12,7 @@
       <view class="iconfont icon-card" />
       <text>我的名片夹</text>
     </view>
-    <view class="nav-item" bindtap="handleToAlumni">
+    <view class="nav-item" bindtap="handleToMyHubs">
       <view class="iconfont icon-round" />
       <text>我的校友圈</text>
     </view>

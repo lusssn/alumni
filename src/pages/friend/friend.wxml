@@ -1,27 +1,21 @@
 <import src="./tmplList.wxml" />
 
-<view class="padding-t-md">
-  <Search
-    className="margin-l-lg margin-r-lg"
-    placeholder="名片夹内搜索"
-    bindconfirm="handleSearch"
+<view class="padding-t-md padding-l-lg padding-r-lg">
+  <Search placeholder="名片夹内搜索" bindconfirm="handleSearch" />
+  <Nav
+    class="padding-b-md"
+    data="{{NAV}}"
+    current="{{currentTab.id}}"
+    bindswitch="handleSwitch"
   />
-  <view class="margin-l-xl margin-r-xl">
-    <Nav
-      className="margin-t-sm margin-b-md"
-      data="{{NAV}}"
-      current="{{currentTab.id}}"
-      bindswitch="handleSwitch"
-    />
-    <template
-      wx:if="{{currentTab.key === 'Friend'}}"
-      is="tmplList"
-      data="{{ list: friendList, placeholder: '暂无朋友，快去交换名片吧' }}"
-    />
-    <template
-      wx:else
-      is="tmplList"
-      data="{{ list: favoriteList, placeholder: '暂无收藏，快去收藏名片吧' }}"
-    />
-  </view>
+  <template
+    wx:if="{{currentTab.key === 'Friend'}}"
+    is="tmplList"
+    data="{{ list: friendList, placeholder: '暂无朋友，快去交换名片吧' }}"
+  />
+  <template
+    wx:else
+    is="tmplList"
+    data="{{ list: favoriteList, placeholder: '暂无收藏，快去收藏名片吧' }}"
+  />
 </view>

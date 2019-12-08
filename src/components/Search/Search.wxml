@@ -1,4 +1,4 @@
-<view class="search-wrap {{selfClassName}}">
+<view class="search-wrap {{alignType === 'center' ? 'search-center' : ''}}">
   <icon type="search" size="19" color="#CACACA" />
   <input
     class="search-header-input"

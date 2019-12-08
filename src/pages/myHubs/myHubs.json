@@ -5,6 +5,7 @@
   "navigationBarTextStyle": "white",
   "usingComponents": {
     "Loading": "../../components/Loading/Loading",
+    "Avatar": "../../components/Avatar/Avatar",
     "ListEmpty": "../../components/ListEmpty/ListEmpty"
   }
 }

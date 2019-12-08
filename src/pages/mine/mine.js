@@ -37,8 +37,8 @@ Page({
   handleToCardcase() {
     wxUtil.navigateTo('friend')
   },
-  handleToAlumni() {
-    wxUtil.navigateTo('myHub')
+  handleToMyHubs(){
+    wxUtil.navigateTo('myHubs')
   },
   handleToActivity() {
     wxUtil.navigateTo('activity')

@@ -1,12 +1,16 @@
 @import "../../scss/variables";
 
+nav {
+  display: block;
+}
 .nav {
   display: flex;
   background-color: white;
+  padding-top: 8rpx;
 
   .nav-item {
     position: relative;
-    padding-top: 10rpx;
+    padding-top: 8rpx;
     flex: 1;
     font-size: 32rpx;
     line-height: 62rpx;

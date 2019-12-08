@@ -82,8 +82,8 @@
     bindtap="handleChooseImage"
   />
 
-  <view class="fix-bottom flex">
-    <button class="flex-item" type="primary" bindtap="handleSubmit">
+  <view class="fix-bottom">
+    <button type="primary" bindtap="handleSubmit">
       发起活动
     </button>
   </view>

@@ -6,7 +6,6 @@
   "usingComponents": {
     "Loading": "../../components/Loading/Loading",
     "Nav": "../../components/Nav/Nav",
-    "ActivityCard": "../../components/ActivityCard/ActivityCard",
     "ListEmpty": "../../components/ListEmpty/ListEmpty"
   }
 }

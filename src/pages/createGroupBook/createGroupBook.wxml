@@ -1,5 +1,5 @@
 <view class="container padding-t-md">
-  <view class="margin-l-xl margin-r-xl">
+  <view class="margin-l-lg margin-r-lg">
     <view class="h1 title">群名称</view>
     <view class="card input-card">
       <input class="h2 padding-sm" value="{{groupName}}" placeholder="请输入群名称" maxlength="15" placeholder-class="search-placeholder" bindinput="handleGroupNameChange" />
