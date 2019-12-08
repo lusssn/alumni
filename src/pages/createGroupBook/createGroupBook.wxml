@@ -7,8 +7,8 @@
     </view>
     <view class="h1 title">群简介</view>
     <view class="card input-card">
-      <textarea class="intro-input h2 padding-sm" placeholder="请输入群简介" maxlength="5000" placeholder-class="search-placeholder" bindinput="handleGroupIntroChange" />
-      <text class="word-tip h3 text-muted">5000个字</text>
+      <textarea class="intro-input h2 padding-sm" placeholder="请输入群简介" maxlength="40" placeholder-class="search-placeholder" bindinput="handleGroupIntroChange" />
+      <text class="word-tip h3 text-muted">40个字</text>
     </view>
   </view>
   <view class="fix-bottom">
