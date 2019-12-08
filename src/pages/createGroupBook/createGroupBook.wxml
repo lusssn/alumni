@@ -1,19 +1,34 @@
-<view class="container padding-t-md">
-  <view class="margin-l-lg margin-r-lg">
-    <view class="h1 title">群名称</view>
-    <view class="card input-card">
-      <input class="h2 padding-sm" value="{{groupName}}" placeholder="请输入群名称" maxlength="15" placeholder-class="search-placeholder" bindinput="handleGroupNameChange" />
-      <text class="word-tip h3 text-muted">15个字</text>
+<view class="padding-t-md">
+  <view class="h3 margin-l-lg margin-r-lg">
+    <view class="title">群名称</view>
+    <view class="card padding-md flex-center">
+      <input
+        class="flex-item"
+        value="{{groupName}}"
+        placeholder="请输入群名称"
+        placeholder-class="text-muted"
+        maxlength="15"
+        bindinput="handleGroupNameChange"
+      />
+      <text class="text-muted">15个字</text>
     </view>
-    <view class="h1 title">群简介</view>
-    <view class="card input-card">
-      <textarea class="intro-input h2 padding-sm" placeholder="请输入群简介" maxlength="5000" placeholder-class="search-placeholder" bindinput="handleGroupIntroChange" />
-      <text class="word-tip h3 text-muted">5000个字</text>
+
+    <view class="title">群简介</view>
+    <view class="card padding-sm">
+      <textarea
+        class="textarea"
+        placeholder="请输入群简介"
+        placeholder-class="text-muted"
+        maxlength="5000"
+        bindinput="handleGroupIntroChange"
+      />
+      <view class="text-right text-muted">5000个字</view>
     </view>
   </view>
   <view class="fix-bottom">
-    <button class="complete-btn" bindtap="handleComplete">完成</button>
+    <button type="primary" bindtap="handleComplete">完成</button>
   </view>
+
   <view wx:if="{{showModal}}" class="mask">
     <view class="modal-content margin-xl">
       <view class="h1 text-muted text-center">
