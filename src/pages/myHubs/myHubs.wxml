@@ -1,0 +1,8 @@
+<import src="../../templates/hubList.wxml" />
+
+<view class="container">
+  <template is="hubList" data="{{ list: hubList }}" />
+  <view class="fix-bottom">
+    <button type="primary" bindtap="">创建群通讯录</button>
+  </view>
+</view>

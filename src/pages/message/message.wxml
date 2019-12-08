@@ -1,5 +1,5 @@
 <view class="padding-t-md">
-  <view class="margin-l-xl margin-r-xl">
+  <view class="margin-l-lg margin-r-lg">
     <Loading wx:if="{{!messageList}}" />
     <view wx wx:for="{{messageList}}" class="card">
       <view class="card-block" data-id="{{item.messageId}}" bindtap="handleClickMessage">

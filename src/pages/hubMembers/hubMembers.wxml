@@ -1,5 +1,5 @@
 <view class="padding-lg">
-  <Search className="margin-b-lg" placeholder="搜索圈子成员" />
+  <Search class="margin-b-lg" placeholder="搜索圈子成员" />
   <Loading wx:if="{{!list}}" />
   <block wx:elif="{{list.length}}">
     <BusinessCard

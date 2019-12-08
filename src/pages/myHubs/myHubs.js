@@ -7,7 +7,7 @@ const PAGE_SIZE = 10
 
 Page({
   data: {
-    alumniList: [
+    hubList: [
       {
         "alumniCircleMembersNum": 1,
         "alumniCircleId": 222,
@@ -42,6 +42,6 @@ Page({
         "creatorName": "杨诗月"
       }
     ],
-    messagePagination: { current: 1, total: 0 },
+    hubPagination: { current: 1, total: 0 },
   },
 })

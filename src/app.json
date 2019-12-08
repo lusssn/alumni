@@ -1,13 +1,17 @@
 {
   "pages": [
     "pages/hubs/hubs",
-    "pages/myHub/myHub",
-    "pages/hubDetail/hubDetail",
-    "pages/activity/activity",
-    "pages/message/message",
     "pages/connections/connections",
-    "pages/friend/friend",
     "pages/mine/mine",
+    "pages/friend/friend",
+    "pages/myHubs/myHubs",
+    "pages/hubMembers/hubMembers",
+    "pages/activity/activity",
+    "pages/myActivity/myActivity",
+    "pages/activityDetail/activityDetail",
+    "pages/activityCreate/activityCreate",
+    "pages/hubDetail/hubDetail",
+    "pages/message/message",
     "pages/search/search",
     "pages/searchList/searchList",
     "pages/edit/edit",
@@ -15,11 +19,7 @@
     "pages/detail/detail",
     "pages/notice/notice",
     "pages/register/register",
-    "pages/myActivity/myActivity",
-    "pages/activityDetail/activityDetail",
-    "pages/activityCreate/activityCreate",
-    "pages/createGroupBook/createGroupBook",
-    "pages/hubMembers/hubMembers"
+    "pages/createGroupBook/createGroupBook"
   ],
   "permission": {
     "scope.userLocation": {

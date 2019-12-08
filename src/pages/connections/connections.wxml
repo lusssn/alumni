@@ -1,7 +1,6 @@
-<view wx:if="{{list}}" class="container">
+<view wx:if="{{list}}">
   <view class="header">
     <Search
-      className="search"
       placeholder="海量校友资源，一键搜索找人"
       alignType="center"
       bindtap="handleClickSearch"
@@ -9,13 +8,12 @@
     />
   </view>
 
-  <view class="flex padding-t-sm padding-b-lg padding-l-xl padding-r-xl">
-    <button class="capsule">行业人脉</button>
-    <button class="capsule">可能认识</button>
-    <button class="capsule active">同城</button>
-  </view>
-
-  <view class="padding-l-xl padding-r-xl">
+  <view class="padding-l-lg padding-r-lg">
+    <view class="flex padding-t-sm padding-b-lg">
+      <button class="capsule">行业人脉</button>
+      <button class="capsule">可能认识</button>
+      <button class="capsule active">同城</button>
+    </view>
     <BusinessCard
       wx:for="{{list}}"
       wx:key="accountId"

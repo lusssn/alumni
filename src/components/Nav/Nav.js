@@ -3,7 +3,6 @@ Component({
     addGlobalClass: true
   },
   properties: {
-    className: { type: String, value: '' },
     data: { type: Array, value: [] },
     current: { type: Number, value: 0 },
   },

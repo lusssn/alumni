@@ -1,4 +1,4 @@
-<view class="nav {{className}}">
+<view class="nav">
   <view
     wx:for="{{data}}"
     wx:key="id"

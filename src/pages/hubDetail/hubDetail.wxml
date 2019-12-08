@@ -1,5 +1,5 @@
 <view class="container padding-t-md">
-  <view class="margin-l-xl margin-r-xl">
+  <view class="margin-l-lg margin-r-lg">
     <!-- 圈子信息 -->
     <view class="card">
       <view class="card-block">

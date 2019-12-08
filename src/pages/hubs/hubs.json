@@ -4,11 +4,10 @@
   "navigationBarTextStyle": "white",
   "usingComponents": {
     "Loading": "../../components/Loading/Loading",
-    "InfoCard": "../../components/InfoCard/InfoCard",
-    "TabBox": "../../components/TabBox/TabBox",
     "Nav": "../../components/Nav/Nav",
-    "AlumniSpaceCard": "../../components/AlumniSpace/AlumniSpaceCard/AlumniSpaceCard",
+    "Avatar": "../../components/Avatar/Avatar",
     "Search": "../../components/Search/Search",
-    "ListEmpty": "../../components/ListEmpty/ListEmpty"
+    "ListEmpty": "../../components/ListEmpty/ListEmpty",
+    "Tag": "../../components/Tag/Tag"
   }
 }

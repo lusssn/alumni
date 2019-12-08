@@ -1,0 +1,24 @@
+@import "../../scss/variables";
+
+tag {
+  display: inline-flex;
+}
+.tag {
+  display: inline-block;
+  padding: 0 12rpx 2rpx 12rpx;
+  font-size: 18rpx;
+  line-height: 20rpx;
+  vertical-align: middle;
+  color: $theme-color;
+  border: 2rpx solid $theme-color;
+  border-radius: 14rpx;
+  background-color: white;
+  &.active {
+    color: white;
+    background-color: $theme-color;
+  }
+  & > .iconfont {
+    margin-right: 2rpx;
+    vertical-align: top;
+  }
+}

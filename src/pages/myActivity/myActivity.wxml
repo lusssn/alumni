@@ -53,8 +53,8 @@
   </block>
   <ListEmpty wx:else description="活动暂无人参与" />
 
-  <view class="fix-bottom flex">
-    <button class="flex-item" type="primary">
+  <view class="fix-bottom">
+    <button type="primary">
       一键通知
     </button>
   </view>
