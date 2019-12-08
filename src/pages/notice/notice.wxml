@@ -1,13 +1,9 @@
-<view class="container padding-t-md">
-  <view class="card">
-    <view class="card-block">
-      <NoticeItem
-        wx:for="{{noticeList}}"
-        wx:key="messageId"
-        data="{{item}}"
-        data-id="{{item.fromUser}}"
-        bindtap="handleClickCard"
-      />
-    </view>
+<view class="padding-t-md">
+  <view class="margin-l-xl margin-r-xl">
+    <Loading wx:if="{{!noticeList}}" />
+    <block wx:elif="{{noticeList.length}}">
+      <NoticeItem wx:key="messageId" wx:for="{{noticeList}}" data-id="{{item.messageId}}" data="{{item}}" bindtap="handleClickNotice" />
+    </block>
+    <ListEmpty wx:else description="暂无未读消息" />
   </view>
 </view>

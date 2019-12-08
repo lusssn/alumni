@@ -1,8 +1,18 @@
 @import "../../scss/variables";
 
-.avatar {
-  width: 90rpx;
-  height: 90rpx;
+.message-card-avatar {
+  flex-shrink: 0;
+  width: 94rpx;
+  height: 94rpx;
   border-radius: 50%;
   background-color: $bg-color;
+}
+
+.payload{
+  display: -webkit-box;
+  word-break: break-all;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp:2;
+  overflow: hidden;
+  text-overflow:ellipsis;
 }

@@ -93,7 +93,6 @@ Page({
   },
   handleApplyExchange() {
     if (!Util.isRegistered()) return
-    const { accountId } = this.data.account
     this.setData({
       showModal: true
     })

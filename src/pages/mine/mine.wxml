@@ -23,7 +23,7 @@
     <view class="nav-item" bindtap="handleToMsgs">
       <view class="iconfont icon-message" />
       <text class="flex-item">我的消息</text>
-      <view wx:if="{{messageCount > 0}}" class="red-number text-center h6">{{messageCount}}</view>
+      <view wx:if="{{noticeCount > 0}}" class="red-number text-center h6">{{noticeCount}}</view>
     </view>
   </view>
 </view>

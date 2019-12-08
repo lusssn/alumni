@@ -7,7 +7,7 @@
   <view class="text-center text-primary">
     {{data[1][0].startTime%100}}级-{{data[1][0].school}}-{{data[1][0].college}}-{{data[1][0].education}}
   </view>
-  <view class="info-list">
+  <view class="flex-align-center info-list">
     <view wx:if="{{data[2][0].company}}" class="field">
       <label>公司：</label>
       <view class="field-content">{{data[2][0].company}}</view>
@@ -16,18 +16,21 @@
       <label>职位：</label>
       <text class="field-content">{{data[2][0].position}}</text>
     </view>
-    <view wx:if="{{allField && data[0].email}}" class="field">
+    <view wx:if="{{data[0].email}}" class="field">
       <label>邮箱：</label>
       <text class="text-title">{{data[0].email}}</text>
     </view>
-    <view wx:if="{{allField && data[0].phone}}" class="field">
-      <label>手机：</label>
-      <text class="text-title">{{data[0].phone}}</text>
-    </view>
-    <view wx:if="{{allField && data[0].wechat}}" class="field">
-      <label>微信：</label>
-      <text class="text-title">{{data[0].wechat}}</text>
-    </view>
+    <block wx:if="{{allField}}">
+      <view wx:if="{{data[0].phone}}" class="field">
+        <label>手机：</label>
+        <text class="text-title">{{data[0].phone}}</text>
+      </view>
+      <view wx:if="{{data[0].wechat}}" class="field">
+        <label>微信：</label>
+        <text class="text-title">{{data[0].wechat}}</text>
+      </view>
+    </block>
+    <view wx:else class="text-primary">手机、微信交换名片后可见</view>
   </view>
   <slot></slot>
 </view>
