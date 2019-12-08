@@ -1,4 +1,4 @@
-<!-- 引入此模板时同时需要引入组件：Loading，Avatar，ListEmpty -->
+<!-- 引入此模板时同时需要引入组件：Loading，ListEmpty -->
 <template name="activityList">
   <Loading wx:if="{{!list}}" />
   <block wx:elif="{{list.length}}">
@@ -15,7 +15,7 @@
             <view class="padding-b-sm">
               <text class="flex-item h1 text-title">{{item.activityName}}</text>
             </view>
-            <view class="flex-align-center h5 activity-info">
+            <view class="flex-align-center h5">
               <view class="iconfont icon-calendar text-muted" />
               <view class="text-title padding-l-xs padding-r-xs text-muted">2019-12-20</view>
               <view class="iconfont icon-card text-primary" />

@@ -5,9 +5,9 @@
   "usingComponents": {
     "Loading": "../../components/Loading/Loading",
     "Nav": "../../components/Nav/Nav",
-    "Avatar": "../../components/Avatar/Avatar",
     "Search": "../../components/Search/Search",
-    "ListEmpty": "../../components/ListEmpty/ListEmpty",
-    "Tag": "../../components/Tag/Tag"
+    "Avatar": "../../components/Avatar/Avatar",
+    "Tag": "../../components/Tag/Tag",
+    "ListEmpty": "../../components/ListEmpty/ListEmpty"
   }
 }

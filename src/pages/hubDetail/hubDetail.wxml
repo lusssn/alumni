@@ -1,51 +1,50 @@
-<view class="container padding-t-md">
-  <view class="margin-l-lg margin-r-lg">
-    <!-- 圈子信息 -->
-    <view class="card">
-      <view class="card-block">
-        <view class="flex-align-center padding-t-lg padding-b-lg">
-          <image class="alumni-card-avatar" mode="aspectFill" src="{{'../../images/avatar_default.jpeg'}}" />
-          <view class="flex-item padding-l-md">
-            <view class="padding-b-xs">
-              <text class="flex-item h1 text-title">测试圈子名称</text>
-            </view>
-            <view class="flex-align-center h5 activity-info">
-              <view class="iconfont icon-calendar text-primary h4" />
-              <text class="padding-l-xs padding-r-xs text-primary">官方认证</text>
-              <view class="iconfont icon-excl-o text-primary h4" />
-              <text class="padding-l-xs padding-r-xs text-primary">校友圈运营</text>
-            </view>
+<import src="../../templates/activityList.wxml" />
+
+<view class="margin-l-lg margin-r-lg padding-t-md">
+  <!-- 圈子信息 -->
+  <view class="card padding-l-xs padding-r-xs">
+    <view class="flex-center padding-md">
+      <Avatar size="96" />
+      <view class="flex-item padding-l-md">
+        <view class="h1 text-title padding-b-xs">测试圈子名称</view>
+        <view class="h5 flex-align-center">
+          <view class="margin-r-lg">
+            <view class="iconfont icon-shield text-primary" />
+            <text class="padding-l-xs text-primary">官方认证</text>
           </view>
-        </view>
-        <view class="flex-align-center border-t alumni-member">
-          <text class="h3 text-title">圈子成员</text>
-          <view class="flex-align-center">
-            <image class="alumni-member-avatar" mode="aspectFill" src="{{'../../images/avatar_default.jpeg'}}" />
-            <image class="alumni-member-avatar" mode="aspectFill" src="{{'../../images/avatar_default.jpeg'}}" />
-            <image class="alumni-member-avatar" mode="aspectFill" src="{{'../../images/avatar_default.jpeg'}}" />
-            <text class="h5 text-muted margin-l-sm margin-r-sm">全部</text>
-            <view class="iconfont icon-arrow-right text-muted" />
+          <view class="margin-r-lg">
+            <view class="iconfont icon-shield text-primary" />
+            <text class="padding-l-xs text-primary">校友圈运营</text>
           </view>
         </view>
       </view>
     </view>
-    <!-- 圈子活动列表 -->
-    <view class="h1 title">圈内活动</view>
-    <ActivityCard />
-    <ActivityCard />
-    <ActivityCard />
-    <!-- 发起活动 button -->
-    <button class="activity-btn" bindtap="handleToCreateActivity">
-      <image style="width:50rpx; height:50rpx;" mode="aspectFill" src="{{'../../images/avatar_default.jpeg'}}" />
-      <text>发起活动</text>
-    </button>
-    <!-- 底部 button -->
-    <view class="fix-bottom flex">
-      <button type="primary" class="manager-btn flex-item">管理</button>
-      <!-- <block>
-        <button class="flex-item" type="primary">圈子详情</button>
-        <button class="flex-item" type="primary">加入校友圈</button>
-      </block> -->
+    <view class="flex-center border-t member-wrap">
+      <text class="flex-item h3 text-title">圈子成员</text>
+      <Avatar size="48" />
+      <Avatar size="48" />
+      <Avatar size="48" />
+      <text class="h5 text-muted margin-l-sm margin-r-sm">全部</text>
+      <view class="iconfont icon-arrow-right text-muted" />
     </view>
+  </view>
+  <!-- 圈子活动列表 -->
+  <view class="h3 title">圈内活动</view>
+  <template
+    is="activityList"
+    data="{{ list: activityList, bindtap: 'handleToActivityDetail' }}"
+  />
+  <!-- 发起活动 button -->
+  <view class="activity-btn tap" bindtap="handleToCreateActivity">
+    <view class="iconfont icon-bugle" />
+    <view>发起活动</view>
+  </view>
+  <!-- 底部 button -->
+  <view class="fix-bottom">
+    <button type="primary">管理</button>
+    <!-- <block>
+      <button class="flex-item" type="primary">圈子详情</button>
+      <button class="flex-item" type="primary">加入校友圈</button>
+    </block> -->
   </view>
 </view>

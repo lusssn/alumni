@@ -1,4 +1,4 @@
-<!-- 引入此模板时同时需要引入组件：Loading，Avatar，ListEmpty -->
+<!-- 引入此模板时同时需要引入组件：Loading，Avatar，Tag, ListEmpty -->
 <template name="hubList">
   <Loading wx:if="{{!list}}" />
   <block wx:elif="{{list.length}}">
