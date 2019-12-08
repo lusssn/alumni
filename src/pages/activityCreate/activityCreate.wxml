@@ -1,5 +1,5 @@
-<view class="container">
-  <view class="h3 title">活动总览</view>
+<view class="container h3">
+  <view class="title">活动总览</view>
   <view class="card padding-md">
     <view class="input-item">
       <text>活动主题</text>
@@ -49,19 +49,20 @@
       </view>
     </view>
   </view>
-  <view class="h3 title">活动详情</view>
-  <view class="card padding-md">
+  <view class="title">活动详情</view>
+  <view class="card padding-sm">
     <textarea
       class="textarea"
       placeholder-class="text-muted"
       placeholder="请输入活动详情"
+      maxlength="500"
       value="{{info.activityDesc}}"
       data-name="info.activityDesc"
       bindinput="handleInputChange"
     />
-    <view class="h3 text-title text-right">500字</view>
+    <view class="text-muted text-right">500字</view>
   </view>
-  <view class="h3 title">添加图片（{{images.length}}/{{MAX_IMAGE_AMOUNT}}）</view>
+  <view class="title">添加图片（{{images.length}}/{{MAX_IMAGE_AMOUNT}}）</view>
   <view
     wx:for="{{images}}"
     wx:key="*this"

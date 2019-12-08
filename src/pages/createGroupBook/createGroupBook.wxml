@@ -1,7 +1,7 @@
 <view class="padding-t-md">
   <view class="h3 margin-l-lg margin-r-lg">
     <view class="title">群名称</view>
-    <view class="card padding-md flex-center">
+    <view class="card input-card">
       <input
         class="flex-item"
         value="{{groupName}}"

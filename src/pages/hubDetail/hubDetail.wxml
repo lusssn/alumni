@@ -3,7 +3,7 @@
 <view class="margin-l-lg margin-r-lg padding-t-md">
   <!-- 圈子信息 -->
   <view class="card padding-l-xs padding-r-xs">
-    <view class="flex-center padding-md">
+    <view class="flex-align-center padding-md">
       <Avatar size="96" />
       <view class="flex-item padding-l-md">
         <view class="h1 text-title padding-b-xs">测试圈子名称</view>
@@ -19,7 +19,7 @@
         </view>
       </view>
     </view>
-    <view class="flex-center border-t member-wrap">
+    <view class="member-wrap border-t tap" bindtap="handleToHubMembers">
       <text class="flex-item h3 text-title">圈子成员</text>
       <Avatar size="48" />
       <Avatar size="48" />

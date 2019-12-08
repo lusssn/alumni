@@ -1,5 +1,11 @@
 @import "../../scss/variables";
 
+.input-card {
+  padding: 16rpx 24rpx;
+  display: flex;
+  align-items: center;
+}
+
 .textarea {
   height: 340rpx;
   width: 100%;

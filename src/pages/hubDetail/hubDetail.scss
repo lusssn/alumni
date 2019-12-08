@@ -1,7 +1,9 @@
 @import "../../scss/variables";
 
 .member-wrap {
+  display: flex;
   padding: 16rpx 16rpx 16rpx 32rpx;
+  align-items: center;
   avatar + avatar {
     margin-left: 10rpx;
   }

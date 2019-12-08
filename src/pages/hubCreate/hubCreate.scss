@@ -3,17 +3,10 @@
 .container {
   padding: 32rpx 32rpx 92rpx;
 }
-.input-item {
+.input-card {
+  padding: 16rpx 24rpx;
   display: flex;
   align-items: center;
-  font-size: 28rpx;
-  &:not(:last-child) {
-    padding-bottom: 24rpx;
-  }
-  & > text {
-    padding-right: 16rpx;
-    color: $strong-color;
-  }
 }
 .textarea {
   width: 100%;

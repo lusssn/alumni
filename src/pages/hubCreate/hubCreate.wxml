@@ -1,0 +1,68 @@
+<view class="container h3">
+  <view class="title">校友圈名称</view>
+  <view class="card input-card">
+    <input
+      class="flex-item"
+      value="{{info.name}}"
+      placeholder="请输入校友圈名称"
+      placeholder-class="text-muted"
+      maxlength="15"
+      data-name="info.name"
+      bindinput="handleInputChange"
+    />
+    <text class="text-muted">15个字</text>
+  </view>
+  <view class="title">校友圈简介</view>
+  <view class="card padding-sm">
+    <textarea
+      class="textarea"
+      style="height: 60rpx;"
+      placeholder-class="text-muted"
+      placeholder="请输入校友圈简介"
+      maxlength="40"
+      value="{{info.desc}}"
+      data-name="info.desc"
+      bindinput="handleInputChange"
+    />
+    <view class="text-muted text-right">40字</view>
+  </view>
+  <view class="title">群公告</view>
+  <view class="card padding-sm">
+    <textarea
+      class="textarea"
+      placeholder-class="text-muted"
+      placeholder="请输入群公告"
+      maxlength="300"
+      value="{{info.announce}}"
+      data-name="info.announce"
+      bindinput="handleInputChange"
+    />
+    <view class="text-muted text-right">300字</view>
+  </view>
+  <view class="title">添加头像</view>
+  <view
+    wx:for="{{images}}"
+    wx:key="*this"
+    class="image-item"
+  >
+    <image src="{{item}}" mode="aspectFill" />
+    <view
+      class="image-remove"
+      data-index="{{index}}"
+      bindtap="handleRemoveImage"
+    >
+      ×
+    </view>
+  </view>
+  <view
+    hidden="{{images.length === MAX_IMAGE_AMOUNT}}"
+    class="image-item image-add"
+    bindtap="handleChooseImage"
+  />
+
+  <view class="fix-bottom">
+    <button type="primary" bindtap="handleSubmit">
+      保存
+    </button>
+  </view>
+</view>

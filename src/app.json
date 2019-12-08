@@ -10,6 +10,7 @@
     "pages/myActivity/myActivity",
     "pages/activityDetail/activityDetail",
     "pages/activityCreate/activityCreate",
+    "pages/hubCreate/hubCreate",
     "pages/hubDetail/hubDetail",
     "pages/search/search",
     "pages/searchList/searchList",
