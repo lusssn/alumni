@@ -15,11 +15,30 @@ Page({
     },
     images: [],
   },
-  onLoad() {
-    wxUtil.login()
+  onLoad({ hub }) {
+    wxUtil.login().then(() => {
+      if (hub) {
+        Api.getHubInfo({ alumniCircleId: hub }).then(
+          res => {
+            this.setData({
+              info: {
+                id: res.alumniCircleId,
+                name: res.alumniCircleName,
+                desc: res.alumniCircleDesc,
+                announce: '',
+              },
+            })
+          },
+          () => {
+            wxUtil.showToast('获取详情失败')
+          },
+        )
+      }
+    })
   },
   handleSubmit() {
     const { info } = this.data
+    // TODO 待联调
   },
   handleInputChange(event) {
     const { name } = event.currentTarget.dataset

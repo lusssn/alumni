@@ -4,17 +4,13 @@
   <!-- 圈子信息 -->
   <view class="card padding-l-xs padding-r-xs">
     <view class="flex-align-center padding-md">
-      <Avatar size="96" />
+      <Avatar size="96" src="{{hubInfo.avatar}}" />
       <view class="flex-item padding-l-md">
-        <view class="h1 text-title padding-b-xs">测试圈子名称</view>
+        <view class="h1 text-title padding-b-xs">{{hubInfo.alumniCircleName}}</view>
         <view class="h5 flex-align-center">
-          <view class="margin-r-lg">
+          <view wx:if="{{hubInfo.authorizationStatus}}" class="margin-r-lg">
             <view class="iconfont icon-shield text-primary" />
             <text class="padding-l-xs text-primary">官方认证</text>
-          </view>
-          <view class="margin-r-lg">
-            <view class="iconfont icon-shield text-primary" />
-            <text class="padding-l-xs text-primary">校友圈运营</text>
           </view>
         </view>
       </view>
@@ -41,7 +37,7 @@
   </view>
   <!-- 底部 button -->
   <view class="fix-bottom">
-    <button type="primary">管理</button>
+    <button type="primary" bindtap="handleToHubCreate">管理</button>
     <!-- <block>
       <button class="flex-item" type="primary">圈子详情</button>
       <button class="flex-item" type="primary">加入校友圈</button>

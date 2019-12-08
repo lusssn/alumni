@@ -10,7 +10,7 @@
       data-name="info.name"
       bindinput="handleInputChange"
     />
-    <text class="text-muted">15个字</text>
+    <text class="text-muted">15字</text>
   </view>
   <view class="title">校友圈简介</view>
   <view class="card padding-sm">

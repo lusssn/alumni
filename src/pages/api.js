@@ -44,10 +44,22 @@ export const saveWork = params => request.post('/v2/job', params)
 // 删除-工作信息
 export const removeWork = params => request.del('/v2/job', params)
 
-/*************************************** 人脉 ***************************************/
+/*************************************** 圈子 ***************************************/
 // 圈子推荐列表
 export const getHubsRecommend = params =>
-  request.get('/v2/alumniCircles/recommend', params)
+  request.get('/v2/alumniCircle/recommend', params).then(res => res.data)
+
+// 圈子成员
+export const getHubMembers = params =>
+  request.get('/v2/alumniCircle/members', params).then(res => res.data)
+
+// 圈子详情
+export const getHubInfo = params =>
+  request.get('/v2/alumniCircle/information', params).then(res => res.data)
+
+// 圈子活动
+export const getHubActivities = params =>
+  request.get('/v2/alumniCircle/activities', params).then(res => res.data)
 
 /*************************************** 人脉 ***************************************/
 // 人脉-名片广场
@@ -62,6 +74,10 @@ export const getSearch = params =>
 // 我的-获取名片全部信息
 export const getAccountAll = params =>
   request.get('/v2/accountAll', params).then(res => res.data)
+
+// 我的圈子-获取用户参与的圈群的基本信息
+export const getMyHubs = params =>
+  request.get('/v2/alumniCircles/enrolledAlumniCircles', params).then(res => res.data)
 
 /*************************************** 朋友 ***************************************/
 // 朋友-获取通知列表
@@ -118,8 +134,3 @@ export const joinActivity = params =>
 // 消息-改变消息阅读状态
 export const readNotice = params =>
   request.post('/v2/message/changeStatus', params)
-
-/************************************* 我的圈子 *************************************/
-// 我的圈子-获取用户参与的圈群的基本信息
-export const getMyHubs = params =>
-  request.get('/v2/alumniCircles/enrolledAlumniCircles', params).then(res => res.data)

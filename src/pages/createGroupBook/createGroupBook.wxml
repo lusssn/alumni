@@ -10,7 +10,7 @@
         maxlength="15"
         bindinput="handleGroupNameChange"
       />
-      <text class="text-muted">15个字</text>
+      <text class="text-muted">15字</text>
     </view>
 
     <view class="title">群简介</view>
@@ -22,7 +22,7 @@
         maxlength="5000"
         bindinput="handleGroupIntroChange"
       />
-      <view class="text-right text-muted">5000个字</view>
+      <view class="text-right text-muted">5000字</view>
     </view>
   </view>
   <view class="fix-bottom">

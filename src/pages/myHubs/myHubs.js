@@ -1,8 +1,6 @@
 import wxUtil from '../../utils/wxUtil'
 import * as Api from '../api'
 
-const app = getApp()
-
 const PAGE_SIZE = 10
 
 const ALUMNI_CIRCLE = "ALUMNI_CIRCLE" //校友圈
@@ -37,7 +35,6 @@ Page({
   },
   loadHubList(pageNo = 1) {
     return Api.getMyHubs({
-      accountId: app.global.accountId,
       pageIndex: pageNo,
       pageSize: PAGE_SIZE,
     }).then(data => {
