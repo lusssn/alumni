@@ -17,9 +17,7 @@
     </view>
     <view class="member-wrap border-t tap" bindtap="handleToHubMembers">
       <text class="flex-item h3 text-title">圈子成员</text>
-      <Avatar size="48" />
-      <Avatar size="48" />
-      <Avatar size="48" />
+      <Avatar wx:for="{{memberList}}" wx:key="accountId" size="48" src="{{item.avatar}}" />
       <text class="h5 text-muted margin-l-sm margin-r-sm">全部</text>
       <view class="iconfont icon-arrow-right text-muted" />
     </view>

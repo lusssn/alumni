@@ -3,11 +3,11 @@
   <view class="card input-card">
     <input
       class="flex-item"
-      value="{{info.name}}"
+      value="{{info.alumniCircleName}}"
       placeholder="请输入校友圈名称"
       placeholder-class="text-muted"
       maxlength="15"
-      data-name="info.name"
+      data-name="info.alumniCircleName"
       bindinput="handleInputChange"
     />
     <text class="text-muted">15字</text>
@@ -20,8 +20,8 @@
       placeholder-class="text-muted"
       placeholder="请输入校友圈简介"
       maxlength="40"
-      value="{{info.desc}}"
-      data-name="info.desc"
+      value="{{info.alumniCircleDesc}}"
+      data-name="info.alumniCircleDesc"
       bindinput="handleInputChange"
     />
     <view class="text-muted text-right">40字</view>
@@ -33,31 +33,24 @@
       placeholder-class="text-muted"
       placeholder="请输入群公告"
       maxlength="300"
-      value="{{info.announce}}"
-      data-name="info.announce"
+      value="{{info.alumniCircleAnnouncement}}"
+      data-name="info.alumniCircleAnnouncement"
       bindinput="handleInputChange"
     />
     <view class="text-muted text-right">300字</view>
   </view>
   <view class="title">添加头像</view>
-  <view
-    wx:for="{{images}}"
-    wx:key="*this"
-    class="image-item"
-  >
-    <image src="{{item}}" mode="aspectFill" />
-    <view
-      class="image-remove"
-      data-index="{{index}}"
-      bindtap="handleRemoveImage"
-    >
+
+  <view wx:if="{{info.avatar}}" class="image-item">
+    <image src="{{info.avatar}}" mode="aspectFill" />
+    <view class="image-remove" bindtap="handleRemoveAvatar">
       ×
     </view>
   </view>
   <view
-    hidden="{{images.length === MAX_IMAGE_AMOUNT}}"
+    wx:else
     class="image-item image-add"
-    bindtap="handleChooseImage"
+    bindtap="handleChooseAvatar"
   />
 
   <view class="fix-bottom">

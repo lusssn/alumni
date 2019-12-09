@@ -5,8 +5,8 @@
   "enablePullDownRefresh": true,
   "usingComponents": {
     "Loading": "../../components/Loading/Loading",
-    "BusinessCard": "../../components/BusinessCard/BusinessCard",
     "Search": "../../components/Search/Search",
+    "Avatar": "../../components/Avatar/Avatar",
     "ListEmpty": "../../components/ListEmpty/ListEmpty"
   }
 }

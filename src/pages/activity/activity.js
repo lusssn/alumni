@@ -91,12 +91,10 @@ Page({
     })
   },
   handleToActivityDetail(e) {
-    console.log(1)
     const { id } = e.currentTarget.dataset
-    wxUtil.navigateTo('activityDetail', { id })
+    wxUtil.navigateTo('activityDetail', { activity: id })
   },
   handleToMyActivity(e) {
-    console.log(2)
     const { id } = e.currentTarget.dataset
     wxUtil.navigateTo('myActivity', { id })
   },

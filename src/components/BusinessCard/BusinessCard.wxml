@@ -18,8 +18,10 @@
           <text class="text-primary margin-r-sm">{{data.position}}</text>
           <text class="text-title">{{data.company}}</text>
         </view>
-        <view wx:if="{{data.college}}">
-          2012级，东南大学，{{data.college}}
+        <view wx:if="{{data.school}}">
+          <text wx:if="{{data.startTime}}">{{data.startTime}}，</text>
+          <text>{{data.school}}</text>
+          <text wx:if="{{data.college}}">，{{data.college}}</text>
         </view>
       </view>
     </view>

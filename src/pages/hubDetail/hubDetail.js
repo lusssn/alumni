@@ -28,8 +28,7 @@ Page({
         pageIndex: 1,
         pageSize: 3,
       }).then(data => {
-        const { list, count } = data
-        this.setData({ memberList: list })
+        this.setData({ memberList: data.list })
       }, () => {})
       this.loadHubActivities()
     })
@@ -69,5 +68,9 @@ Page({
     wxUtil.navigateTo('hubCreate', {
       hub: currentPage.options.hub,
     })
+  },
+  handleToActivityDetail(e) {
+    const { id } = e.currentTarget.dataset
+    wxUtil.navigateTo('activityDetail', { activity: id })
   },
 })

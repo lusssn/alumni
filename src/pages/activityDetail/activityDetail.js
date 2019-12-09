@@ -7,14 +7,14 @@ Page({
   data: {
     activity: {},
   },
-  onLoad({ id }) {
-    if (!id) {
+  onLoad({ activity }) {
+    if (!activity) {
       wxUtil.showToast('不存在此活动')
       return
     }
     // 加载详情数据
     wxUtil.login().then(() => {
-      Api.getActivityDetail({ activityId: id }).then(
+      Api.getActivityDetail({ activityId: activity }).then(
         res => { this.setData({ activity: res }) },
         () => {},
       )

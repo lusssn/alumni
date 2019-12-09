@@ -1,5 +1,7 @@
 import request from '../utils/request'
 import server from '../server'
+import moment from '../utils/moment.min'
+import * as R from '../utils/ramda/index'
 
 export const getLocation = params =>
   request.get(`${server.qqMapHost}/ws/geocoder/v1/`, {
@@ -51,7 +53,20 @@ export const getHubsRecommend = params =>
 
 // 圈子成员
 export const getHubMembers = params =>
-  request.get('/v2/alumniCircle/members', params).then(res => res.data)
+  request.get('/v2/alumniCircle/members', params).then(res => {
+    const { count = 0, list = [] } = res.data
+    // 转换startTime
+    return {
+      count,
+      list: list.map(item => {
+        if (item.startTime) {
+          const year = moment(item.startTime).format('YYYY级')
+          return R.assoc('startTime', year, item)
+        }
+        return item
+      })
+    }
+  })
 
 // 圈子详情
 export const getHubInfo = params =>
@@ -60,6 +75,10 @@ export const getHubInfo = params =>
 // 圈子活动
 export const getHubActivities = params =>
   request.get('/v2/alumniCircle/activities', params).then(res => res.data)
+
+// 圈子管理
+export const updateHubInfo = params =>
+  request.put('/v2/alumniCircle', params)
 
 /*************************************** 人脉 ***************************************/
 // 人脉-名片广场
@@ -77,7 +96,7 @@ export const getAccountAll = params =>
 
 // 我的圈子-获取用户参与的圈群的基本信息
 export const getMyHubs = params =>
-  request.get('/v2/alumniCircles/enrolledAlumniCircles', params).then(res => res.data)
+  request.get('/v2/alumniCircle/enrolledAlumniCircles', params).then(res => res.data)
 
 /*************************************** 朋友 ***************************************/
 // 朋友-获取通知列表
@@ -132,5 +151,4 @@ export const joinActivity = params =>
 
 /************************************* 消息列表 *************************************/
 // 消息-改变消息阅读状态
-export const readNotice = params =>
-  request.post('/v2/message/changeStatus', params)
+export const readNotice = params => request.post('/v2/message/changeStatus', params)

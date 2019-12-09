@@ -7,7 +7,7 @@
       wx:key="activityId"
       class="card tap"
       data-id="{{item.activityId}}"
-      bindtap="bindtap"
+      bindtap="{{bindtap}}"
     >
       <view class="card-block">
         <view class="flex-align-center padding-t-lg padding-b-lg">

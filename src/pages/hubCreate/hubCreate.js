@@ -1,19 +1,11 @@
 import * as Util from '../../utils/util'
 import wxUtil from '../../utils/wxUtil'
-import * as Api from  '../api'
-import moment from '../../utils/moment.min'
-
-const app = getApp()
+import * as Api from '../api'
+import * as R from '../../utils/ramda/index'
 
 Page({
   data: {
-    MAX_IMAGE_AMOUNT: 1,
-    info: {
-      name: '',
-      desc: '',
-      announce: '',
-    },
-    images: [],
+    info: {},
   },
   onLoad({ hub }) {
     wxUtil.login().then(() => {
@@ -21,12 +13,7 @@ Page({
         Api.getHubInfo({ alumniCircleId: hub }).then(
           res => {
             this.setData({
-              info: {
-                id: res.alumniCircleId,
-                name: res.alumniCircleName,
-                desc: res.alumniCircleDesc,
-                announce: '',
-              },
+              info: R.omit(['ctime', 'isAvailable', 'utime'], res),
             })
           },
           () => {
@@ -38,7 +25,10 @@ Page({
   },
   handleSubmit() {
     const { info } = this.data
-    // TODO 待联调
+    Api.updateHubInfo(info).then(
+      () => { wxUtil.showToast('保存成功', 'success') },
+      () => { wxUtil.showToast('保存失败') }
+    )
   },
   handleInputChange(event) {
     const { name } = event.currentTarget.dataset
@@ -46,20 +36,17 @@ Page({
       [name]: event.detail.value,
     })
   },
-  handleRemoveImage(event) {
-    const { index } = event.target.dataset
-    const images = [...this.data.images]
-    images.splice(index, 1)
-    this.setData({ images })
+  handleRemoveAvatar() {
+    this.setData({
+      info: R.assoc('avatar', '', this.data.info)
+    })
   },
-  handleChooseImage() {
-    const { images } = this.data
-    const amount = this.data.MAX_IMAGE_AMOUNT - this.data.images.length
+  handleChooseAvatar() {
     Util.promisify(wx.chooseImage)({
-      count: amount,
+      count: 1,
     }).then(res => {
       this.setData({
-        images: images.concat(res.tempFilePaths),
+        info: R.assoc('avatar', res.tempFilePaths, this.data.info),
       })
     })
   },
