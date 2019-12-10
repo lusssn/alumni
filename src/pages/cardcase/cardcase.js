@@ -14,8 +14,8 @@ Page({
   data: {
     NAV: NAV_CONFIG,
     currentTab: NAV_CONFIG[0],
-    friendList: null, // 初始化为null，方便页面加载动画展示
-    friendPagination: { current: 1, total: 0 },
+    cardcaseList: null, // 初始化为null，方便页面加载动画展示
+    cardcasePagination: { current: 1, total: 0 },
     favoriteList: null, // 初始化为null，方便页面加载动画展示
     favoritePagination: { current: 1, total: 0 },
   },
@@ -41,7 +41,7 @@ Page({
   onReachBottom() {
     const { currentTab } = this.data
     if (currentTab.key === 'Friend') {
-      const { total, current } = this.data.friendPagination
+      const { total, current } = this.data.cardcasePagination
       // 是否为最后一页
       if (Math.ceil(total / PAGE_SIZE) > current) {
         this.loadFriendList(current + 1)
@@ -62,8 +62,8 @@ Page({
     }).then(data => {
       const { list, count } = data
       this.setData({
-        friendList: pageNo === 1 ? list : this.data.friendList.concat(list),
-        friendPagination: {
+        cardcaseList: pageNo === 1 ? list : this.data.cardcaseList.concat(list),
+        cardcasePagination: {
           current: pageNo,
           total: count,
         },

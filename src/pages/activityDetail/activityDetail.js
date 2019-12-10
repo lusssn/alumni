@@ -1,5 +1,6 @@
 import wxUtil from '../../utils/wxUtil'
 import * as Api from '../api'
+import * as R from '../../utils/ramda/index'
 
 const app = getApp()
 
@@ -21,12 +22,32 @@ Page({
     })
   },
   handleJoinActivity() {
-    Api.joinActivity({
-      activityId: this.data.activity.activityId,
+    const { activity } = this.data
+    const params = {
+      activityId: activity.activityId,
       accountId: app.global.accountId,
-    }).then(
-      () => {},
-      () => {},
+    }
+    let operateName = ''
+    let next = null
+    if (activity.hasEnrolled) {
+      operateName = '退出'
+      next = Api.quitActivity(params)
+    } else {
+      operateName = '报名'
+      next = Api.joinActivity(params)
+    }
+    next.then(
+      () => {
+        wxUtil.showToast(`${operateName}成功`, 'success')
+        this.setData({
+          activity: R.assoc('hasEnrolled', !activity.hasEnrolled, activity),
+        })
+      },
+      err => {
+        console.error(err)
+        wxUtil.showToast(`${operateName}失败请重试`)
+      },
     )
-  }
+
+  },
 })

@@ -1,4 +1,4 @@
-<view wx:if="{{data.name}}" class="card">
+<view wx:if="{{data.name}}" class="card tap">
   <view class="card-block">
     <view class="flex-align-center padding-t-lg padding-b-lg">
       <image
@@ -10,8 +10,8 @@
         <view class="business-card-header">
           <text class="flex-item h1 text-title">{{data.name}}</text>
           <view wx:if="{{data.city}}">
-            <view class="iconfont icon-location text-muted" />
-            <text class="text-muted">{{data.city}}</text>
+            <view class="iconfont icon-location text-muted h4" />
+            <text class="text-muted h5">{{data.city}}</text>
           </view>
         </view>
         <view wx:if="{{data.company}}" class="h3">
@@ -19,7 +19,7 @@
           <text class="text-title">{{data.company}}</text>
         </view>
         <view wx:if="{{data.school}}">
-          <text wx:if="{{data.startTime}}">{{data.startTime}}，</text>
+          <text wx:if="{{data.startTime}}">{{data.startTime}}级，</text>
           <text>{{data.school}}</text>
           <text wx:if="{{data.college}}">，{{data.college}}</text>
         </view>

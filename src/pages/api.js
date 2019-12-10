@@ -2,6 +2,7 @@ import request from '../utils/request'
 import server from '../server'
 import moment from '../utils/moment.min'
 import * as R from '../utils/ramda/index'
+import * as Util from '../utils/util'
 
 export const getLocation = params =>
   request.get(`${server.qqMapHost}/ws/geocoder/v1/`, {
@@ -77,8 +78,13 @@ export const getHubActivities = params =>
   request.get('/v2/alumniCircle/activities', params).then(res => res.data)
 
 // 圈子管理
-export const updateHubInfo = params =>
-  request.put('/v2/alumniCircle', params)
+export const updateHubInfo = params => request.put('/v2/alumniCircle', params)
+
+// 加入圈子
+export const joinHub = params => {
+  const query = Util.getSortQuery(params)
+  return request.post(`/v2/alumniCircle/join?${query}`)
+}
 
 /*************************************** 人脉 ***************************************/
 // 人脉-名片广场
@@ -146,8 +152,16 @@ export const getActivityMembers = params =>
   request.get('/v2/activities/members', params).then(res => res.data)
 
 // 活动详情-参与活动
-export const joinActivity = params =>
-  request.post('/v2/activities/members', params).then(res => res.data)
+export const joinActivity = params => {
+  const query = Util.getSortQuery(params)
+  return request.post(`/v2/activities/members?${query}`)
+}
+
+// 活动详情-退出活动
+export const quitActivity = params => {
+  const query = Util.getSortQuery(params)
+  return request.del(`/v2/activities/members?${query}`).then()
+}
 
 /************************************* 消息列表 *************************************/
 // 消息-改变消息阅读状态

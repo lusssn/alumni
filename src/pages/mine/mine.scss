@@ -5,15 +5,25 @@
   height: 90rpx;
 }
 
+.share {
+  display: flex;
+  padding: 16rpx 0;
+  align-items: center;
+  color: $theme-color;
+  &:active {
+    opacity: .7;
+  }
+}
+
 .nav-list {
-  padding: 0 40rpx;
   margin: 34rpx 32rpx;
+  padding: 0 40rpx;
 
   .nav-item {
-    font-size: 28rpx;
-    height: 122rpx;
     display: flex;
+    height: 122rpx;
     align-items: center;
+    font-size: 28rpx;
     color: black;
 
     & + .nav-item {
@@ -21,16 +31,16 @@
     }
 
     & > .iconfont {
+      margin-right: 24rpx;
       font-size: 40rpx;
       color: $theme-color;
-      margin-right: 24rpx;
     }
 
     .red-number {
       width: 34rpx;
       height: 34rpx;
-      border-radius: 50%;
       color: white;
+      border-radius: 50%;
       background-color: #FD3F3F;
     }
   }

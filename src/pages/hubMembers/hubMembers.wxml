@@ -8,7 +8,7 @@
       data="{{item}}"
       data-id="{{item.accountId}}"
       bindtap="handleClickCard"
-      class="card taps"
+      class="card tap"
     >
       <view class="card-block">
         <view class="flex-align-center padding-t-lg padding-b-lg">
@@ -25,7 +25,8 @@
               <text wx:if="{{item.college}}">，{{item.college}}</text>
             </view>
           </view>
-          <view class="icon-group">
+          <!-- 暂时不做 -->
+          <view hidden class="icon-group">
             <view class="iconfont icon-phone" />
             <view class="iconfont icon-wechat" />
           </view>

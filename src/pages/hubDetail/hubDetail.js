@@ -1,10 +1,12 @@
 import wxUtil from '../../utils/wxUtil'
 import * as Api from '../api'
 
+const app = getApp()
 const PAGE_SIZE = 10
 
 Page({
   data: {
+    isCreator: false, // 当前圈子是否是自己创建的
     hubInfo: {},
     memberList: [],
     activityList: [],
@@ -16,22 +18,52 @@ Page({
       return
     }
     wxUtil.login().then(() => {
-      Api.getHubInfo({ alumniCircleId: hub }).then(
-        res => {
-          this.setData({ hubInfo: res })
-        },
-        () => {},
-      )
+      this.loadHubInfo()
       // 获取成员列表
-      Api.getHubMembers({
-        alumniCircleId: hub,
-        pageIndex: 1,
-        pageSize: 3,
-      }).then(data => {
-        this.setData({ memberList: data.list })
-      }, () => {})
+      this.loadHubMembers()
       this.loadHubActivities()
     })
+  },
+  onPullDownRefresh() {
+    Promise.all([
+      this.loadHubInfo(),
+      this.loadHubMembers(),
+      this.loadHubActivities(),
+    ]).then(() => {
+      wx.stopPullDownRefresh()
+    })
+  },
+  onReachBottom() {
+    const { total, current } = this.data.activityPagination
+    // 是否为最后一页
+    if (Math.ceil(total / PAGE_SIZE) > current) {
+      this.loadHubActivities(current + 1)
+    }
+  },
+  loadHubInfo() {
+    const currentPage = getCurrentPages().pop()
+    Api.getHubInfo({
+      alumniCircleId: currentPage.options.hub,
+    }).then(
+      res => {
+        this.setData({
+          hubInfo: res,
+          isCreator: res.creatorId === app.global.accountId,
+        })
+      },
+      () => {},
+    )
+  },
+  // 获取成员列表
+  loadHubMembers() {
+    const currentPage = getCurrentPages().pop()
+    return Api.getHubMembers({
+      alumniCircleId: currentPage.options.hub,
+      pageIndex: 1,
+      pageSize: 3,
+    }).then(data => {
+      this.setData({ memberList: data.list })
+    }, () => {})
   },
   loadHubActivities(pageNo = 1) {
     const currentPage = getCurrentPages().pop()
@@ -50,6 +82,12 @@ Page({
         },
       })
     }, () => {})
+  },
+  handleToHubInfo() {
+    const currentPage = getCurrentPages().pop()
+    wxUtil.navigateTo('hubInfo', {
+      hub: currentPage.options.hub,
+    })
   },
   handleToHubMembers() {
     const currentPage = getCurrentPages().pop()
@@ -72,5 +110,20 @@ Page({
   handleToActivityDetail(e) {
     const { id } = e.currentTarget.dataset
     wxUtil.navigateTo('activityDetail', { activity: id })
+  },
+  handleJoinHub() {
+    Api.joinHub({
+      alumniCircleId: this.data.hubInfo.alumniCircleId,
+      accountId: app.global.accountId,
+    }).then(
+      () => {
+        wxUtil.showToast('加入成功', 'success')
+        this.loadHubMembers()
+      },
+      (err) => {
+        console.error(err)
+        wxUtil.showToast('加入失败请重试')
+      },
+    )
   },
 })

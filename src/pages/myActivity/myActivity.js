@@ -38,6 +38,13 @@ Page({
       wx.stopPullDownRefresh()
     })
   },
+  onReachBottom() {
+    const { total, current } = this.data.memberPagination
+    // 是否为最后一页
+    if (Math.ceil(total / PAGE_SIZE) > current) {
+      this.loadMemberList(current + 1)
+    }
+  },
   loadMemberList(pageNo = 1) {
     const currentPage = getCurrentPages().pop()
     // 加载朋友列表数据
@@ -55,5 +62,9 @@ Page({
         },
       })
     }, () => {})
+  },
+  handleClickCard(e) {
+    const { id } = e.currentTarget.dataset
+    wxUtil.navigateTo('detail', { id })
   },
 })

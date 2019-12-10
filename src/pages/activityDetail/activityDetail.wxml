@@ -34,7 +34,7 @@
   </view>
   <view class="fix-bottom">
     <button type="primary" bindtap="handleJoinActivity">
-      报名
+      {{activity.hasEnrolled ? '退出活动' : '报名'}}
     </button>
   </view>
 </view>

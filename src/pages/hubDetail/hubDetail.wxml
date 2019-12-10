@@ -14,6 +14,7 @@
           </view>
         </view>
       </view>
+      <button size="mini" type="primary" plain bindtap="handleToHubInfo">详情</button>
     </view>
     <view class="member-wrap border-t tap" bindtap="handleToHubMembers">
       <text class="flex-item h3 text-title">圈子成员</text>
@@ -35,10 +36,7 @@
   </view>
   <!-- 底部 button -->
   <view class="fix-bottom">
-    <button type="primary" bindtap="handleToHubCreate">管理</button>
-    <!-- <block>
-      <button class="flex-item" type="primary">圈子详情</button>
-      <button class="flex-item" type="primary">加入校友圈</button>
-    </block> -->
+    <button wx:if="{{isCreator}}" type="primary" bindtap="handleToHubCreate">管理</button>
+    <button wx:else="{{isCreator}}" type="primary" bindtap="handleJoinHub">加入校友圈</button>
   </view>
 </view>

@@ -1,7 +1,7 @@
 <import src="./tmplList.wxml" />
 
 <view class="padding-t-md padding-l-lg padding-r-lg">
-  <Search placeholder="名片夹内搜索" bindconfirm="handleSearch" />
+<!--  <Search placeholder="名片夹内搜索" bindconfirm="handleSearch" />-->
   <Nav
     class="padding-b-md"
     data="{{NAV}}"
@@ -11,7 +11,7 @@
   <template
     wx:if="{{currentTab.key === 'Friend'}}"
     is="tmplList"
-    data="{{ list: friendList, placeholder: '暂无朋友，快去交换名片吧' }}"
+    data="{{ list: cardcaseList, placeholder: '暂无朋友，快去交换名片吧' }}"
   />
   <template
     wx:else
