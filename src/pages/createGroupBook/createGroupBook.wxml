@@ -19,10 +19,10 @@
         class="textarea"
         placeholder="请输入群简介"
         placeholder-class="text-muted"
-        maxlength="5000"
+        maxlength="40"
         bindinput="handleGroupIntroChange"
       />
-      <view class="text-right text-muted">5000字</view>
+      <view class="text-right text-muted">40字</view>
     </view>
   </view>
   <view class="fix-bottom">
