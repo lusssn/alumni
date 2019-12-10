@@ -35,9 +35,9 @@ Page({
     wxUtil.navigateTo('edit', { type: 'account' })
   },
   handleToCardcase() {
-    wxUtil.navigateTo('friend')
+    wxUtil.navigateTo('cardcase')
   },
-  handleToMyHubs(){
+  handleToMyHubs() {
     wxUtil.navigateTo('myHubs')
   },
   handleToActivity() {
@@ -53,7 +53,7 @@ Page({
     }).then(data => {
       const { count } = data
       this.setData({
-        noticeCount: count
+        noticeCount: count,
       })
     }, () => { })
   },
@@ -83,7 +83,7 @@ Page({
       },
     )
   },
-  handleRegister() {
-    Util.isRegistered()
-  }
+  handleShare() {
+    wxUtil.showToast('点击右上角转发')
+  },
 })

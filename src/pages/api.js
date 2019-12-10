@@ -1,5 +1,8 @@
 import request from '../utils/request'
 import server from '../server'
+import moment from '../utils/moment.min'
+import * as R from '../utils/ramda/index'
+import * as Util from '../utils/util'
 
 export const getLocation = params =>
   request.get(`${server.qqMapHost}/ws/geocoder/v1/`, {
@@ -44,10 +47,44 @@ export const saveWork = params => request.post('/v2/job', params)
 // 删除-工作信息
 export const removeWork = params => request.del('/v2/job', params)
 
-/*************************************** 人脉 ***************************************/
+/*************************************** 圈子 ***************************************/
 // 圈子推荐列表
 export const getHubsRecommend = params =>
-  request.get('/v2/alumniCircles/recommend', params)
+  request.get('/v2/alumniCircle/recommend', params).then(res => res.data)
+
+// 圈子成员
+export const getHubMembers = params =>
+  request.get('/v2/alumniCircle/members', params).then(res => {
+    const { count = 0, list = [] } = res.data
+    // 转换startTime
+    return {
+      count,
+      list: list.map(item => {
+        if (item.startTime) {
+          const year = moment(item.startTime).format('YYYY级')
+          return R.assoc('startTime', year, item)
+        }
+        return item
+      })
+    }
+  })
+
+// 圈子详情
+export const getHubInfo = params =>
+  request.get('/v2/alumniCircle/information', params).then(res => res.data)
+
+// 圈子活动
+export const getHubActivities = params =>
+  request.get('/v2/alumniCircle/activities', params).then(res => res.data)
+
+// 圈子管理
+export const updateHubInfo = params => request.put('/v2/alumniCircle', params)
+
+// 加入圈子
+export const joinHub = params => {
+  const query = Util.getSortQuery(params)
+  return request.post(`/v2/alumniCircle/join?${query}`)
+}
 
 /*************************************** 人脉 ***************************************/
 // 人脉-名片广场
@@ -62,6 +99,10 @@ export const getSearch = params =>
 // 我的-获取名片全部信息
 export const getAccountAll = params =>
   request.get('/v2/accountAll', params).then(res => res.data)
+
+// 我的圈子-获取用户参与的圈群的基本信息
+export const getMyHubs = params =>
+  request.get('/v2/alumniCircle/enrolledAlumniCircles', params).then(res => res.data)
 
 /*************************************** 朋友 ***************************************/
 // 朋友-获取通知列表
@@ -111,15 +152,17 @@ export const getActivityMembers = params =>
   request.get('/v2/activities/members', params).then(res => res.data)
 
 // 活动详情-参与活动
-export const joinActivity = params =>
-  request.post('/v2/activities/members', params).then(res => res.data)
+export const joinActivity = params => {
+  const query = Util.getSortQuery(params)
+  return request.post(`/v2/activities/members?${query}`)
+}
+
+// 活动详情-退出活动
+export const quitActivity = params => {
+  const query = Util.getSortQuery(params)
+  return request.del(`/v2/activities/members?${query}`).then()
+}
 
 /************************************* 消息列表 *************************************/
 // 消息-改变消息阅读状态
-export const readNotice = params =>
-  request.post('/v2/message/changeStatus', params)
-
-/************************************* 我的圈子 *************************************/
-// 我的圈子-获取用户参与的圈群的基本信息
-export const getMyHubs = params =>
-  request.get('/v2/alumniCircles/enrolledAlumniCircles', params).then(res => res.data)
+export const readNotice = params => request.post('/v2/message/changeStatus', params)

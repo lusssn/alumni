@@ -10,6 +10,6 @@ search {
   margin: 42rpx 32rpx 0;
 }
 
-//.hub-list tag:not(:last-child) {
-//  margin-right: 16rpx;
-//}
+tag:not(:last-child) {
+  margin-right: 16rpx;
+}

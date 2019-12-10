@@ -1,4 +1,4 @@
-<view class="padding-t-lg padding-l-xl padding-r-xl">
+<view class="container">
   <view class="card">
     <view class="card-block">
       <view class="flex-align-center padding-t-sm padding-b-sm">
@@ -28,7 +28,7 @@
       data="{{item}}"
       data-id="{{item.accountId}}"
       bindtap="handleClickCard"
-      class="card"
+      class="card tap"
     >
       <view class="card-block">
         <view class="flex-align-center padding-t-lg padding-b-lg">
@@ -43,7 +43,8 @@
               {{item.educationGrade}}，{{item.educationSchool}}，{{item.educationCollege}}
             </view>
           </view>
-          <view class="icon-group">
+          <!-- 暂时不做 -->
+          <view hidden class="icon-group">
             <view class="iconfont icon-phone" />
             <view class="iconfont icon-wechat" />
           </view>

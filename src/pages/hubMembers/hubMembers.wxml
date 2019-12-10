@@ -2,13 +2,37 @@
   <Search class="margin-b-lg" placeholder="搜索圈子成员" />
   <Loading wx:if="{{!list}}" />
   <block wx:elif="{{list.length}}">
-    <BusinessCard
+    <view
       wx:for="{{list}}"
-      wx:key="friendAccountId"
+      wx:key="accountId"
       data="{{item}}"
-      data-id="{{item.friendAccountId || item.favoriteAccountId}}"
+      data-id="{{item.accountId}}"
       bindtap="handleClickCard"
-    />
+      class="card tap"
+    >
+      <view class="card-block">
+        <view class="flex-align-center padding-t-lg padding-b-lg">
+          <Avatar src="{{item.avatar}}" size="96" />
+          <view class="flex-item padding-l-md">
+            <view class="h1 text-title">{{item.name}}</view>
+            <view wx:if="{{item.company}}" class="h3">
+              <text class="text-primary margin-r-sm">{{item.position}}</text>
+              <text class="text-title">{{item.company}}</text>
+            </view>
+            <view wx:if="{{item.school}}">
+              <text wx:if="{{item.startTime}}">{{item.startTime}}，</text>
+              <text>{{item.school}}</text>
+              <text wx:if="{{item.college}}">，{{item.college}}</text>
+            </view>
+          </view>
+          <!-- 暂时不做 -->
+          <view hidden class="icon-group">
+            <view class="iconfont icon-phone" />
+            <view class="iconfont icon-wechat" />
+          </view>
+        </view>
+      </view>
+    </view>
   </block>
   <ListEmpty wx:else description="圈子内暂无成员" />
 </view>

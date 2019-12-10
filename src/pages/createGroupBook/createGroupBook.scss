@@ -1,51 +1,45 @@
 @import "../../scss/variables";
 
-.container {
-  .input-card {
-    position: relative;
-    .word-tip {
-      position: absolute;
-      right: 16rpx;
-      bottom: 16rpx;
-    }
-    .intro-input {
-      height: 340rpx;
-    }
-  }
+.input-card {
+  padding: 16rpx 24rpx;
+  display: flex;
+  align-items: center;
+}
 
-  .complete-btn {
-    background: $theme-color;
-    color: white;
-    box-shadow: 0px 6px 20px 0px rgba(28, 86, 122, 0.46);
-  }
+.textarea {
+  height: 340rpx;
+  width: 100%;
+  padding: 8rpx 0 8rpx 8rpx;
+}
 
-  .mask {
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
+.mask {
+  position: absolute;
+  z-index: 9999;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, .2);
+
+  .modal-content {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: rgba(0, 0, 0, 0.2);
-    z-index: 9999;
-    .modal-content {
-      display: flex;
-      flex-direction: column;
-      padding: 48rpx;
-      background-color: white;
-      border-radius: 4rpx;
-      .confirm-btn {
-        width: 252rpx;
-        height: 72rpx;
-        margin: 0 auto;
-        line-height: 72rpx;
-        text-align: center;
-        background: $theme-color;
-        border-radius: 4px;
-        color: white;
-      }
+    padding: 48rpx;
+    flex-direction: column;
+    border-radius: 4rpx;
+    background-color: white;
+
+    .confirm-btn {
+      width: 252rpx;
+      height: 72rpx;
+      margin: 0 auto;
+      line-height: 72rpx;
+      text-align: center;
+      color: white;
+      border-radius: 4px;
+      background: $theme-color;
     }
   }
 }

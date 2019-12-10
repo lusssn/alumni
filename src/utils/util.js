@@ -75,3 +75,14 @@ export const checkParams = (checkList, params) => {
   }
   return _params
 }
+
+export const getSortQuery = dict => {
+  let str = ''
+
+  for (let key of Object.keys(dict)) {
+    if (key) {
+      str = `${str}&${key}=${encodeURIComponent(dict[key])}`
+    }
+  }
+  return str.substr(1)
+}

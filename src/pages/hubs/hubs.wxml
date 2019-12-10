@@ -20,7 +20,7 @@
   <template
     wx:if="{{currentTab.key === 'Hubs'}}"
     is="hubList"
-    data="{{ list: alumniSpaceList }}"
+    data="{{ list: hubList, bindtap: 'handleToHubDetail' }}"
   />
   <template
     wx:else
