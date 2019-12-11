@@ -1,6 +1,6 @@
 <view wx:if="{{isLoaded}}" class="container">
   <view class="header" />
-  <InfoCard data="{{[account,educations,jobs]}}" bind:handleEdit="handleEdit">
+  <InfoCard data="{{[account,educations,jobs]}}" handleEdit="handleEdit"  bind:handleEdit="handleEdit">
     <view class="border-t share" bindtap="handleShare">
       <view class="iconfont icon-link margin-r-xs" />
       <text class="flex-item h5">分享名片给好友</text>
