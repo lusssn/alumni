@@ -128,6 +128,7 @@ Page({
       },
     )
   },
+  // TODO 退出校友圈待联调
   handleExitHub() {
     Api.exitHub({
       alumniCircleId: this.data.hubInfo.alumniCircleId,
