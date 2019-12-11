@@ -1,0 +1,9 @@
+@import "../../scss/variables";
+
+.container {
+  padding: 32rpx 32rpx 98rpx;
+}
+
+tag:not(:last-child) {
+  margin-right: 16rpx;
+}

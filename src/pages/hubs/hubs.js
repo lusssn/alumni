@@ -71,5 +71,8 @@ Page({
   handleToHubDetail(event) {
     const { id } = event.currentTarget.dataset
     wxUtil.navigateTo('hubDetail', { hub: id })
-  }
+  },
+  handleClickSearch() {
+    wxUtil.navigateTo('search')
+  },
 })

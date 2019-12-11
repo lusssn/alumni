@@ -1,9 +1,28 @@
-<view class="container padding-t-md padding-l-xl padding-r-xl">
-  <BusinessCard
-    wx:for="{{list}}"
-    wx:key="*this"
-    data-id="{{item.accountId}}"
-    bindtap="handleClickCard"
-    data="{{item}}"
+<import src="../../templates/hubList.wxml" />
+<import src="../../templates/activityList.wxml" />
+
+<view class="container">
+  <template
+    wx:if="{{type === 'hub'}}"
+    is="hubList"
+    data="{{ list, bindtap: 'handleClickHub' }}"
   />
+  <template
+    wx:elif="{{type === 'activity'}}"
+    is="activityList"
+    data="{{ list, bindtap: 'handleToActivityDetail' }}"
+  />
+  <block wx:else>
+    <Loading wx:if="{{!list}}" />
+    <block wx:elif="{{list.length}}">
+      <BusinessCard
+        wx:for="{{list}}"
+        wx:key="accountId"
+        data="{{item}}"
+        data-id="{{item.accountId}}"
+        bindtap="handleClickCard"
+      />
+    </block>
+    <ListEmpty wx:else description="暂无名片" />
+  </block>
 </view>

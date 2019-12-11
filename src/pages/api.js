@@ -52,6 +52,10 @@ export const removeWork = params => request.del('/v2/job', params)
 export const getHubsRecommend = params =>
   request.get('/v2/alumniCircle/recommend', params).then(res => res.data)
 
+// 根据圈子名称搜索圈子
+export const searchHubs = params =>
+  request.get('/v2/alumniCircle/search', params).then(res => res.data)
+
 // 圈子成员
 export const getHubMembers = params =>
   request.get('/v2/alumniCircle/members', params).then(res => {
@@ -131,6 +135,10 @@ export const applyFriend = params => request.post('/v2/friend/apply', params)
 export const favoriteFriend = params => request.post('/v2/favorite', params)
 
 /************************************* 活动列表 *************************************/
+// 根据活动名称搜索活动
+export const searchActivities = params =>
+  request.get('/v2/search/activities', params).then(res => res.data)
+
 // 活动-我参与的活动列表
 export const getEnrolledActivities = params =>
   request.get('/v2/activities/enrolledActivities', params).then(res => res.data)

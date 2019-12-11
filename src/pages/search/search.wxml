@@ -13,7 +13,7 @@
     bindtap="handleSearchDetail"
   >
     <text class="h1 text-title flex-item">{{item.name}}</text>
-    <view class="search-result-capsule">{{result[item.key]}}个结果</view>
+    <view class="search-result-capsule">{{result[item.key] || 0}}个结果</view>
   </view>
 </view>
 <!-- 搜索提示 -->
