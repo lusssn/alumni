@@ -90,6 +90,12 @@ export const joinHub = params => {
   return request.post(`/v2/alumniCircle/join?${query}`)
 }
 
+// 退出圈子
+export const exitHub = params => {
+  const query = Util.getSortQuery(params)
+  return request.post(`/v2/alumniCircle/leave?${query}`)
+}
+
 /*************************************** 人脉 ***************************************/
 // 人脉-名片广场
 export const getSquareCards = params =>

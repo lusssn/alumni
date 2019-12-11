@@ -37,6 +37,7 @@
   <!-- 底部 button -->
   <view class="fix-bottom">
     <button wx:if="{{isCreator}}" type="primary" bindtap="handleToHubCreate">管理</button>
-    <button wx:else="{{isCreator}}" type="primary" bindtap="handleJoinHub">加入校友圈</button>
+    <button wx:elif="{{isJoined}}" type="primary"  bindtap="handleExitHub">退出校友圈</button>
+    <button wx:else type="primary" bindtap="handleJoinHub">加入校友圈</button>
   </view>
 </view>

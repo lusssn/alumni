@@ -7,6 +7,7 @@ const PAGE_SIZE = 10
 Page({
   data: {
     isCreator: false, // 当前圈子是否是自己创建的
+    isJoined: false, // 是圈子成员
     hubInfo: {},
     memberList: [],
     activityList: [],
@@ -49,6 +50,7 @@ Page({
         this.setData({
           hubInfo: res,
           isCreator: res.creatorId === app.global.accountId,
+          isJoined: res.isJoined,
         })
       },
       () => {},
@@ -123,6 +125,21 @@ Page({
       (err) => {
         console.error(err)
         wxUtil.showToast('加入失败请重试')
+      },
+    )
+  },
+  handleExitHub() {
+    Api.exitHub({
+      alumniCircleId: this.data.hubInfo.alumniCircleId,
+      accountId: app.global.accountId,
+    }).then(
+      () => {
+        wxUtil.showToast('退出成功', 'success')
+        this.loadHubMembers()
+      },
+      (err) => {
+        console.error(err)
+        wxUtil.showToast('退出失败请稍后重试')
       },
     )
   },
