@@ -46,7 +46,7 @@ Page({
   // 点击消息列表，将未读更改为已读
   handleClickNotice(e) {
     const { id } = e.currentTarget.dataset;
-    Api.readNotice({ messageId: id, status: 0 }).then(res => {
+    Api.readNotice({ messageId: id, status: 1 }).then(res => {
       const readedIndex = this.data.noticeList.findIndex(item => item.messageId === id)
       let tempList = R.clone(this.data.noticeList)
       tempList.splice(readedIndex, 1)
