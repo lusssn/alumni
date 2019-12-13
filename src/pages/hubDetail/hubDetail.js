@@ -120,6 +120,9 @@ Page({
     }).then(
       () => {
         wxUtil.showToast('加入成功', 'success')
+        this.setData({
+          isJoined: true
+        })
         this.loadHubMembers()
       },
       (err) => {
@@ -136,6 +139,9 @@ Page({
     }).then(
       () => {
         wxUtil.showToast('退出成功', 'success')
+        this.setData({
+          isJoined: false
+        })
         this.loadHubMembers()
       },
       (err) => {
