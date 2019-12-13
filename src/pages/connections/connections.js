@@ -3,9 +3,12 @@ import * as Api from '../api'
 
 const PAGE_SIZE = 10
 
+const app = getApp()
+
 Page({
   data: {
     isLoaded: false,
+    filter: 0,
     list: null,
     pagination: { current: 1, total: 0 },
   },
@@ -30,6 +33,7 @@ Page({
   },
   loadSquareCards(pageNo = 1) {
     return Api.getSquareCards({
+      filter: this.data.filter,
       pageSize: PAGE_SIZE,
       pageIndex: pageNo,
     }).then(res => {
@@ -45,6 +49,14 @@ Page({
   },
   handleClickSearch() {
     wxUtil.navigateTo('search')
+  },
+  handleClickFilter(e) {
+    const { filter } = e.currentTarget.dataset
+    if (filter !== this.data.filter) {
+      this.setData({ filter }, () => {
+        this.loadSquareCards();
+      })
+    }
   },
   handleClickCard(e) {
     const { id } = e.currentTarget.dataset
