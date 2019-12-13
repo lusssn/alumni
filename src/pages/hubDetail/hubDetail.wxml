@@ -30,7 +30,7 @@
     data="{{ list: activityList, bindtap: 'handleToActivityDetail' }}"
   />
   <!-- 发起活动 button -->
-  <view class="activity-btn tap" bindtap="handleToCreateActivity">
+  <view wx:if="{{isJoined}}" class="activity-btn tap" bindtap="handleToCreateActivity">
     <view class="iconfont icon-bugle" />
     <view>发起活动</view>
   </view>
