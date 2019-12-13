@@ -87,13 +87,13 @@ export const updateHubInfo = params => request.put('/v2/alumniCircle', params)
 // 加入圈子
 export const joinHub = params => {
   const query = Util.getSortQuery(params)
-  return request.post(`/v2/alumniCircle/join?${query}`)
+  return request.get(`/v2/alumniCircle/join?${query}`)
 }
 
 // 退出圈子
 export const exitHub = params => {
   const query = Util.getSortQuery(params)
-  return request.post(`/v2/alumniCircle/leave?${query}`)
+  return request.get(`/v2/alumniCircle/leave?${query}`)
 }
 
 /*************************************** 人脉 ***************************************/
