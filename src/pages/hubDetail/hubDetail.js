@@ -116,7 +116,6 @@ Page({
   handleJoinHub() {
     Api.joinHub({
       alumniCircleId: this.data.hubInfo.alumniCircleId,
-      accountId: app.global.accountId,
     }).then(
       () => {
         wxUtil.showToast('加入成功', 'success')
@@ -131,11 +130,9 @@ Page({
       },
     )
   },
-  // TODO 退出校友圈待联调
   handleExitHub() {
     Api.exitHub({
       alumniCircleId: this.data.hubInfo.alumniCircleId,
-      accountId: app.global.accountId,
     }).then(
       () => {
         wxUtil.showToast('退出成功', 'success')

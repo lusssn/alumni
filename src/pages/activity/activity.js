@@ -53,7 +53,6 @@ Page({
   loadEnrolledList(pageNo = 1) {
     // 加载参与的活动列表数据
     return Api.getEnrolledActivities({
-      accountId: app.global.accountId,
       pageIndex: pageNo,
       pageSize: PAGE_SIZE,
     }).then(data => {
@@ -70,7 +69,6 @@ Page({
   loadStartedList(pageNo = 1) {
     // 加载发起的活动列表
     return Api.getStartedActivities({
-      accountId: app.global.accountId,
       pageIndex: pageNo,
       pageSize: PAGE_SIZE,
     }).then(data => {

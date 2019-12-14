@@ -25,7 +25,6 @@ Page({
     const { activity } = this.data
     const params = {
       activityId: activity.activityId,
-      accountId: app.global.accountId,
     }
     let operateName = ''
     let next = null
