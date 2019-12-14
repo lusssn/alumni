@@ -39,7 +39,7 @@
         </view>
       </view>
       <block wx:if="{{educations.length}}">
-        <EducationInfo wx:for="{{educations}}" wx:key="educationId" data="{{item}}" border="{{index < educations.length - 1 }}" data-id="{{item.educationId}}" bindtap="handleEducationAdd" />
+        <EducationInfo wx:for="{{educations}}" wx:key="educationId" data="{{item}}" border="{{index > 0 }}" data-id="{{item.educationId}}" bindtap="handleEducationAdd" />
       </block>
       <view wx:else class="card-block padding-b-xl text-center">
         <image class="experience-empty margin-t-xl margin-b-xl" src="../../images/experience-empty.png" />
@@ -55,7 +55,7 @@
         </view>
       </view>
       <block wx:if="{{jobs.length}}">
-        <WorkInfo wx:for="{{jobs}}" wx:key="jobId" data="{{item}}" border="{{index < jobs.length }}" data-id="{{item.jobId}}" bindtap="handleWorkAdd" />
+        <WorkInfo wx:for="{{jobs}}" wx:key="jobId" data="{{item}}" border="{{index > 0 }}" data-id="{{item.jobId}}" bindtap="handleWorkAdd" />
       </block>
       <view wx:else class="card-block padding-b-xl text-center">
         <image class="experience-empty margin-t-xl margin-b-xl" src="../../images/experience-empty.png" />
