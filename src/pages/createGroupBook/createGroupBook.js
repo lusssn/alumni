@@ -38,5 +38,6 @@ Page({
     // 发起请求
     // then showModal
     this.setData({ showModal: true })
+    // TODO 等待接口和设计稿完善
   }
 })
