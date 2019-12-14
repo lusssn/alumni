@@ -1,5 +1,5 @@
 <template name="educationEdit">
-  <view class="card">
+  <view class="card margin-lg negative-margin">
     <view class="card-header">
       <view class="card-title">教育经历</view>
     </view>

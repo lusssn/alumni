@@ -1,11 +1,13 @@
 @import "../../scss/variables";
 
-.header {
-  height: 90rpx;
+.container {
+  padding-bottom: 64rpx;
+  .header {
+    height: 90rpx;
+  }
 }
-
 .main-info {
-  margin: -70rpx 32rpx 0;
+  margin: -80rpx 32rpx 0;
   .avatar {
     width: 132rpx;
     height: 132rpx;

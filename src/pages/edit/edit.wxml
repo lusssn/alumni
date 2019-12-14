@@ -2,7 +2,8 @@
 <import src="../../templates/educationEdit.wxml" />
 <import src="../../templates/workEdit.wxml" />
 
-<view class="container{{type !== 'account' ? ' padding-t-md' : ''}}">
+<view class="container ">
+  <view class="header" />
   <template
     wx:if="{{type === 'account'}}"
     is="basicEdit"
@@ -18,13 +19,11 @@
     is="workEdit"
     data="{{job}}"
   />
-  <view class="fix-bottom padding-md border-t flex">
+  <view class="fix-bottom border-t flex">
     <button
       wx:if="{{id}}"
-      class="flex-item margin-r-md"
-      type="primary"
+      class="flex-item"
       bindtap="handleRemove"
-      plain
     >
       删除
     </button>
