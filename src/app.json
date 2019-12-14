@@ -3,6 +3,7 @@
     "pages/hubs/hubs",
     "pages/connections/connections",
     "pages/mine/mine",
+    "pages/mineDetail/mineDetail",
     "pages/cardcase/cardcase",
     "pages/myHubs/myHubs",
     "pages/hubMembers/hubMembers",

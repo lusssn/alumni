@@ -10,7 +10,6 @@ Page({
     account: {},
     educations: [],
     jobs: [],
-    noticeCount: 0,
   },
   onLoad() {
     this.loadAllInfo()
@@ -31,31 +30,28 @@ Page({
       path: `/pages/detail/detail?id=${account.accountId}&isShare=1`,
     }
   },
-  handleEdit() {
-    wxUtil.navigateTo('mineDetail')
+  handleBasicEdit() {
+    wxUtil.navigateTo('edit', { type: 'account' })
   },
-  handleToCardcase() {
-    wxUtil.navigateTo('cardcase')
-  },
-  handleToMyHubs() {
-    wxUtil.navigateTo('myHubs')
-  },
-  handleToActivity() {
-    wxUtil.navigateTo('activity')
-  },
-  handleToMsgs() {
-    wxUtil.navigateTo('notice')
-  },
-  loadNoticeList() {
-    return Api.getNoticeList({
-      pageIndex: 1,
-      pageSize: 10,
-    }).then(data => {
-      const { count } = data
-      this.setData({
-        noticeCount: count,
+  handleEducationAdd(e) {
+    const { id } = e.target.dataset
+    if (id) {
+      wxUtil.navigateTo('edit', {
+        type: 'education', id,
       })
-    }, () => { })
+      return
+    }
+    wxUtil.navigateTo('edit', { type: 'education' })
+  },
+  handleWorkAdd(e) {
+    const { id } = e.target.dataset
+    if (id) {
+      wxUtil.navigateTo('edit', {
+        type: 'job', id,
+      })
+      return
+    }
+    wxUtil.navigateTo('edit', { type: 'job' })
   },
   loadAllInfo() {
     return wxUtil.login().then(
@@ -68,8 +64,14 @@ Page({
           accountId: app.global.accountId,
         }).then(
           data => {
-            this.loadNoticeList()
+            // 处理时间
+            const { birthday } = data.account
+            data.account.birthday = Util.getYearMonthDate(birthday)
             for (let item of data.educations) {
+              item.startTime = Util.getYear(item.startTime)
+              item.endTime = Util.getYear(item.endTime)
+            }
+            for (let item of data.jobs) {
               item.startTime = Util.getYear(item.startTime)
               item.endTime = Util.getYear(item.endTime)
             }
@@ -78,12 +80,12 @@ Page({
               ...data,
             })
           },
-          () => { },
+          () => {},
         )
       },
     )
   },
-  handleShare() {
-    wxUtil.showToast('点击右上角转发')
-  },
+  handleRegister() {
+    Util.isRegistered()
+  }
 })

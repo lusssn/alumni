@@ -1,0 +1,12 @@
+{
+  "navigationBarTitleText": "编辑",
+  "navigationBarBackgroundColor": "#3A82E6",
+  "navigationBarTextStyle": "white",
+  "enablePullDownRefresh": true,
+  "usingComponents": {
+    "Loading": "../../components/Loading/Loading",
+    "BasicInfo": "../../components/BasicInfo/BasicInfo",
+    "EducationInfo": "../../components/EducationInfo/EducationInfo",
+    "WorkInfo": "../../components/WorkInfo/WorkInfo"
+  }
+}
