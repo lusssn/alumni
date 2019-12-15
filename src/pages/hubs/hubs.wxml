@@ -25,6 +25,6 @@
   <template
     wx:else
     is="activityList"
-    data="{{ list: activityList }}"
+    data="{{ list: activityList, bindtap: 'handleToActivityDetail' }}"
   />
 </view>

@@ -19,7 +19,7 @@
               <view class="iconfont icon-calendar text-muted" />
               <view class="text-title padding-l-xs padding-r-xs text-muted">2019-12-20</view>
               <view class="iconfont icon-card text-primary" />
-              <text class="text-title padding-l-xs padding-r-xs text-primary">{{item.enrolledNumber}}人报名</text>
+              <text class="text-title padding-l-xs padding-r-xs text-primary">{{item.enrolledNumber || 0}}人报名</text>
             </view>
           </view>
           <view class="iconfont icon-arrow-right text-muted" />

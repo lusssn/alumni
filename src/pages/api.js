@@ -142,6 +142,11 @@ export const favoriteFriend = params => request.post('/v2/favorite', params)
 
 /************************************* 活动列表 *************************************/
 // 根据活动名称搜索活动
+export const getActivitiesRecommend = params =>
+  request.get('/v2/activities/recommend', params).then(res => res.data)
+
+
+// 根据活动名称搜索活动
 export const searchActivities = params =>
   request.get('/v2/search/activities', params).then(res => res.data)
 

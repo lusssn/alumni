@@ -15,17 +15,21 @@ Page({
     currentTab: NAV_CONFIG[0],
     hubList: null,
     hubPagination: { current: 1, total: 0 },
-    activityList:[]
+    activityList:[],
+    activityPagination: { current: 1, total: 0 },
   },
   onLoad() {
     wxUtil.login().then(() => {
       // 加载校友圈列表数据
       this.loadHubsList()
+      // 加载活动列表数据
+      this.loadActivitiesList()
     })
   },
   onPullDownRefresh() {
     Promise.all([
       this.loadHubsList(),
+      this.loadActivitiesList(),
     ]).then(() => {
       wx.stopPullDownRefresh()
     })
@@ -40,10 +44,10 @@ Page({
       }
       return
     }
-    const { total, current } = this.data.favoritePagination
+    const { total, current } = this.data.activityPagination
     // 是否为最后一页
     if (Math.ceil(total / PAGE_SIZE) > current) {
-      this.loadFavoriteList(current + 1)
+      this.loadActivitiesList(current + 1)
     }
   },
   loadHubsList(pageNo = 1) {
@@ -62,6 +66,22 @@ Page({
       })
     }, () => {})
   },
+  loadActivitiesList(pageNo = 1){
+    // 加载活动列表数据
+    return Api.getActivitiesRecommend({
+      pageIndex: pageNo,
+      pageSize: PAGE_SIZE,
+    }).then(data => {
+      const { list, count } = data
+      this.setData({
+        activityList: pageNo === 1 ? list : this.data.activityList.concat(list),
+        activityPagination: {
+          current: pageNo,
+          total: count,
+        },
+      })
+    }, () => {})
+  },
   handleSwitch(event) {
     const { id } = event.detail
     this.setData({
@@ -71,6 +91,10 @@ Page({
   handleToHubDetail(event) {
     const { id } = event.currentTarget.dataset
     wxUtil.navigateTo('hubDetail', { hub: id })
+  },
+  handleToActivityDetail(event) {
+    const { id } = event.currentTarget.dataset
+    wxUtil.navigateTo('activityDetail', { activity: id })
   },
   handleClickSearch() {
     wxUtil.navigateTo('search')
