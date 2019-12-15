@@ -180,3 +180,7 @@ export const quitActivity = params => {
 /************************************* 消息列表 *************************************/
 // 消息-改变消息阅读状态
 export const readNotice = params => request.post('/v2/message/changeStatus', params)
+
+/************************************* 文件传输 *************************************/
+// 删除一个文件
+export const deleteFile = params => request.del('/v2/deleteFile', params)
