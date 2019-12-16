@@ -76,6 +76,9 @@ Page({
       pageSize: PAGE_SIZE,
     }).then(data => {
       const { list, count } = data
+      list.forEach(item => {
+        item.activityDateTime = item.activityDateTime.split(' ')[0]
+      })
       this.setData({
         activityList: pageNo === 1 ? list : this.data.activityList.concat(list),
         activityPagination: {
