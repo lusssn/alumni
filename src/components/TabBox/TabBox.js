@@ -15,9 +15,11 @@ Component({
   methods: {
     //滑动切换
     handleSwiperTab(e) {
-      this.setData({
-        currentTab: e.current
-      });
+      if (e.detail.source === 'touch') {
+        this.setData({
+          currentTab: e.detail.current
+        });
+      }
     },
     //点击切换
     handleClickTab(e) {
