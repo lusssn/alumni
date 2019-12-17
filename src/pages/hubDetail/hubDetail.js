@@ -6,6 +6,7 @@ const PAGE_SIZE = 10
 
 Page({
   data: {
+    hubId: '',
     isCreator: false, // 当前圈子是否是自己创建的
     isJoined: false, // 是圈子成员
     hubInfo: {},
@@ -18,6 +19,7 @@ Page({
       wxUtil.showToast('不存在此校友圈')
       return
     }
+    this.setData({hubId: hub})
     wxUtil.login().then(() => {
       this.loadHubInfo()
       // 获取成员列表
@@ -39,6 +41,13 @@ Page({
     // 是否为最后一页
     if (Math.ceil(total / PAGE_SIZE) > current) {
       this.loadHubActivities(current + 1)
+    }
+  },
+  onShareAppMessage() {
+    return {
+      title: this.data.hubInfo.alumniCircleName,
+      desc: '邀请你加入这个校友圈，一起参加丰富活动',
+      path: `/pages/hubDetail/hubDetail?hub=${this.data.hubId}`
     }
   },
   loadHubInfo() {

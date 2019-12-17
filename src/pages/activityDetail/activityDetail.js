@@ -6,6 +6,7 @@ const app = getApp()
 
 Page({
   data: {
+    activityId: '',
     activity: {},
   },
   onLoad({ activity }) {
@@ -14,12 +15,22 @@ Page({
       return
     }
     // 加载详情数据
+    this.setData({
+      activityId: activity
+    })
     wxUtil.login().then(() => {
       Api.getActivityDetail({ activityId: activity }).then(
         res => { this.setData({ activity: res }) },
         () => {},
       )
     })
+  },
+  onShareAppMessage() {
+    return {
+      title: this.data.activity.activityName,
+      desc: `邀你一起加入${this.data.activity.activityName}`,
+      path: `/pages/activityDetail/activityDetail?activity=${this.data.activityId}`
+    }
   },
   handleJoinActivity() {
     const { activity } = this.data
