@@ -41,15 +41,15 @@ Page({
       expirationTime: moment(info.expirationTime).format('YYYY-MM-DD HH:mm:ss'),
       ...imgs
     }).then((res) => {
-      if (res.status == 200) {
-        wxUtil.showToast('活动发起成功')
+      wx.showToast('活动发起成功')
+      setTimeout(() => {
+        wx.hideToast()
         wxUtil.navigateTo('hubDetail', { hub: hubId })
-      }
+      }, 500);
     }
     ).catch(err => {
       wxUtil.showToast(err.message)
     })
-    console.log(this.data.previewImages)
   },
   handleInputChange(event) {
     const { name } = event.currentTarget.dataset
