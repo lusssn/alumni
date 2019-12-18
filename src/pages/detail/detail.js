@@ -109,6 +109,7 @@ Page({
     })
   },
   handleApplySend() {
+    const { accountId } = this.data.account
     Api.applyFriend({
       A: app.global.accountId,
       B: accountId,
