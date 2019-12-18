@@ -10,7 +10,7 @@
 
   <view class="padding-l-lg padding-r-lg">
     <view class="flex padding-t-sm padding-b-lg">
-      <button class="capsule {{filter === 0 ? 'active' : ''}}" data-filter="{{0}}" bindtap="handleClickFilter">同学校</button>
+      <button class="capsule {{filter === 0 ? 'active' : ''}}" data-filter="{{0}}" bindtap="handleClickFilter">同学院</button>
       <button class="capsule {{filter === 1 ? 'active' : ''}}" data-filter="{{1}}" bindtap="handleClickFilter">同城</button>
       <button class="capsule {{filter === 2 ? 'active' : ''}}" data-filter="{{2}}" bindtap="handleClickFilter">可能认识</button>
     </view>
