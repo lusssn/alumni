@@ -1,6 +1,6 @@
 <view wx:if="{{status}}" class="container">
   <view class="header" />
-  <InfoCard data="{{[account,educations,jobs]}}" allField="{{status === FRIEND}}" />
+  <InfoCard data="{{[account,educations,jobs]}}" allField="{{status === 'FRIEND'}}" />
   <view class="padding-l-lg padding-r-lg padding-t-md">
     <view class="h1 title">基本信息</view>
     <view class="base-card card">
@@ -46,7 +46,7 @@
   <view wx:if="{{showModal}}" class='mask'>
     <view class='modal-content'>
       <view class="flex tips">
-        <image src="../../images/avatar_default.jpeg" />
+        <image src="../../images/mine-selected.png" />
         <text class="h3 text-muted">给他留言，能够增加名片交换的通过率哦</text>
       </view>
       <view>

@@ -16,6 +16,12 @@ Component({
   methods: {
     handleEdit(){
       this.triggerEvent('handleEdit');
+    },
+    handleClickAvatar(){
+      wx.previewImage({
+        current: this.properties.data[0].avatar,
+        urls: [this.properties.data[0].avatar]
+      })
     }
   }
 })
