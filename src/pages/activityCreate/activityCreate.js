@@ -1,7 +1,7 @@
 import * as Util from '../../utils/util'
 import wxUtil from '../../utils/wxUtil'
 import * as Api from '../api'
-import server from "../../server";
+import server from "../../server"
 import moment from '../../utils/moment.min'
 
 const app = getApp()

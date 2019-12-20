@@ -1,11 +1,15 @@
 import * as Util from '../../utils/util'
 import wxUtil from '../../utils/wxUtil'
 import * as Api from '../api'
+import server from "../../server"
 import * as R from '../../utils/ramda/index'
+
+const app = getApp()
 
 Page({
   data: {
     info: {},
+    previewImage: ''
   },
   onLoad({ hub }) {
     wxUtil.login().then(() => {
@@ -46,7 +50,24 @@ Page({
       count: 1,
     }).then(res => {
       this.setData({
-        info: R.assoc('avatar', res.tempFilePaths, this.data.info),
+        previewImage: res.tempFilePaths[0],
+      })
+      let _this = this;
+      wx.uploadFile({
+        url: `${server.host}/v2/uploadFile`,
+        filePath: res.tempFilePaths[0],
+        name: 'file',
+        header: {
+          'X-Wx-Token': app.global.token,
+        },
+        success: function (res) {
+          _this.setData({
+            info: R.assoc('avatar', JSON.parse(res.data).data, _this.data.info),
+          })
+        },
+        fail: function (err) {
+          console.log(err);
+        }
       })
     })
   },

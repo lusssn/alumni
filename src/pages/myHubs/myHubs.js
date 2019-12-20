@@ -55,6 +55,6 @@ Page({
   },
   // 创建群通讯录
   handleCreateGroup() {
-    wxUtil.navigateTo('createGroupBook')
+    wxUtil.navigateTo('hubCreate')
   }
 })
