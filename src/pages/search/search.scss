@@ -1,5 +1,11 @@
 @import "../../scss/variables";
 
+.header {
+  height: 50rpx;
+}
+.container {
+  margin-top: -40rpx !important;
+}
 // 准备搜索
 .ready-text {
   padding-top: 50rpx;
@@ -13,7 +19,7 @@
       bottom: 6rpx;
       width: 2rpx;
       content: "";
-      transform: scaleX(.5);
+      transform: scaleX(0.5);
       background-color: $gray-deep;
     }
   }
@@ -32,7 +38,7 @@
   padding: 0 36rpx;
   font-size: 24rpx;
   line-height: 50rpx;
-  color: rgba($strong-color, .5);
+  color: rgba($strong-color, 0.5);
   border-radius: 25rpx;
   background-color: $bg-color;
 }
@@ -40,6 +46,6 @@
 .search-item {
   padding: 20rpx 40rpx 20rpx 54rpx;
   &:active {
-    opacity: .7;
+    opacity: 0.7;
   }
 }
