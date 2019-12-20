@@ -140,4 +140,22 @@ Page({
       wxUtil.showToast('操作失败')
     })
   },
+  handleAddPhone(){
+    wx.addPhoneContact({
+      firstName: this.data.account.name,//联系人姓名
+      mobilePhoneNumber: this.data.account.phone,//联系人手机号
+    })
+  },
+  handleAddWechat(){
+    wx.setClipboardData({
+      data: this.data.account.wechat,
+      success: function () { 
+        wx.showToast({
+          icon: 'none',
+          title: '微信号已复制到剪贴板, 快去添加好友吧',
+          duration: 1000
+        })
+      }
+    })
+  }
 })
