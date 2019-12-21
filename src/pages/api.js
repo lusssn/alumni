@@ -84,6 +84,9 @@ export const getHubActivities = params =>
 // 圈子管理
 export const updateHubInfo = params => request.put('/v2/alumniCircle', params)
 
+// 圈子创建
+export const createHub = params => request.post('/v2/alumniCircle', params)
+
 // 加入圈子
 export const joinHub = params => {
   const query = Util.getSortQuery(params)

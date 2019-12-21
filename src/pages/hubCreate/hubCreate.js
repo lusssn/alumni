@@ -6,14 +6,21 @@ import * as R from '../../utils/ramda/index'
 
 const app = getApp()
 
+const UPDATE = 'update';
+const CREATE = 'create';
+
 Page({
   data: {
+    alumniCircleId: '',
     info: {},
-    previewImage: ''
+    previewImage: '',
+    flag: '', // update-校友圈信息更新  create-创建新的圈子
+    showModal: false,
   },
   onLoad({ hub }) {
     wxUtil.login().then(() => {
       if (hub) {
+        this.setData({ flag: UPDATE, alumniCircleId: hub })
         Api.getHubInfo({ alumniCircleId: hub }).then(
           res => {
             this.setData({
@@ -24,15 +31,34 @@ Page({
             wxUtil.showToast('获取详情失败')
           },
         )
+      } else {
+        this.setData({ flag: CREATE })
       }
     })
   },
   handleSubmit() {
-    const { info } = this.data
-    Api.updateHubInfo(info).then(
-      () => { wxUtil.showToast('保存成功', 'success') },
-      () => { wxUtil.showToast('保存失败') }
-    )
+    const { info, flag } = this.data
+    if (flag === UPDATE) {
+      Api.updateHubInfo(info).then(
+        () => {
+          this.setData({ showModal: true })
+        },
+        () => { wxUtil.showToast('保存失败') }
+      )
+    }
+    else if (flag === CREATE) {
+      Api.createHub(info).then(
+        (res) => {
+          this.setData({ showModal: true })
+          this.setData({ alumniCircleId: res.data })
+        },
+        () => { wxUtil.showToast('保存失败') }
+      )
+    }
+  },
+  handleConfirm() {
+    this.setData({ showModal: false })
+    wxUtil.navigateTo('hubDetail', { hub: this.data.alumniCircleId })
   },
   handleInputChange(event) {
     const { name } = event.currentTarget.dataset

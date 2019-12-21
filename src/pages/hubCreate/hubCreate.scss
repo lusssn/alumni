@@ -60,3 +60,36 @@
     opacity: .7;
   }
 }
+
+.mask {
+  position: absolute;
+  z-index: 9999;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, .2);
+
+  .modal-content {
+    display: flex;
+    padding: 48rpx;
+    flex-direction: column;
+    border-radius: 4rpx;
+    background-color: white;
+
+    .confirm-btn {
+      width: 252rpx;
+      height: 72rpx;
+      margin: 0 auto;
+      line-height: 72rpx;
+      text-align: center;
+      color: white;
+      border-radius: 4px;
+      background: $theme-color;
+    }
+  }
+}
+

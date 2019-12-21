@@ -58,4 +58,17 @@
       保存
     </button>
   </view>
+  <view wx:if="{{showModal}}" class="mask">
+    <view class="modal-content margin-xl">
+      <view class="h1 text-muted text-center">
+        <text>{{flag === 'create' ? '已创建群通讯录' : '已保存新的圈子信息'}}</text>
+      </view>
+      <view class="h3 text-muted text-center padding-xl">
+        <text>{{flag === 'create' ? '分享给您的好友或微信群让大家加入吧' : '分享给您的好友或微信群让大家了解新的圈子信息'}}</text>
+      </view>
+      <view>
+        <view class='confirm-btn h1' bindtap='handleConfirm'>确定</view>
+      </view>
+    </view>
+  </view>
 </view>
