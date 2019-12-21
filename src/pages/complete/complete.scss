@@ -2,6 +2,12 @@
 
 .container {
   padding-bottom: 132rpx;
+  .header {
+    height: 90rpx;
+  }
+  .negative-margin {
+    margin-top: -112rpx !important;
+  }
 }
 // reset
 .field {
