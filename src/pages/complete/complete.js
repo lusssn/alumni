@@ -16,7 +16,9 @@ Page({
     degreeSelect: DEGREE_TYPE,
     collegeSelect: COLLEGE_TYPE,
     account: {},
-    education: {},
+    education: {
+      school: '东南大学'
+    },
     job: {},
     redirect: '', // 完善后跳转的路径
     options: '', // 完善后跳转的路径参数
