@@ -20,8 +20,7 @@
     "pages/complete/complete",
     "pages/detail/detail",
     "pages/notice/notice",
-    "pages/register/register",
-    "pages/createGroupBook/createGroupBook"
+    "pages/register/register"
   ],
   "permission": {
     "scope.userLocation": {
