@@ -70,6 +70,12 @@ Page({
       [name]: e.detail.value,
     })
   },
+  handlePhoneCheck (e) {
+    const phone = e.detail.value
+    if (phone.length !== 11 || !(/^[0-9]+$/.test(phone))) {
+      wxUtil.showToast('手机号码格式不正确', 'none')
+    }
+  },
   handleRemove () {
     Util.promisify(wx.showModal)({
       title: '提示',

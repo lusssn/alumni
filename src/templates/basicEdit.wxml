@@ -106,6 +106,7 @@
             value="{{account.phone}}"
             data-name="account.phone"
             bindinput="handleInputChange"
+            bindblur="handlePhoneCheck"
           />
         </view>
       </view>
