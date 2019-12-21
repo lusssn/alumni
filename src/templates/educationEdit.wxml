@@ -1,7 +1,7 @@
 <template name="educationEdit">
-  <view class="card margin-lg negative-margin">
+  <view class="card margin-lg {{!isComplete ? 'negative-margin' : ''}}">
     <view class="card-header">
-      <view class="card-title">教育经历</view>
+      <view class="card-title">教育经历{{isComplete && '-[东南大学相关]'}}</view>
     </view>
     <view class="card-block">
       <view class="field">
@@ -12,6 +12,7 @@
             value="{{education.school}}"
             data-name="education.school"
             bindinput="handleInputChange"
+            disabled="{{isComplete}}"
           />
         </view>
       </view>
@@ -36,11 +37,26 @@
       <view class="field">
         <label class="field-label"><text class="text-error">*</text>院系：</label>
         <view class="field-content">
-          <input
+          <picker
+            wx:if="{{education.school === '东南大学'}}"
+            range="{{collegeSelect}}"
+            range-key="name"
+            value="{{education.college}}"
+            data-name="education.college"
+            bindchange="handleInputChange"
+          >
+            <input
+              placeholder="请选择院系"
+              value="{{collegeSelect[education.college].name}}"
+              disabled
+            />
+          </picker>
+          <input 
+            wx:else
             placeholder="请输入院系"
             value="{{education.college}}"
             data-name="education.college"
-            bindinput="handleInputChange"
+            bindchange="handleInputChange"
           />
         </view>
       </view>

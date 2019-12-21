@@ -1,10 +1,11 @@
 <view class="container">
-  <view class="card padding-t-xl padding-b-xl">
+  <view class="header" />
+  <view class="card margin-lg padding-t-xl padding-b-xl negative-margin">
     <view class="avatar flex-center">
       <image mode="aspectFill" src="{{basic.avatar || '../../images/avatar_default.jpeg'}}" />
     </view>
   </view>
-  <view class="card">
+  <view class="card margin-lg">
     <view class="card-header">
       <view class="card-title">个人信息</view>
     </view>

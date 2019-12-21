@@ -1,5 +1,7 @@
 {
   "navigationBarTitleText": "完善信息",
+  "navigationBarBackgroundColor": "#3A82E6",
+  "navigationBarTextStyle": "white",
   "usingComponents": {
     "Modal": "../../components/Modal/Modal",
     "Loading": "../../components/Loading/Loading"
