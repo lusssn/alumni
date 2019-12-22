@@ -8,6 +8,7 @@ const app = getApp()
 
 Page({
   data: {
+    isMine: false,
     account: {},
     educations: [],
     jobs: [],
@@ -22,6 +23,9 @@ Page({
     }
     // 加载详情数据
     wxUtil.login().then(() => {
+      if ( app.global.accountId == id ) {
+        this.setData({isMine: true})
+      }
       this.loadCardInfo(id)
     })
   },
@@ -141,16 +145,16 @@ Page({
       wxUtil.showToast('操作失败')
     })
   },
-  handleAddPhone(){
+  handleAddPhone() {
     wx.addPhoneContact({
       firstName: this.data.account.name,//联系人姓名
       mobilePhoneNumber: this.data.account.phone,//联系人手机号
     })
   },
-  handleAddWechat(){
+  handleAddWechat() {
     wx.setClipboardData({
       data: this.data.account.wechat,
-      success: function () { 
+      success: function () {
         wx.showToast({
           icon: 'none',
           title: '微信号已复制到剪贴板, 快去添加好友吧',

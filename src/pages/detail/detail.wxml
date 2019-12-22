@@ -26,7 +26,7 @@
     </view>
   </view>
 
-  <view class="fix-bottom flex">
+  <view wx:if="{{!isMine}}" class="fix-bottom flex">
     <button class="flex-item" bindtap="handleFavorite">{{favorite ? '取消收藏' : '收藏名片'}}</button>
     <block wx:if="{{status === 'YES_OR_NO'}}">
       <button class="flex-item" bindtap="handleRefuse">忽略</button>
@@ -42,6 +42,9 @@
     <button wx:elif="{{status === 'SEASSI'}}" class="flex-item" type="default"  disabled>
       已申请交换名片
     </button>
+  </view>
+  <view wx:if="{{isMine}}" class="fix-bottom flex">
+    <button class="flex-item" type="primary" open-type="share">分享名片</button>
   </view>
   <view wx:if="{{showModal}}" class='mask'>
     <view class='modal-content'>
