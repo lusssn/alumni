@@ -23,7 +23,7 @@ Page({
     }
     // 加载详情数据
     wxUtil.login().then(() => {
-      if ( app.global.accountId == id ) {
+      if ( app.global.accountId === +id ) {
         this.setData({isMine: true})
       }
       this.loadCardInfo(id)
@@ -91,8 +91,8 @@ Page({
     }).then(() => {
       wxUtil.showToast('已忽略', 'success')
       this.loadCardInfo(accountId)
-    }, () => {
-      wxUtil.showToast('操作失败')
+    }, err => {
+      wxUtil.showToast(err.errMsg || '操作失败', 'none')
     })
   },
   handleApplyExchange() {
@@ -126,7 +126,7 @@ Page({
         message: '',
       })
     }, err => {
-      wxUtil.showToast(err.errMsg || '操作失败')
+      wxUtil.showToast(err.errMsg || '操作失败', 'none')
     })
   },
   handleFavorite() {
@@ -141,8 +141,8 @@ Page({
       })
       app.setNotice('favorited', true)
       wxUtil.showToast('操作成功', 'success')
-    }, () => {
-      wxUtil.showToast('操作失败')
+    }, err => {
+      wxUtil.showToast(err.errMsg || '操作失败', 'none')
     })
   },
   handleAddPhone() {

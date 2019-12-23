@@ -38,7 +38,6 @@ Page({
         })
       },
       err => {
-        console.error('Hello: ', err)
         wxUtil.showToast('搜索失败')
       }
     )

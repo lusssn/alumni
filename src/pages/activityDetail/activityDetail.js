@@ -54,8 +54,7 @@ Page({
         })
       },
       err => {
-        console.error(err)
-        wxUtil.showToast(`${operateName}失败请重试`)
+        wxUtil.showToast(err.errMsg, 'none')
       },
     )
 

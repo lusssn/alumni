@@ -27,8 +27,22 @@ Page({
     })
   },
   handleSubmit() {
-    // TODO 数据校验
     const { info, imageURLs, hubId } = this.data
+    // 数据校验
+    if (!info.activityName) {
+      wxUtil.showToast('活动名称必填')
+      return
+    }
+    if (!info.activityTime || !info.expirationTime) {
+      wxUtil.showToast('活动时间必填')
+      return
+    }
+    const activityTime = moment(info.activityTime)
+    const expirationTime = moment(info.expirationTime)
+    if (expirationTime.isBefore(activityTime)) {
+      wxUtil.showToast('时间范围不正确')
+      return
+    }
     let imgs = {};
     imageURLs.forEach((item, index) => {
       imgs[`img${index + 1}`] = item
@@ -37,19 +51,18 @@ Page({
       alumniCircleId: hubId,
       activityName: info.activityName,
       activityDesc: info.activityDesc,
-      activityTime: moment(info.activityTime).format('YYYY-MM-DD HH:mm:ss'),
-      expirationTime: moment(info.expirationTime).format('YYYY-MM-DD HH:mm:ss'),
+      activityTime: activityTime.format('YYYY-MM-DD HH:mm:ss'),
+      expirationTime: expirationTime.format('YYYY-MM-DD HH:mm:ss'),
       ...imgs
-    }).then((res) => {
-      wx.showToast('活动发起成功')
-      setTimeout(() => {
-        wx.hideToast()
-        wxUtil.navigateTo('hubDetail', { hub: hubId })
-      }, 500);
-    }
+    }).then(() => {
+        wx.showToast('活动发起成功')
+        setTimeout(() => {
+          wx.hideToast()
+          wxUtil.navigateTo('hubDetail', { hub: hubId })
+        }, 500);
+      }
     ).catch(err => {
-      console.log(err)
-      wxUtil.showToast(err.errMsg)
+      wxUtil.showToast(err.errMsg, 'none')
     })
   },
   handleInputChange(event) {
@@ -73,7 +86,6 @@ Page({
     previewImages.splice(index, 1)
     imageURLs.splice(index, 1)
     this.setData({ previewImages, imageURLs })
-    console.log(imageURLs)
   },
   handleChooseImage() {
     const { previewImages } = this.data
@@ -99,7 +111,7 @@ Page({
           })
         },
         fail: function (err) {
-          console.log(err);
+          wxUtil.showToast(err.errMsg, 'none')
         }
       })
     })

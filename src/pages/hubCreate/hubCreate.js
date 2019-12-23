@@ -38,6 +38,10 @@ Page({
   },
   handleSubmit() {
     const { info, flag } = this.data
+    if (!info.alumniCircleName) {
+      wxUtil.showToast('校友圈名称必填')
+      return
+    }
     if (flag === UPDATE) {
       Api.updateHubInfo(info).then(
         () => {
@@ -92,7 +96,7 @@ Page({
           })
         },
         fail: function (err) {
-          console.log(err);
+          wxUtil.showToast(err.errMsg, 'none')
         }
       })
     })

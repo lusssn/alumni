@@ -137,8 +137,7 @@ Page({
         this.loadHubMembers()
       },
       (err) => {
-        console.error(err)
-        wxUtil.showToast('加入失败请重试')
+        wxUtil.showToast(err.errMsg, 'none')
       },
     )
   },
@@ -154,8 +153,7 @@ Page({
         this.loadHubMembers()
       },
       (err) => {
-        console.error(err)
-        wxUtil.showToast('退出失败请稍后重试')
+        wxUtil.showToast(err.errMsg, 'none')
       },
     )
   },
