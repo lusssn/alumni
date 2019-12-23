@@ -1,6 +1,11 @@
 <view class="header"></view>
 <view class="container">
-  <Search class="margin-l-lg margin-r-lg" placeholder="海量校友资源，一键搜索找人" bindconfirm="handleSearch" />
+  <Search
+    class="margin-l-lg margin-r-lg"
+    placeholder="海量校友资源，一键搜索找人"
+    bindconfirm="handleSearch"
+    focus
+  />
   <!-- 搜索结果 -->
   <view hidden="{{!isSearched}}" class="search-result">
     <view wx:for="{{SEARCH_TYPE}}" wx:key="key" class="search-item flex-align-center border-b" data-way="{{item.key}}" bindtap="handleSearchDetail">
@@ -15,6 +20,12 @@
       <text>学院</text>
       <text>公司</text>
       <text>校友圈</text>
+    </view>
+    <view class="ready-text">
+      <text decode>&emsp;学校</text>
+      <text>城市</text>
+      <text>职位</text>
+      <text>校友活动</text>
     </view>
   </view>
 </view>

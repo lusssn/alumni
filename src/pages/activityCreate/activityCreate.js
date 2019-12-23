@@ -48,7 +48,8 @@ Page({
       }, 500);
     }
     ).catch(err => {
-      wxUtil.showToast(err.message)
+      console.log(err)
+      wxUtil.showToast(err.errMsg)
     })
   },
   handleInputChange(event) {

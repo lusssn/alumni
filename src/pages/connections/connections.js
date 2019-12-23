@@ -51,8 +51,8 @@ Page({
     wxUtil.navigateTo('search')
   },
   handleClickFilter(e) {
-    const { filter } = e.currentTarget.dataset
-    if (filter !== this.data.filter) {
+    const { filter } = e.target.dataset
+    if (!isNaN(filter) && filter !== this.data.filter) {
       this.setData({ filter }, () => {
         this.loadSquareCards();
       })

@@ -6,7 +6,7 @@
     placeholder-class="search-placeholder"
     bindconfirm="handleSearch"
     bindtap="handleTap"
-    focus="true"
     confirm-type="search"
+    focus="{{focus}}"
   />
 </view>

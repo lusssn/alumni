@@ -5,7 +5,7 @@
   <Search
     placeholder="海量校友资源，一键搜索找人"
     alignType="center"
-    bindtap="handleClickSearch"
+    bindclick="handleClickSearch"
     disabled
   />
 </view>

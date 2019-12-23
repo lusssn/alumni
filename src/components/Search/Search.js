@@ -9,6 +9,7 @@ Component({
      */
     alignType: { type: String, value: '' },
     disabled: { type: Boolean, value: false },
+    focus: { type: Boolean, value: false },
   },
   data: {
     selfClassName: '',
@@ -20,7 +21,7 @@ Component({
       this.triggerEvent('confirm', { value })
     },
     handleTap() {
-      this.triggerEvent('tap')
+      this.triggerEvent('click')
     },
   },
 })

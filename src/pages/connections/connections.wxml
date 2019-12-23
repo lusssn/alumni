@@ -3,16 +3,16 @@
     <Search
       placeholder="海量校友资源，一键搜索找人"
       alignType="center"
-      bindtap="handleClickSearch"
+      bindclick="handleClickSearch"
       disabled
     />
   </view>
 
   <view class="padding-l-lg padding-r-lg">
-    <view class="flex padding-t-sm padding-b-lg">
-      <button class="capsule {{filter === 0 ? 'active' : ''}}" data-filter="{{0}}" bindtap="handleClickFilter">同学院</button>
-      <button class="capsule {{filter === 1 ? 'active' : ''}}" data-filter="{{1}}" bindtap="handleClickFilter">同城</button>
-      <button class="capsule {{filter === 2 ? 'active' : ''}}" data-filter="{{2}}" bindtap="handleClickFilter">可能认识</button>
+    <view class="flex padding-t-sm padding-b-lg" bindtap="handleClickFilter">
+      <button class="capsule {{filter === 0 ? 'active' : ''}}" data-filter="{{0}}">同学院</button>
+      <button class="capsule {{filter === 1 ? 'active' : ''}}" data-filter="{{1}}">同城</button>
+      <button class="capsule {{filter === 2 ? 'active' : ''}}" data-filter="{{2}}">可能认识</button>
     </view>
     <BusinessCard
       wx:for="{{list}}"
