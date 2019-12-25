@@ -115,8 +115,7 @@ Page({
   handleApplySend() {
     const { accountId } = this.data.account
     Api.applyFriend({
-      A: app.global.accountId,
-      B: accountId,
+      friendAccountId: accountId,
       message: this.data.message,
     }).then(() => {
       wxUtil.showToast('申请已发出', 'success')

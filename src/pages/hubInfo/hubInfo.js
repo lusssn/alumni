@@ -8,14 +8,14 @@ Page({
     hubInfo: {},
     creator: {},
   },
-  onLoad({ hub }) {
-    if (!hub) {
+  onLoad({ hubId }) {
+    if (!hubId) {
       wxUtil.showToast('不存在此校友圈')
       return
     }
     wxUtil.login().then(() => {
       Api.getHubInfo({
-        alumniCircleId: hub,
+        alumniCircleId: hubId,
       }).then(
         res => {
           this.setData({ hubInfo: res, isLoaded: true })

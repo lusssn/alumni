@@ -90,11 +90,11 @@ Page({
   },
   handleToHubDetail(event) {
     const { id } = event.currentTarget.dataset
-    wxUtil.navigateTo('hubDetail', { hub: id })
+    wxUtil.navigateTo('hubDetail', { hubId: id })
   },
   handleToActivityDetail(event) {
     const { id } = event.currentTarget.dataset
-    wxUtil.navigateTo('activityDetail', { activity: id })
+    wxUtil.navigateTo('activityDetail', { activityId: id })
   },
   handleClickSearch() {
     wxUtil.navigateTo('search')

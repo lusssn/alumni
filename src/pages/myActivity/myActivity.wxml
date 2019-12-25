@@ -55,7 +55,7 @@
   <ListEmpty wx:else description="活动暂无人参与" />
 
   <view class="fix-bottom">
-    <button type="primary">
+    <button type="primary" bindtap="handleBatchNotice">
       一键通知
     </button>
   </view>

@@ -28,7 +28,7 @@ Page({
   loadHubMembers(pageNo = 1) {
     const currentPage = getCurrentPages().pop()
     return Api.getHubMembers({
-      alumniCircleId: currentPage.options.hub,
+      alumniCircleId: currentPage.options.hubId,
       pageIndex: pageNo,
       pageSize: PAGE_SIZE,
     }).then(data => {

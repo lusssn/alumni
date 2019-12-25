@@ -58,7 +58,7 @@ Page({
         wx.showToast('活动发起成功')
         setTimeout(() => {
           wx.hideToast()
-          wxUtil.navigateTo('hubDetail', { hub: hubId })
+          wxUtil.navigateTo('hubDetail', { hubId })
         }, 500);
       }
     ).catch(err => {

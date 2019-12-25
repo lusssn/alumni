@@ -11,14 +11,14 @@ Page({
     memberPagination: { current: 1, total: 0 },
     activity: {},
   },
-  onLoad({ id }) {
-    if (!id) {
+  onLoad({ activityId }) {
+    if (!activityId) {
       wxUtil.showToast('不存在此活动')
       return
     }
     // 加载详情数据
     wxUtil.login().then(() => {
-      Api.getActivityDetail({ activityId: id }).then(
+      Api.getActivityDetail({ activityId }).then(
         res => {
           this.setData({
             activity: R.assoc(
@@ -49,7 +49,7 @@ Page({
     const currentPage = getCurrentPages().pop()
     // 加载朋友列表数据
     return Api.getActivityMembers({
-      activityId: currentPage.options.id,
+      activityId: currentPage.options.activityId,
       pageIndex: pageNo,
       pageSize: PAGE_SIZE,
     }).then(data => {
@@ -66,5 +66,11 @@ Page({
   handleClickCard(e) {
     const { id } = e.currentTarget.dataset
     wxUtil.navigateTo('detail', { id })
+  },
+  handleBatchNotice() {
+    const currentPage = getCurrentPages().pop()
+    wxUtil.navigateTo('noticePost', {
+      activityId: currentPage.options.activityId,
+    })
   },
 })

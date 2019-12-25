@@ -6,7 +6,6 @@ const PAGE_SIZE = 10
 
 Page({
   data: {
-    hubId: '',
     isCreator: false, // 当前圈子是否是自己创建的
     isJoined: false, // 是圈子成员
     hubInfo: {},
@@ -14,12 +13,11 @@ Page({
     activityList: [],
     activityPagination: { current: 1, total: 0 },
   },
-  onLoad({ hub }) {
-    if (!hub) {
+  onLoad({ hubId }) {
+    if (!hubId) {
       wxUtil.showToast('不存在此校友圈')
       return
     }
-    this.setData({hubId: hub})
     wxUtil.login().then(() => {
       this.loadHubInfo()
       // 获取成员列表
@@ -44,16 +42,17 @@ Page({
     }
   },
   onShareAppMessage() {
+    const currentPage = getCurrentPages().pop()
     return {
       title: this.data.hubInfo.alumniCircleName,
       desc: '邀请你加入这个校友圈，一起参加丰富活动',
-      path: `/pages/hubDetail/hubDetail?hub=${this.data.hubId}`
+      path: `/pages/hubDetail/hubDetail?hubId=${currentPage.options.hubId}`
     }
   },
   loadHubInfo() {
     const currentPage = getCurrentPages().pop()
     Api.getHubInfo({
-      alumniCircleId: currentPage.options.hub,
+      alumniCircleId: currentPage.options.hubId,
     }).then(
       res => {
         this.setData({
@@ -69,7 +68,7 @@ Page({
   loadHubMembers() {
     const currentPage = getCurrentPages().pop()
     return Api.getHubMembers({
-      alumniCircleId: currentPage.options.hub,
+      alumniCircleId: currentPage.options.hubId,
       pageIndex: 1,
       pageSize: 3,
     }).then(data => {
@@ -80,7 +79,7 @@ Page({
     const currentPage = getCurrentPages().pop()
     // 加载校友圈下活动列表数据
     return Api.getHubActivities({
-      alumniCircleId: currentPage.options.hub,
+      alumniCircleId: currentPage.options.hubId,
       pageIndex: pageNo,
       pageSize: PAGE_SIZE,
     }).then(data => {
@@ -100,30 +99,30 @@ Page({
   handleToHubInfo() {
     const currentPage = getCurrentPages().pop()
     wxUtil.navigateTo('hubInfo', {
-      hub: currentPage.options.hub,
+      hubId: currentPage.options.hubId,
     })
   },
   handleToHubMembers() {
     const currentPage = getCurrentPages().pop()
     wxUtil.navigateTo('hubMembers', {
-      hub: currentPage.options.hub,
+      hubId: currentPage.options.hubId,
     })
   },
   handleToCreateActivity() {
     const currentPage = getCurrentPages().pop()
     wxUtil.navigateTo('activityCreate', {
-      hub: currentPage.options.hub,
+      hub: currentPage.options.hubId,
     })
   },
   handleToHubCreate() {
     const currentPage = getCurrentPages().pop()
     wxUtil.navigateTo('hubCreate', {
-      hub: currentPage.options.hub,
+      hubId: currentPage.options.hubId,
     })
   },
   handleToActivityDetail(e) {
     const { id } = e.currentTarget.dataset
-    wxUtil.navigateTo('activityDetail', { activity: id })
+    wxUtil.navigateTo('activityDetail', { activityId: id })
   },
   handleJoinHub() {
     Api.joinHub({

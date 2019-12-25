@@ -1,0 +1,34 @@
+<view class="container h3">
+  <view class="title">通知主题</view>
+  <view class="card input-card">
+    <input
+      class="flex-item"
+      value="{{title}}"
+      placeholder="请输入通知主题"
+      placeholder-class="text-muted"
+      maxlength="15"
+      data-name="title"
+      bindinput="handleInputChange"
+    />
+    <text class="text-muted">15字</text>
+  </view>
+  <view class="title">通知内容</view>
+  <view class="card padding-sm">
+    <textarea
+      class="textarea"
+      placeholder-class="text-muted"
+      placeholder="请输入通知内容"
+      maxlength="100"
+      value="{{content}}"
+      data-name="content"
+      bindinput="handleInputChange"
+    />
+    <view class="text-muted text-right">100字</view>
+  </view>
+
+  <view class="fix-bottom">
+    <button type="primary" bindtap="handleSubmit">
+      发送通知
+    </button>
+  </view>
+</view>

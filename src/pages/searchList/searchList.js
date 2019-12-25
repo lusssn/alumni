@@ -100,10 +100,10 @@ Page({
   // 跳转到圈子详情
   handleClickHub(e) {
     const { id } = e.currentTarget.dataset;
-    wxUtil.navigateTo('hubDetail', { hub: id })
+    wxUtil.navigateTo('hubDetail', { hubId: id })
   },
   handleToActivityDetail(e) {
     const { id } = e.currentTarget.dataset
-    wxUtil.navigateTo('activityDetail', { activity: id })
+    wxUtil.navigateTo('activityDetail', { activityId: id })
   },
 })

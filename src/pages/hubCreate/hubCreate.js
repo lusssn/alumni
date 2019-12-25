@@ -17,11 +17,11 @@ Page({
     flag: '', // update-校友圈信息更新  create-创建新的圈子
     showModal: false,
   },
-  onLoad({ hub }) {
+  onLoad({ hubId }) {
     wxUtil.login().then(() => {
-      if (hub) {
-        this.setData({ flag: UPDATE, alumniCircleId: hub })
-        Api.getHubInfo({ alumniCircleId: hub }).then(
+      if (hubId) {
+        this.setData({ flag: UPDATE, alumniCircleId: hubId })
+        Api.getHubInfo({ alumniCircleId: hubId }).then(
           res => {
             this.setData({
               info: R.omit(['ctime', 'isAvailable', 'utime'], res),
@@ -62,7 +62,7 @@ Page({
   },
   handleConfirm() {
     this.setData({ showModal: false })
-    wxUtil.navigateTo('hubDetail', { hub: this.data.alumniCircleId })
+    wxUtil.navigateTo('hubDetail', { hubId: this.data.alumniCircleId })
   },
   handleInputChange(event) {
     const { name } = event.currentTarget.dataset

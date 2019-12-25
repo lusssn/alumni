@@ -17,11 +17,7 @@ Page({
   },
   onShow() {
     app.checkNotice('edited', true, this.loadAllInfo)
-  },
-  onPullDownRefresh() {
-    this.loadAllInfo().then(() => {
-      wx.stopPullDownRefresh()
-    })
+    this.loadNoticeList()
   },
   onShareAppMessage() {
     const { account, educations } = this.data
@@ -44,16 +40,15 @@ Page({
     wxUtil.navigateTo('activity')
   },
   handleToMsgs() {
-    wxUtil.navigateTo('notice')
+    wxUtil.navigateTo('noticeList')
   },
   loadNoticeList() {
     return Api.getNoticeList({
       pageIndex: 1,
       pageSize: 10,
     }).then(data => {
-      const { count } = data
       this.setData({
-        noticeCount: count,
+        noticeCount: data.count,
       })
     }, () => { })
   },

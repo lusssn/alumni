@@ -2,9 +2,19 @@ import wxUtil from '../../utils/wxUtil'
 import * as Api from '../api'
 import * as R from '../../utils/ramda/index'
 
-const app = getApp()
-
 const PAGE_SIZE = 10
+const NOTICE_TYPE = [
+  { id: 0, name: '交换名片申请', key: 'Request' },
+  { id: 1, name: '同意交换名片', key: 'Accepted' },
+  { id: 2, name: '拒绝交换名片', key: 'Rejected' },
+  { id: 10, name: '活动通知', key: 'Activity' },
+]
+const NOTICE_TYPE_MAP = (() => {
+  return NOTICE_TYPE.reduce((result, current) => {
+    result[current.id] = current
+    return result
+  }, {})
+})()
 
 Page({
   data: {
@@ -34,8 +44,12 @@ Page({
       pageSize: PAGE_SIZE,
     }).then(data => {
       const { list, count } = data
+      const resultList = list.map(item => {
+        return R.assoc('type', NOTICE_TYPE_MAP[item.type], item)
+      })
+      console.log(resultList)
       this.setData({
-        noticeList: pageNo === 1 ? list : this.data.noticeList.concat(list),
+        noticeList: pageNo === 1 ? resultList : this.data.noticeList.concat(resultList),
         noticePagination: {
           current: pageNo,
           total: count,

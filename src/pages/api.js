@@ -118,13 +118,6 @@ export const getMyHubs = params =>
   request.get('/v2/alumniCircle/enrolledAlumniCircles', params).then(res => res.data)
 
 /*************************************** 朋友 ***************************************/
-// 朋友-获取通知列表
-export const getNoticeList = params =>
-  request.get('/v2/message', {
-    status: 0, // 0-未读，1-已读
-    ...params,
-  }).then(res => res.data)
-
 // 朋友-获取朋友列表
 export const getFriendList = params =>
   request.get('/v2/friends', params).then(res => res.data)
@@ -182,10 +175,20 @@ export const joinActivity = params => {
 // 活动详情-退出活动
 export const quitActivity = params => {
   const query = Util.getSortQuery(params)
-  return request.del(`/v2/activities/members?${query}`).then()
+  return request.del(`/v2/activities/members?${query}`)
 }
 
 /************************************* 消息列表 *************************************/
+// 消息-活动一键通知
+export const batchSendNotice = params => request.get('/v2/activity/notify', params)
+
+// 消息-获取通知列表
+export const getNoticeList = params =>
+  request.get('/v2/message', {
+    status: 0, // 0-未读，1-已读
+    ...params,
+  }).then(res => res.data)
+
 // 消息-改变消息阅读状态
 export const readNotice = params => request.post('/v2/message/changeStatus', params)
 

@@ -11,6 +11,7 @@
     "pages/myActivity/myActivity",
     "pages/activityDetail/activityDetail",
     "pages/activityCreate/activityCreate",
+    "pages/activityInfo/activityInfo",
     "pages/hubCreate/hubCreate",
     "pages/hubDetail/hubDetail",
     "pages/hubInfo/hubInfo",
@@ -19,7 +20,8 @@
     "pages/edit/edit",
     "pages/complete/complete",
     "pages/detail/detail",
-    "pages/notice/notice",
+    "pages/noticeList/noticeList",
+    "pages/noticePost/noticePost",
     "pages/register/register"
   ],
   "permission": {

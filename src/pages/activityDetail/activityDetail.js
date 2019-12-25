@@ -6,30 +6,27 @@ const app = getApp()
 
 Page({
   data: {
-    activityId: '',
     activity: {},
   },
-  onLoad({ activity }) {
-    if (!activity) {
+  onLoad({ activityId }) {
+    if (!activityId) {
       wxUtil.showToast('不存在此活动')
       return
     }
     // 加载详情数据
-    this.setData({
-      activityId: activity
-    })
     wxUtil.login().then(() => {
-      Api.getActivityDetail({ activityId: activity }).then(
+      Api.getActivityDetail({ activityId }).then(
         res => { this.setData({ activity: res }) },
         () => {},
       )
     })
   },
   onShareAppMessage() {
+    const { activity } = this.data
     return {
-      title: this.data.activity.activityName,
-      desc: `邀你一起加入${this.data.activity.activityName}`,
-      path: `/pages/activityDetail/activityDetail?activity=${this.data.activityId}`
+      title: activity.activityName,
+      desc: `邀你一起加入${activity.activityName}`,
+      path: `/pages/activityDetail/activityDetail?activityId=${activity.activityId}`
     }
   },
   handleJoinActivity() {
