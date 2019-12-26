@@ -1,0 +1,33 @@
+@import "../../scss/variables";
+
+.info-card {
+  margin: -32rpx 32rpx 0;
+  padding: 0 24rpx;
+  .avatar {
+    position: relative;
+    top: -52rpx;
+    display: block;
+    width: 98rpx;
+    height: 98rpx;
+    margin: 0 auto -52rpx;
+    border: 6rpx solid white;
+    border-radius: 50%;
+    background-color: $bg-color;
+  }
+}
+
+.info-list {
+  flex-wrap: wrap;
+  padding: 16rpx 0;
+  & > .field {
+    font-size: 24rpx;
+    padding: 8rpx 0;
+  }
+
+  & > .field:nth-child(odd) {
+    width: 60%;
+  }
+  & > .field:nth-child(even) {
+    width: 40%;
+  }
+}

@@ -1,0 +1,15 @@
+@import "../../scss/variables";
+
+.header {
+  height: 50rpx;
+  margin-bottom: 60rpx;
+}
+
+search {
+  flex: 1;
+  margin: 42rpx 32rpx 0;
+}
+
+tag:not(:last-child) {
+  margin-right: 16rpx;
+}

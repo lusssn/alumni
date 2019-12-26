@@ -1,26 +1,17 @@
 @import "../../scss/variables";
 
-// 搜索结果
-.search-result {
-  position: absolute;
-  top: 134rpx;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  margin-bottom: 0;
+.header {
+  height: 50rpx;
 }
-.search-item {
-  padding: 26rpx 0;
-  &:active {
-    opacity: .7;
-  }
+.container {
+  margin-top: -40rpx !important;
 }
 // 准备搜索
 .ready-text {
   padding-top: 50rpx;
   & > text {
     position: relative;
-    padding: 0 50rpx;
+    padding: 0 34rpx;
     &:not(:last-child)::before {
       position: absolute;
       top: 6rpx;
@@ -28,8 +19,33 @@
       bottom: 6rpx;
       width: 2rpx;
       content: "";
-      transform: scaleX(.5);
+      transform: scaleX(0.5);
       background-color: $gray-deep;
     }
+  }
+}
+
+// 搜索结果
+.search-result {
+  position: absolute;
+  top: 114rpx;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin-bottom: 0;
+}
+.search-result-capsule {
+  padding: 0 36rpx;
+  font-size: 24rpx;
+  line-height: 50rpx;
+  color: rgba($strong-color, 0.5);
+  border-radius: 25rpx;
+  background-color: $bg-color;
+}
+
+.search-item {
+  padding: 20rpx 40rpx 20rpx 54rpx;
+  &:active {
+    opacity: 0.7;
   }
 }

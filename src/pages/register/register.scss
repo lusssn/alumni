@@ -1,5 +1,14 @@
 @import "../../scss/variables";
 
+.container {
+  padding-bottom: 132rpx;
+  .header {
+    height: 90rpx;
+  }
+  .negative-margin {
+    margin-top: -80rpx !important;
+  }
+}
 // 头像
 .avatar {
   position: relative;
@@ -9,9 +18,6 @@
   overflow: hidden;
   border-radius: 50%;
   background-color: $bg-color;
-  & > .icon-camera {
-    position: absolute;
-  }
   & > image {
     width: 100%;
     height: 100%;

@@ -4,26 +4,18 @@
 @import "./scss/border";
 @import "./scss/font";
 
-@import "./scss/header";
 @import "./scss/card";
 @import "./scss/field";
-@import "./scss/tag";
+@import "./scss/icon";
 
-.search {
-  position: relative;
+.header {
   display: flex;
   align-items: center;
-  & > icon {
-    position: absolute;
-    top: 20rpx;
-    left: 20rpx;
-  }
-  &-input {
-    padding: 10rpx 15rpx 9rpx 70rpx;
-    flex: 1;
-    border-radius: 4rpx;
-    background-color: $bg-color;
-  }
+  font-size: 28rpx;
+  color: $gray-lighter;
+  border-radius: 0 0 20rpx 20rpx;
+  background-color: $theme-color;
+  box-shadow: 0 6rpx 18rpx 0 rgba($shadow-color, .25);
 }
 
 .link {
@@ -35,35 +27,4 @@
 
 .tap:active {
   opacity: .7;
-}
-
-@import "./scss/svg";
-.icon-location {
-  @include svg("location");
-}
-.icon-arrow-up {
-  @include svg("arrow-up");
-}
-.icon-arrow-right {
-  @include svg("arrow-up");
-
-  transform: rotate(-90deg);
-}
-.icon-ercode {
-  @include svg("ercode", 42rpx, $gray-base);
-}
-.icon-plane {
-  @include svg("plane");
-}
-.icon-plus {
-  @include svg("plus", $theme-color);
-}
-.icon-error {
-  @include svg("error", $red-base);
-}
-.icon-camera {
-  @include svg("camera", 48rpx, white);
-}
-.icon-edit {
-  @include svg("edit", $theme-color);
 }

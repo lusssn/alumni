@@ -1,0 +1,13 @@
+{
+  "navigationBarTitleText": "名片夹",
+  "navigationBarTextStyle": "white",
+  "navigationBarBackgroundColor": "#3A82E6",
+  "enablePullDownRefresh": true,
+  "usingComponents": {
+    "Loading": "../../components/Loading/Loading",
+    "Nav": "../../components/Nav/Nav",
+    "BusinessCard": "../../components/BusinessCard/BusinessCard",
+    "Search": "../../components/Search/Search",
+    "ListEmpty": "../../components/ListEmpty/ListEmpty"
+  }
+}

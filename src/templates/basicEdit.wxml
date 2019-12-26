@@ -1,11 +1,10 @@
 <template name="basicEdit">
-  <view wx:if="{{!isComplete}}" class="card padding-t-xl padding-b-xl">
+  <view wx:if="{{!isComplete}}" class="card padding-t-xl padding-b-xl margin-lg negative-margin">
     <view class="avatar flex-center">
       <image mode="aspectFill" src="{{account.avatar || '../../images/avatar_default.jpeg'}}" />
-      <!--<icon class="icon-camera" />-->
     </view>
   </view>
-  <view class="card">
+  <view class="card margin-lg">
     <view class="card-header">
       <view class="card-title">个人信息</view>
     </view>
@@ -66,7 +65,7 @@
               disabled
             />
           </picker>
-          <icon class="icon-arrow-up" />
+          <view class="iconfont icon-arrow-up text-muted" />
         </view>
       </view>
       <view class="field">
@@ -82,7 +81,7 @@
       </view>
     </view>
   </view>
-  <view class="card">
+  <view class="card margin-lg">
     <view class="card-header">
       <view class="card-title">联系方式</view>
     </view>
@@ -107,6 +106,7 @@
             value="{{account.phone}}"
             data-name="account.phone"
             bindinput="handleInputChange"
+            bindblur="handlePhoneCheck"
           />
         </view>
       </view>

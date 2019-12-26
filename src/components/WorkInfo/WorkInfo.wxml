@@ -1,18 +1,9 @@
-<view class="card-block padding-t-sm padding-b-sm{{border ? ' border-b' : ''}}">
-  <view class="field">
-    <label class="field-label">公司名称：</label>
-    <view class="field-content">{{data.company}}</view>
-  </view>
-  <view class="field">
-    <label class="field-label">职业名称：</label>
-    <view class="field-content">
-      <text>{{data.position}}</text>
-    </view>
-  </view>
-  <view wx:if="{{data.startTime || data.endTime}}" class="field">
-    <label class="field-label">入职／离职：</label>
-    <view class="field-content">
-      {{data.startTime || '未填写'}}／{{data.endTime || '未填写'}}
+<view class="{{border ? 'border-t' : ''}} work-item">
+  <view class="h3 text-title company">{{data.company}}</view>
+  <view class="flex-align-center position">
+    <view class="text-primary h3">{{data.position}}</view>
+    <view class="text-muted h5 time" wx:if="{{data.startTime || data.endTime}}">
+      {{data.startTime || '未填写'}}-{{data.endTime || '未填写'}}
     </view>
   </view>
 </view>

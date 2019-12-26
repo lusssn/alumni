@@ -1,3 +1,8 @@
 {
-  "navigationBarTitleText": "搜索"
+  "navigationBarTitleText": "搜索",
+  "navigationBarBackgroundColor": "#3A82E6",
+  "navigationBarTextStyle": "white",
+  "usingComponents": {
+    "Search": "../../components/Search/Search"
+  }
 }

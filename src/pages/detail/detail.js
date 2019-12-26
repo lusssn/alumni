@@ -8,10 +8,13 @@ const app = getApp()
 
 Page({
   data: {
+    isMine: false,
     account: {},
     educations: [],
     jobs: [],
     status: '',
+    showModal: false,
+    message: '',
   },
   onLoad({ id, isShare }) {
     if (!id) {
@@ -20,6 +23,9 @@ Page({
     }
     // 加载详情数据
     wxUtil.login().then(() => {
+      if ( app.global.accountId === +id ) {
+        this.setData({isMine: true})
+      }
       this.loadCardInfo(id)
     })
   },
@@ -85,49 +91,41 @@ Page({
     }).then(() => {
       wxUtil.showToast('已忽略', 'success')
       this.loadCardInfo(accountId)
-    }, () => {
-      wxUtil.showToast('操作失败')
+    }, err => {
+      wxUtil.showToast(err.errMsg || '操作失败', 'none')
     })
   },
   handleApplyExchange() {
     if (!Util.isRegistered()) return
+    this.setData({
+      showModal: true
+    })
+  },
+  handleMessageInput(event) {
+    this.setData({
+      message: event.detail.value
+    })
+  },
+  handleApplyCancel() {
+    this.setData({
+      showModal: false,
+      message: '',
+    })
+  },
+  handleApplySend() {
     const { accountId } = this.data.account
     Api.applyFriend({
-      A: app.global.accountId,
-      B: accountId,
+      friendAccountId: accountId,
+      message: this.data.message,
     }).then(() => {
       wxUtil.showToast('申请已发出', 'success')
       this.loadCardInfo(accountId)
+      this.setData({
+        showModal: false,
+        message: '',
+      })
     }, err => {
-      wxUtil.showToast(err.errMsg || '操作失败')
-    })
-  },
-  handleAddWechat() {
-    const { wechat } = this.data.account
-    if (!wechat) {
-      wxUtil.showToast('暂未填写微信')
-      return
-    }
-    Util.promisify(wx.setClipboardData)({
-      data: wechat,
-    }).then(
-      () => {
-        wxUtil.showToast('复制微信号成功', 'success')
-      },
-      () => {
-        wxUtil.showToast('操作失败')
-      },
-    )
-  },
-  handleAddPhone() {
-    const { phone, name } = this.data.account
-    if (!phone) {
-      wxUtil.showToast('暂未填写电话')
-      return
-    }
-    wx.addPhoneContact({
-      firstName: name, //联系人姓名
-      mobilePhoneNumber: phone, //联系人手机号
+      wxUtil.showToast(err.errMsg || '操作失败', 'none')
     })
   },
   handleFavorite() {
@@ -142,8 +140,22 @@ Page({
       })
       app.setNotice('favorited', true)
       wxUtil.showToast('操作成功', 'success')
-    }, () => {
-      wxUtil.showToast('操作失败')
+    }, err => {
+      wxUtil.showToast(err.errMsg || '操作失败', 'none')
     })
   },
+  handleAddPhone() {
+    wx.addPhoneContact({
+      firstName: this.data.account.name,//联系人姓名
+      mobilePhoneNumber: this.data.account.phone,//联系人手机号
+    })
+  },
+  handleAddWechat() {
+    wx.setClipboardData({
+      data: this.data.account.wechat,
+      success: function () {
+        wxUtil.showToast('微信号已复制到剪贴板, 快去添加好友吧', 'none')
+      }
+    })
+  }
 })

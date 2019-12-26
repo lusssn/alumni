@@ -1,0 +1,16 @@
+{
+  "navigationBarTitleText": "校友圈",
+  "navigationBarBackgroundColor": "#3A82E6",
+  "navigationBarTextStyle": "white",
+  "backgroundColor": "#3A82E6",
+  "backgroundTextStyle": "light",
+  "enablePullDownRefresh": true,
+  "usingComponents": {
+    "Loading": "../../components/Loading/Loading",
+    "Nav": "../../components/Nav/Nav",
+    "Search": "../../components/Search/Search",
+    "Avatar": "../../components/Avatar/Avatar",
+    "Tag": "../../components/Tag/Tag",
+    "ListEmpty": "../../components/ListEmpty/ListEmpty"
+  }
+}

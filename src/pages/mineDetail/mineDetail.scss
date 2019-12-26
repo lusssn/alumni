@@ -1,0 +1,28 @@
+@import "../../scss/variables";
+
+.container {
+  padding-bottom: 64rpx;
+  .header {
+    height: 90rpx;
+  }
+}
+.main-info {
+  margin: -80rpx 32rpx 0;
+  .avatar {
+    width: 132rpx;
+    height: 132rpx;
+    border-radius: 50%;
+    background-color: $bg-color;
+  }
+}
+
+// reset
+.field {
+  font-size: 28rpx;
+  padding-left: 32rpx;
+}
+
+.experience-empty {
+  width: 189rpx;
+  height: 203rpx;
+}

@@ -1,0 +1,27 @@
+<import src="../../templates/activityList.wxml" />
+
+<view wx:if="{{isLoaded}}" class="h2 padding-lg">
+  <view class="title text-primary">主题</view>
+  <view class="padding-l-lg padding-r-lg padding-b-xl margin-b-xl">
+    <text>{{title}}</text>
+  </view>
+  <view class="title text-primary">通知内容</view>
+  <view class="padding-l-lg padding-r-lg padding-b-xl margin-b-xl">
+    <text>{{content}}</text>
+  </view>
+  <view class="title text-primary">活动详情</view>
+  <template
+    is="activityList"
+    data="{{ list: [activity], bindtap: 'handleToActivityDetail' }}"
+  />
+
+  <view class="title text-primary">活动发起人</view>
+  <BusinessCard
+    wx:if="{{creator.name}}"
+    data="{{creator}}"
+    data-id="{{creator.accountId}}"
+    bindtap="handleClickCard"
+  />
+  <Loading wx:else />
+</view>
+<Loading wx:else isFixed />

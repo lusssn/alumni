@@ -1,7 +1,0 @@
-{
-  "navigationBarTitleText": "消息通知",
-  "enablePullDownRefresh": true,
-  "usingComponents": {
-    "NoticeItem": "../../components/NoticeItem/NoticeItem"
-  }
-}

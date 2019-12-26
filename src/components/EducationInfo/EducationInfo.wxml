@@ -1,21 +1,9 @@
-<view class="card-block padding-t-sm padding-b-sm{{border ? ' border-b' : ''}}">
-  <view class="field">
-    <label class="field-label">学历：</label>
-    <view class="field-content">{{data.education}}</view>
-  </view>
-  <view class="field">
-    <label class="field-label">院系：</label>
-    <view class="text-strong">
-      <text class="flex flex-align-center">
-        <text>{{data.school}}</text>
-        <text wx:if="{{data.college}}">－{{data.college}}</text>
-      </text>
-    </view>
-  </view>
-  <view wx:if="{{data.startTime || data.endTime}}" class="field">
-    <label class="field-label">入学／毕业：</label>
-    <view class="field-content">
-      {{data.startTime}}／{{data.endTime}}
+<view class="{{border ? 'border-t' : ''}} education-item">
+  <view class="h3 text-title school">{{data.school}}</view>
+  <view class="flex-align-center education">
+    <view class="text-primary h3">{{data.education}}</view>
+    <view class="text-muted h5 time" wx:if="{{data.startTime || data.endTime}}">
+      {{data.startTime || '未填写'}}级,{{data.college}}
     </view>
   </view>
 </view>

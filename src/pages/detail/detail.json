@@ -3,9 +3,10 @@
   "navigationBarTextStyle": "white",
   "navigationBarBackgroundColor": "#3A82E6",
   "usingComponents": {
-    "BasicInfo": "../../components/BasicInfo/BasicInfo",
     "EducationInfo": "../../components/EducationInfo/EducationInfo",
     "WorkInfo": "../../components/WorkInfo/WorkInfo",
-    "Loading": "../../components/Loading/Loading"
+    "Loading": "../../components/Loading/Loading",
+    "InfoCard": "../../components/InfoCard/InfoCard",
+    "TabBox": "../../components/TabBox/TabBox"
   }
 }

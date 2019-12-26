@@ -1,0 +1,62 @@
+<view class="container">
+  <view class="card">
+    <view class="card-block">
+      <view class="flex-align-center padding-t-sm padding-b-sm">
+        <view class="flex-item">
+          <text class="flex-item h1 text-title">活动名称</text>
+          <view class="flex h5 padding-t-sm">
+            <view class="margin-r-sm">
+              <view class="iconfont icon-calendar margin-r-sm" />
+              <text>{{activity.expirationDateTime}}</text>
+            </view>
+            <view class="text-primary margin-r-sm">
+              <view class="iconfont icon-card margin-r-sm" />
+              <text>{{activity.enrolledNumber}}人报名</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="h3 title">成员详情</view>
+  <Loading wx:if="{{!memberList}}" />
+  <block wx:elif="{{memberList.length}}">
+    <view
+      wx:for="{{memberList}}"
+      wx:key="accountId"
+      data="{{item}}"
+      data-id="{{item.accountId}}"
+      bindtap="handleClickCard"
+      class="card tap"
+    >
+      <view class="card-block">
+        <view class="flex-align-center padding-t-lg padding-b-lg">
+          <Avatar src="{{item.avatar}}" size="96" />
+          <view class="flex-item padding-l-md">
+            <view class="h1 text-title">{{item.name}}</view>
+            <view wx:if="{{item.jobCompany}}" class="h3">
+              <text class="text-primary margin-r-sm">{{item.jobPosition}}</text>
+              <text class="text-title">{{item.jobCompany}}</text>
+            </view>
+            <view wx:if="{{item.educationCollege}}">
+              {{item.educationGrade}}，{{item.educationSchool}}，{{item.educationCollege}}
+            </view>
+          </view>
+          <!-- 暂时不做 -->
+          <view hidden class="icon-group">
+            <view class="iconfont icon-phone" />
+            <view class="iconfont icon-wechat" />
+          </view>
+        </view>
+      </view>
+    </view>
+  </block>
+  <ListEmpty wx:else description="活动暂无人参与" />
+
+  <view class="fix-bottom">
+    <button type="primary" bindtap="handleBatchNotice">
+      一键通知
+    </button>
+  </view>
+</view>

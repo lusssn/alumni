@@ -4,7 +4,7 @@ import * as Util from '../../utils/util'
 import wxUtil from '../../utils/wxUtil'
 import {
   GENDER_TYPE, DEGREE_TYPE,
-  BASIC_FIELD, EDUCATION_FIELD, WORK_FIELD,
+  BASIC_FIELD, EDUCATION_FIELD, WORK_FIELD, COLLEGE_TYPE
 } from '../../macros'
 
 const app = getApp()
@@ -14,13 +14,16 @@ Page({
     isLoaded: false,
     genderSelect: GENDER_TYPE,
     degreeSelect: DEGREE_TYPE,
+    collegeSelect: COLLEGE_TYPE,
     account: {},
-    education: {},
+    education: {
+      school: '东南大学'
+    },
     job: {},
     redirect: '', // 完善后跳转的路径
     options: '', // 完善后跳转的路径参数
   },
-  onLoad(option) {
+  onLoad(option) {    
     const { redirect = 'mine', options = '{}' } = option
     this.setData({
       redirect,
@@ -48,6 +51,10 @@ Page({
             education.education = R.findIndex(
               R.propEq('name', education.education || '本科'),
             )(DEGREE_TYPE)
+            // 处理学院
+            education.college = R.findIndex(
+              R.propEq('name', education.college || '其他'),
+            )(COLLEGE_TYPE)
 
             const job = jobs[0] || {}
             job.startTime = Util.getYear(job.startTime)
@@ -93,10 +100,22 @@ Page({
     })
   },
   handleInputChange(e) {
+
+    console.log(e.detail.value);
+    
     const { name } = e.currentTarget.dataset
     this.setData({
       [name]: e.detail.value,
     })
+  },
+  handlePhoneCheck (e) {
+    const phone = e.detail.value
+    if (phone.length !== 11 || !(/^[0-9]+$/.test(phone))) {
+      wxUtil.showToast('手机号码格式不正确, 请尝试重新输入', 'none')
+      this.setData({
+        'account.phone' : '',
+      })
+    }
   },
   handleSave() {
     let account = R.clone(this.data.account)
@@ -107,7 +126,9 @@ Page({
     // 处理学历
     const degree = DEGREE_TYPE[education.education] || {}
     education.education = degree.name
-
+    // 处理学院
+    const college = COLLEGE_TYPE[education.college] || {}
+    education.college = college.name
     // 必填项判断
     account = Util.checkParams(BASIC_FIELD, account)
     if (R.isEmpty(account)) return

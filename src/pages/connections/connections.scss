@@ -1,0 +1,32 @@
+@import "../../scss/variables";
+
+.header {
+  height: 50rpx;
+  margin-bottom: 60rpx;
+}
+
+search {
+  flex: 1;
+  margin: 42rpx 32rpx 0;
+}
+
+.capsule {
+  width: 136rpx;
+  margin-left: 0;
+  padding: 0;
+  font-size: 26rpx;
+  line-height: 50rpx;
+  color: $muted-color;
+  border-radius: 25rpx;
+  background-color: rgba($bg-color, .65);
+  &:not(:last-child) {
+    margin-right: 26rpx;
+  }
+  &.active {
+    color: white;
+    background-color: $theme-color;
+  }
+  &::after {
+    border: none;
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "navigationBarTitleText": "我的圈子",
+  "enablePullDownRefresh": true,
+  "navigationBarBackgroundColor": "#3A82E6",
+  "navigationBarTextStyle": "white",
+  "usingComponents": {
+    "Loading": "../../components/Loading/Loading",
+    "Avatar": "../../components/Avatar/Avatar",
+    "Tag": "../../components/Tag/Tag",
+    "ListEmpty": "../../components/ListEmpty/ListEmpty"
+  }
+}

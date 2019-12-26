@@ -1,0 +1,13 @@
+<template name="tmplList">
+  <Loading wx:if="{{!list}}" />
+  <block wx:elif="{{list.length}}">
+    <BusinessCard
+      wx:for="{{list}}"
+      wx:key="friendAccountId"
+      data="{{item}}"
+      data-id="{{item.friendAccountId || item.favoriteAccountId}}"
+      bindtap="handleClickCard"
+    />
+  </block>
+  <ListEmpty wx:else description="{{placeholder}}" />
+</template>

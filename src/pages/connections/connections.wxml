@@ -1,0 +1,26 @@
+<view wx:if="{{list}}">
+  <view class="header">
+    <Search
+      placeholder="海量校友资源，一键搜索找人"
+      alignType="center"
+      bindclick="handleClickSearch"
+      disabled
+    />
+  </view>
+
+  <view class="padding-l-lg padding-r-lg">
+    <view class="flex padding-t-sm padding-b-lg" bindtap="handleClickFilter">
+      <button class="capsule {{filter === 0 ? 'active' : ''}}" data-filter="{{0}}">同学院</button>
+      <button class="capsule {{filter === 1 ? 'active' : ''}}" data-filter="{{1}}">同城</button>
+      <button class="capsule {{filter === 2 ? 'active' : ''}}" data-filter="{{2}}">可能认识</button>
+    </view>
+    <BusinessCard
+      wx:for="{{list}}"
+      wx:key="accountId"
+      data="{{item}}"
+      data-id="{{item.accountId}}"
+      bindtap="handleClickCard"
+    />
+  </view>
+</view>
+<Loading wx:else isFixed />

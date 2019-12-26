@@ -1,0 +1,19 @@
+@import "../../scss/variables";
+
+.container {
+  padding: 32rpx 40rpx 98rpx;
+}
+.icon-group {
+  display: flex;
+  flex-direction: column;
+  font-size: 28rpx;
+  color: $theme-color;
+  & > view {
+    padding: 14rpx;
+    border: 1px solid rgba($main-color, .15);
+    border-radius: 50%;
+    & + view {
+      margin-top: 24rpx;
+    }
+  }
+}

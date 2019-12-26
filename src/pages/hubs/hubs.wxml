@@ -1,0 +1,30 @@
+<import src="../../templates/hubList.wxml" />
+<import src="../../templates/activityList.wxml" />
+
+<view class="header">
+  <Search
+    placeholder="海量校友资源，一键搜索找人"
+    alignType="center"
+    bindclick="handleClickSearch"
+    disabled
+  />
+</view>
+
+<view class="margin-l-lg margin-r-lg">
+  <Nav
+    class="padding-b-md"
+    data="{{NAV}}"
+    current="{{currentTab.id}}"
+    bindswitch="handleSwitch"
+  />
+  <template
+    wx:if="{{currentTab.key === 'Hubs'}}"
+    is="hubList"
+    data="{{ list: hubList, bindtap: 'handleToHubDetail' }}"
+  />
+  <template
+    wx:else
+    is="activityList"
+    data="{{ list: activityList, bindtap: 'handleToActivityDetail' }}"
+  />
+</view>

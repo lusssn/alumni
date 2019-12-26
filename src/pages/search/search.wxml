@@ -1,48 +1,31 @@
+<view class="header"></view>
 <view class="container">
-  <view class="card">
-    <view class="card-block padding-t-lg padding-b-lg">
-      <view class="search">
-        <icon type="search" size="16" color="#999999" />
-        <input
-          class="search-input h2"
-          bindconfirm="handleSearch"
-          focus="true"
-          confirm-type="search"
-        />
-        <text class="link h2 padding-l-lg" bindtap="handleGoBack">取消</text>
-      </view>
-    </view>
-  </view>
+  <Search
+    class="margin-l-lg margin-r-lg"
+    placeholder="海量校友资源，一键搜索找人"
+    bindconfirm="handleSearch"
+    focus
+  />
   <!-- 搜索结果 -->
-  <view class="card search-result">
-    <view hidden="{{!isSearched}}" class="card-block">
-      <view
-        wx:for="{{SEARCH_TYPE}}"
-        wx:key="key"
-        class="search-item flex-align-center border-b"
-        data-way="{{item.key}}"
-        bindtap="handleSearchDetail"
-      >
-        <text class="h1 text-strong flex-item">{{item.name}}</text>
-        <text class="h2 text-muted">{{result[item.key]}}个结果</text>
-        <icon class="icon-arrow-right margin-l-sm" />
-      </view>
+  <view hidden="{{!isSearched}}" class="search-result">
+    <view wx:for="{{SEARCH_TYPE}}" wx:key="key" class="search-item flex-align-center border-b" data-way="{{item.key}}" bindtap="handleSearchDetail">
+      <text class="h1 text-title flex-item">{{item.name}}</text>
+      <view class="search-result-capsule">{{result[item.key] || 0}}个结果</view>
     </view>
   </view>
   <!-- 搜索提示 -->
-  <view
-    hidden="{{isSearched}}"
-    class="h2 text-primary text-center"
-  >
+  <view hidden="{{isSearched}}" class="h3 text-primary text-center">
     <view class="ready-text">
       <text>姓名</text>
       <text>学院</text>
-      <text>城市</text>
+      <text>公司</text>
+      <text>校友圈</text>
     </view>
     <view class="ready-text">
-      <text>公司</text>
+      <text decode>&emsp;学校</text>
+      <text>城市</text>
       <text>职位</text>
-      <text>自述</text>
+      <text>校友活动</text>
     </view>
   </view>
 </view>

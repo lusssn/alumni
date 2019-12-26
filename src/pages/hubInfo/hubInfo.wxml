@@ -1,0 +1,19 @@
+<view wx:if="{{isLoaded}}" class="h2 padding-lg">
+  <view class="title text-primary">简介</view>
+  <view class="padding-l-lg padding-r-lg padding-b-xl margin-b-xl">
+    <text>{{hubInfo.alumniCircleDesc || '暂无描述'}}</text>
+  </view>
+  <view class="title text-primary">公告栏</view>
+  <view class="padding-l-lg padding-r-lg padding-b-xl margin-b-xl">
+    <text>{{hubInfo.alumniCircleAnnouncement || '暂无公告'}}</text>
+  </view>
+  <view class="title text-primary">管理人</view>
+  <BusinessCard
+    wx:if="{{creator.name}}"
+    data="{{creator}}"
+    data-id="{{creator.accountId}}"
+    bindtap="handleClickCard"
+  />
+  <Loading wx:else />
+</view>
+<Loading wx:else isFixed />

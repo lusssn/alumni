@@ -1,11 +1,51 @@
 @import "../../scss/variables";
+@import "../../scss/border";
 
-.avatar {
-  width: 132rpx;
-  height: 132rpx;
-  border-radius: 50%;
-  background-color: $bg-color;
+.header {
+  height: 90rpx;
 }
+
+.share {
+  display: flex;
+  padding: 16rpx 0;
+  align-items: center;
+  color: $theme-color;
+  &:active {
+    opacity: .7;
+  }
+}
+
+.nav-list {
+  margin: 34rpx 32rpx;
+  padding: 0 40rpx;
+
+  .nav-item {
+    display: flex;
+    height: 122rpx;
+    align-items: center;
+    font-size: 28rpx;
+    color: black;
+
+    & + .nav-item {
+      @include borderPoint5("t");
+    }
+
+    & > .iconfont {
+      margin-right: 24rpx;
+      font-size: 40rpx;
+      color: $theme-color;
+    }
+
+    .red-number {
+      width: 34rpx;
+      height: 34rpx;
+      color: white;
+      border-radius: 50%;
+      background-color: #FD3F3F;
+    }
+  }
+}
+
 .experience-empty {
   width: 189rpx;
   height: 203rpx;

@@ -1,0 +1,29 @@
+@import "../../scss/variables";
+
+.container {
+  padding-bottom: 132rpx;
+}
+.member-wrap {
+  display: flex;
+  padding: 16rpx 16rpx 16rpx 32rpx;
+  align-items: center;
+  avatar + avatar {
+    margin-left: 10rpx;
+  }
+}
+.activity-btn {
+  position: fixed;
+  right: 0;
+  bottom: 130rpx;
+  padding: 8rpx 6rpx 8rpx 36rpx;
+  font-size: 20rpx;
+  text-align: center;
+  letter-spacing: 1px;
+  color: white;
+  border-radius: 50rpx 0 0 50rpx;
+  background-color: $theme-color;
+  box-shadow: 0 6rpx 18rpx 0 rgba($shadow-color, .25);
+  & > .iconfont {
+    font-size: 50rpx;
+  }
+}

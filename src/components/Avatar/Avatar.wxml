@@ -1,0 +1,6 @@
+<image
+  class="avatar"
+  mode="aspectFill"
+  src="{{src || defaultSrc}}"
+  style="width: {{size}}rpx;height: {{size}}rpx;"
+/>

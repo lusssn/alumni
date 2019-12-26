@@ -1,0 +1,19 @@
+@import "../../scss/variables";
+
+.swiper-tab{
+  width: 100%;
+  text-align: center;
+  height: 72rpx;
+  line-height: 72rpx;
+  justify-content: space-around;
+  .swiper-tab-item{
+    border-bottom: 2px solid rgba($color: #ffffff, $alpha: 0);
+  }
+  .active{
+    border-bottom-color: $theme-color;
+  }
+}
+
+swiper{
+  text-align: center;
+}

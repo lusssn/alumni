@@ -1,0 +1,10 @@
+<view class="flex-align-center swiper-tab border-b">
+  <view wx:for="{{tabs}}"  wx:key="{{index}}" class="h3 text-title swiper-tab-item {{currentTab==index?'active':''}}"  data-current="{{index}}" bindtap="handleClickTab">
+    {{item.label}}
+  </view>
+</view>
+<swiper current="{{currentTab}}" duration="300" bindchange="handleSwiperTab">
+  <swiper-item wx:for="{{tabs}}"  wx:key="{{index}}">
+    <slot name="slot-{{index}}"></slot>
+  </swiper-item>
+</swiper>

@@ -1,0 +1,12 @@
+<view class="search-wrap {{alignType === 'center' ? 'search-center' : ''}}">
+  <icon type="search" size="19" color="#CACACA" />
+  <input
+    class="search-header-input"
+    placeholder="{{placeholder}}"
+    placeholder-class="search-placeholder"
+    bindconfirm="handleSearch"
+    bindtap="handleTap"
+    confirm-type="search"
+    focus="{{focus}}"
+  />
+</view>

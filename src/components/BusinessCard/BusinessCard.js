@@ -7,6 +7,4 @@ Component({
       type: Object, value: {},
     },
   },
-  data: {},
-  lifetimes: {},
 })

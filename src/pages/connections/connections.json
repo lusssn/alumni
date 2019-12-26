@@ -1,0 +1,13 @@
+{
+  "navigationBarTitleText": "人脉",
+  "navigationBarTextStyle": "white",
+  "navigationBarBackgroundColor": "#3A82E6",
+  "backgroundColor": "#3A82E6",
+  "backgroundTextStyle": "light",
+  "enablePullDownRefresh": true,
+  "usingComponents": {
+    "Loading": "../../components/Loading/Loading",
+    "BusinessCard": "../../components/BusinessCard/BusinessCard",
+    "Search": "../../components/Search/Search"
+  }
+}

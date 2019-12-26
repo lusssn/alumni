@@ -1,6 +1,10 @@
 {
   "navigationBarTitleText": "搜索结果",
   "usingComponents": {
-    "BusinessCard": "../../components/BusinessCard/BusinessCard"
+    "Loading": "../../components/Loading/Loading",
+    "Avatar": "../../components/Avatar/Avatar",
+    "Tag": "../../components/Tag/Tag",
+    "BusinessCard": "../../components/BusinessCard/BusinessCard",
+    "ListEmpty": "../../components/ListEmpty/ListEmpty"
   }
 }

@@ -3,7 +3,7 @@
 page {
   font-size: 24rpx;
   color: $main-color;
-  background-color: $ground-color;
+  background-color: white;
 }
 
 text {
@@ -14,6 +14,8 @@ button {
   color: $muted-color;
   border-radius: 0;
   background-color: white;
+  font-size: 28rpx;
+  line-height: 98rpx;
 
   &::after {
     border-color: rgba(black, .08);

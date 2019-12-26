@@ -1,0 +1,12 @@
+{
+  "navigationBarTitleText": "圈子成员",
+  "navigationBarTextStyle": "white",
+  "navigationBarBackgroundColor": "#3A82E6",
+  "enablePullDownRefresh": true,
+  "usingComponents": {
+    "Loading": "../../components/Loading/Loading",
+    "Search": "../../components/Search/Search",
+    "Avatar": "../../components/Avatar/Avatar",
+    "ListEmpty": "../../components/ListEmpty/ListEmpty"
+  }
+}

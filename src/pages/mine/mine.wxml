@@ -1,89 +1,29 @@
-<view wx:if="{{isLoaded}}" class="container padding-t-md">
-  <view wx:if="{{account.name}}" class="card">
-    <view class="card-block">
-      <view class="flex-align-center padding-t-lg padding-b-lg border-b">
-        <image class="avatar" mode="aspectFill" src="{{account.avatar || '../../images/avatar_default.jpeg'}}" />
-        <view class="flex-item padding-l-lg">
-          <view class="h1 text-strong padding-b-md">
-            <text>{{account.name}}</text>
-          </view>
-          <view>ID: {{account.accountId}}</view>
-        </view>
-        <!--        <icon class="icon-ercode" />-->
-        <!--        <icon class="icon-arrow-right margin-l-sm" />-->
-      </view>
+<view wx:if="{{isLoaded}}" class="container">
+  <view class="header" />
+  <InfoCard data="{{[account,educations,jobs]}}" handleEdit="handleEdit"  bind:handleEdit="handleEdit">
+    <view class="border-t share" bindtap="handleShare">
+      <view class="iconfont icon-link margin-r-xs" />
+      <text class="flex-item h5">分享名片给好友</text>
+      <view class="iconfont icon-arrow-right text-muted" />
     </view>
-  </view>
-  <view wx:if="{{!account.phone}}" class="card" bindtap="handleRegister">
-    <view class="card-block flex-align-center padding-t-lg padding-b-lg">
-      <view class="flex-item h1 text-strong">
-        完善信息，结识优秀人脉
-      </view>
-      <icon class="icon-arrow-right margin-l-sm" />
+  </InfoCard>
+  <view class="card nav-list">
+    <view class="nav-item" bindtap="handleToCardcase">
+      <view class="iconfont icon-card" />
+      <text>我的名片夹</text>
     </view>
-  </view>
-  <view wx:else>
-    <view class="card">
-      <view class="card-header">
-        <view class="card-title">基本信息</view>
-        <view class="link" bindtap="handleBasicEdit">
-          <icon class="icon-edit margin-r-sm" />
-          <text class="h3">编辑</text>
-        </view>
-      </view>
-      <BasicInfo data="{{account}}" />
+    <view class="nav-item" bindtap="handleToMyHubs">
+      <view class="iconfont icon-round" />
+      <text>我的校友圈</text>
     </view>
-    <view class="card">
-      <view class="card-header">
-        <view class="card-title">教育经历</view>
-        <view class="link" bindtap="handleEducationAdd">
-          <icon class="icon-plus margin-r-sm" />
-          <text class="h3">添加</text>
-        </view>
-      </view>
-      <block wx:if="{{educations.length}}">
-        <EducationInfo
-          wx:for="{{educations}}"
-          wx:key="educationId"
-          data="{{item}}"
-          border="{{index < educations.length - 1 }}"
-          data-id="{{item.educationId}}"
-          bindtap="handleEducationAdd"
-        />
-      </block>
-      <view wx:else class="card-block padding-b-xl text-center">
-        <image
-          class="experience-empty margin-t-xl margin-b-xl"
-          src="../../images/experience-empty.png"
-        />
-        <view class="h4 text-primary">暂无教育经历，快去添加吧</view>
-      </view>
+    <view class="nav-item" bindtap="handleToActivity">
+      <view class="iconfont icon-hand" />
+      <text>我的活动</text>
     </view>
-    <view class="card">
-      <view class="card-header">
-        <view class="card-title">工作经历</view>
-        <view class="link" bindtap="handleWorkAdd">
-          <icon class="icon-plus margin-r-sm" />
-          <text class="h3">添加</text>
-        </view>
-      </view>
-      <block wx:if="{{jobs.length}}">
-        <WorkInfo
-          wx:for="{{jobs}}"
-          wx:key="jobId"
-          data="{{item}}"
-          border="{{index < jobs.length - 1 }}"
-          data-id="{{item.jobId}}"
-          bindtap="handleWorkAdd"
-        />
-      </block>
-      <view wx:else class="card-block padding-b-xl text-center">
-        <image
-          class="experience-empty margin-t-xl margin-b-xl"
-          src="../../images/experience-empty.png"
-        />
-        <view class="h4 text-primary">暂无工作经历，快去添加吧</view>
-      </view>
+    <view class="nav-item" bindtap="handleToMsgs">
+      <view class="iconfont icon-message" />
+      <text class="flex-item">我的消息</text>
+      <view wx:if="{{noticeCount > 0}}" class="red-number text-center h6">{{noticeCount}}</view>
     </view>
   </view>
 </view>

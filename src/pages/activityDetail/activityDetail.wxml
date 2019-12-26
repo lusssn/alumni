@@ -1,0 +1,40 @@
+<view class="padding-t-lg padding-l-xl padding-r-xl">
+  <view class="card">
+    <view class="card-header activity-title">
+      {{activity.activityName}}
+    </view>
+    <view class="card-block">
+      <view class="flex-align-center padding-t-sm padding-b-sm">
+        <image
+          class="avatar"
+          mode="aspectFill"
+          src="{{activity.starterAvatar || '../../images/avatar_default.jpeg'}}"
+        />
+        <view class="flex-item padding-l-sm h6 text-title">
+          <view>
+            <text>{{activity.starterName}}</text>
+            <text>·{{activity.starterEducationGrade}}</text>
+            <text>-{{activity.starterEducationSchool}}</text>
+            <text>-{{activity.starterEducationCollege}}</text>
+          </view>
+          <view>
+            发布时间：{{activity.activityCreatedDateTime}}
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="h3 title">活动介绍</view>
+
+  <view class="card">
+    <view class="padding-lg h3 text-title">
+      {{activity.activityDesc}}
+    </view>
+  </view>
+  <view class="fix-bottom">
+    <button type="primary" bindtap="handleJoinActivity">
+      {{activity.hasEnrolled ? '退出活动' : '报名'}}
+    </button>
+  </view>
+</view>

@@ -1,0 +1,27 @@
+<!-- 引入此模板时同时需要引入组件：Loading，Avatar，Tag, ListEmpty -->
+<template name="hubList">
+  <Loading wx:if="{{!list}}" />
+  <block wx:elif="{{list.length}}">
+    <view
+      wx:for="{{list}}"
+      wx:key="alumniCircleId"
+      class="card tap"
+      data-id="{{item.alumniCircleId}}"
+      bindtap="{{bindtap}}"
+    >
+      <view class="card-block">
+        <view class="flex-align-center padding-t-lg padding-b-lg">
+          <Avatar size="96" src="{{item.avatar}}" />
+          <view class="flex-item padding-l-md">
+            <text class="h1 text-title margin-r-sm">{{item.alumniCircleName}}</text>
+            <Tag wx:if="{{item.authorizationStatus}}" icon="shield" text="官方认证" active />
+            <Tag wx:if="{{item.alumniCircleType === 1}}" text="校友圈" />
+            <Tag wx:if="{{item.alumniCircleType === 2}}" text="群组" />
+            <view class="margin-t-xs text-muted">{{item.alumniCircleDesc}}</view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </block>
+  <ListEmpty wx:else description="{{placeholder || '暂无校友圈'}}" />
+</template>

@@ -10,17 +10,14 @@ Page({
     account: {},
     educations: [],
     jobs: [],
+    noticeCount: 0,
   },
   onLoad() {
     this.loadAllInfo()
   },
   onShow() {
     app.checkNotice('edited', true, this.loadAllInfo)
-  },
-  onPullDownRefresh() {
-    this.loadAllInfo().then(() => {
-      wx.stopPullDownRefresh()
-    })
+    this.loadNoticeList()
   },
   onShareAppMessage() {
     const { account, educations } = this.data
@@ -30,28 +27,30 @@ Page({
       path: `/pages/detail/detail?id=${account.accountId}&isShare=1`,
     }
   },
-  handleBasicEdit() {
-    wxUtil.navigateTo('edit', { type: 'account' })
+  handleEdit() {
+    wxUtil.navigateTo('mineDetail')
   },
-  handleEducationAdd(e) {
-    const { id } = e.target.dataset
-    if (id) {
-      wxUtil.navigateTo('edit', {
-        type: 'education', id,
-      })
-      return
-    }
-    wxUtil.navigateTo('edit', { type: 'education' })
+  handleToCardcase() {
+    wxUtil.navigateTo('cardcase')
   },
-  handleWorkAdd(e) {
-    const { id } = e.target.dataset
-    if (id) {
-      wxUtil.navigateTo('edit', {
-        type: 'job', id,
+  handleToMyHubs() {
+    wxUtil.navigateTo('myHubs')
+  },
+  handleToActivity() {
+    wxUtil.navigateTo('activity')
+  },
+  handleToMsgs() {
+    wxUtil.navigateTo('noticeList')
+  },
+  loadNoticeList() {
+    return Api.getNoticeList({
+      pageIndex: 1,
+      pageSize: 10,
+    }).then(data => {
+      this.setData({
+        noticeCount: data.count,
       })
-      return
-    }
-    wxUtil.navigateTo('edit', { type: 'job' })
+    }, () => { })
   },
   loadAllInfo() {
     return wxUtil.login().then(
@@ -64,14 +63,8 @@ Page({
           accountId: app.global.accountId,
         }).then(
           data => {
-            // 处理时间
-            const { birthday } = data.account
-            data.account.birthday = Util.getYearMonthDate(birthday)
+            this.loadNoticeList()
             for (let item of data.educations) {
-              item.startTime = Util.getYear(item.startTime)
-              item.endTime = Util.getYear(item.endTime)
-            }
-            for (let item of data.jobs) {
               item.startTime = Util.getYear(item.startTime)
               item.endTime = Util.getYear(item.endTime)
             }
@@ -80,12 +73,12 @@ Page({
               ...data,
             })
           },
-          () => {},
+          () => { },
         )
       },
     )
   },
-  handleRegister() {
-    Util.isRegistered()
-  }
+  handleShare() {
+    wxUtil.showToast('点击右上角转发')
+  },
 })

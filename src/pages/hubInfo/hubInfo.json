@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "圈子详情",
+  "navigationBarBackgroundColor": "#3A82E6",
+  "navigationBarTextStyle": "white",
+  "usingComponents": {
+    "Loading": "../../components/Loading/Loading",
+    "BusinessCard": "../../components/BusinessCard/BusinessCard"
+  }
+}

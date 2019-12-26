@@ -1,0 +1,91 @@
+<view class="container h3">
+  <view class="title">活动总览</view>
+  <view class="card padding-md">
+    <view class="input-item">
+      <text>活动主题</text>
+      <input
+        class="flex-item"
+        placeholder-class="text-muted"
+        placeholder="填写本次活动主题"
+        value="{{info.activityName}}"
+        data-name="info.activityName"
+        bindinput="handleInputChange"
+      />
+    </view>
+    <view class="input-item">
+      <text>活动时间</text>
+      <view class="flex-item">
+        <picker
+          mode="date"
+          value="{{info.activityTime}}"
+          data-name="info.activityTime"
+          bindchange="handleInputChange"
+        >
+        <input
+          placeholder-class="text-muted"
+          placeholder="选择活动开始时间"
+          value="{{info.activityTime}}"
+          disabled
+        />
+        </picker>
+      </view>
+    </view>
+    <view class="input-item">
+      <text>报名截止时间</text>
+      <view class="flex-item">
+        <picker
+          mode="date"
+          value="{{info.expirationTime}}"
+          data-name="info.expirationTime"
+          bindchange="handleInputChange"
+        >
+          <input
+            placeholder-class="text-muted"
+            placeholder="选择报名结束时间"
+            value="{{info.expirationTime}}"
+            disabled
+          />
+        </picker>
+      </view>
+    </view>
+  </view>
+  <view class="title">活动详情</view>
+  <view class="card padding-sm">
+    <textarea
+      class="textarea"
+      placeholder-class="text-muted"
+      placeholder="请输入活动详情"
+      maxlength="500"
+      value="{{info.activityDesc}}"
+      data-name="info.activityDesc"
+      bindinput="handleInputChange"
+    />
+    <view class="text-muted text-right">500字</view>
+  </view>
+  <view class="title">添加图片（{{previewImages.length}}/{{MAX_IMAGE_AMOUNT}}）</view>
+  <view
+    wx:for="{{previewImages}}"
+    wx:key="*this"
+    class="image-item"
+  >
+    <image src="{{item}}" mode="aspectFill" />
+    <view
+      class="image-remove"
+      data-index="{{index}}"
+      bindtap="handleRemoveImage"
+    >
+      ×
+    </view>
+  </view>
+  <view
+    hidden="{{previewImages.length === MAX_IMAGE_AMOUNT}}"
+    class="image-item image-add"
+    bindtap="handleChooseImage"
+  />
+
+  <view class="fix-bottom">
+    <button type="primary" bindtap="handleSubmit">
+      发起活动
+    </button>
+  </view>
+</view>

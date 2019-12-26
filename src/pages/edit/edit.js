@@ -8,6 +8,7 @@ import {
   BASIC_FIELD,
   EDUCATION_FIELD,
   WORK_FIELD,
+  COLLEGE_TYPE
 } from '../../macros'
 
 const EDIT_TYPE = [
@@ -24,6 +25,7 @@ Page({
     id: null, // 若不为null，表示为编辑状态
     genderSelect: GENDER_TYPE,
     degreeSelect: DEGREE_TYPE,
+    collegeSelect: COLLEGE_TYPE,
     account: {},
     education: {
       education: R.findIndex(R.propEq('name', '本科'))(DEGREE_TYPE),
@@ -70,6 +72,15 @@ Page({
       [name]: e.detail.value,
     })
   },
+  handlePhoneCheck (e) {
+    const phone = e.detail.value
+    if (phone.length !== 11 || !(/^[0-9]+$/.test(phone))) {
+      wxUtil.showToast('手机号码格式不正确, 请尝试重新输入', 'none')
+      this.setData({
+        'account.phone' : '',
+      })
+    }
+  },
   handleRemove () {
     Util.promisify(wx.showModal)({
       title: '提示',
@@ -112,6 +123,11 @@ Page({
       // 处理degree
       const degree = DEGREE_TYPE[params.education] || {}
       params.education = degree.name
+      // 处理学院
+      if (params.school === '东南大学') {
+        const college = COLLEGE_TYPE[params.college] || {}
+        params.college = college.name
+      }
       // 必填项
       params = Util.checkParams(EDUCATION_FIELD, params)
       if (R.isEmpty(params)) return
@@ -157,6 +173,10 @@ Page({
       data.education = R.findIndex(
         R.propEq('name', data.education),
       )(DEGREE_TYPE)
+      // 处理学院
+      data.college = R.findIndex(
+        R.propEq('name', data.college || '其他'),
+      )(COLLEGE_TYPE)
       this.setData({
         education: data,
       })

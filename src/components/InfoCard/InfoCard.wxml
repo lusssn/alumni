@@ -1,0 +1,36 @@
+<view class="card info-card">
+  <image class="avatar" mode="aspectFill" src="{{data[0].avatar || '../../images/avatar_default.jpeg'}}" bindtap="handleClickAvatar"/>
+  <view class="text-center">
+    <text class="h3 text-title">{{data[0].name}}</text>
+    <view wx:if="{{handleEdit}}" class="iconfont icon-edit text-primary margin-l-md" bindtap="handleEdit" />
+  </view>
+  <view class="text-center text-primary">
+    {{data[1][0].startTime%100}}级-{{data[1][0].school}}-{{data[1][0].college}}-{{data[1][0].education}}
+  </view>
+  <view class="flex-align-center info-list">
+    <view wx:if="{{data[2][0].company}}" class="field">
+      <label>公司：</label>
+      <view class="field-content">{{data[2][0].company}}</view>
+    </view>
+    <view wx:if="{{data[2][0].position}}" class="field">
+      <label>职位：</label>
+      <text class="field-content">{{data[2][0].position}}</text>
+    </view>
+    <view wx:if="{{data[0].email}}" class="field">
+      <label>邮箱：</label>
+      <text class="text-title">{{data[0].email}}</text>
+    </view>
+    <block wx:if="{{allField}}">
+      <view wx:if="{{data[0].phone}}" class="field">
+        <label>手机：</label>
+        <text class="text-title">{{data[0].phone}}</text>
+      </view>
+      <view wx:if="{{data[0].wechat}}" class="field">
+        <label>微信：</label>
+        <text class="text-title">{{data[0].wechat}}</text>
+      </view>
+    </block>
+    <view wx:else class="text-primary">手机、微信交换名片后可见</view>
+  </view>
+  <slot></slot>
+</view>

@@ -1,0 +1,22 @@
+<import src="../../templates/activityList.wxml" />
+
+<view class="padding-b-md">
+  <view class="margin-l-lg margin-r-lg">
+    <Nav
+      class="padding-b-md"
+      data="{{NAV}}"
+      current="{{currentTab.id}}"
+      bindswitch="handleSwitch"
+    />
+    <template
+      wx:if="{{currentTab.key === 'Enrolled'}}"
+      is="activityList"
+      data="{{ list: enrolledList, placeholder: '还没有参加活动，去参加一些吧', bindtap: 'handleToActivityDetail' }}"
+    />
+    <template
+      wx:else
+      is="activityList"
+      data="{{ list: startedList, placeholder: '还没有发起的活动', bindtap: 'handleToMyActivity' }}"
+    />
+  </view>
+</view>

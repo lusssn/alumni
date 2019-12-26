@@ -1,8 +1,0 @@
-{
-  "navigationBarTitleText": "朋友",
-  "enablePullDownRefresh": true,
-  "usingComponents": {
-    "Loading": "../../components/Loading/Loading",
-    "NoticeItem": "../../components/NoticeItem/NoticeItem"
-  }
-}

@@ -1,0 +1,43 @@
+<import src="../../templates/activityList.wxml" />
+
+<view class="margin-l-lg margin-r-lg padding-t-md container">
+  <!-- 圈子信息 -->
+  <view class="card padding-l-xs padding-r-xs">
+    <view class="flex-align-center padding-md">
+      <Avatar size="96" src="{{hubInfo.avatar}}" />
+      <view class="flex-item padding-l-md">
+        <view class="h1 text-title padding-b-xs">{{hubInfo.alumniCircleName}}</view>
+        <view class="h5 flex-align-center">
+          <view wx:if="{{hubInfo.authorizationStatus}}" class="margin-r-lg">
+            <view class="iconfont icon-shield text-primary" />
+            <text class="padding-l-xs text-primary">官方认证</text>
+          </view>
+        </view>
+      </view>
+      <button size="mini" type="primary" plain bindtap="handleToHubInfo">详情</button>
+    </view>
+    <view class="member-wrap border-t tap" bindtap="handleToHubMembers">
+      <text class="flex-item h3 text-title">圈子成员</text>
+      <Avatar wx:for="{{memberList}}" wx:key="accountId" size="48" src="{{item.avatar}}" />
+      <text class="h5 text-muted margin-l-sm margin-r-sm">全部</text>
+      <view class="iconfont icon-arrow-right text-muted" />
+    </view>
+  </view>
+  <!-- 圈子活动列表 -->
+  <view class="h3 title">圈内活动</view>
+  <template
+    is="activityList"
+    data="{{ list: activityList, bindtap: 'handleToActivityDetail' }}"
+  />
+  <!-- 发起活动 button -->
+  <view wx:if="{{isJoined}}" class="activity-btn tap" bindtap="handleToCreateActivity">
+    <view class="iconfont icon-bugle" />
+    <view>发起活动</view>
+  </view>
+  <!-- 底部 button -->
+  <view class="fix-bottom">
+    <button wx:if="{{isCreator}}" type="primary" bindtap="handleToHubCreate">管理</button>
+    <button wx:elif="{{isJoined}}" type="primary"  bindtap="handleExitHub">退出校友圈</button>
+    <button wx:else type="primary" bindtap="handleJoinHub">加入校友圈</button>
+  </view>
+</view>

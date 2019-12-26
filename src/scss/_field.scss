@@ -5,6 +5,9 @@
   padding: 20rpx 0;
   align-items: center;
   font-size: 30rpx;
+  & > label {
+    color: $muted-color;
+  }
   &-label {
     width: 224rpx;
     color: $muted-color;

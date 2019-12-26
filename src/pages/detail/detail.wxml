@@ -1,98 +1,65 @@
 <view wx:if="{{status}}" class="container">
-  <view class="header margin-b-md">
-    <image class="avatar" mode="aspectFill" src="{{account.avatar || '../../images/avatar_default.jpeg'}}" />
-    <view class="flex-item padding-l-lg">
-      <view class="h1 text-bold">
-        <text class="margin-r-sm">{{account.name}}</text>
-        <text wx:if="{{account.gender === 'Female'}}" class="text-error">♀</text>
-        <text wx:else class="text-primary">♂</text>
+  <view class="header" />
+  <InfoCard data="{{[account,educations,jobs]}}" allField="{{status === 'FRIEND'}}" />
+  <view class="padding-l-lg padding-r-lg padding-t-md">
+    <view class="h1 title">基本信息</view>
+    <view class="base-card card">
+      <view wx:if="{{account.birthday}}" class="field">
+        <label class="field-label text-muted">生日：</label>
+        <view class="field-content text-muted">{{account.birthday}}</view>
       </view>
-      <view>ID: {{account.accountId}}</view>
-      <view wx:if="{{account.selfDesc}}">{{account.selfDesc}}</view>
+      <view wx:if="{{account.selfDesc}}" class="field">
+        <label class="field-label text-muted">自我描述：</label>
+        <view class="field-content text-muted">{{account.selfDesc}}</view>
+      </view>
     </view>
-    <view class="h1 self-top">
-      <icon class="icon-location" />
-      <text>{{account.city}}</text>
-    </view>
-  </view>
-
-  <view class="card">
-    <view class="card-header">
-      <view class="card-title">基本信息</view>
-    </view>
-    <BasicInfo data="{{account}}" />
-  </view>
-
-  <view class="card">
-    <view class="card-header">
-      <view class="card-title">教育经历</view>
-    </view>
-    <block wx:if="{{educations.length}}">
-      <EducationInfo
-        wx:for="{{educations}}"
-        wx:key="educationId"
-        data="{{item}}"
-        border="{{index < educations.length - 1 }}"
-      />
-    </block>
-    <view wx:else class="card-block padding-b-xl text-center">
-      <image
-        class="experience-empty margin-t-xl margin-b-xl"
-        src="../../images/experience-empty.png"
-      />
-      <view class="h4 text-primary">暂无教育经历</view>
+    <view class="h1 title">校友档案</view>
+    <view class="card">
+      <TabBox tabs="{{[{label:'工作经历'},{label:'教育经历'}]}}">
+        <view slot="slot-0" class="experience">
+          <WorkInfo wx:for="{{jobs}}" wx:key="{{index}}" data="{{item}}" border="{{index>0}}" />
+        </view>
+        <view slot="slot-1" class="experience">
+          <EducationInfo wx:for="{{educations}}" wx:key="{{index}}" data="{{item}}" border="{{index>0}}" />
+        </view>
+      </TabBox>
     </view>
   </view>
 
-  <view class="card">
-    <view class="card-header">
-      <view class="card-title">工作经历</view>
-    </view>
-    <block wx:if="{{jobs.length}}">
-      <WorkInfo
-        wx:for="{{jobs}}"
-        wx:key="jobId"
-        data="{{item}}"
-        border="{{index < jobs.length - 1 }}"
-      />
-    </block>
-    <view wx:else class="card-block padding-b-xl text-center">
-      <image
-        class="experience-empty margin-t-xl margin-b-xl"
-        src="../../images/experience-empty.png"
-      />
-      <view class="h4 text-primary">暂无工作经历</view>
-    </view>
-  </view>
-
-  <view class="fix-bottom flex">
-    <button class="flex-item" bindtap="handleFavorite">
-      {{favorite ? '取消收藏' : '收藏名片'}}
-    </button>
+  <view wx:if="{{!isMine}}" class="fix-bottom flex">
+    <button class="flex-item" bindtap="handleFavorite">{{favorite ? '取消收藏' : '收藏名片'}}</button>
     <block wx:if="{{status === 'YES_OR_NO'}}">
       <button class="flex-item" bindtap="handleRefuse">忽略</button>
       <button class="flex-item" type="primary" bindtap="handleAccept">同意</button>
     </block>
-    <button
-      wx:elif="{{status === 'STRANGER'}}"
-      class="flex-item"
-      type="primary"
-      bindtap="handleApplyExchange"
-    >
-      交换名片
+    <button wx:elif="{{status === 'STRANGER'}}" class="flex-item" type="primary" bindtap="handleApplyExchange">
+      交换名片,认识一下
     </button>
     <block wx:elif="{{status === 'FRIEND'}}">
       <button class="flex-item" bindtap="handleAddPhone">添加通讯录</button>
       <button class="flex-item" type="primary" bindtap="handleAddWechat">添加微信</button>
     </block>
-    <button
-      wx:elif="{{status === 'SEASSI'}}"
-      class="flex-item"
-      type="default"
-      disabled
-    >
+    <button wx:elif="{{status === 'SEASSI'}}" class="flex-item" type="default"  disabled>
       已申请交换名片
     </button>
+  </view>
+  <view wx:if="{{isMine}}" class="fix-bottom flex">
+    <button class="flex-item" type="primary" open-type="share">分享名片</button>
+  </view>
+  <view wx:if="{{showModal}}" class='mask'>
+    <view class='modal-content'>
+      <view class="flex tips">
+        <image src="../../images/mine-selected.png" />
+        <text class="h3 text-muted">给他留言，能够增加名片交换的通过率哦</text>
+      </view>
+      <view>
+        <input class="message-input h2" bindinput="handleMessageInput"/>
+      </view>
+      <view class='flex modal-btn-wrapper'>
+        <view class='cancel-btn h1' bindtap='handleApplyCancel'>取消</view>
+        <view class='confirm-btn h1' bindtap='handleApplySend'>确定</view>
+      </view>
+    </view>
   </view>
 </view>
 <Loading wx:else isFixed />
