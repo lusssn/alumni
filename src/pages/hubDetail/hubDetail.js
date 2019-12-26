@@ -71,6 +71,7 @@ Page({
       alumniCircleId: currentPage.options.hubId,
       pageIndex: 1,
       pageSize: 3,
+      query: '',
     }).then(data => {
       this.setData({ memberList: data.list })
     }, () => {})
