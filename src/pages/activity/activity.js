@@ -1,3 +1,4 @@
+// 我的活动列表页
 import wxUtil from '../../utils/wxUtil'
 import * as Api from '../api'
 import * as R from '../../utils/ramda/index'

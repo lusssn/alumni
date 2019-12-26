@@ -47,7 +47,6 @@ Page({
       const resultList = list.map(item => {
         return R.assoc('type', NOTICE_TYPE_MAP[item.type], item)
       })
-      console.log(resultList)
       this.setData({
         noticeList: pageNo === 1 ? resultList : this.data.noticeList.concat(resultList),
         noticePagination: {
@@ -57,24 +56,31 @@ Page({
       })
     }, () => { })
   },
-  // 点击消息列表，将未读更改为已读
+  // 点击消息列表
   handleClickNotice(e) {
-    const { id } = e.currentTarget.dataset;
-    Api.readNotice({ messageId: id, status: 1 }).then(res => {
-      const readedIndex = this.data.noticeList.findIndex(item => item.messageId === id)
-      let tempList = R.clone(this.data.noticeList)
-      tempList.splice(readedIndex, 1)
+    const { id } = e.currentTarget.dataset
+    const { noticeList } = this.data
+    const index = R.findIndex(R.propEq('messageId', id), noticeList)
+    const { title, content, type, fromUser } = noticeList[index]
+    if (type.key === 'Activity') {
+      wxUtil.navigateTo('activityInfo', {
+        activityId: fromUser,
+        title,
+        content,
+      })
+    } else {
+      wxUtil.navigateTo('detail', { id: fromUser })
+    }
+    // 将未读更改为已读
+    Api.readNotice({
+      messageId: id,
+      status: 1,
+    }).then(() => {
       this.setData({
-        noticeList: tempList
+        noticeList: R.remove(index, 1, noticeList),
       })
-    }).catch(() => {
-      wx.showToast({
-        title: "阅读消息失败，请稍后重试",
-        icon: "none"
-      })
+    }, err => {
+      wxUtil.showToast(err.errMsg, 'none')
     })
-    setTimeout(() => {
-      wx.hideToast()
-    }, 1500)
-  }
+  },
 })

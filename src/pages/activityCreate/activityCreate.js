@@ -1,7 +1,7 @@
 import * as Util from '../../utils/util'
 import wxUtil from '../../utils/wxUtil'
 import * as Api from '../api'
-import server from "../../server"
+import server from '../../server'
 import moment from '../../utils/moment.min'
 
 const app = getApp()
@@ -22,7 +22,7 @@ Page({
   onLoad({ hub }) {
     wxUtil.login().then(() => {
       this.setData({
-        hubId: hub
+        hubId: hub,
       })
     })
   },
@@ -43,7 +43,7 @@ Page({
       wxUtil.showToast('时间范围不正确')
       return
     }
-    let imgs = {};
+    let imgs = {}
     imageURLs.forEach((item, index) => {
       imgs[`img${index + 1}`] = item
     })
@@ -53,15 +53,13 @@ Page({
       activityDesc: info.activityDesc,
       activityTime: activityTime.format('YYYY-MM-DD HH:mm:ss'),
       expirationTime: expirationTime.format('YYYY-MM-DD HH:mm:ss'),
-      ...imgs
+      ...imgs,
     }).then(() => {
-        wx.showToast('活动发起成功')
-        setTimeout(() => {
-          wx.hideToast()
-          wxUtil.navigateTo('hubDetail', { hubId })
-        }, 500);
-      }
-    ).catch(err => {
+      wxUtil.showToast('活动发起成功', 'success')
+      setTimeout(() => {
+        wxUtil.navigateTo('hubDetail', { hubId })
+      }, 1500)
+    }, err => {
       wxUtil.showToast(err.errMsg, 'none')
     })
   },
@@ -96,7 +94,7 @@ Page({
       this.setData({
         previewImages: previewImages.concat(res.tempFilePaths),
       })
-      let _this = this;
+      let _this = this
       wx.uploadFile({
         url: `${server.host}/v2/uploadFile`,
         filePath: res.tempFilePaths[0],
@@ -105,14 +103,14 @@ Page({
           'X-Wx-Token': app.global.token,
         },
         success: function (res) {
-          const imageURLs = [..._this.data.imageURLs];
+          const imageURLs = [..._this.data.imageURLs]
           _this.setData({
-            imageURLs: [...imageURLs, JSON.parse(res.data).data]
+            imageURLs: [...imageURLs, JSON.parse(res.data).data],
           })
         },
         fail: function (err) {
           wxUtil.showToast(err.errMsg, 'none')
-        }
+        },
       })
     })
   },
