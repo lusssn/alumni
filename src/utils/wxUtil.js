@@ -121,7 +121,8 @@ const showToast = (title = '', icon = 'warning', others) =>
       title,
       icon,
       mask: true,
-      duration: 1500,
+      // 如果是无icon的提示，显示时间延长
+      duration: icon === 'none' ? 3000 : 1500,
       ...others,
     }
     if (icon === 'warning') {

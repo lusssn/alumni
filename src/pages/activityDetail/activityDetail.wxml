@@ -25,7 +25,7 @@
 
   <view class="card">
     <view class="padding-lg h3 text-title">
-      {{activity.activityDesc}}
+      <text>{{activity.activityDesc}}</text>
       <image
         wx:for="{{images}}"
         wx:key="*this"

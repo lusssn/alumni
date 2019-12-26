@@ -17,6 +17,7 @@
       <view class="flex-item">
         <picker
           mode="date"
+          start="{{dateStartLimit}}"
           value="{{info.activityTime}}"
           data-name="info.activityTime"
           bindchange="handleInputChange"
@@ -35,6 +36,7 @@
       <view class="flex-item">
         <picker
           mode="date"
+          start="{{dateStartLimit}}"
           value="{{info.expirationTime}}"
           data-name="info.expirationTime"
           bindchange="handleInputChange"
