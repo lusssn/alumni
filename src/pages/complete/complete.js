@@ -37,34 +37,16 @@ Page({
           accountId: app.global.accountId,
         }).then(
           data => {
-            const { account, educations, jobs } = data
+            const { account } = data
             account.gender = Number(account.gender)
             // 处理时间
             account.birthday = Util.getYearMonthDate(account.birthday)
             // 处理性别
             account.gender = R.findIndex(R.propEq('id', account.gender), GENDER_TYPE)
 
-            const education = educations[0] || {}
-            education.startTime = Util.getYear(education.startTime)
-            education.endTime = Util.getYear(education.endTime)
-            // 处理学历
-            education.education = R.findIndex(
-              R.propEq('name', education.education || '本科'),
-            )(DEGREE_TYPE)
-            // 处理学院
-            education.college = R.findIndex(
-              R.propEq('name', education.college || '其他'),
-            )(COLLEGE_TYPE)
-
-            const job = jobs[0] || {}
-            job.startTime = Util.getYear(job.startTime)
-            job.endTime = Util.getYear(job.endTime)
-
             this.setData({
               isLoaded: true,
               account,
-              education,
-              job,
             })
           },
           () => {},
@@ -100,9 +82,6 @@ Page({
     })
   },
   handleInputChange(e) {
-
-    console.log(e.detail.value);
-    
     const { name } = e.currentTarget.dataset
     this.setData({
       [name]: e.detail.value,
@@ -143,6 +122,11 @@ Page({
       if (R.isEmpty(job)) return
       job.accountId = app.global.accountId
     }
+    console.log({
+      account,
+      educations: [education],
+      jobs: account.type ? [job] : [],
+    })
     // 提交数据
     Api.completeCard({
       account,
