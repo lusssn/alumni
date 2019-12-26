@@ -24,7 +24,6 @@ function handleResponse(response) {
     }
     // 登录失效，重新登录
     if (status === Error.INVALID_TOKEN.errCode) {
-      console.log(4)
       return wxUtil.login({ isForceUpdate: true }).then(
         () => request(url, params, others),
         err => Promise.reject(err),
@@ -35,7 +34,6 @@ function handleResponse(response) {
       errCode: status,
     })
   }).catch(err => {
-    console.log(6)
     return Promise.reject(err)
   })
 }

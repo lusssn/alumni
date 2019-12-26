@@ -23,7 +23,7 @@ Page({
     redirect: '', // 完善后跳转的路径
     options: '', // 完善后跳转的路径参数
   },
-  onLoad(option) {    
+  onLoad(option) {
     const { redirect = 'mine', options = '{}' } = option
     this.setData({
       redirect,
@@ -100,9 +100,6 @@ Page({
     })
   },
   handleInputChange(e) {
-
-    console.log(e.detail.value);
-    
     const { name } = e.currentTarget.dataset
     this.setData({
       [name]: e.detail.value,
