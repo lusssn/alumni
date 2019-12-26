@@ -2,11 +2,12 @@ import wxUtil from '../../utils/wxUtil'
 import * as Api from '../api'
 import * as R from '../../utils/ramda/index'
 
-const app = getApp()
-
+const IMAGE_COUNT = 6
+const IMAGE_WIDTH = 606 // 单位rpx
 Page({
   data: {
     activity: {},
+    images: [],
   },
   onLoad({ activityId }) {
     if (!activityId) {
@@ -16,7 +17,17 @@ Page({
     // 加载详情数据
     wxUtil.login().then(() => {
       Api.getActivityDetail({ activityId }).then(
-        res => { this.setData({ activity: res }) },
+        res => {
+          const images = []
+          for (let i = 1; i <= IMAGE_COUNT; i++) {
+            const url = res[`img${i}`]
+            url && images.push({ url })
+          }
+          this.setData({
+            activity: res,
+            images,
+          })
+        },
         () => {},
       )
     })
@@ -26,8 +37,22 @@ Page({
     return {
       title: activity.activityName,
       desc: `邀你一起加入${activity.activityName}`,
-      path: `/pages/activityDetail/activityDetail?activityId=${activity.activityId}`
+      path: `/pages/activityDetail/activityDetail?activityId=${activity.activityId}`,
     }
+  },
+  handleLoadImage(event) {
+    const { images } = this.data
+    const { height, width } = event.detail
+    const { index } = event.target.dataset
+    this.setData({
+      images: R.assocPath(
+        [index],
+        R.mergeRight(images[index], {
+          height: height / width * IMAGE_WIDTH,
+        }),
+        images,
+      ),
+    })
   },
   handleJoinActivity() {
     const { activity } = this.data
