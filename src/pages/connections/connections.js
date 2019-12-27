@@ -8,7 +8,7 @@ const app = getApp()
 Page({
   data: {
     isLoaded: false,
-    filter: 0,
+    filter: 2,
     list: null,
     pagination: { current: 1, total: 0 },
   },
