@@ -84,7 +84,7 @@
   />
 
   <view class="fix-bottom">
-    <button type="primary" bindtap="handleSubmit">
+    <button type="primary" disabled="{{buttonLoading}}" bindtap="handleSubmit">
       发起活动
     </button>
   </view>

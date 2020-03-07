@@ -18,6 +18,7 @@ Page({
     },
     previewImages: [],
     imageURLs: [],
+    buttonLoading: false,
   },
   onLoad({ hub }) {
     wxUtil.login().then(() => {
@@ -26,40 +27,59 @@ Page({
       })
     })
   },
-  handleSubmit() {
-    const { info, imageURLs, hubId } = this.data
+  checkData() {
+    const { info } = this.data
     // 数据校验
     if (!info.activityName) {
       wxUtil.showToast('活动名称必填')
-      return
+      return false;
     }
     if (!info.activityTime || !info.expirationTime) {
       wxUtil.showToast('活动时间必填')
-      return
+      return false;
     }
     const activityTime = moment(info.activityTime)
     const expirationTime = moment(info.expirationTime)
-    if (expirationTime.isBefore(activityTime)) {
+    if (!expirationTime.isBefore(activityTime)) {
       wxUtil.showToast('时间范围不正确')
-      return
+      return false;
+    }
+    return true;
+  },
+  handleSubmit() {
+    const { info, imageURLs, hubId } = this.data
+    if(!this.checkData()){
+      return;
     }
     let imgs = {}
     imageURLs.forEach((item, index) => {
       imgs[`img${index + 1}`] = item
     })
+    this.setData({
+      buttonLoading: true,
+    })
+    wx.showToast({
+      title: '活动创建中',
+      icon: 'loading',
+    })
     Api.createActivity({
       alumniCircleId: hubId,
       activityName: info.activityName,
       activityDesc: info.activityDesc,
-      activityTime: activityTime.format('YYYY-MM-DD HH:mm:ss'),
-      expirationTime: expirationTime.format('YYYY-MM-DD HH:mm:ss'),
+      activityTime: moment(info.activityTime).format('YYYY-MM-DD HH:mm:ss'),
+      expirationTime: moment(info.expirationTime).format('YYYY-MM-DD HH:mm:ss'),
       ...imgs,
     }).then(() => {
+      wx.hideToast();
       wxUtil.showToast('活动发起成功', 'success')
       setTimeout(() => {
         wxUtil.navigateTo('hubDetail', { hubId })
       }, 1500)
     }, err => {
+      this.setData({
+        buttonLoading: false,
+      })
+      wx.hideToast();
       wxUtil.showToast(err.errMsg, 'none')
     })
   },

@@ -2,6 +2,10 @@
 
 .container {
   padding: 32rpx 32rpx 92rpx;
+  button[disabled]{
+    background-color: $bg-color !important;
+    color: $gray-base !important;
+  }
 }
 .input-item {
   display: flex;
