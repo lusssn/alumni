@@ -3,7 +3,7 @@
   <InfoCard data="{{[account,educations,jobs]}}" handleEdit="handleEdit"  bind:handleEdit="handleEdit">
     <view class="border-t share" bindtap="handleShare">
       <view class="iconfont icon-link margin-r-xs" />
-      <text class="flex-item h5">分享名片给好友</text>
+      <text class="flex-item h5">生成我的SEU校友卡</text>
       <view class="iconfont icon-arrow-right text-muted" />
     </view>
   </InfoCard>
