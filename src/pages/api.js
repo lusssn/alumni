@@ -19,6 +19,9 @@ export const createAccount = params => request.post('/v2/account/step1', params)
 // 完善-保存名片信息
 export const completeCard = params => request.put('/v2/account/step2', params)
 
+// 获取用户序号
+export const getAccountNumber = params => request.get('/v2/accountNumber', params)
+
 /************************************ 编辑、完善 *************************************/
 // 获取-基本信息
 export const getAccount = params =>

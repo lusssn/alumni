@@ -9,6 +9,7 @@ Page({
   data: {
     isShowAuthModal: false,
     genderSelect: GENDER_TYPE,
+    accountNumber: 0,
     basic: {},
     redirect: '', // 完善后跳转的路径
     options: '', // 完善后跳转的路径参数
@@ -20,6 +21,10 @@ Page({
       this.setData({
         isShowAuthModal: true,
       })
+    })
+    Api.getAccountNumber().then(res => {
+      console.log(res)
+      this.setData({accountNumber: res.data})
     })
   },
   handleCloseAuthModal() {

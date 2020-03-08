@@ -50,6 +50,15 @@
       </view>
     </view>
   </view>
+  <view class="accountNumber">
+    <view class="flex-center">
+      <image src="../../images/logo-SEU.jpg" alt="logo"/>
+      <span class="h2 text-title">东南人专属的公益校友服务平台</span>
+    </view>
+    <view wx:if="{{accountNumber > 0}}" class="margin-t-md text-center h3 text-title">
+      <span>欢迎您成为第 {{accountNumber}} 位入驻校友</span>
+    </view>
+  </view>
   <view class="fix-bottom flex">
     <button class="flex-item" bindtap="handleSkip">游客体验</button>
     <button class="flex-item" type="primary" bindtap="handleNext">下一步</button>
