@@ -1,6 +1,6 @@
 <view class="card info-card">
   <image class="avatar" mode="aspectFill" src="{{data[0].avatar || '../../images/avatar_default.jpeg'}}" bindtap="handleClickAvatar"/>
-  <view class="text-center">
+  <view wx:if="{{data[0].name}}" class="text-center">
     <text class="h3 text-title">{{data[0].name}}</text>
     <view wx:if="{{handleEdit}}" class="iconfont icon-edit text-primary margin-l-md" bindtap="handleEdit" />
   </view>

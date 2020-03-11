@@ -7,6 +7,18 @@
       <view class="iconfont icon-arrow-right text-muted" />
     </view>
   </InfoCard>
+  <view wx:if="{{!account.name}}" class="card margin-lg " bindtap="handleRegister">
+    <view class="card-block flex-align-center padding-t-lg padding-b-lg">
+      <view class="flex-item h1 text-title text-strong">前往注册，开启校友世界</view>
+      <view class="register-tip"></view>
+    </view>
+  </view>
+  <view wx:elif="{{!account.phone}}" class="card margin-lg " bindtap="handleRegister">
+    <view class="card-block flex-align-center padding-t-lg padding-b-lg">
+      <view class="flex-item h1 text-title text-strong">完善信息，结识优秀人脉</view>
+      <view class="register-tip"></view>
+    </view>
+  </view>
   <view class="card nav-list">
     <view class="nav-item" bindtap="handleToCardcase">
       <view class="iconfont icon-card" />

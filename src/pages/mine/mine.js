@@ -13,6 +13,7 @@ Page({
     noticeCount: 0,
   },
   onLoad() {
+    // if (!Util.isRegistered()) return
     this.loadAllInfo()
   },
   onShow() {
@@ -28,6 +29,7 @@ Page({
     }
   },
   handleEdit() {
+    if (!Util.isRegistered()) return
     wxUtil.navigateTo('mineDetail')
   },
   handleToCardcase() {
@@ -79,6 +81,17 @@ Page({
     )
   },
   handleShare() {
-    wxUtil.showToast('点击右上角转发')
+    const { account, educations } = this.data
+    if (!account.name) {
+      wxUtil.showToast("请先完成注册")
+      return;
+    }
+    if (educations.length === 0) {
+      wxUtil.showToast("请先完善个人信息")
+      return;
+    }
   },
+  handleRegister() {
+    Util.isRegistered()
+  }
 })

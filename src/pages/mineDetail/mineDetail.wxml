@@ -16,7 +16,7 @@
   <view wx:if="{{!account.phone}}" class="card margin-lg " bindtap="handleRegister">
     <view class="card-block flex-align-center padding-t-lg padding-b-lg">
       <view class="flex-item h1 text-strong">完善信息，结识优秀人脉</view>
-      <icon class="icon-arrow-right margin-l-sm" />
+      <icon class="iconfont icon-arrow-right margin-l-sm" />
     </view>
   </view>
   <view wx:else class="margin-b-lg">
