@@ -12,7 +12,7 @@ const qqMapKey = 'AWIBZ-EZJ34-AULUQ-DO546-YFS5T-6ZFNX'
 
 export default {
   // 请求的服务器域名
-  host: HOST.online,
+  host: HOST.dev,
   qqMapKey,
   qqMapHost,
 }
