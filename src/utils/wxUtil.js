@@ -132,10 +132,33 @@ const showToast = (title = '', icon = 'warning', others) =>
     }, reject)
   })
 
+/**
+ * 消息订阅
+ * @param title
+ * @param icon
+ * @param others
+ * @returns { Promise }
+ */
+const requestSubscribeMessage = () => {
+  wx.getSetting({
+    withSubscriptions: true,
+    success(res) {
+      if (!res.subscriptionsSetting
+        || !res.subscriptionsSetting.itemSettings
+        || !res.subscriptionsSetting.itemSettings['b4KhLPwI1zJIq5KmZ0IzCV_TD9nS3CS3MEzjf8i0McA']) {
+        wx.requestSubscribeMessage({
+          tmplIds: ['b4KhLPwI1zJIq5KmZ0IzCV_TD9nS3CS3MEzjf8i0McA'],
+        })
+      }
+    }
+  })
+}
+
 export default {
   login,
   getUserInfo,
   getLocation,
   navigateTo,
   showToast,
+  requestSubscribeMessage,
 }

@@ -13,7 +13,6 @@ Page({
     noticeCount: 0,
   },
   onLoad() {
-    // if (!Util.isRegistered()) return
     this.loadAllInfo()
   },
   onShow() {
@@ -45,7 +44,7 @@ Page({
     wxUtil.navigateTo('noticeList')
   },
   loadNoticeList() {
-    return Api.getNoticeList({
+    Api.getNoticeList({
       pageIndex: 1,
       pageSize: 10,
     }).then(data => {

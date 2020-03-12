@@ -1,5 +1,6 @@
 import * as R from '../../utils/ramda/index'
 import * as Api from '../api'
+import * as Util from '../../utils/util'
 import wxUtil from '../../utils/wxUtil'
 
 const app = getApp()
@@ -15,7 +16,7 @@ Page({
     currentTab: NAV_CONFIG[0],
     hubList: null,
     hubPagination: { current: 1, total: 0 },
-    activityList:[],
+    activityList: [],
     activityPagination: { current: 1, total: 0 },
   },
   onLoad() {
@@ -64,9 +65,9 @@ Page({
           total: count,
         },
       })
-    }, () => {})
+    }, () => { })
   },
-  loadActivitiesList(pageNo = 1){
+  loadActivitiesList(pageNo = 1) {
     // 加载活动列表数据
     return Api.getActivitiesRecommend({
       pageIndex: pageNo,
@@ -80,7 +81,7 @@ Page({
           total: count,
         },
       })
-    }, () => {})
+    }, () => { })
   },
   handleSwitch(event) {
     const { id } = event.detail

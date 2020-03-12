@@ -122,11 +122,6 @@ Page({
       if (R.isEmpty(job)) return
       job.accountId = app.global.accountId
     }
-    console.log({
-      account,
-      educations: [education],
-      jobs: account.type ? [job] : [],
-    })
     // 提交数据
     Api.completeCard({
       account,
@@ -135,6 +130,7 @@ Page({
     }).then(() => {
       app.setConfig({ registered: true })
       wxUtil.showToast('保存成功', 'success').then(() => {
+        wxUtil.requestSubscribeMessage();
         const { redirect, options } = this.data
         wxUtil.navigateTo(redirect, JSON.parse(options), true)
       })

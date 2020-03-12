@@ -17,7 +17,7 @@ Page({
     wxUtil.login().then(() => {
       Api.getActivityDetail({ activityId }).then(
         res => { this.setData({ activity: res }) },
-        () => {},
+        () => { },
       )
     })
   },
@@ -49,6 +49,10 @@ Page({
         this.setData({
           activity: R.assoc('hasEnrolled', !activity.hasEnrolled, activity),
         })
+        // 报名的时候检查有没有订阅，并申请推送活动消息
+        if (!activity.hasEnrolled) {
+          wxUtil.requestSubscribeMessage();
+        }
       },
       err => {
         wxUtil.showToast(err.errMsg, 'none')
