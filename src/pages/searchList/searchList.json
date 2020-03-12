@@ -1,5 +1,7 @@
 {
   "navigationBarTitleText": "搜索结果",
+  "navigationBarBackgroundColor": "#3A82E6",
+  "navigationBarTextStyle": "white",
   "usingComponents": {
     "Loading": "../../components/Loading/Loading",
     "Avatar": "../../components/Avatar/Avatar",
