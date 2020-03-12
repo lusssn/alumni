@@ -86,9 +86,10 @@ Page({
       return;
     }
     if (educations.length === 0) {
-      wxUtil.showToast("请先完善个人信息")
+      wxUtil.showToast("请先完善个人信息", null)
       return;
     }
+    wxUtil.showToast("点击右上角转发分享", 'none')
   },
   handleRegister() {
     Util.isRegistered()
