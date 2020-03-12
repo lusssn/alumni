@@ -2,11 +2,13 @@ import wxUtil from '../../utils/wxUtil'
 import * as Api from '../api'
 import * as R from '../../utils/ramda/index'
 
-const app = getApp()
+const IMAGE_COUNT = 6
+const IMAGE_WIDTH = 606 // 单位rpx
 
 Page({
   data: {
     activity: {},
+    images: [],
   },
   onLoad({ activityId }) {
     if (!activityId) {
@@ -16,8 +18,18 @@ Page({
     // 加载详情数据
     wxUtil.login().then(() => {
       Api.getActivityDetail({ activityId }).then(
-        res => { this.setData({ activity: res }) },
-        () => { },
+        res => {
+          const images = []
+          for (let i = 1; i <= IMAGE_COUNT; i++) {
+            const url = res[`img${i}`]
+            url && images.push({ url })
+          }
+          this.setData({
+            activity: res,
+            images,
+          })
+        },
+        () => {},
       )
     })
   },
@@ -58,6 +70,5 @@ Page({
         wxUtil.showToast(err.errMsg, 'none')
       },
     )
-
   },
 })
