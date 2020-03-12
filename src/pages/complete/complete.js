@@ -122,18 +122,18 @@ Page({
       if (R.isEmpty(job)) return
       job.accountId = app.global.accountId
     }
-    wxUtil.showToast('保存成功', 'success').then(() => {
-      wxUtil.requestSubscribeMessage();
-      const { redirect, options } = this.data
-      wxUtil.navigateTo(redirect, JSON.parse(options), true)
-    })
     // 提交数据
+    wxUtil.requestSubscribeMessage();
     Api.completeCard({
       account,
       educations: [education],
       jobs: account.type ? [job] : [],
     }).then(() => {
       app.setConfig({ registered: true })
+      wxUtil.showToast('保存成功', 'success').then(() => {
+        const { redirect, options } = this.data
+        wxUtil.navigateTo(redirect, JSON.parse(options), true)
+      })
     }, err => {
       Util.promisify(wx.showModal)({
         title: '错误提示',

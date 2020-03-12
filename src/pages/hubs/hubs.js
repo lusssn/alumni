@@ -27,6 +27,9 @@ Page({
       this.loadActivitiesList()
     })
   },
+  onShow() {
+    wxUtil.requestSubscribeMessage();
+  },
   onPullDownRefresh() {
     Promise.all([
       this.loadHubsList(),

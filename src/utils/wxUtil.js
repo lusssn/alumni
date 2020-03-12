@@ -143,13 +143,9 @@ const requestSubscribeMessage = () => {
   wx.getSetting({
     withSubscriptions: true,
     success(res) {
-      if (!res.subscriptionsSetting
-        || !res.subscriptionsSetting.itemSettings
-        || !res.subscriptionsSetting.itemSettings['b4KhLPwI1zJIq5KmZ0IzCV_TD9nS3CS3MEzjf8i0McA']) {
-        wx.requestSubscribeMessage({
-          tmplIds: ['b4KhLPwI1zJIq5KmZ0IzCV_TD9nS3CS3MEzjf8i0McA'],
-        })
-      }
+      wx.requestSubscribeMessage({
+        tmplIds: ['b4KhLPwI1zJIq5KmZ0IzCV_TD9nS3CS3MEzjf8i0McA'],
+      })
     }
   })
 }
