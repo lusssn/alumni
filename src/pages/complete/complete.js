@@ -122,8 +122,9 @@ Page({
       if (R.isEmpty(job)) return
       job.accountId = app.global.accountId
     }
-    // 提交数据
+    // 申请授权
     wxUtil.requestSubscribeMessage();
+    // 数据提交
     Api.completeCard({
       account,
       educations: [education],

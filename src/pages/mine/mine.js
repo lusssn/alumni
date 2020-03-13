@@ -41,6 +41,7 @@ Page({
     wxUtil.navigateTo('activity')
   },
   handleToMsgs() {
+    wxUtil.requestSubscribeMessage();
     wxUtil.navigateTo('noticeList')
   },
   loadNoticeList() {
