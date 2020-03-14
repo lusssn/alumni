@@ -40,10 +40,6 @@ Page({
           index: 2,
           text: count.toString(),
         })
-      } else {
-        wx.removeTabBarBadge({
-          index: 2,
-        })
       }
     })
     // 检查消息订阅状态

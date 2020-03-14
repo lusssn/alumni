@@ -41,22 +41,6 @@ Page({
       })
     })
   },
-  onShow(){
-    wxUtil.getNoticeCount().then(count => {
-      if (count > 0) {
-        wx.setTabBarBadge({
-          index: 2,
-          text: count.toString(),
-        })
-      } else {
-        wx.removeTabBarBadge({
-          index: 2,
-        })
-        // 检查消息订阅状态
-        wxUtil.checkSubscribeStatus()
-      }
-    })
-  },
   onPullDownRefresh() {
     Promise.all([
       this.loadHubsList(),
