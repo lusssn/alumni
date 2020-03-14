@@ -4,6 +4,8 @@ import * as Api from '../pages/api'
 
 const app = getApp()
 
+const TMPLID = 'b4KhLPwI1zJIq5KmZ0IzCV_TD9nS3CS3MEzjf8i0McA';
+
 const login = ({ isForceUpdate } = {}) => {
   // 优先从global中读取数据
   const { accountId } = app.global
@@ -133,22 +135,52 @@ const showToast = (title = '', icon = 'warning', others) =>
   })
 
 /**
- * 消息订阅
- * @param title
- * @param icon
- * @param others
+ * 永久订阅情况
+ * @returns { Promise }
+ */
+const checkSubscribeStatus = () =>
+  promisify(wx.getSetting)({
+    withSubscriptions: true,
+  }).then(res => {
+    const { subscriptionsSetting = {} } = res; // 获取订阅消息相关信息
+    const { itemSettings = {} } = subscriptionsSetting;
+    // 没有长期消息授权的情况下
+    if (!itemSettings[TMPLID] || itemSettings[TMPLID] !== 'accept') {
+      wx.showTabBarRedDot({ index: 2 })
+      return false;
+    } else {
+      wx.hideTabBarRedDot({ index: 2 })
+      return true;
+    }
+  })
+
+/**
+ * 订阅
  * @returns { Promise }
  */
 const requestSubscribeMessage = () => {
-  wx.getSetting({
-    withSubscriptions: true,
-    success(res) {
-      wx.requestSubscribeMessage({
-        tmplIds: ['b4KhLPwI1zJIq5KmZ0IzCV_TD9nS3CS3MEzjf8i0McA'],
-      })
+  return promisify(wx.requestSubscribeMessage)({
+    tmplIds: [TMPLID]
+  }).then(res => {
+    if (res[TMPLID] === 'accept') {
+      return true;
+    } else {
+      return false;
     }
-  })
+  }, err => Promise.reject(err))
 }
+
+/**
+ * 获取未读消息数
+ */
+const getNoticeCount = () => {
+  return Api.getNoticeList({
+    pageIndex: 1,
+    pageSize: 10,
+  }).then(data => {
+    return data.count;
+  })
+};
 
 export default {
   login,
@@ -156,5 +188,7 @@ export default {
   getLocation,
   navigateTo,
   showToast,
+  checkSubscribeStatus,
   requestSubscribeMessage,
+  getNoticeCount,
 }

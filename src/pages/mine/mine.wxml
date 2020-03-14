@@ -19,6 +19,12 @@
       <view class="register-tip"></view>
     </view>
   </view>
+  <view wx:if="{{account.name && !subscribeStatus}}" class="card margin-lg " bindtap="handleSubscribe">
+    <view class="card-block flex-align-center padding-t-lg padding-b-lg">
+      <view class="flex-item h1 text-title text-strong">长期订阅活动通知和好友申请</view>
+      <view class="register-tip"></view>
+    </view>
+  </view>
   <view class="card nav-list">
     <view class="nav-item" bindtap="handleToCardcase">
       <view class="iconfont icon-card" />

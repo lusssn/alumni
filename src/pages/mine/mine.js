@@ -11,13 +11,52 @@ Page({
     educations: [],
     jobs: [],
     noticeCount: 0,
+    subscribeStatus: true,
   },
   onLoad() {
-    this.loadAllInfo()
+    wxUtil.login().then((isLogin) => {
+      this.loadAllInfo(isLogin);
+      wxUtil.getNoticeCount().then(count => {
+        this.setData({ noticeCount: count })
+        if (count > 0) {
+          wx.setTabBarBadge({
+            index: 2,
+            text: count.toString(),
+          })
+        } else {
+          wx.removeTabBarBadge({
+            index: 2,
+          })
+        }
+      })
+    })
   },
   onShow() {
     app.checkNotice('edited', true, this.loadAllInfo)
-    this.loadNoticeList()
+    wxUtil.getNoticeCount().then(count => {
+      this.setData({ noticeCount: count })
+      if (count > 0) {
+        wx.setTabBarBadge({
+          index: 2,
+          text: count.toString(),
+        })
+      } else {
+        wx.removeTabBarBadge({
+          index: 2,
+        })
+      }
+    })
+    // 检查消息订阅状态
+    wxUtil.checkSubscribeStatus().then(flag => {
+      // flag —— true：永久订阅  false：一次订阅/未订阅
+      this.setData({ subscribeStatus: flag })
+      if (this.data.noticeCount > 0) {
+        wx.setTabBarBadge({
+          index: 2,
+          text: this.data.noticeCount.toString(),
+        })
+      }
+    });
   },
   onShareAppMessage() {
     const { account, educations } = this.data
@@ -44,40 +83,25 @@ Page({
     wxUtil.requestSubscribeMessage();
     wxUtil.navigateTo('noticeList')
   },
-  loadNoticeList() {
-    Api.getNoticeList({
-      pageIndex: 1,
-      pageSize: 10,
-    }).then(data => {
-      this.setData({
-        noticeCount: data.count,
-      })
-    }, () => { })
-  },
-  loadAllInfo() {
-    return wxUtil.login().then(
-      isLogin => {
-        if (!isLogin) {
-          this.setData({ isLoaded: true })
-          return Promise.resolve()
+  loadAllInfo(isLogin) {
+    if (!isLogin) {
+      this.setData({ isLoaded: true })
+      return Promise.resolve()
+    }
+    return Api.getAccountAll({
+      accountId: app.global.accountId,
+    }).then(
+      data => {
+        for (let item of data.educations) {
+          item.startTime = Util.getYear(item.startTime)
+          item.endTime = Util.getYear(item.endTime)
         }
-        return Api.getAccountAll({
-          accountId: app.global.accountId,
-        }).then(
-          data => {
-            this.loadNoticeList()
-            for (let item of data.educations) {
-              item.startTime = Util.getYear(item.startTime)
-              item.endTime = Util.getYear(item.endTime)
-            }
-            this.setData({
-              isLoaded: true,
-              ...data,
-            })
-          },
-          () => { },
-        )
+        this.setData({
+          isLoaded: true,
+          ...data,
+        })
       },
+      () => { },
     )
   },
   handleShare() {
@@ -94,5 +118,23 @@ Page({
   },
   handleRegister() {
     Util.isRegistered()
+  },
+  handleSubscribe() {
+    wx.showToast({
+      title: '建议勾选最下方长期订阅',
+      icon: 'none',
+      duration: 10000,
+    })
+    // 订阅消息
+    wxUtil.requestSubscribeMessage().then(flag => {
+      wx.hideToast()
+      // 点击确认
+      if (flag) {
+        // 再次检查订阅状态，newFlag —— true: 永久订阅 false: 单次订阅
+        wxUtil.checkSubscribeStatus().then(newFlag => {
+          this.setData({ subscribeStatus: newFlag })
+        });
+      }
+    })
   }
 })
