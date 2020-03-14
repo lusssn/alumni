@@ -7,7 +7,7 @@
   </view>
   <view class="title text-primary">通知内容</view>
   <view class="padding-l-lg padding-r-lg padding-b-xl margin-b-xl">
-    <text>{{content}}</text>
+    <text selectable>{{content}}</text>
   </view>
   <view class="title text-primary">活动详情</view>
   <template

@@ -18,12 +18,12 @@
       class="textarea"
       placeholder-class="text-muted"
       placeholder="请输入通知内容"
-      maxlength="100"
+      maxlength="500"
       value="{{content}}"
       data-name="content"
       bindinput="handleInputChange"
     />
-    <view class="text-muted text-right">100字</view>
+    <view class="text-muted text-right">500字</view>
   </view>
 
   <view class="fix-bottom">
