@@ -23,7 +23,7 @@ function handleResponse(response) {
       return data
     }
     // 登录失效，重新登录
-    if (status === Error.INVALID_.errCode) {
+    if (status === Error.INVALID_TOKEN.errCode) {
       return wxUtil.login({ isForceUpdate: true }).then(
         () => request(url, params, others),
         err => Promise.reject(err),

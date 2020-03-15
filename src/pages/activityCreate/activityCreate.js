@@ -38,7 +38,7 @@ Page({
     }
     const activityTime = moment(info.activityTime)
     const expirationTime = moment(info.expirationTime)
-    if (activityTime.isBefore(expirationTime)) {
+    if (!expirationTime.isBefore(activityTime)) {
       wxUtil.showToast('时间范围不正确')
       return false;
     }

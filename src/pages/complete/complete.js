@@ -54,9 +54,9 @@ Page({
       },
     )
   },
-  onShow(){
-    wx.hideHomeButton();
-  },
+  // onShow(){
+  //   wx.hideHomeButton();
+  // },
   handleClickAvatar() {
     Util.promisify(wx.chooseImage)({
       count: 1,
