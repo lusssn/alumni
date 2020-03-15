@@ -5,6 +5,7 @@ const PAGE_SIZE = 10
 
 Page({
   data: {
+    keyword: '',
     list: [],
     pagination: { current: 1, total: 0 },
   },
@@ -25,12 +26,21 @@ Page({
       this.loadHubMembers(current + 1)
     }
   },
+  handleSearch(event) {
+    const content = event.detail.value
+    this.setData({
+      keyword: content,
+    }, () => {
+      this.loadHubMembers()
+    })
+  },
   loadHubMembers(pageNo = 1) {
     const currentPage = getCurrentPages().pop()
     return Api.getHubMembers({
       alumniCircleId: currentPage.options.hubId,
       pageIndex: pageNo,
       pageSize: PAGE_SIZE,
+      query: this.data.keyword,
     }).then(data => {
       const { list, count } = data
       this.setData({

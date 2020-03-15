@@ -1,9 +1,9 @@
-<view class="padding-t-lg padding-l-xl padding-r-xl">
+<view class="container">
   <view class="card">
     <view class="card-header activity-title">{{activity.activityName}}</view>
     <view class="card-block">
       <view class="flex-align-center padding-t-sm padding-b-sm">
-        <image class="avatar" mode="aspectFill" src="{{activity.starterAvatar || '../../images/avatar_default.jpeg'}}" />
+        <Avatar size="60" src="{{activity.starterAvatar}}" />
         <view class="flex-item padding-l-sm h6 text-title">
           <view>
             <text>{{activity.starterName}}</text>
@@ -19,8 +19,17 @@
   <view class="h3 title">活动介绍</view>
   <view class="card">
     <view class="padding-lg h3 text-title">
-      {{activity.activityDesc}}
-      <image wx:for="{{images}}" wx:key="*this" src="{{item.url}}" class="activity-image" mode='widthFix' data-index="{{index}}" bindload="handleLoadImage" lazy-load />
+      <text>{{activity.activityDesc}}</text>
+      <image
+        wx:for="{{images}}"
+        wx:key="*this"
+        src="{{item.url}}"
+        class="activity-image"
+        mode='widthFix'
+        data-index="{{index}}"
+        bindload="handleLoadImage"
+        lazy-load
+      />
     </view>
   </view>
   <view class="fix-bottom">

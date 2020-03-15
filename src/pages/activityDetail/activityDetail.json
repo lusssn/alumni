@@ -5,6 +5,7 @@
   "enablePullDownRefresh": true,
   "usingComponents": {
     "Loading": "../../components/Loading/Loading",
+    "Avatar": "../../components/Avatar/Avatar",
     "BusinessCard": "../../components/BusinessCard/BusinessCard"
   }
 }

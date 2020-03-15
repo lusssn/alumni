@@ -1,10 +1,7 @@
 import * as Util from '../../utils/util'
 import wxUtil from '../../utils/wxUtil'
 import * as Api from '../api'
-import server from "../../server"
 import * as R from '../../utils/ramda/index'
-
-const app = getApp()
 
 Page({
   alumniCircleId: '',
@@ -41,7 +38,7 @@ Page({
         () => {
           this.setData({ showModal: true })
         },
-        () => { wxUtil.showToast('保存失败') }
+        () => { wxUtil.showToast('保存失败') },
       )
     }
     else if (!info.alumniCircleId) {
@@ -50,7 +47,7 @@ Page({
           this.setData({ showModal: true })
           this.alumniCircleId = res.data;
         },
-        () => { wxUtil.showToast('保存失败') }
+        () => { wxUtil.showToast('保存失败') },
       )
     }
   },
@@ -66,33 +63,26 @@ Page({
   },
   handleRemoveAvatar() {
     this.setData({
-      info: R.assoc('avatar', '', this.data.info)
+      info: R.assoc('avatar', '', this.data.info),
     })
   },
   handleChooseAvatar() {
     Util.promisify(wx.chooseImage)({
       count: 1,
-    }).then(res => {
+    }).then(({ tempFilePaths }) => {
       this.setData({
-        previewImage: res.tempFilePaths[0],
+        previewImage: tempFilePaths[0],
       })
-      let _this = this;
-      wx.uploadFile({
-        url: `${server.host}/v2/uploadFile`,
-        filePath: res.tempFilePaths[0],
-        name: 'file',
-        header: {
-          'X-Wx-Token': app.global.token,
-        },
-        success: function (res) {
-          _this.setData({
-            info: R.assoc('avatar', JSON.parse(res.data).data, _this.data.info),
+      Api.uploadImage(tempFilePaths[0]).then(
+        imgUrl => {
+          this.setData({
+            info: R.assoc('avatar', imgUrl, this.data.info),
           })
         },
-        fail: function (err) {
+        err => {
           wxUtil.showToast(err.errMsg, 'none')
-        }
-      })
+        },
+      )
     })
   },
 })

@@ -38,8 +38,22 @@ Page({
     return {
       title: activity.activityName,
       desc: `邀你一起加入${activity.activityName}`,
-      path: `/pages/activityDetail/activityDetail?activityId=${activity.activityId}`
+      path: `/pages/activityDetail/activityDetail?activityId=${activity.activityId}`,
     }
+  },
+  handleLoadImage(event) {
+    const { images } = this.data
+    const { height, width } = event.detail
+    const { index } = event.target.dataset
+    this.setData({
+      images: R.assocPath(
+        [index],
+        R.mergeRight(images[index], {
+          height: height / width * IMAGE_WIDTH,
+        }),
+        images,
+      ),
+    })
   },
   handleJoinActivity() {
     const { activity } = this.data

@@ -1,4 +1,4 @@
-<view class="header"></view>
+<view class="header" />
 <view class="container">
   <Search
     class="margin-l-lg margin-r-lg"
