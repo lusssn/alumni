@@ -9,3 +9,4 @@ export const LOCATION_FAILED = { errMsg: '获取位置失败', errCode: -301 }
 
 /* 后端错误码，为正数 */
 export const INVALID_TOKEN = { errMsg: '登录失效', errCode: 401 }
+export const NO_REGISTER = { errMsg: '尚未注册', errCode: 403 }
