@@ -56,10 +56,6 @@ Page({
       'basic.type': +value,
     })
   },
-  handleSkip() {
-    const { redirect, options } = this.data
-    wxUtil.navigateTo(redirect, JSON.parse(options), true)
-  },
   handleNext() {
     const { redirect, options, basic } = this.data
     if (!basic.name.trim()) {

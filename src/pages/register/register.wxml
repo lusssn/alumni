@@ -60,7 +60,6 @@
     </view>
   </view>
   <view class="fix-bottom flex">
-    <button class="flex-item" bindtap="handleSkip">游客体验</button>
     <button class="flex-item" type="primary" bindtap="handleNext">下一步</button>
   </view>
   <Modal
