@@ -1,15 +1,10 @@
 <view class="padding-t-md">
-  <view class="margin-l-xl margin-r-xl">
-    <Loading wx:if="{{!noticeList}}" />
-    <block wx:elif="{{noticeList.length}}">
-      <view
-        wx:for="{{noticeList}}"
-        wx:key="messageId"
-        class="card"
-        data-id="{{item.messageId}}"
-        bindtap="handleClickNotice"
-      >
-        <view class="card-block" data-id="{{data.messageId}}">
+  <Nav class="padding-b-md" data="{{NAV}}" current="{{currentTab.id}}" bindswitch="handleSwitch" />
+  <view wx:if="{{currentTab.key === 'New'}}" class="margin-l-xl margin-r-xl">
+    <Loading wx:if="{{!newNoticeList}}" />
+    <block wx:elif="{{newNoticeList.length}}">
+      <view wx:for="{{newNoticeList}}" wx:key="messageId" class="card" data-id="{{item.messageId}}" data-noticetype="new" bindtap="handleClickNotice">
+        <view class="card-block">
           <view class="flex-align-center padding-t-lg padding-b-lg">
             <Avatar size="96" src="{{item.avatar}}" />
             <view class="flex-item padding-l-md content-wrap">
@@ -22,5 +17,23 @@
       </view>
     </block>
     <ListEmpty wx:else description="暂无未读消息" />
+  </view>
+  <view wx:else class="margin-l-xl margin-r-xl">
+    <Loading wx:if="{{!historyNoticeList}}" />
+    <block wx:elif="{{historyNoticeList.length}}">
+      <view wx:for="{{historyNoticeList}}" wx:key="messageId" class="card" data-id="{{item.messageId}}" data-noticetype="history" bindtap="handleClickNotice">
+        <view class="card-block">
+          <view class="flex-align-center padding-t-lg padding-b-lg">
+            <Avatar size="96" src="{{item.avatar}}" />
+            <view class="flex-item padding-l-md content-wrap">
+              <view class="padding-b-xs h1 text-title">{{item.fromUserName}}</view>
+              <view class="h3 text-primary">{{item.typeDesc}}</view>
+              <view class="h5 text-muted content">{{item.content}}</view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </block>
+    <ListEmpty wx:else description="暂无历史消息" />
   </view>
 </view>

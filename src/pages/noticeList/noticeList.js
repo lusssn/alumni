@@ -16,71 +16,136 @@ const NOTICE_TYPE_MAP = (() => {
   }, {})
 })()
 
+const NAV_CONFIG = [
+  { id: 1, name: '未读消息', key: 'New' },
+  { id: 2, name: '历史消息', key: 'History' },
+]
+
 Page({
   data: {
-    noticeList: null,
-    noticePagination: { current: 1, total: 0 },
+    NAV: NAV_CONFIG,
+    currentTab: NAV_CONFIG[0],
+    newNoticeList: null,
+    newPagination: { current: 1, total: 0 },
+    historyNoticeList: null,
+    historyPagination: { current: 1, total: 0 },
   },
   onLoad() {
     wxUtil.login().then(() => {
-      this.loadNoticeList()
+      this.loadNewNotices()
+      this.loadHistoryNotices()
     })
   },
   onPullDownRefresh() {
-    this.loadNoticeList().then(() => {
+    this.loadNewNotices().then(() => {
+      wx.stopPullDownRefresh()
+    })
+    Promise.all([
+      this.loadNewNotices(),
+      this.loadHistoryNotices(),
+    ]).then(() => {
       wx.stopPullDownRefresh()
     })
   },
   onReachBottom() {
-    const { total, current } = this.data.noticePagination
+    const { currentTab } = this.data
+    if (currentTab.key === 'New') {
+      const { total, current } = this.data.newPagination
+      // 是否为最后一页
+      if (Math.ceil(total / PAGE_SIZE) > current) {
+        this.loadNewNotices(current + 1)
+      }
+      return
+    }
+    const { total, current } = this.data.historyPagination
     // 是否为最后一页
     if (Math.ceil(total / PAGE_SIZE) > current) {
-      this.loadNoticeList(current + 1)
+      this.loadHistoryNotices(current + 1)
     }
   },
-  loadNoticeList(pageNo = 1) {
+  loadNewNotices(pageNo = 1) {
     return Api.getNoticeList({
       pageIndex: pageNo,
       pageSize: PAGE_SIZE,
+      status: 0,
     }).then(data => {
       const { list, count } = data
       const resultList = list.map(item => {
         return R.assoc('type', NOTICE_TYPE_MAP[item.type], item)
       })
       this.setData({
-        noticeList: pageNo === 1 ? resultList : this.data.noticeList.concat(resultList),
-        noticePagination: {
+        newNoticeList: pageNo === 1 ? resultList : this.data.newNoticeList.concat(resultList),
+        newPagination: {
           current: pageNo,
           total: count,
         },
       })
     }, () => { })
   },
+  loadHistoryNotices(pageNo = 1) {
+    return Api.getNoticeList({
+      pageIndex: pageNo,
+      pageSize: PAGE_SIZE,
+      status: 1,
+    }).then(data => {
+      const { list, count } = data
+      const resultList = list.map(item => {
+        return R.assoc('type', NOTICE_TYPE_MAP[item.type], item)
+      })
+      this.setData({
+        historyNoticeList: pageNo === 1 ? resultList : this.data.historyNoticeList.concat(resultList),
+        historyPagination: {
+          current: pageNo,
+          total: count,
+        },
+      })
+    }, () => { })
+  },
+  handleSwitch(event) {
+    const { id } = event.detail
+    this.setData({
+      currentTab: R.find(R.propEq('id', id), NAV_CONFIG),
+    })
+  },
   // 点击消息列表
   handleClickNotice(e) {
-    const { id } = e.currentTarget.dataset
-    const { noticeList } = this.data
-    const index = R.findIndex(R.propEq('messageId', id), noticeList)
-    const { title, content, type, fromUser } = noticeList[index]
-    if (type.key === 'Activity') {
-      wxUtil.navigateTo('activityInfo', {
-        activityId: fromUser,
-        title,
-        content,
+    const { id, noticetype } = e.currentTarget.dataset
+    const { newNoticeList, historyNoticeList } = this.data
+    if (noticetype === 'new') {
+      const index = R.findIndex(R.propEq('messageId', id), newNoticeList)
+      const { title, content, type, fromUser } = newNoticeList[index]
+      if (type.key === 'Activity') {
+        wxUtil.navigateTo('activityInfo', {
+          activityId: fromUser,
+          title,
+          content,
+        })
+      } else {
+        wxUtil.navigateTo('detail', { id: fromUser })
+      }
+      // 将未读更改为已读
+      Api.readNotice({
+        messageId: id,
+        status: 1,
+      }).then(() => {
+        this.setData({
+          newNoticeList: R.remove(index, 1, newNoticeList),
+        })
+      }, err => {
+        wxUtil.showToast(err.errMsg, 'none')
       })
     } else {
-      wxUtil.navigateTo('detail', { id: fromUser })
+      const index = R.findIndex(R.propEq('messageId', id), historyNoticeList)
+      const { title, content, type, fromUser } = historyNoticeList[index]
+      if (type.key === 'Activity') {
+        wxUtil.navigateTo('activityInfo', {
+          activityId: fromUser,
+          title,
+          content,
+        })
+      } else {
+        wxUtil.navigateTo('detail', { id: fromUser })
+      }
     }
-    // 将未读更改为已读
-    Api.readNotice({
-      messageId: id,
-      status: 1,
-    }).then(() => {
-      this.setData({
-        noticeList: R.remove(index, 1, noticeList),
-      })
-    }, err => {
-      wxUtil.showToast(err.errMsg, 'none')
-    })
   },
 })
