@@ -27,6 +27,9 @@ Page({
       this.setData({accountNumber: res.data})
     })
   },
+  onShow(){
+    wx.hideHomeButton();
+  },
   handleCloseAuthModal() {
     this.initBasic()
     // 关闭弹窗
