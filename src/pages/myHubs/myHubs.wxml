@@ -6,8 +6,8 @@
     data="{{ list: hubList, bindtap: 'handleClickHub' }}"
   />
   <view class="fix-bottom">
-    <button type="primary" bindtap="handleCreateGroup">
-      创建群通讯录
+    <button type="primary" bindtap="handleCreateHub">
+      创建校友圈
     </button>
   </view>
 </view>

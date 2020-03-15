@@ -53,8 +53,8 @@ Page({
     const { id } = e.currentTarget.dataset;
     wxUtil.navigateTo('hubDetail', { hubId: id })
   },
-  // 创建群通讯录
-  handleCreateGroup() {
+  // 创建校友圈
+  handleCreateHub() {
     wxUtil.navigateTo('hubCreate')
   }
 })
