@@ -54,7 +54,7 @@
   />
 
   <view class="fix-bottom">
-    <button type="primary" bindtap="handleSubmit">
+    <button type="primary" bindtap="handleSubmit" disabled="{{submitLoading}}">
       保存
     </button>
   </view>

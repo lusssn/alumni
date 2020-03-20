@@ -8,6 +8,10 @@
   .negative-margin {
     margin-top: -80rpx !important;
   }
+  button[disabled]{
+    background-color: $bg-color !important;
+    color: $gray-base !important;
+  }
 }
 // reset
 .field {

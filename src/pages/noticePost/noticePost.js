@@ -5,6 +5,7 @@ Page({
   data: {
     title: '',
     content: '',
+    submitLoading: false,
   },
   handleSubmit() {
     const { title, content } = this.data
@@ -18,6 +19,9 @@ Page({
     }
     const currentPage = getCurrentPages().pop()
     wxUtil.login().then(() => {
+      this.setData({
+        submitLoading: true
+      });
       Api.batchSendNotice({
         activityId: currentPage.options.activityId,
         title,

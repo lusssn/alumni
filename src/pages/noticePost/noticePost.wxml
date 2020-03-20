@@ -27,7 +27,7 @@
   </view>
 
   <view class="fix-bottom">
-    <button type="primary" bindtap="handleSubmit">
+    <button type="primary" disabled="{{submitLoading}}" bindtap="handleSubmit">
       发送通知
     </button>
   </view>

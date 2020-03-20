@@ -31,8 +31,9 @@ Page({
       education: R.findIndex(R.propEq('name', '本科'))(DEGREE_TYPE),
     },
     job: {},
+    buttonLoading: false
   },
-  onLoad ({ type, id = null }) {
+  onLoad({ type, id = null }) {
     // 动态设置页面标题
     const editType = R.find(R.propEq('type', type))(EDIT_TYPE)
     wx.setNavigationBarTitle({
@@ -51,7 +52,7 @@ Page({
     this.setData({ type, id })
   },
   // 点击头像
-  handleClickAvatar () {
+  handleClickAvatar() {
     Util.promisify(wx.chooseImage)({
       count: 1,
     }).then(res => {
@@ -61,27 +62,27 @@ Page({
     })
   },
   // 定位
-  handleLocation () {
+  handleLocation() {
     wxUtil.getLocation().then(res => {
       this.setData({ 'account.city': res })
     }, err => wxUtil.showToast(err.errMsg))
   },
-  handleInputChange (e) {
+  handleInputChange(e) {
     const { name } = e.currentTarget.dataset
     this.setData({
       [name]: e.detail.value,
     })
   },
-  handlePhoneCheck (e) {
+  handlePhoneCheck(e) {
     const phone = e.detail.value
     if (phone.length !== 11 || !(/^[0-9]+$/.test(phone))) {
       wxUtil.showToast('手机号码格式不正确, 请尝试重新输入', 'none')
       this.setData({
-        'account.phone' : '',
+        'account.phone': '',
       })
     }
   },
-  handleRemove () {
+  handleRemove() {
     Util.promisify(wx.showModal)({
       title: '提示',
       content: '你确认要删除该条信息吗？',
@@ -108,7 +109,10 @@ Page({
       })
     })
   },
-  handleSave () {
+  handleSave() {
+    this.setData({
+      buttonLoading: true
+    })
     const { type } = this.data
     let params = R.clone(this.data[type])
     let next = null
@@ -144,13 +148,19 @@ Page({
     next && next.then(() => {
       app.setNotice('edited', true)
       wxUtil.showToast('保存成功', 'success').then(() => {
+        this.setData({
+          buttonLoading: false,
+        })
         wx.navigateBack()
       })
     }, () => {
       wxUtil.showToast('保存失败')
+      this.setData({
+        buttonLoading: false,
+      })
     })
   },
-  loadBasic () {
+  loadBasic() {
     Api.getAccount().then(data => {
       // 处理时间
       data.birthday = Util.getYearMonthDate(data.birthday)
@@ -158,9 +168,9 @@ Page({
       this.setData({
         account: data,
       })
-    }, () => {})
+    }, () => { })
   },
-  loadEducation (id) {
+  loadEducation(id) {
     const { accountId } = app.global
     Api.getEducationInfo({
       accountId,
@@ -180,9 +190,9 @@ Page({
       this.setData({
         education: data,
       })
-    }, () => {})
+    }, () => { })
   },
-  loadWork (id) {
+  loadWork(id) {
     const { accountId } = app.global
     Api.getWorkInfo({
       accountId,
@@ -192,6 +202,6 @@ Page({
       data.startTime = Util.getYear(data.startTime)
       data.endTime = Util.getYear(data.endTime)
       this.setData({ job: data })
-    }, () => {})
+    }, () => { })
   },
 })

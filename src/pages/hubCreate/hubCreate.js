@@ -9,6 +9,7 @@ Page({
     info: {},
     previewImage: '',
     showModal: false,
+    submitLoading: false,
   },
   onLoad({ hubId }) {
     wxUtil.login().then(() => {
@@ -28,6 +29,9 @@ Page({
     })
   },
   handleSubmit() {
+    this.setData({
+      submitLoading: true,
+    })
     const { info } = this.data
     if (!info.alumniCircleName) {
       wxUtil.showToast('校友圈名称必填')
@@ -36,18 +40,34 @@ Page({
     if (info.alumniCircleId) {
       Api.updateHubInfo(info).then(
         () => {
-          this.setData({ showModal: true })
+          this.setData({
+            showModal: true,
+            submitLoading: false,
+          })
         },
-        () => { wxUtil.showToast('保存失败') },
+        () => {
+          wxUtil.showToast('保存失败')
+          this.setData({
+            submitLoading: false,
+          })
+        },
       )
     }
     else if (!info.alumniCircleId) {
       Api.createHub(info).then(
         (res) => {
-          this.setData({ showModal: true })
+          this.setData({
+            showModal: true,
+            submitLoading: false,
+          })
           this.alumniCircleId = res.data;
         },
-        () => { wxUtil.showToast('保存失败') },
+        () => {
+          wxUtil.showToast('保存失败')
+          this.setData({
+            submitLoading: false,
+          })
+        },
       )
     }
   },

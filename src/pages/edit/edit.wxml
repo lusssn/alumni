@@ -27,6 +27,6 @@
     >
       删除
     </button>
-    <button class="flex-item" type="primary" bindtap="handleSave">保存</button>
+    <button class="flex-item" type="primary" bindtap="handleSave" disabled="{{buttonLoading}}">保存</button>
   </view>
 </view>
