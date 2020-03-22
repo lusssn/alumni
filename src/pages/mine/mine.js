@@ -33,15 +33,6 @@ Page({
   },
   onShow() {
     app.checkNotice('edited', true, this.loadAllInfo)
-    wxUtil.getNoticeCount().then(count => {
-      this.setData({ noticeCount: count })
-      if (count > 0) {
-        wx.setTabBarBadge({
-          index: 2,
-          text: count.toString(),
-        })
-      }
-    })
     // 检查消息订阅状态
     wxUtil.checkSubscribeStatus().then(flag => {
       // flag —— true：永久订阅  false：一次订阅/未订阅
