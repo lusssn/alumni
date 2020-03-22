@@ -128,6 +128,12 @@ Page({
     // 申请授权
     wxUtil.requestSubscribeMessage();
     // 数据提交
+    console.log({
+      account,
+      educations: [education],
+      jobs: account.type ? [job] : [],
+    });
+    
     Api.completeCard({
       account,
       educations: [education],

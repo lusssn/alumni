@@ -3,6 +3,10 @@ import * as Api from '../api'
 
 const app = getApp()
 const PAGE_SIZE = 10
+const AUTH_WAY = [
+  { label: '手机/微信：15850606321', value: '15850606321' },
+  { label: '邮箱：seu_wzh@163.com', value: 'seu_wzh@163.com' }
+];
 
 Page({
   data: {
@@ -12,6 +16,8 @@ Page({
     memberList: [],
     activityList: [],
     activityPagination: { current: 1, total: 0 },
+    authWay: AUTH_WAY,
+    isShowSheet: false,
   },
   onLoad({ hubId }) {
     if (!hubId) {
@@ -61,7 +67,7 @@ Page({
           isJoined: res.isJoined,
         })
       },
-      () => {},
+      () => { },
     )
   },
   // 获取成员列表
@@ -74,7 +80,7 @@ Page({
       query: '',
     }).then(data => {
       this.setData({ memberList: data.list })
-    }, () => {})
+    }, () => { })
   },
   loadHubActivities(pageNo = 1) {
     const currentPage = getCurrentPages().pop()
@@ -95,7 +101,23 @@ Page({
           total: count,
         },
       })
-    }, () => {})
+    }, () => { })
+  },
+  handleSelectAuth(res) {
+    const { index } = res.detail;
+    const { authWay } = this.data;
+    wxUtil.setClipboardData(authWay[index].value).then(() => {
+      wxUtil.showToast('复制到剪贴板', 'success').then(() => {
+        this.setData({
+          isShowSheet: false,
+        })
+      })
+    })
+  },
+  handleAuth() {
+    this.setData({
+      isShowSheet: true,
+    })
   },
   handleToHubInfo() {
     const currentPage = getCurrentPages().pop()

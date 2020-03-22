@@ -35,9 +35,16 @@
     <view>发起活动</view>
   </view>
   <!-- 底部 button -->
-  <view class="fix-bottom">
-    <button wx:if="{{isCreator}}" type="primary" bindtap="handleToHubCreate">管理</button>
-    <button wx:elif="{{isJoined}}" type="primary"  bindtap="handleExitHub">退出校友圈</button>
-    <button wx:else type="primary" bindtap="handleJoinHub">加入校友圈</button>
+  <view class="fix-bottom flex">
+    <button wx:if="{{isCreator && !hubInfo.authorizationStatus}}" class="flex-item" bindtap="handleAuth">申请认证</button>
+    <button wx:if="{{isCreator}}" class="flex-item" type="primary" bindtap="handleToHubCreate">管理</button>
+    <button wx:elif="{{isJoined}}" class="flex-item" type="primary"  bindtap="handleExitHub">退出校友圈</button>
+    <button wx:else class="flex-item" type="primary" bindtap="handleJoinHub">加入校友圈</button>
   </view>
+  <ActionSheet
+    isShowSheet="{{isShowSheet}}"
+    itemList="{{authWay}}"
+    title="认证后可将圈子面向所有校友展示, 点击复制联系方式"
+    bindselect='handleSelectAuth'
+  />
 </view>

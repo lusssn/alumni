@@ -172,6 +172,16 @@ const requestSubscribeMessage = () => {
 }
 
 /**
+ * 订阅
+ * @returns { Promise }
+ */
+const setClipboardData = (text) => {
+  return promisify(wx.setClipboardData)({
+    data: text,
+  })
+}
+
+/**
  * 获取未读消息数
  */
 const getNoticeCount = () => {
@@ -192,4 +202,5 @@ export default {
   checkSubscribeStatus,
   requestSubscribeMessage,
   getNoticeCount,
+  setClipboardData,
 }

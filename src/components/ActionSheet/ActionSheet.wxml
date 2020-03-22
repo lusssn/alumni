@@ -1,0 +1,10 @@
+<view class="action-sheet" wx:if="{{isShowSheet}}">
+  <view class="context">
+    <view class='row h3 text-center border-b'>{{title}}</view>
+    <view class='row h2 text-center border-b text-primary' wx:for='{{itemList}}' wx:key data-index='{{index}}' bindtap='handleClick'>
+      {{item.label || item}}
+    </view>
+    <slot></slot>
+    <view class='row margin-t-xs h3 text-center border-b' bindtap='handleClose'>取 消</view>
+  </view>
+</view>

@@ -6,6 +6,7 @@
   "usingComponents": {
     "Loading": "../../components/Loading/Loading",
     "Avatar": "../../components/Avatar/Avatar",
-    "ListEmpty": "../../components/ListEmpty/ListEmpty"
+    "ListEmpty": "../../components/ListEmpty/ListEmpty",
+    "ActionSheet": "../../components/ActionSheet/ActionSheet"
   }
 }
