@@ -33,20 +33,23 @@ Page({
   },
   onPullDownRefresh() {
     wxUtil.login().then((isLogin) => {
-      this.loadAllInfo(isLogin);
-      wxUtil.getNoticeCount().then(count => {
-        this.setData({ noticeCount: count })
-        if (count > 0) {
-          wx.setTabBarBadge({
-            index: 2,
-            text: count.toString(),
-          })
-        } else {
-          wx.removeTabBarBadge({
-            index: 2,
-          })
-        }
-      })
+      Promise.all([
+        this.loadAllInfo(isLogin),
+        wxUtil.getNoticeCount().then(count => {
+          this.setData({ noticeCount: count })
+          if (count > 0) {
+            wx.setTabBarBadge({
+              index: 2,
+              text: count.toString(),
+            })
+          } else {
+            wx.removeTabBarBadge({
+              index: 2,
+            })
+          }
+        })]).then(() => {
+          wx.stopPullDownRefresh()
+        })
     })
   },
   onShow() {
