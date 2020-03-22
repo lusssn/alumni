@@ -50,6 +50,9 @@ export const saveWork = params => request.post('/v2/job', params)
 // 删除-工作信息
 export const removeWork = params => request.del('/v2/job', params)
 
+// 更新用户头像 - 使用微信提供的头像 url
+export const updateAvatarUrl = params => request.get('/v2/account/urlAvatar', params)
+
 /*************************************** 圈子 ***************************************/
 // 圈子推荐列表
 export const getHubsRecommend = params =>

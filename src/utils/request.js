@@ -7,7 +7,7 @@ const regHttp = /^(http[s]{0,1}:\/\/)/
 const app = getApp()
 
 
-function handleResponse(response) {
+function handleResponse(response, url, params, others) {
   return new Promise((resolve, reject) => {
     if (response.statusCode === 200) {
       if (typeof response.data === 'string') {
@@ -49,7 +49,7 @@ const request = (url, params = {}, others = {}) => {
     data: params,
     header,
     ...other,
-  }).then(handleResponse)
+  }).then(response => handleResponse(response, url, params, other))
 }
 
 const get = (url, params = {}, custom = {}) => {
@@ -90,7 +90,7 @@ const upload = (url, file, params = {}) => {
     header: {
       'X-Wx-Token': app.global.token || '',
     },
-  }).then(handleResponse)
+  }).then(response => handleResponse(response, url, params, other))
 }
 
 export default {

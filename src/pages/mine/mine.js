@@ -31,6 +31,24 @@ Page({
       })
     })
   },
+  onPullDownRefresh() {
+    wxUtil.login().then((isLogin) => {
+      this.loadAllInfo(isLogin);
+      wxUtil.getNoticeCount().then(count => {
+        this.setData({ noticeCount: count })
+        if (count > 0) {
+          wx.setTabBarBadge({
+            index: 2,
+            text: count.toString(),
+          })
+        } else {
+          wx.removeTabBarBadge({
+            index: 2,
+          })
+        }
+      })
+    })
+  },
   onShow() {
     app.checkNotice('edited', true, this.loadAllInfo)
     // 检查消息订阅状态

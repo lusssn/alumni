@@ -30,9 +30,9 @@ const login = ({ isForceUpdate } = {}) => {
 
 const getUserInfo = () => {
   // 优先从global中读取数据
-  const { userInfo, accountId } = app.global
+  const { userInfo } = app.global
   if (userInfo) {
-    return Promise.resolve({ userInfo, accountId })
+    return Promise.resolve(userInfo)
   }
   return login().then(
     () => {

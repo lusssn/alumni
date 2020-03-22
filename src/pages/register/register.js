@@ -16,15 +16,14 @@ Page({
   },
   onLoad({ redirect = 'mine', options = '{}' }) {
     this.setData({ redirect, options: decodeURIComponent(options) })
-    wxUtil.getUserInfo().then(this.initBasic, () => {
-      // 未授权，显示授权弹窗
-      this.setData({
-        isShowAuthModal: true,
-      })
-    })
     Api.getAccountNumber().then(res => {
-      console.log(res)
-      this.setData({accountNumber: res.data})
+      this.setData({accountNumber: res.data}),
+      wxUtil.getUserInfo().then(this.initBasic, () => {
+        // 未授权，显示授权弹窗
+        this.setData({
+          isShowAuthModal: true,
+        })
+      })
     })
   },
   onShow(){

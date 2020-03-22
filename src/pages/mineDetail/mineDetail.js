@@ -6,13 +6,16 @@ const app = getApp()
 
 Page({
   data: {
+    isShowAuthModal: false,
     isLoaded: false,
     account: {},
     educations: [],
     jobs: [],
   },
   onLoad() {
-    this.loadAllInfo()
+    this.loadAllInfo().then(() => {
+      this.updateAvatarUrl();
+    });
   },
   onShow() {
     app.checkNotice('edited', true, this.loadAllInfo)
@@ -29,6 +32,39 @@ Page({
       title: `${education.school || ''}校友：${account.name}的名片`,
       path: `/pages/detail/detail?id=${account.accountId}&isShare=1`,
     }
+  },
+  updateAvatarUrl() {
+    wxUtil.getUserInfo().then(() => {
+    }, () => {
+      // 未授权，显示授权弹窗
+      this.setData({
+        isShowAuthModal: true,
+      })
+    })
+    Util.promisify(wx.getSetting)().then(
+      ({ authSetting }) => {
+        if (authSetting['scope.userInfo']) {
+          Util.promisify(wx.getUserInfo)().then(
+            ({ userInfo: realInfo }) => {
+              let realAvatar = realInfo.avatarUrl;
+              Api.updateAvatarUrl({
+                url: realAvatar,
+              }).then(({ data }) => {
+                this.setData({
+                  account: {
+                    ...this.data.account,
+                    avatar: data,
+                  }
+                })
+              })
+            },
+            () => Promise.reject(Error.AUTH_FAILED),
+          )
+        }
+        return Promise.reject(Error.UNAUTHORIZED)
+      },
+      () => Promise.reject(Error.AUTH_FAILED),
+    )
   },
   handleBasicEdit() {
     wxUtil.navigateTo('edit', { type: 'account' })
@@ -80,7 +116,7 @@ Page({
               ...data,
             })
           },
-          () => {},
+          () => { },
         )
       },
     )
