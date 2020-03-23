@@ -65,3 +65,13 @@
   </view>
 </view>
 <Loading wx:else isFixed />
+<Modal
+  isOpen="{{isShowAuthModal}}"
+  title="提示"
+  cancelText="取消"
+  okText="授权"
+  okOpenType="getUserInfo"
+  content="{{['你的个人信息将用于小程序头像的效果展示']}}"
+  bindcancel="handleCloseAuthModal"
+  bindok="handleAuth"
+/>

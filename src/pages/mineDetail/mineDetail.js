@@ -13,9 +13,16 @@ Page({
     jobs: [],
   },
   onLoad() {
-    this.loadAllInfo().then(() => {
-      this.updateAvatarUrl();
-    });
+    this.loadAllInfo();
+    wxUtil.getUserInfo().then((res) => {
+      const { avatarUrl } = res;
+      this.updateAvatarUrl(avatarUrl)
+    }, () => {
+      // 未授权，显示授权弹窗
+      this.setData({
+        isShowAuthModal: true,
+      })
+    })
   },
   onShow() {
     app.checkNotice('edited', true, this.loadAllInfo)
@@ -33,38 +40,33 @@ Page({
       path: `/pages/detail/detail?id=${account.accountId}&isShare=1`,
     }
   },
-  updateAvatarUrl() {
-    wxUtil.getUserInfo().then(() => {
-    }, () => {
-      // 未授权，显示授权弹窗
+  updateAvatarUrl(avatarUrl) {
+    Api.updateAvatarUrl({
+      url: avatarUrl,
+    }).then(({ data }) => {
       this.setData({
-        isShowAuthModal: true,
+        account: {
+          ...this.data.account,
+          avatar: data,
+        }
       })
     })
-    Util.promisify(wx.getSetting)().then(
-      ({ authSetting }) => {
-        if (authSetting['scope.userInfo']) {
-          Util.promisify(wx.getUserInfo)().then(
-            ({ userInfo: realInfo }) => {
-              let realAvatar = realInfo.avatarUrl;
-              Api.updateAvatarUrl({
-                url: realAvatar,
-              }).then(({ data }) => {
-                this.setData({
-                  account: {
-                    ...this.data.account,
-                    avatar: data,
-                  }
-                })
-              })
-            },
-            () => Promise.reject(Error.AUTH_FAILED),
-          )
-        }
-        return Promise.reject(Error.UNAUTHORIZED)
-      },
-      () => Promise.reject(Error.AUTH_FAILED),
-    )
+  },
+  handleCloseAuthModal() {
+    // 关闭弹窗
+    this.setData({
+      isShowAuthModal: false,
+    })
+  },
+  handleAuth(e) {
+    const { event } = e.detail
+    const { userInfo } = event.detail
+    if (!userInfo) {
+      wxUtil.showToast('授权失败请重试')
+      return
+    }
+    this.updateAvatarUrl(userInfo.avatarUrl);
+    this.setData({ isShowAuthModal: false })
   },
   handleBasicEdit() {
     wxUtil.navigateTo('edit', { type: 'account' })
