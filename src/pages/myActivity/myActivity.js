@@ -11,7 +11,6 @@ Page({
     memberList: null,
     memberPagination: { current: 1, total: 0 },
     activity: {},
-    
   },
   onLoad({ activityId }) {
     if (!activityId) {

@@ -40,7 +40,6 @@
     <view class="text-muted text-right">300字</view>
   </view>
   <view class="title">添加头像</view>
-
   <view wx:if="{{info.avatar}}" class="image-item">
     <image src="{{previewImage}}" mode="aspectFill" />
     <view class="image-remove" bindtap="handleRemoveAvatar">

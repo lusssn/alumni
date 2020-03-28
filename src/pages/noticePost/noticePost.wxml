@@ -1,34 +1,21 @@
 <view class="container h3">
   <view class="title">通知主题</view>
   <view class="card input-card">
-    <input
-      class="flex-item"
-      value="{{title}}"
-      placeholder="请输入通知主题"
-      placeholder-class="text-muted"
-      maxlength="15"
-      data-name="title"
-      bindinput="handleInputChange"
-    />
+    <input class="flex-item" value="{{title}}" placeholder="请输入通知主题" placeholder-class="text-muted" maxlength="15" data-name="title" bindinput="handleInputChange" />
     <text class="text-muted">15字</text>
   </view>
   <view class="title">通知内容</view>
   <view class="card padding-sm">
-    <textarea
-      class="textarea"
-      placeholder-class="text-muted"
-      placeholder="请输入通知内容"
-      maxlength="500"
-      value="{{content}}"
-      data-name="content"
-      bindinput="handleInputChange"
-    />
+    <textarea class="textarea" placeholder-class="text-muted" placeholder="请输入通知内容" maxlength="500" value="{{content}}" data-name="content" bindinput="handleInputChange" />
     <view class="text-muted text-right">500字</view>
   </view>
-
+  <view class="title">添加图片</view>
+  <view wx:if="{{img}}" class="image-item">
+    <image src="{{previewImage}}" mode="aspectFill" />
+    <view class="image-remove" bindtap="handleRemoveImage">×</view>
+  </view>
+  <view wx:else class="image-item image-add" bindtap="handleChooseImage" />
   <view class="fix-bottom">
-    <button type="primary" disabled="{{submitLoading}}" bindtap="handleSubmit">
-      发送通知
-    </button>
+    <button type="primary" disabled="{{submitLoading}}" bindtap="handleSubmit">发送通知</button>
   </view>
 </view>

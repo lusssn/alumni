@@ -3,7 +3,7 @@
     <view class="card-block">
       <view class="flex-align-center padding-t-sm padding-b-sm">
         <view class="flex-item">
-          <text class="flex-item h1 text-title">活动名称</text>
+          <text class="flex-item h1 text-title">{{activity.activityName}}</text>
           <view class="flex h5 padding-t-sm">
             <view class="margin-r-sm">
               <view class="iconfont icon-calendar margin-r-sm" />

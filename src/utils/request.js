@@ -49,7 +49,7 @@ const request = (url, params = {}, others = {}) => {
     data: params,
     header,
     ...other,
-  }).then(response => handleResponse(response, url, params, other))
+  }).then(response => handleResponse(response, url, params, others))
 }
 
 const get = (url, params = {}, custom = {}) => {
@@ -90,7 +90,7 @@ const upload = (url, file, params = {}) => {
     header: {
       'X-Wx-Token': app.global.token || '',
     },
-  }).then(response => handleResponse(response, url, params, other))
+  }).then(response => handleResponse(response, url, params))
 }
 
 export default {

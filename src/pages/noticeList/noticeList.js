@@ -113,12 +113,13 @@ Page({
     const { newNoticeList, historyNoticeList } = this.data
     if (noticetype === 'new') {
       const index = R.findIndex(R.propEq('messageId', id), newNoticeList)
-      const { title, content, type, fromUser } = newNoticeList[index]
+      const { title, content, img, type, fromUser } = newNoticeList[index]
       if (type.key === 'Activity') {
         wxUtil.navigateTo('activityInfo', {
           activityId: fromUser,
           title,
           content,
+          img,
         })
       } else {
         wxUtil.navigateTo('detail', { id: fromUser })
@@ -136,12 +137,13 @@ Page({
       })
     } else {
       const index = R.findIndex(R.propEq('messageId', id), historyNoticeList)
-      const { title, content, type, fromUser } = historyNoticeList[index]
+      const { title, content, img, type, fromUser } = historyNoticeList[index]
       if (type.key === 'Activity') {
         wxUtil.navigateTo('activityInfo', {
           activityId: fromUser,
           title,
           content,
+          img,
         })
       } else {
         wxUtil.navigateTo('detail', { id: fromUser })

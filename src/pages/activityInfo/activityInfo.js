@@ -9,19 +9,19 @@ Page({
     activity: {},
     creator: {},
   },
-  onLoad({ activityId, title, content }) {
+  onLoad({ activityId, title, content, img }) {
     if (!activityId) {
       wxUtil.showToast('不存在此活动')
       return
     }
     wxUtil.login().then(() => {
-      // TODO 获取活动内容
       Api.getActivityDetail({ activityId }).then(
         res => {
           this.setData({
             activity: res,
             title: decodeURIComponent(title),
             content: decodeURIComponent(content),
+            img: img !== 'null' ? decodeURIComponent(img) : undefined,
             isLoaded: true,
           })
           Api.getAccountAll({ accountId: res.starterId }).then(
@@ -58,4 +58,10 @@ Page({
     const { id } = e.currentTarget.dataset
     wxUtil.navigateTo('detail', { id })
   },
+  handleClickImg(){
+    wx.previewImage({
+      current: this.data.img,
+      urls: [this.data.img]
+    })
+  }
 })
