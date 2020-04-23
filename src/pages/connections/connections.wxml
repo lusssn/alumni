@@ -23,4 +23,4 @@
     />
   </view>
 </view>
-<Loading wx:else isFixed />
+<Loading wx:if="{{!isLoaded && !list}}" isFixed />

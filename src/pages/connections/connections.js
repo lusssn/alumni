@@ -46,6 +46,9 @@ Page({
     }
   },
   loadSquareCards(pageNo = 1) {
+    this.setData({
+      isLoaded: false,
+    })
     return Api.getSquareCards({
       filter: this.data.filter,
       pageSize: PAGE_SIZE,
@@ -53,6 +56,7 @@ Page({
     }).then(res => {
       const { list, count } = res
       this.setData({
+        isLoaded: true,
         list: pageNo === 1 ? list : this.data.list.concat(list),
         pagination: {
           current: pageNo,
