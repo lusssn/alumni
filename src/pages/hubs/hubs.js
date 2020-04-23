@@ -19,26 +19,17 @@ Page({
     activityList: [],
     activityPagination: { current: 1, total: 0 },
   },
-  onLoad() {
+  onLoad({tabindex}) {
+    if (tabindex) {
+      this.setData({
+        currentTab: NAV_CONFIG[tabindex],
+      })
+    }
     wxUtil.login().then(() => {
       // 加载校友圈列表数据
       this.loadHubsList()
       // 加载活动列表数据
       this.loadActivitiesList()
-      wxUtil.getNoticeCount().then(count => {
-        if (count > 0) {
-          wx.setTabBarBadge({
-            index: 2,
-            text: count.toString(),
-          })
-        } else {
-          wx.removeTabBarBadge({
-            index: 2,
-          })
-          // 检查消息订阅状态
-          wxUtil.checkSubscribeStatus()
-        }
-      })
     })
   },
   onPullDownRefresh() {

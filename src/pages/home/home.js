@@ -8,10 +8,38 @@ const app = getApp();
 const PAGE_SIZE = 10;
 
 const SERVICE_NAV_CONFIG = [
-  { index: 0, img: "../../images/alumni-center.png", text: "校友会中心" },
-  { index: 1, img: "../../images/alumni-activities.png", text: "校友活动" },
-  { index: 2, img: "../../images/hub.png", text: "校友圈" },
-  { index: 3, img: "../../images/alumni-news.png", text: "校友风采" }
+  {
+    index: 0,
+    img: "../../images/alumni-center.png",
+    text: "校友会中心",
+    clickCallback: () => {
+      wxUtil.showToast("功能开发中", "none");
+    }
+  },
+  {
+    index: 1,
+    img: "../../images/alumni-activities.png",
+    text: "校友活动",
+    clickCallback: () => {
+      wxUtil.navigateTo("hubs", { tabindex: 1 });
+    }
+  },
+  {
+    index: 2,
+    img: "../../images/hub.png",
+    text: "校友圈",
+    clickCallback: () => {
+      wxUtil.navigateTo("hubs", { tabindex: 0 });
+    }
+  },
+  {
+    index: 3,
+    img: "../../images/alumni-news.png",
+    text: "校友风采",
+    clickCallback: () => {
+      wxUtil.showToast("功能开发中", "none");
+    }
+  }
 ];
 
 Page({
@@ -91,6 +119,10 @@ Page({
   handleClickSearch() {
     wxUtil.navigateTo("search");
   },
+  handleClickService(e) {
+    const { index } = e.target.dataset;
+    SERVICE_NAV_CONFIG[index].clickCallback();
+  },
   handleClickFilter(e) {
     const { filter } = e.target.dataset;
     if (!isNaN(filter) && filter !== this.data.filter) {
@@ -99,7 +131,7 @@ Page({
       });
     }
   },
-  handleClickBanner(e){
+  handleClickBanner(e) {
     const { banner } = this.data;
     const { index } = e.currentTarget.dataset;
     wxUtil.navigateTo("article", { link: banner[index].link });
