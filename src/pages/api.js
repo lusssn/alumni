@@ -53,6 +53,19 @@ export const removeWork = params => request.del('/v2/job', params)
 // 更新用户头像 - 使用微信提供的头像 url
 export const updateAvatarUrl = params => request.get('/v2/account/urlAvatar', params)
 
+/*************************************** 需求 ***************************************/
+// 需求-需求列表
+export const getDemands = params =>
+  request.get('/v2/demand/list', params).then(res => res.data)
+
+// 需求-详细信息
+export const getDemandDetail = params =>
+  request.get('/v2/demand/detail', params).then(res => res.data)
+
+// 需求-创建需求
+export const createDemand = params =>
+  request.post('/v2/demand/create', params)
+
 /*************************************** 圈子 ***************************************/
 // 圈子推荐列表
 export const getHubsRecommend = params =>
@@ -201,3 +214,7 @@ export const readNotice = params => request.post('/v2/message/changeStatus', par
 /************************************* 文件传输 *************************************/
 export const uploadImage = file =>
   request.upload('/v2/uploadFile', file).then(res => res.data)
+
+/************************************* 文件传输 *************************************/
+export const getBanner = () =>
+  request.get('/v2/banner/validList').then(res => res.data)
