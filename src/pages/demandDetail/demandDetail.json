@@ -1,0 +1,11 @@
+{
+  "navigationBarTitleText": "需求详情",
+  "navigationBarTextStyle": "white",
+  "navigationBarBackgroundColor": "#3A82E6",
+  "enablePullDownRefresh": true,
+  "usingComponents": {
+    "Loading": "../../components/Loading/Loading",
+    "Avatar": "../../components/Avatar/Avatar",
+    "BusinessCard": "../../components/BusinessCard/BusinessCard"
+  }
+}

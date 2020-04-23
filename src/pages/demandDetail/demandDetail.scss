@@ -1,0 +1,17 @@
+@import "../../scss/variables";
+
+.container {
+  padding: 32rpx 32rpx 98rpx;
+}
+.demand-title {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: $strong-color;
+}
+// .demand-tag {
+//   margin-right: 32rpx;
+// }
+.demand-image{
+  width: 600rpx;
+  margin: 12rpx auto;
+}

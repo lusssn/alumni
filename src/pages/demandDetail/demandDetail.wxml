@@ -1,0 +1,42 @@
+<view class="container">
+  <view class="card">
+    <view class="card-header demand-title">{{demand.demandName}}</view>
+    <view class="card-block">
+      <view class="flex-align-center padding-t-sm padding-b-sm">
+        <Avatar size="60" src="{{demand.accountAvatar}}" />
+        <view class="flex-item padding-l-sm h6 text-title">
+          <view>
+            <text>{{demand.accountName}}</text>
+            <text>·{{demand.accountStartEducationGrade}}</text>
+            <text>-{{demand.accountEducationSchool}}</text>
+            <text>-{{demand.accountEducationCollege}}</text>
+          </view>
+          <view>发布时间：{{demand.ctime}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="h3 title">需求标签</view>
+  <view class="text-title h3 margin-b-lg">
+    <text wx:for="{{tags}}" wx:key="*this" class="margin-r-md"># {{item}}</text>
+  </view>
+  <view class="h3 title">需求详情（可长按复制）</view>
+  <view class="card">
+    <view class="padding-lg h3 text-title">
+      <text>{{demand.details}}</text>
+      <image
+        wx:for="{{images}}"
+        wx:key="*this"
+        src="{{item.url}}"
+        class="demand-image"
+        mode='widthFix'
+        data-index="{{index}}"
+        bindload="handleLoadImage"
+        lazy-load
+      />
+    </view>
+  </view>
+  <view class="fix-bottom">
+    <button type="primary" bindtap="handleJoinDemand">联系需求发起人</button>
+  </view>
+</view>
