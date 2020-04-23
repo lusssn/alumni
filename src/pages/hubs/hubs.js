@@ -1,6 +1,5 @@
 import * as R from '../../utils/ramda/index'
 import * as Api from '../api'
-import * as Util from '../../utils/util'
 import wxUtil from '../../utils/wxUtil'
 
 const app = getApp()
