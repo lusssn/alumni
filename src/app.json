@@ -1,5 +1,8 @@
 {
   "pages": [
+    "pages/home/home",
+    "pages/demandCreate/demandCreate",
+    "pages/demandDetail/demandDetail",
     "pages/hubs/hubs",
     "pages/connections/connections",
     "pages/mine/mine",
@@ -22,7 +25,8 @@
     "pages/detail/detail",
     "pages/noticeList/noticeList",
     "pages/noticePost/noticePost",
-    "pages/register/register"
+    "pages/register/register",
+    "pages/article/article"
   ],
   "permission": {
     "scope.userLocation": {
@@ -47,10 +51,10 @@
         "text": "人脉"
       },
       {
-        "pagePath": "pages/hubs/hubs",
-        "iconPath": "images/round-normal.png",
-        "selectedIconPath": "images/round-selected.png",
-        "text": "校友圈"
+        "pagePath": "pages/home/home",
+        "iconPath": "images/home-normal.png",
+        "selectedIconPath": "images/home-selected.png",
+        "text": "首页"
       },
       {
         "pagePath": "pages/mine/mine",
