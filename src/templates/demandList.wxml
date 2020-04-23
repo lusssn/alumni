@@ -1,0 +1,29 @@
+<!-- 引入此模板时同时需要引入组件：Loading，Avatar，Tag, ListEmpty -->
+<template name="demandList">
+  <Loading wx:if="{{!list}}" />
+  <block wx:elif="{{list.length}}">
+    <view wx:for="{{list}}" wx:key="demandId" class="card tap" data-id="{{item.demandId}}" bindtap="{{bindtap}}">
+      <view class="card-block">
+        <view class="flex-align-center padding-t-lg padding-b-lg">
+          <Avatar size="96" src="{{item.avatar}}" />
+          <view class="flex-item padding-l-md">
+            <view class="padding-b-xs">
+              <text class="h1 text-title">{{item.demandName}}</text>
+            </view>
+            <view class="flex h6 demand-card-tags">
+              <view wx:if="{{item.tag1}}">{{item.tag1}}</view>
+              <view wx:if="{{item.tag2}}">{{item.tag2}}</view>
+              <view wx:if="{{item.tag3}}">{{item.tag3}}</view>
+              <view wx:if="{{item.tag4}}">{{item.tag4}}</view>
+              <view wx:if="{{item.tag5}}">{{item.tag5}}</view>
+            </view>
+            <text>发布人：{{item.accountName}}</text>
+            <text wx:if="{{item.accountStartEducationYear}}">，{{item.accountStartEducationGrade}}</text>
+            <text wx:if="{{item.accountEducationCollege}}">，{{item.accountEducationCollege}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </block>
+  <ListEmpty wx:else description="{{placeholder || '暂无新需求，尝试去发布吧'}}" />
+</template>
