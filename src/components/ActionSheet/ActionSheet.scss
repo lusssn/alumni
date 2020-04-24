@@ -11,11 +11,12 @@
   .context {
     background: $gray-lightest;
     padding-top: 4rpx;
-    border-radius: 16rpx 16rpx;
+    border-radius: 16rpx 16rpx 0 0;
     position: fixed;
     width: 100vw;
     bottom: 0;
     z-index: 888;
+    overflow: hidden;
     .row {
       width: 100%;
       line-height: 50px;
