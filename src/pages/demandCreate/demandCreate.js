@@ -63,9 +63,7 @@ Page({
     }).then(() => {
       wx.hideToast();
       wxUtil.showToast('需求发起成功', 'success')
-      setTimeout(() => {
-        wxUtil.navigateTo('demandDetail', { demandId })
-      }, 1500)
+      wx.navigateBack();
     }, err => {
       this.setData({
         buttonLoading: false,
