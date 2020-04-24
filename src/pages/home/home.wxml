@@ -2,7 +2,7 @@
 <view class="header"></view>
 <view class="content">
   <Search class="margin-l-lg margin-r-lg" placeholder="海量校友资源，一键搜索找人" alignType="center" bindclick="handleClickSearch" disabled />
-  <view class="banner margin-lg">
+  <view class="banner margin-lg margin-t-sm">
     <swiper indicator-dots="true" autoplay="true" interval="{{3000}}" duration="{{500}}">
       <block wx:for="{{banner}}" wx:key="*this">
         <swiper-item>
