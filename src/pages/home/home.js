@@ -1,11 +1,12 @@
+import * as R from "../../utils/ramda/index";
 import * as Api from "../api";
 import wxUtil from "../../utils/wxUtil";
+import { DEMAND_AVATAR } from "../../macros";
 
 const PAGE_SIZE = 10;
 
 const SERVICE_NAV_CONFIG = [
   {
-    index: 0,
     img: "../../images/alumni-center.png",
     text: "校友会中心",
     clickCallback: () => {
@@ -13,15 +14,13 @@ const SERVICE_NAV_CONFIG = [
     }
   },
   {
-    index: 1,
-    img: "../../images/alumni-activities.png",
-    text: "校友活动",
+    img: "../../images/alumni-news.png",
+    text: "校友风采",
     clickCallback: () => {
-      wxUtil.navigateTo("hubs", { tabindex: 1 });
+      wxUtil.showToast("功能开发中", "none");
     }
   },
   {
-    index: 2,
     img: "../../images/hub.png",
     text: "校友圈",
     clickCallback: () => {
@@ -29,11 +28,10 @@ const SERVICE_NAV_CONFIG = [
     }
   },
   {
-    index: 3,
-    img: "../../images/alumni-news.png",
-    text: "校友风采",
+    img: "../../images/alumni-activities.png",
+    text: "校友活动",
     clickCallback: () => {
-      wxUtil.showToast("功能开发中", "none");
+      wxUtil.navigateTo("hubs", { tabindex: 1 });
     }
   }
 ];
@@ -97,6 +95,12 @@ Page({
     }).then(
       res => {
         const { list, count } = res;
+        const newList = list.map(
+          item =>
+            (item.avatar = R.find(R.propEq("type", +item.type))(
+              DEMAND_AVATAR
+            ).url)
+        );
         this.setData({
           isLoaded: true,
           demandList: pageNo === 1 ? list : this.data.list.concat(list),
@@ -117,7 +121,9 @@ Page({
   },
   handleClickService(e) {
     const { index } = e.target.dataset;
-    SERVICE_NAV_CONFIG[index].clickCallback();
+    if (index >= 0) {
+      SERVICE_NAV_CONFIG[index].clickCallback();
+    }
   },
   handleClickFilter(e) {
     const { filter } = e.target.dataset;
