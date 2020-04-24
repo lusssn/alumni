@@ -103,11 +103,11 @@ export const DEMAND_AVATAR = [
   },
   {
     type: 2,
-    url: "https://clab-1257046110.cos.ap-beijing.myqcloud.com/avatar-info.png"
+    url: "https://clab-1257046110.cos.ap-beijing.myqcloud.com/avatar-cooperation.png"
   },
   {
     type: 3,
-    url: "https://clab-1257046110.cos.ap-beijing.myqcloud.com/avatar-cooperation.png"
+    url: "https://clab-1257046110.cos.ap-beijing.myqcloud.com/avatar-info.png"
   },
 ]
 
