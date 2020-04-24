@@ -1,44 +1,39 @@
 <import src="../../templates/demandList.wxml" />
-<view class="header">
+<view class="header"></view>
+<view class="content">
   <Search class="margin-l-lg margin-r-lg" placeholder="海量校友资源，一键搜索找人" alignType="center" bindclick="handleClickSearch" disabled />
-  <view class="banner margin-l-lg margin-r-lg">
+  <view class="banner margin-lg">
     <swiper indicator-dots="true" autoplay="true" interval="{{3000}}" duration="{{500}}">
       <block wx:for="{{banner}}" wx:key="*this">
         <swiper-item>
           <view class="swiper-item tap" data-index="{{index}}" bindtap="handleClickBanner">
-            <image src="{{item.img}}" mode="aspectFill" lazy-load="false"/>
+            <image src="{{item.img}}" mode="aspectFill" lazy-load="false" />
           </view>
         </swiper-item>
       </block>
     </swiper>
   </view>
-</view>
-<view class="margin-l-lg margin-r-lg">
-  <view class="h3 title">校友服务通道</view>
-  <view class="card flex service-nav padding-lg" catchtap="handleClickService">
-    <view wx:for="{{NAV}}" wx:key="{{index}}" class="service-item flex-center flex-direction-column" data-index="{{index}}">
-      <image src="{{item.img}}" mode="widthFix" lazy-load="false" data-index="{{index}}"/>
-      <text data-index="{{index}}">{{item.text}}</text>
+  <view class="margin-l-lg margin-r-lg">
+    <view class="h3 title">校友服务通道</view>
+    <view class="card flex service-nav padding-lg" catchtap="handleClickService">
+      <view wx:for="{{NAV}}" wx:key="{{index}}" class="service-item flex-center flex-direction-column" data-index="{{index}}">
+        <image src="{{item.img}}" mode="widthFix" lazy-load="false" data-index="{{index}}" />
+        <text data-index="{{index}}">{{item.text}}</text>
+      </view>
     </view>
-  </view>
-  <view class="h3 title">校友需求发布平台</view>
-  <view class="flex padding-t-sm padding-b-lg" bindtap="handleClickFilter">
-    <button class="capsule {{filter === 0 ? 'active' : ''}}" data-filter="{{0}}">全部</button>
-    <button class="capsule {{filter === 1 ? 'active' : ''}}" data-filter="{{1}}">求职内推</button>
-    <button class="capsule {{filter === 2 ? 'active' : ''}}" data-filter="{{2}}">行业合作</button>
-    <button class="capsule {{filter === 3 ? 'active' : ''}}" data-filter="{{3}}">信息发布</button>
-  </view>
-  <!-- 需求列表 -->
-  <template 
-    is="demandList"
-    data="{{ list: demandList, bindtap: 'handleToDemandDetail' }}" 
-  />
-  <!-- 发起活动 button -->
-  <view
-    class="activity-btn tap"
-    bindtap="handleToCreateDemand"
-  >
-    <view class="iconfont icon-bugle" />
-    <view>发布需求</view>
+    <view class="h3 title">校友需求发布平台</view>
+    <view class="flex padding-t-sm padding-b-lg" bindtap="handleClickFilter">
+      <button class="capsule {{filter === 0 ? 'active' : ''}}" data-filter="{{0}}">全部</button>
+      <button class="capsule {{filter === 1 ? 'active' : ''}}" data-filter="{{1}}">求职内推</button>
+      <button class="capsule {{filter === 2 ? 'active' : ''}}" data-filter="{{2}}">行业合作</button>
+      <button class="capsule {{filter === 3 ? 'active' : ''}}" data-filter="{{3}}">信息发布</button>
+    </view>
+    <!-- 需求列表 -->
+    <template is="demandList" data="{{ list: demandList, bindtap: 'handleToDemandDetail' }}" />
+    <!-- 发起活动 button -->
+    <view class="activity-btn tap" bindtap="handleToCreateDemand">
+      <view class="iconfont icon-bugle" />
+      <view>发布需求</view>
+    </view>
   </view>
 </view>

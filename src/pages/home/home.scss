@@ -2,83 +2,84 @@
 
 .header {
   display: block;
-  height: 300rpx;
-  padding: 240rpx 0 0;
-  margin-bottom: 140rpx;
-  background: no-repeat center/80% url("https://clab-1257046110.cos.ap-beijing.myqcloud.com/home-header-bg.png") $theme-color;
+  height: 560rpx;
+  background: no-repeat center/90%
+    url("https://clab-1257046110.cos.ap-beijing.myqcloud.com/home-header-bg.png")
+    $theme-color;
 }
-
-.banner{
-  overflow: hidden;
-  border-radius: 16rpx;
-  margin-top: 24rpx;
-  .swiper-item{
-    height: 100%;
-    image{
-      width: 100%;
+.content {
+  margin-top: -300rpx;
+  .banner {
+    overflow: hidden;
+    border-radius: 16rpx;
+    .swiper-item {
       height: 100%;
+      image {
+        width: 100%;
+        height: 100%;
+      }
     }
   }
-}
 
-.service-nav{
-  flex-wrap: wrap;
-  .service-item{
-    width: 25%;
-    image{
-      width: 96rpx;
-      height: 96rpx;
+  .service-nav {
+    flex-wrap: wrap;
+    .service-item {
+      width: 25%;
+      image {
+        width: 96rpx;
+        height: 96rpx;
+      }
     }
   }
-}
 
-.capsule {
-  width: 136rpx;
-  margin-left: 0;
-  padding: 0;
-  font-size: 26rpx;
-  line-height: 50rpx;
-  color: $muted-color;
-  border-radius: 25rpx;
-  background-color: rgba($bg-color, .65);
-  &:not(:last-child) {
-    margin-right: 26rpx;
+  .capsule {
+    width: 136rpx;
+    margin-left: 0;
+    padding: 0;
+    font-size: 26rpx;
+    line-height: 50rpx;
+    color: $muted-color;
+    border-radius: 25rpx;
+    background-color: rgba($bg-color, 0.65);
+    &:not(:last-child) {
+      margin-right: 26rpx;
+    }
+    &.active {
+      color: white;
+      background-color: $theme-color;
+    }
+    &::after {
+      border: none;
+    }
   }
-  &.active {
+
+  .demand-card-tags {
+    flex-wrap: wrap;
+    view {
+      height: 24rpx;
+      line-height: 24rpx;
+      padding: 4rpx 10rpx;
+      margin: 8rpx 16rpx 8rpx 0;
+      border-radius: 12rpx;
+      color: white;
+      background-color: $theme-color;
+    }
+  }
+
+  .activity-btn {
+    position: fixed;
+    right: 0;
+    bottom: 60rpx;
+    padding: 8rpx 6rpx 8rpx 36rpx;
+    font-size: 20rpx;
+    text-align: center;
+    letter-spacing: 1px;
     color: white;
+    border-radius: 50rpx 0 0 50rpx;
     background-color: $theme-color;
-  }
-  &::after {
-    border: none;
-  }
-}
-
-.demand-card-tags {
-  flex-wrap: wrap;
-  view {
-    height: 24rpx;
-    line-height: 24rpx;
-    padding: 4rpx 10rpx;
-    margin: 8rpx 16rpx 8rpx 0;
-    border-radius: 12rpx;
-    color: white;
-    background-color: $theme-color;
-  }
-}
-
-.activity-btn {
-  position: fixed;
-  right: 0;
-  bottom: 60rpx;
-  padding: 8rpx 6rpx 8rpx 36rpx;
-  font-size: 20rpx;
-  text-align: center;
-  letter-spacing: 1px;
-  color: white;
-  border-radius: 50rpx 0 0 50rpx;
-  background-color: $theme-color;
-  box-shadow: 0 6rpx 18rpx 0 rgba($shadow-color, .25);
-  & > .iconfont {
-    font-size: 50rpx;
+    box-shadow: 0 6rpx 18rpx 0 rgba($shadow-color, 0.25);
+    & > .iconfont {
+      font-size: 50rpx;
+    }
   }
 }
