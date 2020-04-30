@@ -4,6 +4,7 @@
   "navigationBarTextStyle": "white",
   "usingComponents": {
     "Modal": "../../components/Modal/Modal",
-    "Loading": "../../components/Loading/Loading"
+    "Loading": "../../components/Loading/Loading",
+    "SubscriptionTip": "../../components/SubscriptionTip/SubscriptionTip"
   }
 }

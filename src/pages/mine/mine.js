@@ -12,6 +12,7 @@ Page({
     jobs: [],
     noticeCount: 0,
     subscribeStatus: true,
+    showTipComponent: false,
   },
   onLoad() {
     wxUtil.login().then((isLogin) => {
@@ -128,14 +129,14 @@ Page({
     Util.isRegistered()
   },
   handleSubscribe() {
-    wx.showToast({
-      title: '建议勾选最下方长期订阅',
-      icon: 'none',
-      duration: 10000,
+    this.setData({
+      showTipComponent: true,
     })
     // 订阅消息
     wxUtil.requestSubscribeMessage().then(flag => {
-      wx.hideToast()
+      this.setData({
+        showTipComponent: false,
+      })
       // 点击确认
       if (flag) {
         // 再次检查订阅状态，newFlag —— true: 永久订阅 false: 单次订阅

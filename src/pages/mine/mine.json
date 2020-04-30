@@ -7,6 +7,7 @@
   "enablePullDownRefresh": true,
   "usingComponents": {
     "Loading": "../../components/Loading/Loading",
-    "InfoCard": "../../components/InfoCard/InfoCard"
+    "InfoCard": "../../components/InfoCard/InfoCard",
+    "SubscriptionTip": "../../components/SubscriptionTip/SubscriptionTip"
   }
 }

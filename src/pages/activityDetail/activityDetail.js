@@ -9,6 +9,7 @@ Page({
   data: {
     activity: {},
     images: [],
+    showTipComponent: false,
   },
   onLoad({ activityId }) {
     if (!activityId) {
@@ -77,7 +78,15 @@ Page({
         })
         // 报名的时候检查有没有订阅，并申请推送活动消息
         if (!activity.hasEnrolled) {
-          wxUtil.requestSubscribeMessage();
+          this.setData({
+            showTipComponent: true,
+          })
+          // 订阅消息
+          wxUtil.requestSubscribeMessage().then(flag => {
+            this.setData({
+              showTipComponent: false,
+            })
+          })
         }
       },
       err => {

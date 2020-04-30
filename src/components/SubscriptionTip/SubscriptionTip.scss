@@ -1,0 +1,21 @@
+@import "../../scss/variables";
+
+.mask {
+  position: fixed;
+  z-index: 10;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 300rpx 0 0;
+  color: #fff;
+  text-align: center;
+  background-color: rgba(black, .8);
+  .tip-title {
+    font-size: 40rpx;
+  }
+  .tip-content {
+    padding: 40rpx 32rpx 0;
+    font-size: 32rpx;
+  }
+}

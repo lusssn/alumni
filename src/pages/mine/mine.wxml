@@ -46,3 +46,4 @@
   </view>
 </view>
 <Loading wx:else isFixed />
+<SubscriptionTip show="{{showTipComponent}}" title="建议长期授权，不错过消息哦" content="请勾选最下方“总是保持以上选择，不再询问”"/>

@@ -22,6 +22,7 @@ Page({
     job: {},
     redirect: '', // 完善后跳转的路径
     options: '', // 完善后跳转的路径参数
+    showTipComponent: false,
   },
   onLoad(option) {
     const { redirect = 'mine', options = '{}' } = option
@@ -126,14 +127,15 @@ Page({
       job.accountId = app.global.accountId
     }
     // 申请授权
-    wxUtil.requestSubscribeMessage();
-    // 数据提交
-    console.log({
-      account,
-      educations: [education],
-      jobs: account.type ? [job] : [],
-    });
-    
+    this.setData({
+      showTipComponent: true,
+    })
+    // 订阅消息
+    wxUtil.requestSubscribeMessage().then(flag => {
+      this.setData({
+        showTipComponent: false,
+      })
+    })
     Api.completeCard({
       account,
       educations: [education],
