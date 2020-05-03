@@ -3,12 +3,21 @@
 .container {
   padding: 32rpx 32rpx 98rpx;
 }
+.demand-tags {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0 32rpx;
+  color: $theme-color;
+  & > view {
+    margin: 4rpx;
+  }
+}
 .demand-title {
   font-size: 36rpx;
   font-weight: bold;
   color: $strong-color;
 }
-.demand-image{
+.demand-image {
   width: 100%;
   margin: 12rpx auto;
 }
