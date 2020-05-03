@@ -19,7 +19,6 @@
   <view class="h3 title">需求标签</view>
   <view class="margin-b-sm h3 demand-tags">
     <view wx:for="{{tags}}" wx:key="*this" class="margin-r-md">#{{item}}</view>
-    <view wx:for="{{tags}}" wx:key="*this" class="margin-r-md">#{{item}}</view>
   </view>
   <view class="h3 title">需求详情（可长按复制）</view>
   <view class="card">
