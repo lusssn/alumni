@@ -44,7 +44,7 @@ Page({
   onShareAppMessage() {
     const { demand } = this.data
     return {
-      title: demand.demandName,
+      title: `SEU 校友圈-邀请您参与${demand.demandName}`,
       path: `/pages/demandDetail/demandDetail?demandId=${demand.demandId}`,
     }
   },

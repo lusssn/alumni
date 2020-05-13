@@ -47,7 +47,7 @@ Page({
   },
   onShareAppMessage() {
     return {
-      title: 'SEU 校友圈',
+      title: 'SEU 校友人脉-加入东南大学校友圈，结识更多优秀校友',
       path: `/pages/connections/connections`
     }
   },

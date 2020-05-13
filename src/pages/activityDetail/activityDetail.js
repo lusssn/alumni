@@ -37,7 +37,7 @@ Page({
   onShareAppMessage() {
     const { activity } = this.data
     return {
-      title: activity.activityName,
+      title: `邀请你参与活动：${activity.activityName}`,
       path: `/pages/activityDetail/activityDetail?activityId=${activity.activityId}`,
     }
   },

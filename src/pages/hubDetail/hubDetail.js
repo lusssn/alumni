@@ -50,7 +50,7 @@ Page({
   onShareAppMessage() {
     const currentPage = getCurrentPages().pop()
     return {
-      title: this.data.hubInfo.alumniCircleName,
+      title: `SEU 校友圈-邀请您加入${this.data.hubInfo.alumniCircleName}`,
       path: `/pages/hubDetail/hubDetail?hubId=${currentPage.options.hubId}`
     }
   },

@@ -79,7 +79,7 @@ Page({
   },
   onShareAppMessage() {
     return {
-      title: 'SEU 校友圈',
+      title: 'SEU 校友圈-加入校友圈，共同建设校友文化',
       path: `/pages/home/home`
     }
   },
