@@ -38,7 +38,6 @@ Page({
     const { activity } = this.data
     return {
       title: activity.activityName,
-      desc: `邀你一起加入${activity.activityName}`,
       path: `/pages/activityDetail/activityDetail?activityId=${activity.activityId}`,
     }
   },

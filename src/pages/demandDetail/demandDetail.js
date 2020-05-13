@@ -45,7 +45,6 @@ Page({
     const { demand } = this.data
     return {
       title: demand.demandName,
-      desc: `邀你一起加入${demand.demandName}`,
       path: `/pages/demandDetail/demandDetail?demandId=${demand.demandId}`,
     }
   },

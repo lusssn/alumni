@@ -45,6 +45,12 @@ Page({
       this.loadSquareCards(current + 1)
     }
   },
+  onShareAppMessage() {
+    return {
+      title: 'SEU 校友圈',
+      path: `/pages/connections/connections`
+    }
+  },
   loadSquareCards(pageNo = 1) {
     this.setData({
       isLoaded: false,

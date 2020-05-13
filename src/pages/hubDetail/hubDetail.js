@@ -51,7 +51,6 @@ Page({
     const currentPage = getCurrentPages().pop()
     return {
       title: this.data.hubInfo.alumniCircleName,
-      desc: '邀请你加入这个校友圈，一起参加丰富活动',
       path: `/pages/hubDetail/hubDetail?hubId=${currentPage.options.hubId}`
     }
   },

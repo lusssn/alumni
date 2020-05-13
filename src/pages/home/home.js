@@ -77,6 +77,12 @@ Page({
       this.loadDemandList(current + 1);
     }
   },
+  onShareAppMessage() {
+    return {
+      title: 'SEU 校友圈',
+      path: `/pages/home/home`
+    }
+  },
   loadBanner() {
     Api.getBanner().then(res => {
       this.setData({
