@@ -22,7 +22,7 @@
     "pages/searchList/searchList",
     "pages/edit/edit",
     "pages/complete/complete",
-    "pages/detail/detail",
+    "pages/alumniDetail/alumniDetail",
     "pages/noticeList/noticeList",
     "pages/noticePost/noticePost",
     "pages/register/register",

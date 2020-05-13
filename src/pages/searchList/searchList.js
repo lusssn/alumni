@@ -95,7 +95,7 @@ Page({
   },
   handleClickCard(e) {
     const { id } = e.currentTarget.dataset
-    wxUtil.navigateTo('detail', { id })
+    wxUtil.navigateTo('alumniDetail', { id })
   },
   // 跳转到圈子详情
   handleClickHub(e) {

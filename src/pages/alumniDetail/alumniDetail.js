@@ -34,7 +34,7 @@ Page({
     const education = educations[0] || {}
     return {
       title: `${education.school || ''}校友：${account.name}的名片`,
-      path: `/pages/detail/detail?id=${account.accountId}&isShare=1`,
+      path: `/pages/alumniDetail/alumniDetail?id=${account.accountId}&isShare=1`,
     }
   },
   loadCardInfo(friendAccountId) {

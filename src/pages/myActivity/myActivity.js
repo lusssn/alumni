@@ -66,7 +66,7 @@ Page({
   },
   handleClickCard(e) {
     const { id } = e.currentTarget.dataset
-    wxUtil.navigateTo('detail', { id })
+    wxUtil.navigateTo('alumniDetail', { id })
   },
   handleBatchNotice() {
     const currentPage = getCurrentPages().pop()

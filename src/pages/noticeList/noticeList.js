@@ -122,7 +122,7 @@ Page({
           img,
         })
       } else {
-        wxUtil.navigateTo('detail', { id: fromUser })
+        wxUtil.navigateTo('alumniDetail', { id: fromUser })
       }
       // 将未读更改为已读
       Api.readNotice({
@@ -146,7 +146,7 @@ Page({
           img,
         })
       } else {
-        wxUtil.navigateTo('detail', { id: fromUser })
+        wxUtil.navigateTo('alumniDetail', { id: fromUser })
       }
     }
   },

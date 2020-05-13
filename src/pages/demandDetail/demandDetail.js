@@ -65,6 +65,6 @@ Page({
   },
   handleJoinDemand() {
     const { accountId } = this.data.demand;
-    wxUtil.navigateTo('detail', { id: accountId })
+    wxUtil.navigateTo('alumniDetail', { id: accountId })
   },
 })
